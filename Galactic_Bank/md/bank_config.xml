@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="Banking_Clan_Bank_Config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../md/md.xsd">
+	<cues>
+		<cue name="StartSMO" instantiate="true">
+			<conditions>
+				<event_cue_signalled cue="md.Simple_Menu_Options.Reloaded" />
+			</conditions>
+			<actions>
+				<signal_cue_instantly cue="md.Simple_Menu_API.Register_Options_Menu"
+					param="table[
+						$id = 'bank_extension_options_menu',
+						$columns = 2,
+						$title = 'Bank Options Menu',
+						$onOpen = BankOptionsMenu
+					]" />
+				<cancel_cue cue="this" />
+			</actions>
+		</cue>
+		<cue name="BankOptionsMenu" instantiate="true">
+			<conditions>
+				<event_cue_signalled />
+			</conditions>
+			<actions>
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $text='Interest Rate']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'interest_rate',
+						$start = md.banking_clan_bank.GalacticBank.$interest_rate * 100,
+						$col = 2,
+						$text = table[$text=''],
+						$min = 0, $max = 100, $step = 0.1, $suffix='%',
+						$default = 1,
+						$mouseOverText = '',
+						$onSliderCellChanged = OnRateChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $text='Interval']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'interval',
+						$start = md.banking_clan_bank.GalacticBank.$interval / 60,
+						$col = 2,
+						$text = table[$text=''],
+						$min = 0, $max = 1440, $step = 1, $suffix='',
+						$default = 1,
+						$mouseOverText = '1440 = 24 hours',
+						$onSliderCellChanged = OnIntervalChange
+					]" />
+			</actions>
+		</cue>
+		<cue name="OnRateChange" instantiate="true">
+			<conditions>
+				<event_cue_signalled />
+			</conditions>
+			<actions>
+				<set_value name="md.banking_clan_bank.GalacticBank.$interest_rate"
+					exact="event.param.$value / 100" />
+				<cancel_cue cue="this" />
+			</actions>
+		</cue>
+		<cue name="OnIntervalChange" instantiate="true">
+			<conditions>
+				<event_cue_signalled />
+			</conditions>
+			<actions>
+				<set_value name="md.banking_clan_bank.GalacticBank.$interval"
+					exact="event.param.$value * 60" />
+				<cancel_cue cue="this" />
+			</actions>
+		</cue>
+	</cues>
+</mdscript>

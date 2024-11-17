@@ -1,0 +1,24 @@
+Bank Todo:
+
+adjust interest
+add fee 3%
+implement relations
+change fee based on relations:  <-10 balance forfeture/no access, <0 = 5%, >0 3%, >10 2%, >20 1%, 30 0%
+change rate by relation: <0 = 0.5%, >0 0.75%, >10 1%, >20 1.25%, 30 1.5%
+period by status: standard 20hr; 1 defense station 15hr, 3 defense stations 12hr, 4 defense stations 10hr (branch defense stations count as half)
+add hq
+add faction branches and their stations
+no fee at banker-owned stations
+limit offices to stations owned by factions that have banker branch stations
+
+
+build/rebuild logic:
+-md/factionlogic_stations.xml
+
+
+station design:
+-Bank icon for map
+-This, use the Station Design Simulator to come up with a station plan, set it to Empty Loadout.
+Then, export it, and you can add it in constructionplans.xml.
+From there, you'll need to add it in stations.xml and stationgroups.xml.
+You can look at existing SWI examples for reference.

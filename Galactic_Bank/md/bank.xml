@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="Banking_Clan_Bank" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../md/md.xsd">
+	<cues>
+		<cue name="GalacticBank" namespace="this" version="1">
+			<conditions>
+				<check_any>
+					<event_cue_signalled cue="md.Setup.GameStart" />
+					<event_game_loaded />
+				</check_any>
+				<check_value value="not @player.allmodules.{player.module}.isscenario" />
+			</conditions>
+			<actions>
+				<debug_text text="'event.name: ' + event.name" />
+				<set_value name="global.$Bank" exact="this" />
+				<set_value name="$balance" exact="0" />
+				<set_value name="$newBalance" exact="0" />
+				<set_value name="$interest_rate" exact="0.01" />
+				<set_value name="$interest_time" exact="null" />
+				<set_value name="$interval" exact="3600s" />
+				<set_value name="$interior" exact="null" />
+				<set_value name="$corridor" exact="null" />
+				<set_value name="$room" exact="null" />
+				<set_value name="$banker" exact="null" />
+				<set_value name="$stationTable" exact="null" />
+				<set_value name="$stationInterior" exact="null" />
+				<set_value name="$amount" exact="0" />
+				<set_value name="$deposit_amount" exact="0" />
+				<set_value name="$withdraw_amount" exact="0" />
+			</actions>
+			<cues>
+				<cue name="Init">
+					<conditions>
+						<check_any>
+							<event_cue_signalled />
+							<event_game_loaded />
+						</check_any>
+						<check_value value="not @player.allmodules.{player.module}.isscenario" />
+					</conditions>
+					<actions>
+						<reset_cue cue="this" />
+					</actions>
+				</cue>
+				<!-- <cue name="Bank_Deposit">
+					<conditions>
+						<event_cue_signalled/>
+						<check_value value="player.money ge $amount"/>
+					</conditions>
+					<actions>
+						<set_value name="$amount" exact="event.param.{1}"/>
+						<reward_player money="$amount * -1"/>
+						<set_value name="$balance" exact="$balance + $amount"/>
+						<show_help duration="4s" custom="'You have deposited ' + $amount + ' credits into your bank
+				account. Your balance is now ' + $balance + '.'"/>
+						<set_value name="$amount" exact="0"/>
+					</actions>
+				</cue>
+				<cue name="Bank_Withdraw">
+					<conditions>
+						<event_cue_signalled/>
+						<check_value value="$balance ge $amount"/>
+					</conditions>
+					<actions>
+						<set_value name="$amount" exact="event.param.{1}"/>
+						<reward_player money="$amount"/>
+						<set_value name="$balance" exact="$balance - $amount"/>
+						<show_help duration="4s" custom="'You have withdrawn (' + $amount + ') credits from the bank. New
+				balance: ' + $balance"/>
+						<set_value name="$amount" exact="0"/>
+					</actions>
+				</cue>
+				<cue name="Balance">
+					<conditions>
+						<event_cue_signalled/>
+					</conditions>
+					<actions>
+						<show_notification text="'Your balance: ' + $balance" timeout="10s" sound="ui_mon_eve_money_up"/>
+					</actions>
+				</cue> -->
+				<cue name="Bank_Remove" instantiate="true">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<set_value name="$object" exact="event.param.{1}" />
+						<set_value name="$interior" exact="event.param.{2}" />
+						<do_if value="$banker">
+							<remove_actor_from_room actor="$banker" />
+							<destroy_object object="$banker" />
+						</do_if>
+						<remove_dynamic_interior object="$object" interior="$interior" />
+						<destroy_object object="$interior" />
+						<remove_value name="$interior" />
+						<remove_value name="$corridor" />
+						<remove_value name="$room" />
+						<remove_value name="$banker" />
+					</actions>
+				</cue>
+				<cue name="Bank_Add" instantiate="true">
+					<conditions>
+						<event_object_changed_object object="player.entity" />
+					</conditions>
+					<actions>
+						<set_value name="$station" exact="player.station" />
+						<do_if value="$station">
+							<do_if value="$stationInterior">
+								<signal_cue_instantly cue="Bank_Remove" param="[$stationTable, $stationInterior]" />
+							</do_if>
+
+							<create_cue_actor name="$banker" cue="this">
+								<select faction="faction.bankingclan" />
+								<owner exact="faction.bankingclan" />
+							</create_cue_actor>
+							<set_entity_traits entity="$banker" missionactor="true" />
+							<set_entity_overrides entity="$banker" icon="'specialist'" />
+
+							<get_room_definition macro="$corridorMacro" race="$station.owner.primaryrace"
+								tags="tag.corridor" />
+							<do_if value="not $corridorMacro">
+								<get_room_definition macro="$corridorMacro" race="faction.argon.primaryrace"
+									tags="tag.corridor" />
+							</do_if>
+							<get_room_definition macro="$roomMacro" race="faction.argon.primaryrace"
+								tags="tag.office" />
+							<set_value name="$name" exact="{20777, 1001}" />
+							<create_dynamic_interior object="$station"
+								corridor="$corridorMacro" room="$roomMacro"
+								name="$name"
+								interiorname="$interior" corridorname="$corridor" roomname="$room"
+								roomtype="roomtype.office"
+								seed="$station.seed + lookup.roomtype.list.indexof.{roomtype.office}" />
+
+							<do_if value="$interior and $corridor and $room">
+								<find_npc_slot name="$roomSlot" object="$room" tags="tag.control" />
+								<do_if value="$roomSlot">
+									<add_actor_to_room actor="$banker" slot="$roomSlot" />
+								</do_if>
+							</do_if>
+
+							<set_value name="$stationTable" exact="$station" />
+							<set_value name="$stationInterior" exact="$interior" />
+							<set_value name="$interior" exact="null" />
+						</do_if>
+					</actions>
+					<cues>
+						<cue name="BankerConversationStart">
+							<conditions>
+								<check_any>
+									<event_cue_signalled />
+									<event_conversation_started actor="$banker" conversation="default" />
+								</check_any>
+							</conditions>
+							<actions>
+								<do_if value="event.name == 'event_cue_signalled'">
+									<set_value name="$convoOption_Banker_Account"
+										exact="@event.param.$convoOption_Banker_Account" />
+								</do_if>
+								<do_else>
+									<set_value name="$convoOption_Banker_Account" exact="true" />
+								</do_else>
+								<do_if
+									value="event.name == 'event_conversation_started' and @md.ExtendedConversationMenu.Main.exists">
+									<set_value name="md.ExtendedConversationMenu.Main.$convOptions.$banker"
+										exact="table[
+										$signalCue = BankerConversationStart,
+										$params = table[$convoOption_Banker_Account = @$convoOption_Banker_Account]
+									]" />
+								</do_if>
+								<do_else>
+									<do_if value="$convoOption_Banker_Account">
+										<add_player_choice text="'Access Bank Account'" section="Banker_Account" />
+									</do_if>
+								</do_else>
+								<reset_cue cue="this" />
+							</actions>
+						</cue>
+						<cue name="BankerConversationNext">
+							<conditions>
+								<event_conversation_next_section sectionprefix="Banker_" />
+							</conditions>
+							<actions>
+								<do_if value="event.param == 'Banker_Account'">
+									<signal_cue_instantly cue="Bank_Menu_Open" />
+								</do_if>
+								<reset_cue cue="this" />
+							</actions>
+						</cue>
+					</cues>
+				</cue>
+
+				<cue name="Bank_Menu_Open" instantiate="true">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<signal_cue_instantly cue="md.Simple_Menu_API.Create_Menu"
+							param="table[
+							$id = 'bank_menu',
+							$columns = 1,
+							$title = $interest_rate * 100 + '% interest per ' + $interval / 60 / 60 + ' hour.',
+							$height = 400,
+							$width = 300
+						]" />
+						<do_if value="$balance gt 0">
+							<set_value name="$timeSinceInterest" exact="player.age - $interest_time" />
+							<set_value name="$interest_time" exact="player.age" />
+							<do_if value="$timeSinceInterest gt $interval - 1">
+								<set_value name="$timeSinceInterest" exact="$interval" />
+							</do_if>
+							<set_value name="$interest_amount"
+								exact="$balance * ((1 + $interest_rate)^($timeSinceInterest / $interval) - 1)" />
+							<set_value name="$balance" exact="$balance + $interest_amount" />
+							<do_if value="$interest_amount">
+								<set_value name="$earned" exact="$interest_amount" />
+							</do_if>
+							<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+								param="table[$col=1, $text='Balance: '+$balance]" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+								param="table[$col=1, $text='Interest Earned: ' +$earned]" />
+						</do_if>
+						<do_else>
+							<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+								param="table[$col=1, $text='Balance: 0']" />
+						</do_else>
+						<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+						<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text" param="table[$col=1, $text='']" />
+						<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+						<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text" param="table[$col=1, $text='']" />
+						<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+						<signal_cue_instantly cue="md.Simple_Menu_API.Make_Slider"
+							param="table[
+							$start = 0,
+							$col = 1,
+							$text = table[$text=''],
+							$min = 0, $max = player.money, $step = 1, $suffix='cr',
+							$default = 0,
+							$onSliderCellChanged = Bank_Menu_Deposit_Amount
+						]" />
+						<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+						<signal_cue_instantly cue="md.Simple_Menu_API.Make_Button"
+							param="table[
+							$col = 1,
+							$text = table[$text='Deposit'],
+							$onClick = Bank_Menu_Deposit
+						]" />
+						<do_if value="$balance gt 0">
+							<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+								param="table[$col=1, $text='']" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Make_Slider"
+								param="table[
+								$start = 0,
+								$col = 1,
+								$text = table[$text=''],
+								$min = 0, $max = $balance, $step = 1, $suffix='cr',
+								$default = 0,
+								$onSliderCellChanged = Bank_Menu_Withdraw_Amount
+							]" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Make_Button"
+								param="table[
+								$col = 1,
+								$text = table[$text='Withdraw'],
+								$onClick = Bank_Menu_Withdraw
+							]" />
+						</do_if>
+					</actions>
+				</cue>
+				<cue name="Bank_Menu_Update" instantiate="true">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<signal_cue_instantly cue="md.Simple_Menu_API.Close_Menu" />
+						<signal_cue_instantly cue="Bank_Menu_Open" />
+					</actions>
+				</cue>
+				<cue name="Bank_Menu_Deposit_Amount" instantiate="true">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<set_value name="$deposit_amount" exact="event.param.$value" />
+						<cancel_cue cue="this" />
+					</actions>
+				</cue>
+				<cue name="Bank_Menu_Withdraw_Amount" instantiate="true">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<set_value name="$withdraw_amount" exact="event.param.$value" />
+						<cancel_cue cue="this" />
+					</actions>
+				</cue>
+				<cue name="Bank_Menu_Deposit" instantiate="true">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<do_if value="player.money ge $deposit_amount">
+							<do_if value="$balance gt 0">
+								<set_value name="$timeSinceInterest" exact="player.age - $interest_time" />
+								<set_value name="$interest_time" exact="player.age" />
+								<do_if value="$timeSinceInterest gt $interval - 1">
+									<set_value name="$timeSinceInterest" exact="$interval" />
+								</do_if>
+								<set_value name="$interest_amount"
+									exact="$balance * ((1 + $interest_rate)^($timeSinceInterest / $interval) - 1)" />
+								<set_value name="$balance" exact="$balance + $interest_amount" />
+							</do_if>
+							<reward_player money="($deposit_amount)Cr * -1" />
+							<set_value name="$balance" exact="$balance + $deposit_amount" />
+							<set_value name="$deposit_amount" exact="0" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Close_Menu" />
+							<signal_cue_instantly cue="Bank_Menu_Open" />
+						</do_if>
+						<do_else>
+							<cancel_cue cue="this" />
+						</do_else>
+					</actions>
+				</cue>
+				<cue name="Bank_Menu_Withdraw" instantiate="true">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<do_if value="$balance ge $withdraw_amount">
+							<set_value name="$timeSinceInterest" exact="player.age - $interest_time" />
+							<set_value name="$interest_time" exact="player.age" />
+							<do_if value="$timeSinceInterest gt $interval - 1">
+								<set_value name="$timeSinceInterest" exact="$interval" />
+							</do_if>
+							<set_value name="$interest_amount"
+								exact="$balance * ((1 + $interest_rate)^($timeSinceInterest / $interval) - 1)" />
+							<set_value name="$balance" exact="$balance + $interest_amount" />
+							<reward_player money="($withdraw_amount)Cr * 1" />
+							<set_value name="$balance" exact="$balance - $withdraw_amount" />
+							<set_value name="$withdraw_amount" exact="0" />
+							<signal_cue_instantly cue="md.Simple_Menu_API.Close_Menu" />
+							<signal_cue_instantly cue="Bank_Menu_Open" />
+						</do_if>
+						<do_else>
+							<cancel_cue cue="this" />
+						</do_else>
+					</actions>
+				</cue>
+				<!-- <cue name="ApplyInterest">
+					<conditions>
+						<check_any>
+							<event_cue_signalled/>
+						</check_any>
+					</conditions>
+					<delay exact="$interval"/>
+					<actions>
+						<set_value name="$timeSinceInterest" exact="player.age - global.$Bank.$interest_time"/>
+						<set_value name="global.$Bank.$interest_time" exact="player.age"/>
+						<do_if value="$timeSinceInterest ge global.$Bank.$interval">
+							<set_value name="$timeSinceInterest" exact="global.$Bank.$interval"/>
+						</do_if>
+						<set_value name="$interest_amount" exact="global.$Bank.$balance * global.$Bank.$interest_rate *
+				($timeSinceInterest / global.$Bank.$interval)"/>
+						<set_value name="global.$Bank.$balance" exact="global.$Bank.$balance + $interest_amount"/>
+						<show_notification text="'Interest: ' + $interest_amount + '. New balance: ' +
+				global.$Bank.$balance" timeout="10s" sound="ui_mon_eve_money_up"/>
+						<signal_cue_instantly cue="md.banking_clan_bank.ApplyInterest"/>
+					</actions>
+				</cue> -->
+			</cues>
+		</cue>
+	</cues>
+</mdscript>
