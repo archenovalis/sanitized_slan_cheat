@@ -1,15 +1,31 @@
 // compileMod.ts
-import { createWriteStream, readFileSync, readdirSync, statSync } from 'fs';
-import { relative, resolve } from 'path';
+import { createWriteStream, existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'fs';
+import { extname, relative, resolve } from 'path';
 import { Parser } from 'xml2js';
 import archiver from 'archiver';
 
-// Function to extract the version from content.xml
-const contentXmlPath = (projectFolder: string) => resolve(__dirname, projectFolder);
+const parser = new Parser();
+
+const getAllowedExtensions = (projectPath: string): string[] => {
+  const configPath = resolve(projectPath, 'allowedExtensions');
+  
+  if (existsSync(configPath)) {
+    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    if (config.filetypes) {
+      return config.filetypes || ['.xml'];
+    }
+    else {
+      throw new Error('allowedExtensions file error');
+    }
+  } else {
+    return ['.xml'];
+  }
+};
+
+const projectPath = (projectFolder: string) => resolve(__dirname, projectFolder);
 
 const getVersionFromContentXml = async (path: string): Promise<string> => {
   const xml = readFileSync(path+'/content.xml', 'utf8');
-  const parser = new Parser();
 
   try {
     const result = await parser.parseStringPromise(xml);
@@ -19,26 +35,30 @@ const getVersionFromContentXml = async (path: string): Promise<string> => {
   }
 };
 
-const addFilesToZip = (archive: archiver.Archiver, dir: string, baseDir: string) => {
+const addFilesToZip = (projectFolder: string, archive: archiver.Archiver, dir: string, baseDir: string, allowedExtensions: string[]) => {
   const items = readdirSync(dir);
 
-  items.forEach((item) => {
+  items.forEach(async (item) => {
     const itemPath = resolve(dir, item);
     const stats = statSync(itemPath);
-
+    const ext = extname(itemPath).toLowerCase()
     if (stats.isDirectory()) {
-      // Recurse into directories
-      addFilesToZip(archive, itemPath, baseDir);
-    } else if (stats.isFile() && itemPath.endsWith('.xml')) {
-      // Add file to the zip archive, preserving the directory structure
+      addFilesToZip(projectFolder, archive, itemPath, baseDir, allowedExtensions);
+    } else if (stats.isFile() && allowedExtensions.includes(ext)) {
       const relativePath = relative(baseDir, itemPath);
-      archive.file(itemPath, { name: relativePath });
+      if (itemPath.endsWith('.xml')) {
+        // removes ../../.*/ from schema
+        const xml = readFileSync(itemPath, 'utf8').replace(/SchemaLocation\=\"\.\.\/\.\.\/.*\//g, 'SchemaLocation="');
+        archive.append(xml, { name: relativePath }); 
+      } else {
+        archive.file(resolve(projectFolder, itemPath), { name: relativePath });
+      }
     }
   });
 };
 
 // Main function to create the zip file
-const createZip = (projectFolder: string, sourceDir: string, version: string) => {
+const createZip = (projectFolder: string, sourceDir: string, version: string, allowedExtensions: string[]) => {
   const dateTime = new Date().toISOString().replace(/[:.-]/g, '_');
   const outDir = resolve(__dirname, 'dist');
   const outputZip = `${outDir}/${projectFolder}-v${version}-${dateTime.split('T')[0]}.zip`;
@@ -57,23 +77,23 @@ const createZip = (projectFolder: string, sourceDir: string, version: string) =>
 
   archive.pipe(output);
 
-  addFilesToZip(archive, sourceDir, sourceDir);
+  addFilesToZip(projectFolder, archive, sourceDir, sourceDir, allowedExtensions);
 
   archive.finalize();
 };
 
-// Main function to run the script
 const run = async () => {
-  const projectFolder = process.argv[2]; // Project folder name passed via command line
+  const projectFolder = process.argv[2];
   if (!projectFolder) {
     console.error('Please provide the project folder as an argument.');
     process.exit(1);
   }
 
   try {
-    const path = contentXmlPath(projectFolder);
+    const path = projectPath(projectFolder);
     const version = await getVersionFromContentXml(path);
-    createZip(projectFolder, path, version);
+    const allowedExtensions = getAllowedExtensions(path);
+    createZip(projectFolder, path, version, allowedExtensions);
   } catch (error) {
     console.error(`Error: ${error}`);
   }
