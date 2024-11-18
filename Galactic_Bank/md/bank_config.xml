@@ -11,7 +11,7 @@
 					param="table[
 						$id = 'bank_extension_options_menu',
 						$columns = 2,
-						$title = 'Bank Options Menu',
+						$title = 'InterGalactic Banking Clan - Account Status Override Access',
 						$onOpen = BankOptionsMenu
 					]" />
 				<cancel_cue cue="this" />
@@ -22,56 +22,258 @@
 				<event_cue_signalled />
 			</conditions>
 			<actions>
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $text='Relation 30']" />
 				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
 				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
-					param="table[$col=1, $text='Interest Rate']" />
+					param="table[$col=1, $halign='right', $text='Fee']" />
 				<signal_cue_instantly
 					cue="md.Simple_Menu_API.Make_Slider"
 					param="table[
-						$id = 'interest_rate',
-						$start = md.banking_clan_bank.GalacticBank.$interest_rate * 100,
+						$id = 'fee30',
 						$col = 2,
 						$text = table[$text=''],
-						$min = 0, $max = 100, $step = 0.1, $suffix='%',
-						$default = 1,
-						$mouseOverText = '',
-						$onSliderCellChanged = OnRateChange
+						$start = md.Banking_Clan_Bank.GalacticBank.$fee30 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$fee30 * 100,
+						$onSliderCellChanged = OnPercentChange
 					]" />
 				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
-				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
 				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
-					param="table[$col=1, $text='Interval']" />
+					param="table[$col=1, $halign='right', $text='Rate']" />
 				<signal_cue_instantly
 					cue="md.Simple_Menu_API.Make_Slider"
 					param="table[
-						$id = 'interval',
-						$start = md.banking_clan_bank.GalacticBank.$interval / 60,
+						$id = 'rate30',
 						$col = 2,
 						$text = table[$text=''],
-						$min = 0, $max = 1440, $step = 1, $suffix='',
-						$default = 1,
-						$mouseOverText = '1440 = 24 hours',
-						$onSliderCellChanged = OnIntervalChange
+						$start = md.Banking_Clan_Bank.GalacticBank.$rate30 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$rate30 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Period']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'period30',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$period30 / 3600,
+						$min=0, $max=720, $step=0.1, $suffix='hr',
+						$default = md.Banking_Clan_Bank.GalacticBank.$period30 / 3600,
+						$onSliderCellChanged = OnPeriodChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text" param="table[$text='']" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $text='Relation 20']" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Fee']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'fee20',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$fee20 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$fee20 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Rate']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'rate20',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$rate20 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$rate20 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Period']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'period20',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$period20 / 3600,
+						$min=0, $max=720, $step=0.1, $suffix='hr',
+						$default = md.Banking_Clan_Bank.GalacticBank.$period20 / 3600,
+						$onSliderCellChanged = OnPeriodChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text" param="table[$text='']" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $text='Relation 10']" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Fee']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'fee10',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$fee10 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$fee10 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Rate']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'rate10',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$rate10 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$rate10 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Period']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'period10',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$period10 / 3600,
+						$min=0, $max=720, $step=0.1, $suffix='hr',
+						$default = md.Banking_Clan_Bank.GalacticBank.$period10 / 3600,
+						$onSliderCellChanged = OnPeriodChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text" param="table[$text='']" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $text='Relation 0']" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Fee']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'fee0',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$fee0 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$fee0 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Rate']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'rate0',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$rate0 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$rate0 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Period']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'period0',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$period0 / 3600,
+						$min=0, $max=720, $step=0.1, $suffix='hr',
+						$default = md.Banking_Clan_Bank.GalacticBank.$period0 / 3600,
+						$onSliderCellChanged = OnPeriodChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text" param="table[$text='']" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $text='Relation -9']" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Fee']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'fee9',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$fee9 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$fee9 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Rate']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'rate9',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$rate9 * 100,
+						$min=0, $max=100, $step=0.1, $suffix='%',
+						$default = md.Banking_Clan_Bank.GalacticBank.$rate9 * 100,
+						$onSliderCellChanged = OnPercentChange
+					]" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
+				<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
+					param="table[$col=1, $halign='right', $text='Period']" />
+				<signal_cue_instantly
+					cue="md.Simple_Menu_API.Make_Slider"
+					param="table[
+						$id = 'period9',
+						$col = 2,
+						$text = table[$text=''],
+						$start = md.Banking_Clan_Bank.GalacticBank.$period9 / 3600,
+						$min=0, $max=720, $step=0.1, $suffix='hr',
+						$default = md.Banking_Clan_Bank.GalacticBank.$period9 / 3600,
+						$onSliderCellChanged = OnPeriodChange
 					]" />
 			</actions>
 		</cue>
-		<cue name="OnRateChange" instantiate="true">
+		<cue name="OnPercentChange" instantiate="true">
 			<conditions>
 				<event_cue_signalled />
 			</conditions>
 			<actions>
-				<set_value name="md.banking_clan_bank.GalacticBank.$interest_rate"
+				<set_value name="md.Banking_Clan_Bank.GalacticBank.{'$' + event.param.$id}"
 					exact="event.param.$value / 100" />
 				<cancel_cue cue="this" />
 			</actions>
 		</cue>
-		<cue name="OnIntervalChange" instantiate="true">
+		<cue name="OnPeriodChange" instantiate="true">
 			<conditions>
 				<event_cue_signalled />
 			</conditions>
 			<actions>
-				<set_value name="md.banking_clan_bank.GalacticBank.$interval"
-					exact="event.param.$value * 60" />
+				<set_value name="md.Banking_Clan_Bank.GalacticBank.{'$' + event.param.$id}"
+					exact="(event.param.$value * 3600)s" />
 				<cancel_cue cue="this" />
 			</actions>
 		</cue>
