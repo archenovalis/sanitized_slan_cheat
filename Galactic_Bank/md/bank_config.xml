@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mdscript name="Banking_Clan_Bank_Config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="../../md/md.xsd">
+	xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
 	<cues>
 		<cue name="StartSMO" instantiate="true">
 			<conditions>
@@ -11,7 +11,7 @@
 					param="table[
 						$id = 'bank_extension_options_menu',
 						$columns = 2,
-						$title = 'InterGalactic Banking Clan - Account Status Override Access',
+						$title = 'InterGalactic Banking Clan - Account Override Access',
 						$onOpen = BankOptionsMenu
 					]" />
 				<cancel_cue cue="this" />

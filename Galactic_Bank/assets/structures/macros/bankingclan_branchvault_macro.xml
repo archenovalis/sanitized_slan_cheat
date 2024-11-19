@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<macros>
+  <macro name="bankingclan_branchvault_macro" class="station">
+    <component ref="bankingclan_vault" />
+    <properties>
+      <identification name="'{20777,1002} - {20777,1006} {20777,1004}'" icon="faction_bankingclan"
+        factionhqicon="faction_bankingclan" hudicon="faction_bankingclan" />
+    </properties>
+  </macro>
+</macros>

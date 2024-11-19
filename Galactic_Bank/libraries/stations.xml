@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<diff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../xsd/diff.xsd">
+  <add sel="//stations">
+    <station id="bankingclan_vault" group="bankingclan_vault">
+      <category tags="tradestation" faction="[bankingclan]" />
+    </station>
+  </add>
+</diff>

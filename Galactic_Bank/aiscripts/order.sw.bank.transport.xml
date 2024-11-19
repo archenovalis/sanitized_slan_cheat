@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aiscript name="order.sw.bank.transport"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../xsd/aiscripts.xsd" version="1">
+  <order id="SWBankTransport" name="{20777, 1011}" description="{20777, 1012}"
+    category="internal" />
+
+  <interrupts>
+    <handler ref="AttackHandler" />
+    <handler ref="MissileLockHandler" />
+    <handler ref="ScannedHandler" />
+    <handler ref="InspectedHandler" />
+  </interrupts>
+
+  <init>
+    <find_station_by_true_owner faction="faction.bankingclan" space="swi.galaxy.macro"
+      name="$stations" functional="true" multiple="true" append="true" />
+    <set_value name="$stationA" exact="$stations.random" />
+    <find_station_by_true_owner faction="faction.bankingclan" space="swi.galaxy.macro"
+      name="$stations" excluded="$stationA" functional="true" multiple="true" append="true" />
+    <set_value name="$stationB" exact="$stations.random" />
+  </init>
+
+  <attention min="unknown">
+    <actions>
+      <set_value name="$currentStation" exact="$stationA" />
+
+      <label name="start" />
+      <!-- Travel to the current station -->
+      <move_to destination="$currentStation.sector" object="$currentStation" />
+
+      <label name="dock" />
+      <request_docking ship="this.assignedcontrolled" container="$currentStation"
+        queuedresult="$queuedresult" grantedresult="$grantedresult" />
+      <do_if value="$grantedresult">
+        <set_value name="$station" exact="$currentStation" />
+        <break />
+      </do_if>
+      <do_elseif value="$queuedresult">
+        <set_value name="$station" exact="$currentStation" />
+      </do_elseif>
+
+      <do_if value="@$station">
+        <do_if value="this.assignedcontrolled.assigneddock.exists">
+          <get_docking_approach_pos position="$approachpos" rotation="$approachrot"
+            dock="this.assignedcontrolled.assigneddock" ship="this.assignedcontrolled" />
+          <move_to object="this.assignedcontrolled"
+            destination="this.assignedcontrolled.assigneddock" forcesteering="false"
+            finishonapproach="true" forceposition="false" forcerotation="false" boost="false"
+            travel="true">
+            <position value="$approachpos" />
+            <rotation value="$approachrot" />
+            <interrupt_after_time time="10min" />
+          </move_to>
+        </do_if>
+      </do_if>
+      <do_else>
+        <wait min="10s" max="30s" />
+        <resume label="dock" />
+      </do_else>
+
+      <run_script name="'order.dock'" result="$docked">
+        <param name="destination" value="$station" />
+        <param name="dockfollowers" value="false" />
+        <param name="noattackresponse" value="true" />
+        <param name="callerid" value="@this.assignedcontrolled.order" />
+        <param name="internalorder" value="true" />
+        <param name="recallsubordinates" value="true" />
+      </run_script>
+
+      <!-- Toggle the destination -->
+      <do_if value="$currentStation == $stationA">
+        <set_value name="$currentStation" exact="$stationB" />
+      </do_if>
+      <do_else>
+        <set_value name="$currentStation" exact="$stationA" />
+      </do_else>
+
+      <!-- Wait before the next travel -->
+      <wait min="60s" max="300s" />
+      <run_script name="'move.undock'" />
+      <resume label="start" />
+    </actions>
+  </attention>
+</aiscript>

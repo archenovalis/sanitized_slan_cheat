@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<diff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../xsd/diff.xsd">
+  <add sel="/index">
+    <entry
+      name="bankingclan_branchvault_macro"
+      value="assets\structures\macros\bankingclan_branchvault_macro" />
+    <entry
+      name="bankingclan_mainvault_macro"
+      value="assets\structures\macros\bankingclan_mainvault_macro" />
+    <entry
+      name="bank_wares_macro"
+      value="assets\props\StorageModules\macros\bank_wares_macro" />
+  </add>
+</diff>

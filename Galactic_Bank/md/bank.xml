@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mdscript name="Banking_Clan_Bank" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="../../md/md.xsd">
+	xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
 	<cues>
-		<cue name="GalacticBank" namespace="this" version="1">
+		<cue name="GalacticBank" namespace="this" version="2">
 			<conditions>
 				<check_any>
 					<event_cue_signalled cue="md.Setup.GameStart" />
@@ -34,19 +34,27 @@
 				<set_value name="$fee30" exact="0" />
 				<set_value name="$rate30" exact="0.015" />
 				<set_value name="$period30" exact="10h" />
-				<set_value name="$fee20" exact="0.00125" />
+				<set_value name="$fee20" exact="0.0025" />
 				<set_value name="$rate20" exact="0.0125" />
 				<set_value name="$period20" exact="12h" />
-				<set_value name="$fee10" exact="0.00125" />
+				<set_value name="$fee10" exact="0.0025" />
 				<set_value name="$rate10" exact="0.01" />
 				<set_value name="$period10" exact="15h" />
-				<set_value name="$fee0" exact="0.0025" />
+				<set_value name="$fee0" exact="0.005" />
 				<set_value name="$rate0" exact="0.0075" />
 				<set_value name="$period0" exact="20h" />
-				<set_value name="$fee9" exact="0.0025" />
+				<set_value name="$fee9" exact="0.005" />
 				<set_value name="$rate9" exact="0.005" />
 				<set_value name="$period9" exact="24h" />
+				<set_value name="$setupComplete" exact="false" />
 			</actions>
+			<patch sinceversion="2">
+				<set_value name="$fee20" exact="0.0025" />
+				<set_value name="$fee10" exact="0.0025" />
+				<set_value name="$fee0" exact="0.005" />
+				<set_value name="$fee9" exact="0.005" />
+				<set_value name="$setupComplete" exact="false" />
+			</patch>
 			<cues>
 				<cue name="Init">
 					<conditions>
@@ -57,9 +65,65 @@
 						<check_value value="not @player.allmodules.{player.module}.isscenario" />
 					</conditions>
 					<actions>
+						<do_if value="not $setupComplete">
+							<set_value name="$name"
+								exact="'{20777,1001} {20777,1005} - {20777, 1003} {20777, 1004}'" />
+							<create_station state="componentstate.operational" encyclopedia="true"
+								name="$name"
+								sector="macro.swi_clusterscipio_sector001_macro"
+								owner="faction.bankingclan" macro="bankingclan_mainvault_macro"
+								constructionplan="vault_bankingclan">
+							</create_station>
+							<set_value name="$name"
+								exact="'{20777,1001} {20777,1005} - {20777, 1006} {20777, 1004}'" />
+							<create_station state="componentstate.operational" encyclopedia="false"
+								name="$name"
+								sector="macro.swi_clusterbastion_sector001_macro"
+								owner="faction.bankingclan" macro="bankingclan_branchvault_macro"
+								constructionplan="vault_bankingclan">
+							</create_station>
+							<create_station state="componentstate.operational" encyclopedia="false"
+								name="$name"
+								sector="macro.swi_clustereriadu_sector001_macro"
+								owner="faction.bankingclan" macro="bankingclan_branchvault_macro"
+								constructionplan="vault_bankingclan">
+							</create_station>
+							<create_station state="componentstate.operational" encyclopedia="false"
+								name="$name"
+								sector="macro.swi_clustercoruscant_sector001_macro"
+								owner="faction.bankingclan" macro="bankingclan_branchvault_macro"
+								constructionplan="vault_bankingclan">
+							</create_station>
+							<create_station state="componentstate.operational" encyclopedia="false"
+								name="$name"
+								sector="macro.swi_clustercantonica_sector001_macro"
+								owner="faction.bankingclan" macro="bankingclan_branchvault_macro"
+								constructionplan="vault_bankingclan">
+							</create_station>
+							<create_station state="componentstate.operational" encyclopedia="false"
+								name="$name"
+								sector="macro.swi_clusterhypori_sector001_macro"
+								owner="faction.bankingclan" macro="bankingclan_branchvault_macro"
+								constructionplan="vault_bankingclan">
+							</create_station>
+							<create_station state="componentstate.operational" encyclopedia="false"
+								name="$name"
+								sector="macro.swi_clusternarshadda_sector001_macro"
+								owner="faction.bankingclan" macro="bankingclan_branchvault_macro"
+								constructionplan="vault_bankingclan">
+							</create_station>
+							<create_station state="componentstate.operational" encyclopedia="false"
+								name="$name"
+								sector="macro.swi_clusteranpath_sector001_macro"
+								owner="faction.bankingclan" macro="bankingclan_branchvault_macro"
+								constructionplan="vault_bankingclan">
+							</create_station>
+							<set_value name="$setupComplete" exact="true" />
+						</do_if>
 						<reset_cue cue="this" />
 					</actions>
 				</cue>
+
 				<cue name="Relation_Change">
 					<conditions>
 						<event_player_relation_changed faction="bankerclan" />
@@ -67,7 +131,6 @@
 					<actions>
 						<set_value name="$faction" exact="event.param" />
 						<set_value name="$relation" exact="$faction.relationto.{faction.player}" />
-
 						<show_notification text="$relation" timeout="2s" sound="ui_mon_eve_money_up" />
 
 						<do_if value="$relation ge 1">
@@ -102,6 +165,7 @@
 						</do_else>
 					</actions>
 				</cue>
+
 				<!-- mmm, the clone lab cleans this up better... and maybe we could assign an actor to the
 				station so it isn't always different? -->
 				<cue name="Bank_Remove" instantiate="true">
@@ -123,7 +187,8 @@
 						<remove_value name="$banker" />
 					</actions>
 				</cue>
-				<cue name="Bank_Add" instantiate="true">
+
+				<cue name="Branch_Add" instantiate="true">
 					<conditions>
 						<event_object_changed_object object="player.entity" />
 					</conditions>
@@ -156,7 +221,8 @@
 							</do_if>
 							<get_room_definition macro="$roomMacro" race="faction.argon.primaryrace"
 								tags="tag.office" />
-							<set_value name="$name" exact="{20777, 1001}" />
+							<set_value name="$name"
+								exact="'{20777, 1001} {20777, 1005} - {20777, 1006} {20777, 1007} '" />
 							<create_dynamic_interior object="$station"
 								corridor="$corridorMacro" room="$roomMacro"
 								name="$name"
@@ -282,8 +348,6 @@
 							<signal_cue_instantly
 								cue="md.Simple_Menu_API.Make_Text"
 								param="table[$col=1, $text='']" />
-							<!-- <signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
-								param="table[$col=1, $text='Balance: '+$balance+'Cr']" /> -->
 							<signal_cue_instantly
 								cue="md.Simple_Menu_API.Add_Row"
 								param="table[$interactive=false]" />
@@ -297,12 +361,6 @@
 								cue="md.Simple_Menu_API.Make_Text"
 								param="table[$col=1, $halign='right', $text=$earned+'Cr']" />
 						</do_if>
-						<!-- <do_else>
-							<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row"
-								param="table[$interactive=false]" />
-							<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text"
-								param="table[$col=1, $text='Balance: 0']" />
-						</do_else> -->
 						<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" param="table[$interactive=false]" />
 						<signal_cue_instantly cue="md.Simple_Menu_API.Make_Text" param="table[$col=1, $text='']" />
 						<signal_cue_instantly cue="md.Simple_Menu_API.Add_Row" />
@@ -353,6 +411,7 @@
 						</do_if>
 					</actions>
 				</cue>
+
 				<cue name="Bank_Menu_Update" instantiate="true">
 					<conditions>
 						<event_cue_signalled />
@@ -407,6 +466,7 @@
 						</do_else>
 					</actions>
 				</cue>
+
 				<cue name="Bank_Menu_Withdraw" instantiate="true">
 					<conditions>
 						<event_cue_signalled />
@@ -437,27 +497,6 @@
 						</do_else>
 					</actions>
 				</cue>
-				<!-- <cue name="ApplyInterest">
-					<conditions>
-						<check_any>
-							<event_cue_signalled/>
-						</check_any>
-					</conditions>
-					<delay exact="$period"/>
-					<actions>
-						<set_value name="$timeSinceInterest" exact="player.age - global.$Bank.$interest_time"/>
-						<set_value name="global.$Bank.$interest_time" exact="player.age"/>
-						<do_if value="$timeSinceInterest ge global.$Bank.$period">
-							<set_value name="$timeSinceInterest" exact="global.$Bank.$period"/>
-						</do_if>
-						<set_value name="$interest_amount" exact="global.$Bank.$balance * global.$Bank.$rate *
-				($timeSinceInterest / global.$Bank.$period)"/>
-						<set_value name="global.$Bank.$balance" exact="global.$Bank.$balance + $interest_amount"/>
-						<show_notification text="'Interest: ' + $interest_amount + '. New balance: ' +
-				global.$Bank.$balance" timeout="10s" sound="ui_mon_eve_money_up"/>
-						<signal_cue_instantly cue="md.banking_clan_bank.ApplyInterest"/>
-					</actions>
-				</cue> -->
 			</cues>
 		</cue>
 	</cues>
