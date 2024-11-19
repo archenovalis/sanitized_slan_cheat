@@ -48,7 +48,7 @@ const addFilesToZip = (projectFolder: string, archive: archiver.Archiver, dir: s
       const relativePath = relative(baseDir, itemPath);
       if (itemPath.endsWith('.xml')) {
         // removes ../../.*/ from schema
-        const xml = readFileSync(itemPath, 'utf8').replace(/SchemaLocation\=\"\.\.\/\.\.\/.*\//g, 'SchemaLocation="');
+        const xml = readFileSync(itemPath, 'utf8').replace(/SchemaLocation\=\"\.\.\/.*xsd\//g, 'SchemaLocation="');
         archive.append(xml, { name: relativePath }); 
       } else {
         archive.file(resolve(projectFolder, itemPath), { name: relativePath });
