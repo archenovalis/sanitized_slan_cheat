@@ -11,12 +11,20 @@
   <remove sel="//job[@id='bankingclan_refinedmineral_trader_m']" />
   <remove sel="//job[@id='bankingclan_tech_trader_m']" />
   <remove sel="//job[@id='bankingclan_food_trader_m']" />
+  <remove sel="//job[@id='bankingclan_free_miner_m_rhydonium']" />
+  <remove sel="//job[@id='bankingclan_free_miner_m_liquid']" />
+  <remove sel="//job[@id='bankingclan_free_miner_l_ice']" />
+  <remove sel="//job[@id='bankingclan_free_miner_m_mineral']" />
+  <remove sel="//job[@id='bankingclan_free_miner_m_ice']" />
+  <remove sel="//job[@id='bankingclan_ship_construction_trader_m']" />
+
 
   <add sel="//jobs">
-    <!-- <jobs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="../../xsd/libraries.xsd"> -->
+    <!-- <jobs xmlns:xsi="http:// www.w3.org/ 2001/ XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../ ../ xsd/ libraries.xsd"> -->
     <job id="bankingclan_banker_m" name="'{20777,1002} {20777,1008}'">
-      <modifiers rebuild="true" commandeerable="true" />
+      <modifiers rebuild="
+  true" commandeerable="true" />
       <orders>
         <order order="SWBankTransport" default="true" />
       </orders>
@@ -35,7 +43,8 @@
 
     <job
       id="bankingclan_banker_l" name="'{20777,1002} {20777,1008}'">
-      <modifiers rebuild="true" commandeerable="true" />
+      <modifiers rebuild="
+  true" commandeerable="true" />
       <orders>
         <order order="SWBankTransport" default="true" />
       </orders>

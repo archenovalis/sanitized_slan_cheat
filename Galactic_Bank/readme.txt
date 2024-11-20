@@ -30,5 +30,6 @@ Interest Rate, Compounding Period, and Withdrawal Fee are set by player's reputa
 
 1.1:
 Banker's Clan Vault Stations
+Vaults are rebuilt within the same faction
 Credit loot boxes drop from Banker Clan ships
 Banker Clan has ships that transport credits between vaults

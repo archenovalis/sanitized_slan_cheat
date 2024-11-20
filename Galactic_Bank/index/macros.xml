@@ -3,13 +3,13 @@
   xsi:noNamespaceSchemaLocation="../../xsd/diff.xsd">
   <add sel="/index">
     <entry
-      name="bankingclan_branchvault_macro"
-      value="assets\structures\macros\bankingclan_branchvault_macro" />
+      name="station_bankingclan_branchvault_macro"
+      value="extensions\Galactic_Bank\assets\structures\macros\station_bankingclan_branchvault_macro" />
     <entry
-      name="bankingclan_mainvault_macro"
-      value="assets\structures\macros\bankingclan_mainvault_macro" />
+      name="station_bankingclan_mainvault_macro"
+      value="extensions\Galactic_Bank\assets\structures\macros\station_bankingclan_mainvault_macro" />
     <entry
       name="bank_wares_macro"
-      value="assets\props\StorageModules\macros\bank_wares_macro" />
+      value="extensions\Galactic_Bank\assets\props\StorageModules\macros\bank_wares_macro" />
   </add>
 </diff>
