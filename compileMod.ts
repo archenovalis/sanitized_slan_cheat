@@ -60,7 +60,7 @@ const addFilesToZip = async (projectFolder: string, zip: JSZip, dir: string, bas
       // Recursively add files from subdirectories
       await addFilesToZip(projectFolder, zip, itemPath, baseDir, allowedExtensions);
     } else if (stats.isFile() && allowedExtensions.includes(ext)) {
-      let relativePath = relative(baseDir, itemPath);
+      let relativePath = `${projectFolder}/${relative(baseDir, itemPath)}`;
       if (itemPath.endsWith('.xml')) {
         // Clean schema location
         const xml = readFileSync(itemPath, 'utf8').replace(/SchemaLocation\=\"\.\.\/.*xsd\//g, 'SchemaLocation="');
