@@ -3,6 +3,6 @@
   xsi:noNamespaceSchemaLocation="../../xsd/diff.xsd">
   <add sel="//index">
     <entry name="station_bankingclan_vault"
-      value="extensions\Galactic_Bank\assets\structures\station_bankingclan_vault" />
+      value="extensions\galactic_bank\assets\structures\station_bankingclan_vault" />
   </add>
 </diff>

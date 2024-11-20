@@ -4,12 +4,12 @@
   <add sel="/index">
     <entry
       name="station_bankingclan_branchvault_macro"
-      value="extensions\Galactic_Bank\assets\structures\macros\station_bankingclan_branchvault_macro" />
+      value="extensions\galactic_bank\assets\structures\macros\station_bankingclan_branchvault_macro" />
     <entry
       name="station_bankingclan_mainvault_macro"
-      value="extensions\Galactic_Bank\assets\structures\macros\station_bankingclan_mainvault_macro" />
+      value="extensions\galactic_bank\assets\structures\macros\station_bankingclan_mainvault_macro" />
     <entry
       name="bank_wares_macro"
-      value="extensions\Galactic_Bank\assets\props\StorageModules\macros\bank_wares_macro" />
+      value="extensions\galactic_bank\assets\props\StorageModules\macros\bank_wares_macro" />
   </add>
 </diff>
