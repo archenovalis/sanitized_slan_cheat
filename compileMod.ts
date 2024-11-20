@@ -1,8 +1,9 @@
 // compileMod.ts
-import { createWriteStream, existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'fs';
 import { extname, relative, resolve } from 'path';
 import { Parser } from 'xml2js';
-import archiver from 'archiver';
+import zlib from 'zlib';
+import JSZip from 'jszip';
 
 const parser = new Parser();
 
@@ -35,51 +36,61 @@ const getVersionFromContentXml = async (path: string): Promise<string> => {
   }
 };
 
-const addFilesToZip = (projectFolder: string, archive: archiver.Archiver, dir: string, baseDir: string, allowedExtensions: string[]) => {
-  const items = readdirSync(dir);
-
-  items.forEach(async (item) => {
-    const itemPath = resolve(dir, item);
-    const stats = statSync(itemPath);
-    const ext = extname(itemPath).toLowerCase()
-    if (stats.isDirectory()) {
-      addFilesToZip(projectFolder, archive, itemPath, baseDir, allowedExtensions);
-    } else if (stats.isFile() && allowedExtensions.includes(ext)) {
-      const relativePath = relative(baseDir, itemPath);
-      if (itemPath.endsWith('.xml')) {
-        // removes ../../.*/ from schema
-        const xml = readFileSync(itemPath, 'utf8').replace(/SchemaLocation\=\"\.\.\/.*xsd\//g, 'SchemaLocation="');
-        archive.append(xml, { name: relativePath }); 
+const gzip = (buffer: Buffer): Promise<Buffer> => {
+  return new Promise((resolve) => {
+    zlib.gzip(buffer, (err, compressedData) => {
+      if (err) {
+        throw(`Error compressing file: ${err}`);
       } else {
-        archive.file(resolve(projectFolder, itemPath), { name: relativePath });
+        resolve(compressedData);
       }
-    }
+    });
   });
 };
 
+const addFilesToZip = async (projectFolder: string, zip: JSZip, dir: string, baseDir: string, allowedExtensions: string[]) => {
+  const items = readdirSync(dir);
+
+  for (const item of items) {
+    const itemPath = resolve(dir, item);
+    const stats = statSync(itemPath);
+    const ext = extname(itemPath).toLowerCase();
+    
+    if (stats.isDirectory()) {
+      // Recursively add files from subdirectories
+      await addFilesToZip(projectFolder, zip, itemPath, baseDir, allowedExtensions);
+    } else if (stats.isFile() && allowedExtensions.includes(ext)) {
+      let relativePath = relative(baseDir, itemPath);
+      if (itemPath.endsWith('.xml')) {
+        // Clean schema location
+        const xml = readFileSync(itemPath, 'utf8').replace(/SchemaLocation\=\"\.\.\/.*xsd\//g, 'SchemaLocation="');
+        zip.file(relativePath, xml);
+      } else if (itemPath.endsWith('.tga')) {
+        // Gzip and add .tga files
+        relativePath = relativePath.replace('.tga', '.gz');
+        zip.file(relativePath, await gzip(readFileSync(itemPath)));
+      } else {
+        // Add other files as is
+        zip.file(relativePath, readFileSync(itemPath));
+      }
+    }
+  }
+};
+
 // Main function to create the zip file
-const createZip = (projectFolder: string, sourceDir: string, version: string, allowedExtensions: string[]) => {
+const createZip = async (projectFolder: string, sourceDir: string, version: string, allowedExtensions: string[]) => {
   const dateTime = new Date().toISOString().replace(/[:.-]/g, '_');
   const outDir = resolve(__dirname, 'dist');
   const outputZip = `${outDir}/${projectFolder}-v${version}-${dateTime.split('T')[0]}.zip`;
-  const output = createWriteStream(outputZip);
-  const archive = archiver('zip', {
-    zlib: { level: 9 }
-  });
 
-  output.on('close', () => {
-    console.log(`Archive created successfully: ${outputZip}`);
-  });
+  const zip = new JSZip();
+  await addFilesToZip(projectFolder, zip, sourceDir, sourceDir, allowedExtensions);
 
-  archive.on('error', (err: string) => {
-    throw err;
-  });
+  const zipData = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE', compressionOptions: { level: 9 } });
 
-  archive.pipe(output);
-
-  addFilesToZip(projectFolder, archive, sourceDir, sourceDir, allowedExtensions);
-
-  archive.finalize();
+  // Write the generated zip file to disk
+  writeFileSync(outputZip, zipData);
+  console.log(`Archive created successfully: ${outputZip}`);
 };
 
 const run = async () => {
@@ -93,7 +104,7 @@ const run = async () => {
     const path = projectPath(projectFolder);
     const version = await getVersionFromContentXml(path);
     const allowedExtensions = getAllowedExtensions(path);
-    createZip(projectFolder, path, version, allowedExtensions);
+    await createZip(projectFolder, path, version, allowedExtensions);
   } catch (error) {
     console.error(`Error: ${error}`);
   }
