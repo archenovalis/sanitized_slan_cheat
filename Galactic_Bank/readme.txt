@@ -1,9 +1,9 @@
 --- Features ---
-Galactic Bank Offices are found in all stations.
-Interest Rate, Compounding Period, and Withdrawal Fee are set by player's reputation with Banking Clan
 Banker's Clan has Vault Stations in major faction home sectors.
-Banker Clan's ships transport credit lootboxes between vaults
-Credit loot boxes drop from Banker Clan ships (do nothing for now, collect them for profits?)
+Branch Offices are found in stations located within major faction-owned sectors.
+Interest Rate, Compounding Period, and Withdrawal Fee are set by player's reputation with Banking Clan.
+Banker Clan's ships transport credit lootboxes between vaults.
+Credit loot boxes drop from Banker Clan ships (do nothing for now, collect them for future profits).
 
 
 --- Planned Features ---
