@@ -1,16 +1,19 @@
 --- Features ---
-Banker's Clan has Vault Stations in major faction home sectors.
+Banking Clan has Vault Stations in major faction home sectors.
 Branch Offices are found in stations located within major faction-owned sectors.
 Interest Rate, Compounding Period, and Withdrawal Fee are set by player's reputation with Banking Clan.
-Banker Clan's ships transport credit lootboxes between vaults.
-Credit loot boxes drop from Banker Clan ships (do nothing for now, collect them for future profits).
+Banking Clan's ships transport credit lootboxes between vaults.
+Credit loot boxes drop from Banking Clan ships (do nothing for now, collect them for future profits).
 
+--- Requirements ---
+[SirNukes Mod Support APIs](https://www.nexusmods.com/x4foundations/mods/503)
+[SW Interworlds](https://sites.google.com/view/swinterworlds/Home)
 
 --- Planned Features ---
 Change Compounding Period to be based on Banking Clan Standing (Building Defense Stations near Vault Stations)
 
 -Loot Boxes-
-Credit loot boxes drop from Banker Clan owned objects (including destroying a vault, but destroy a vault and everyone with a vault gets mad, super mad)
+Credit loot boxes drop from Banking Clan owned objects (including destroying a vault, but destroy a vault and everyone with a vault gets mad, super mad)
 Rewards and reputation for finding and turning in the credit loot boxes.
 Chance of large reputation decrease for opening credit loot boxes (unknown amount of credits, usually a lot, might not be; same large reputation decrease regardless of amount)
 Use a Security Bypass to attempt to open it without risk. Might succeed on first try. Might require multiple.
@@ -29,7 +32,7 @@ Interest Rate, Compounding Period, and Withdrawal Fee are set by player's reputa
   (Withdrawal fee is nerfed until Banking Clan have their own stations.)
 
 1.1:
-Banker's Clan Vault Stations
+Banking Clan Vault Stations
 Vaults are rebuilt within the same faction
-Credit loot boxes drop from Banker Clan ships
-Banker Clan has ships that transport credits between vaults
+Credit loot boxes drop from Banking Clan ships
+Banking Clan has ships that transport credits between vaults

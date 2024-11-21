@@ -3,8 +3,8 @@ Bank Todo:
 period by status: standard 20hr; 1 defense station 15hr, 3 defense stations 12hr, 4 defense stations 10hr (branch defense stations count as half)
 limit offices to stations owned by factions that have a branch vault station
 
-add credit loot boxes for destroyed vaults
-add risk / reward for opening lootboxes
-change player relation to war for all factions with vaults if player helped destroy a vault
-add player relation decrease with banking clan for picking up looted credit boxes
-add player relation increase with banking clan for returning picked up looted credit boxes to banking clan employee
+add credit loot boxes for destroyed vaults (solid storage modules)
+add opening lootboxes with risk
+
+add player relation decrease with banking clan for (if seen) picking up looted credit boxes
+add player relation increase with banking clan for returning picked up looted credit boxes to banking clan office
