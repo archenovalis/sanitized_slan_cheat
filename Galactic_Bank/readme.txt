@@ -36,3 +36,8 @@ Banking Clan Vault Stations
 Vaults are rebuilt within the same faction
 Credit loot boxes drop from Banking Clan ships
 Banking Clan has ships that transport credits between vaults
+
+1.11 spicy fix:
+cleaned up
+removed 2 (lag causing?) docks from vault station
+should now be save compatible (faction relations updated upon install)

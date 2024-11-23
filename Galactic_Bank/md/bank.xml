@@ -2,7 +2,7 @@
 <mdscript name="Banking_Clan_Bank" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
 	<cues>
-		<cue name="GalacticBank" namespace="this" version="2">
+		<cue name="GalacticBank" namespace="this" version="3">
 			<conditions>
 				<check_any>
 					<event_game_loaded />
@@ -60,6 +60,58 @@
 				<set_value name="$factionList"
 					exact="[faction.bankingclan, faction.galempire, faction.ascendancy, faction.newrepublic, faction.commerceguild, faction.corporate, faction.huttcartel, faction.anoat, faction.mandodw]" />
 			</patch>
+			<patch sinceversion="3">
+				<find_station_by_true_owner macro="macro.station_bankingclan_branchvault_macro"
+					faction="faction.bankingclan" space="player.galaxy" name="$stations" />
+				<set_value name="$rawname"
+					exact="'{20777,1001} {20777,1005} - {20777,1003} {20777,1004}'" />
+				<set_value name="$macro" exact="macro.station_bankingclan_mainvault_macro" />
+				<do_for_each name="$station" in="$stations">
+					<do_if value="not $station.iswreck">
+						<set_value name="$sector" exact="$station.sector" />
+						<set_value name="$position" exact="$station.position" />
+						<set_value name="$rotation" exact="$station.rotation" />
+						<destroy_object explosion="false" object="$station" />
+						<create_station rawname="$rawname"
+							state="componentstate.operational"
+							encyclopedia="false"
+							name="$stationNew"
+							sector="$sector"
+							owner="faction.bankingclan" macro="$macro"
+							constructionplan="'vault_bankingclan'">
+							<position value="$position" />
+						</create_station>
+						<set_loadout_level object="$stationNew" exact="1" />
+						<signal_objects object="player.galaxy" param="'init station'" param2="$stationNew"
+							param3="false" />
+					</do_if>
+				</do_for_each>
+				<find_station_by_true_owner macro="macro.station_bankingclan_branchvault_macro"
+					faction="faction.bankingclan" space="player.galaxy" name="$stations" />
+				<set_value name="$rawname" exact="'{20777,1001} {20777,1005} - {20777,1006} {20777,1004}'" />
+				<set_value name="$macro" exact="macro.station_bankingclan_branchvault_macro" />
+				<do_for_each name="$station" in="$stations">
+					<do_if value="not $station.iswreck">
+						<set_value name="$sector" exact="$station.sector" />
+						<set_value name="$position" exact="$station.position" />
+						<set_value name="$rotation" exact="$station.rotation" />
+						<destroy_object explosion="false" object="$station" />
+						<create_station rawname="$rawname"
+							state="componentstate.operational"
+							encyclopedia="false"
+							name="$stationNew"
+							sector="$sector"
+							owner="faction.bankingclan" macro="$macro"
+							constructionplan="'vault_bankingclan'">
+							<position value="$position" />
+						</create_station>
+						<set_loadout_level object="$stationNew" exact="0.9" />
+						<signal_objects object="player.galaxy" param="'init station'" param2="$stationNew"
+							param3="false" />
+					</do_if>
+				</do_for_each>
+				<set_value name="$setupComplete" exact="false" />
+			</patch>
 			<cues>
 				<cue name="Init">
 					<conditions>
@@ -73,12 +125,12 @@
 					<delay exact="2s" />
 					<actions>
 						<do_if value="not $setupComplete">
-							<signal_cue_instantly cue="Setup" />
+							<signal_cue_instantly cue="InitSetup" />
 						</do_if>
 						<reset_cue cue="Init" />
 					</actions>
 					<cues>
-						<cue name="Setup">
+						<cue name="InitSetup">
 							<conditions>
 								<event_cue_signalled />
 								<check_value value="$setupComplete == false" />
@@ -105,6 +157,7 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<set_value name="$name"
@@ -118,6 +171,7 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<find_sector name="$sector" macro="macro.swi_clustereriadu_sector001_macro" />
@@ -129,6 +183,7 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<find_sector name="$sector" macro="macro.swi_clustercoruscant_sector001_macro" />
@@ -140,6 +195,7 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<find_sector name="$sector" macro="macro.swi_clustercantonica_sector001_macro" />
@@ -151,6 +207,7 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<find_sector name="$sector" macro="macro.swi_clusterhypori_sector001_macro" />
@@ -162,6 +219,7 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<find_sector name="$sector" macro="macro.swi_clusternarshadda_sector001_macro" />
@@ -173,6 +231,7 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<find_sector name="$sector" macro="macro.swi_clusteranpath_sector001_macro" />
@@ -184,6 +243,7 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<find_sector name="$sector" macro="macro.swi_clustermandalore_sector001_macro" />
@@ -195,12 +255,67 @@
 									constructionplan="'vault_bankingclan'">
 									<safepos allowyaxis="false" value="$Position" includeplotbox="true" />
 								</create_station>
+								<set_loadout_level object="$station" exact="0.9" />
 								<signal_objects object="player.galaxy" param="'init station'" param2="$station"
 									param3="false" />
 								<remove_value name="$sector" />
 								<remove_value name="$station" />
+
+								<!-- set faction relations -->
+								<set_faction_relation faction="faction.bankingclan" otherfaction="faction.anoat"
+									value="0.2" />
+								<set_faction_relation faction="faction.anoat" otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan" otherfaction="faction.mandodw"
+									value="0.2" />
+								<set_faction_relation faction="faction.mandodw" otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan"
+									otherfaction="faction.huttcartel"
+									value="0.2" />
+								<set_faction_relation faction="faction.huttcartel"
+									otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan" otherfaction="faction.corporate"
+									value="0.2" />
+								<set_faction_relation faction="faction.corporate" otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan"
+									otherfaction="faction.commerceguild"
+									value="0.2" />
+								<set_faction_relation faction="faction.commerceguild"
+									otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan"
+									otherfaction="faction.rebelalliance"
+									value="0.2" />
+								<set_faction_relation faction="faction.rebelalliance"
+									otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan"
+									otherfaction="faction.newrepublic"
+									value="0.2" />
+								<set_faction_relation faction="faction.newrepublic"
+									otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan"
+									otherfaction="faction.ascendancy"
+									value="0.2" />
+								<set_faction_relation faction="faction.ascendancy"
+									otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan" otherfaction="faction.sith"
+									value="0.2" />
+								<set_faction_relation faction="faction.sith" otherfaction="faction.bankingclan"
+									value="0.2" />
+								<set_faction_relation faction="faction.bankingclan" otherfaction="faction.galempire"
+									value="0.2" />
+								<set_faction_relation faction="faction.galempire" otherfaction="faction.bankingclan"
+									value="0.2" />
+
+								<!-- Complete -->
 								<set_value name="$setupComplete" exact="true" />
-								<reset_cue cue="Setup" />
+								<reset_cue cue="InitSetup" />
 							</actions>
 						</cue>
 					</cues>
@@ -316,9 +431,6 @@
 						<check_value value="player.station" />
 					</conditions>
 					<actions>
-						<!-- 						<set_value name="$setupComplete" exact="false" />
-						<signal_cue_instantly cue="Setup" /> -->
-
 
 						<set_value name="$station" exact="player.station" />
 						<do_if value="$station and $factionList.indexof.{$station.sector.owner}">

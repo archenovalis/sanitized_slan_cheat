@@ -2,7 +2,11 @@
 <diff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="../../xsd/diff.xsd">
   <add sel="/races">
-    <race id="bankingclan" name="{999840,590010}" description="{999840,590011}">
+    <race id="bankingclan" name="dummyrace" description="dummyrace">
+      <icon active="race_human" inactive="race_human" />
+    </race>
+    <race id="bankingclanhq"
+      name="dummyrace" description="dummyrace">
       <icon active="race_human" inactive="race_human" />
     </race>
   </add>

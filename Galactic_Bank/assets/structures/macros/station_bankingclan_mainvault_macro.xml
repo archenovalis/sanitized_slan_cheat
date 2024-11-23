@@ -6,7 +6,7 @@
       <identification name="'{20777,1003} {20777,1004}'"
         icon="mapob_bankingclan_vaulthq"
         factionhqicon="mapob_bankingclan_vaulthq" hudicon="si_bankingclan_vault"
-        makerace="bankingclan" type="headquarters" />
+        race="bankingclanhq" type="tradestation" />
       <build>
         <sets>
           <set ref="factory" />

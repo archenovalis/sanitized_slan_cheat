@@ -6,4 +6,7 @@
   <add sel="/modulesets/set[@id='factory']">
     <race ref="bankingclan" />
   </add>
+  <add sel="/modulesets/set[@id='factory']">
+    <race ref="bankingclanhq" />
+  </add>
 </diff>

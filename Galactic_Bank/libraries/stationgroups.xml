@@ -5,5 +5,8 @@
     <group name="bankingclan_vault">
       <select constructionplan="vault_bankingclan" />
     </group>
+    <group name="bankingclan_vaulthq">
+      <select constructionplan="vault_bankingclan" />
+    </group>
   </add>
 </diff>

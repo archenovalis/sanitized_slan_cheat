@@ -39,36 +39,114 @@ $RelevantSectors.count"
 
         <do_if value="$TradeStationsToBuild gt 0">
           <set_value name="$StationDefinitions" exact="[]" />
-          <set_value name="$StationTypeTag" exact="[tag.tradestation]" />
-          <find_station_by_true_owner name="$hq" tradestation="true" functional="true"
-            faction="$Faction" space="swi_clusterscipio_sector001_macro" />
+          <set_value name="$StationTypeTag"
+            exact="[tag.tradestation]" />
+          <find_station_by_true_owner
+            macro="macro.station_bankingclan_mainvault_macro"
+            name="$hq"
+            functional="true" faction="$Faction" space="player.galaxy" />
           <do_if value="not $hq.count gt 0">
-            <set_value name="$set" exact="'headquarters'" />
-            <set_value name="$planTag" exact="[tag.headquarters]" />
+            <set_value name="$planTag" exact="tag.mainvault" />
+            <set_value name="$race" exact="race.bankingclanhq" />
+            <find_sector name="$sector"
+              macro="macro.swi_clusterscipio_sector001_macro" />
             <append_to_list name="$PreferredSectors"
-              exact="swi_clusterscipio_sector001_macro" />
+              exact="$sector" />
           </do_if>
+
           <do_else>
-            <!--check
-                where wrecks are, create list of major factions missing tradestation-->
-            <set_value
-              name="$set" exact="'tradestation'" />
             <set_value name="$planTag"
-              exact="[tag.tradestation]" />
-            <find_station_by_true_owner name="$stations" tradestation="true"
+              exact="tag.branchvault" />
+            <set_value name="$race" exact="race.bankingclan" />
+            <find_station_by_true_owner
+              name="$stations"
+              macro="macro.station_bankingclan_branchvault_macro"
               functional="true"
-              faction="$Faction" space="swi_galaxy_macro" excluded="$hq" multiple="true" />
+              faction="$Faction" space="player.galaxy" multiple="true" />
             <remove_value name="$hq" />
-            <set_value name="$factionlist"
+            <set_value
+              name="$factionlist"
               exact="[faction.galempire, faction.ascendancy, faction.newrepublic, faction.commerceguild, faction.corporate, faction.huttcartel, faction.anoat, faction.mandodw]" />
-            <do_all exact="$stations.count" counter="$i">
+            <do_all
+              exact="$stations.count" counter="$i">
               <remove_from_list name="$factionlist" exact="stations.{$i}.sector.owner" />
             </do_all>
-            <find_sector name="$RelevantSectors" multiple="true" owner="$factionlist.random"
-              space="swi.galaxy" />
+            <set_value
+              name="$relevantFaction" exact="$factionlist.random" />
+
+            <!-- set preferred sector -->
+            <do_if
+              value="$relevantFaction == faction.galempire">
+              <find_sector name="$sector"
+                macro="macro.swi_clusterbastion_sector001_macro" />
+              <append_to_list
+                name="$PreferredSectors"
+                exact="$sector" />
+            </do_if>
+            <do_elseif
+              value="$relevantFaction == faction.ascendancy">
+              <find_sector name="$sector"
+                macro="macro.swi_clustereriadu_sector001_macro" />
+              <append_to_list
+                name="$PreferredSectors"
+                exact="$sector" />
+            </do_elseif>
+            <do_elseif
+              value="$relevantFaction == faction.newrepublic">
+              <find_sector name="$sector"
+                macro="macro.swi_clustercoruscant_sector001_macro" />
+              <append_to_list
+                name="$PreferredSectors"
+                exact="$sector" />
+            </do_elseif>
+            <do_elseif
+              value="$relevantFaction == faction.commerceguild">
+              <find_sector name="$sector"
+                macro="macro.swi_clusterhypori_sector001_macro" />
+              <append_to_list
+                name="$PreferredSectors"
+                exact="$sector" />
+            </do_elseif>
+            <do_elseif
+              value="$relevantFaction == faction.corporate">
+              <find_sector name="$sector"
+                macro="macro.swi_clustercantonica_sector001_macro" />
+              <append_to_list
+                name="$PreferredSectors"
+                exact="$sector" />
+            </do_elseif>
+            <do_elseif
+              value="$relevantFaction == faction.huttcartel">
+              <find_sector name="$sector"
+                macro="macro.swi_clusternarshadda_sector001_macro" />
+              <append_to_list
+                name="$PreferredSectors"
+                exact="$sector" />
+            </do_elseif>
+            <do_elseif
+              value="$relevantFaction == faction.anoat">
+              <find_sector name="$sector"
+                macro="macro.swi_clusteranpath_sector001_macro" />
+              <append_to_list
+                name="$PreferredSectors"
+                exact="$sector" />
+            </do_elseif>
+            <do_elseif
+              value="$relevantFaction == faction.mandodw">
+              <find_sector name="$sector"
+                macro="macro.swi_clustermandalore_sector001_macro" />
+              <append_to_list
+                name="$PreferredSectors"
+                exact="$sector" />
+            </do_elseif>
+
+            <!-- set relevant sectors -->
+            <find_sector name="$RelevantSectors" multiple="true"
+              owner="$relevantFaction"
+              space="player.galaxy" />
           </do_else>
-          <get_module_set_macro type="@$set" result="$ModuleSetMacro" race="race.bankingclan" />
-          <remove_value name="$set" />
+          <get_module_set_macro type="tradestation" result="$ModuleSetMacro" race="$race" />
+          <remove_value name="$race" />
           <do_if value="$ModuleSetMacro">
             <get_construction_plan result="$ConstructionPlan"
               rawname="$ConstructionPlanName"
@@ -93,9 +171,6 @@ $RelevantSectors.count"
                                $WasWharf = 0.25f]" />
           </do_else>
 
-          <!--TODO
-            @Owen what if there are no stations defined but a god entry is allowed? Just remove this
-            check?-->
           <do_if value="$StationDefinitions.count">
             <debug_text
               text="$DebugText + 'Faction is capable of constructing a trade station. Will now search for a location'"
