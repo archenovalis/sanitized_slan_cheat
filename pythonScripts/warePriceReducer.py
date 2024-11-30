@@ -27,7 +27,7 @@ def reduce_price_spread(match, reduce_average_by, reduce_spread_by, prev_line):
         new_max_value = average_value + reduced_max_diff
 
         prev_match = re.match(r'.*id="([a-zA-Z0-9_-]*)"', prev_line)
-        new_prev_line = f'<replace sel="\\\\ware[id=\'{prev_match.group(1)}\']">'
+        new_prev_line = f'<replace sel="//ware[@id=\'{prev_match.group(1)}\']/price">'
         return f'  {new_prev_line}\n    {match.group(1)}{new_min_value}{match.group(3)}{average_value}{match.group(5)}{new_max_value}{match.group(7)}\n  </replace>'
     return ''
 
