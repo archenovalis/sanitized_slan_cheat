@@ -9,11 +9,14 @@ filtered_lines = []
 for i in range(len(lines)):
     line = lines[i]
     if '<ware id' in line and ('inventory' in line or 'satellite' in line or 'drones' in line or 'probe' in line or 'software' in line) :
-        filtered_lines.append(line)
-        
-        # If it's not the last line, also append the next line
-        if i + 1 < len(lines):
-            filtered_lines.append(lines[i + 1])
+        j = i + 1
+        while '</ware>' not in lines[j]:
+            if '<price' in lines[j]:
+                if not 'max="1"' in lines[j]:
+                    filtered_lines.append(line)
+                    filtered_lines.append(lines[j])
+                break
+            j += 1
 
 
 with open(output_file, 'w') as output:
