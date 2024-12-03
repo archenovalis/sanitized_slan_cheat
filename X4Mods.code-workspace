@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "master",
+			"path": "."
+		},
+		{
+			"name": "Mod: galactic_bank",
+			"path": "mods/galactic_bank"
+		},
+		{
+			"name": "Mod: getting_a_job",
+			"path": "mods/getting_a_job"
+		}
+	],
+	"settings": {}
+}
