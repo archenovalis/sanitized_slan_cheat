@@ -65,7 +65,15 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="materiallibrary" />
+            <xs:element name="collection" />
+            <xs:element name="material" />
+            <xs:element name="properties" />
+            <xs:element name="property" />
+            <xs:element name="variations" />
+            <xs:element name="areas" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +88,15 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="materiallibrary" />
+            <xs:element name="collection" />
+            <xs:element name="material" />
+            <xs:element name="properties" />
+            <xs:element name="property" />
+            <xs:element name="variations" />
+            <xs:element name="areas" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

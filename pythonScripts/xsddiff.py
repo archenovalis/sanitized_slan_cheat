@@ -15,10 +15,21 @@ def process_files():
   # Iterate through each file and extract group names
   for filename in xsd_files:
     group_names = []
+    complex_names = []
+    element_names = []
+    elementType_names = []
     with open(filename, 'r', encoding='utf-8') as file:
       content = file.read()
-      matches = re.findall(r'<xs:group name="(.*?)">', content)
-      group_names.extend(matches)
+      groupMatches = re.findall(r'<xs:group name="(.*?)">', content)
+      group_names.extend(groupMatches)
+      elementTypeMatches = re.findall(r'<xs:element name="(.*?)".*type="(.*?)"', content)
+      elementType_names.extend(elementTypeMatches)
+      if (elementType_names == []):
+        complexMatches = re.findall(r'<xs:complexType name="(.*?)">', content)
+        complex_names.extend(complexMatches)
+      if (complex_names == []):
+        elementMatches = re.findall(r'(?!.*type).*?<xs:element name="(.*?)"', content)
+        element_names.extend(elementMatches)
   
     # Process diff.xsd
     newdiff = diff
@@ -32,22 +43,27 @@ def process_files():
     # Replace instances of <xs:any> with <xs:choice>
     match = re.search(r'\n(\s*).*lax.*',newdiff)
     if match:
+      spacing = match[1]
+      choice_block = spacing+'<xs:choice>\n'
       if (group_names != []):
-        spacing = match[1]
         choice_block = spacing+'<xs:choice>\n'
         for group in group_names:
           choice_block = choice_block+spacing+f'  <xs:group ref="{group}" />\n'
-        choice_block = choice_block+spacing+'</xs:choice>'
+      if (complex_names != []):
+        for complex in complex_names:
+          choice_block = choice_block+spacing+f'  <xs:element name="{complex}" />\n'
+      if (element_names != []):
+        for complex in element_names:
+          choice_block = choice_block+spacing+f'  <xs:element name="{complex}" />\n'
+      if (elementType_names != []):
+        for complex in elementType_names:
+          choice_block = choice_block+spacing+f'  <xs:element name="{complex[0]}" type="{complex[1]}" />\n'
 
-        newdiff = re.sub(
-          r'.*lax.*',
-          choice_block, newdiff
-        )
-      else:
-        newdiff = re.sub(
-          r'(.*)lax(.*)',
-          r'\1strict\2', newdiff
-        )
+      choice_block = choice_block+spacing+'</xs:choice>'
+      newdiff = re.sub(
+        r'.*lax.*',
+        choice_block, newdiff
+      )
       
       # Save the modified diff.xsd as diff.xsd with "diff" suffix
       output_file = os.path.join(current_dir, filename.replace('.xsd','')+'diff.xsd')

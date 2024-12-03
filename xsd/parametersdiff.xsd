@@ -65,7 +65,253 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="point" />
+            <xs:element name="outline" />
+            <xs:element name="fill" />
+            <xs:element name="outline" />
+            <xs:element name="fill" />
+            <xs:element name="category" />
+            <xs:element name="param" />
+            <xs:element name="factor" />
+            <xs:element name="cleanup" />
+            <xs:element name="factor" />
+            <xs:element name="position" />
+            <xs:element name="rotation" />
+            <xs:element name="objects" />
+            <xs:element name="deviation" />
+            <xs:element name="amplitude" />
+            <xs:element name="period" />
+            <xs:element name="min" />
+            <xs:element name="max" />
+            <xs:element name="phase" />
+            <xs:element name="min" />
+            <xs:element name="max" />
+            <xs:element name="width" />
+            <xs:element name="tag" />
+            <xs:element name="widthfactors" />
+            <xs:element name="point" />
+            <xs:element name="speed" />
+            <xs:element name="tag" />
+            <xs:element name="highwaytrailcolor" />
+            <xs:element name="network" />
+            <xs:element name="blocklinks" />
+            <xs:element name="closelinks" />
+            <xs:element name="tangent" />
+            <xs:element name="curves" />
+            <xs:element name="highway" />
+            <xs:element name="parallelroad" />
+            <xs:element name="entryroad" />
+            <xs:element name="exitroad" />
+            <xs:element name="build" />
+            <xs:element name="repair" />
+            <xs:element name="maxflows" />
+            <xs:element name="attack" />
+            <xs:element name="defence" />
+            <xs:element name="size" />
+            <xs:element name="weaponglow" />
+            <xs:element name="anomaly" />
+            <xs:element name="highspeed" />
+            <xs:element name="enginedetail" />
+            <xs:element name="entry" />
+            <xs:element name="dock" />
+            <xs:element name="dockpath" />
+            <xs:element name="farguidance" />
+            <xs:element name="nearguidance" />
+            <xs:element name="background" />
+            <xs:element name="rotation" />
+            <xs:element name="position" />
+            <xs:element name="maxoffsets" />
+            <xs:element name="maxoffset" />
+            <xs:element name="position" />
+            <xs:element name="rotation" />
+            <xs:element name="landing" />
+            <xs:element name="entry" />
+            <xs:element name="slowdown" />
+            <xs:element name="align" />
+            <xs:element name="move" />
+            <xs:element name="touchdown" />
+            <xs:element name="suspension" />
+            <xs:element name="sway" />
+            <xs:element name="takeoff" />
+            <xs:element name="entry" />
+            <xs:element name="release" />
+            <xs:element name="align" />
+            <xs:element name="sway" />
+            <xs:element name="orders" />
+            <xs:element name="plot" />
+            <xs:element name="gate" />
+            <xs:element name="highway" />
+            <xs:element name="station" />
+            <xs:element name="population" />
+            <xs:element name="prices" />
+            <xs:element name="factor" />
+            <xs:element name="variation" />
+            <xs:element name="recycling" />
+            <xs:element name="ship" />
+            <xs:element name="resources" />
+            <xs:element name="station" />
+            <xs:element name="resources" />
+            <xs:element name="smallnavmesh" />
+            <xs:element name="navmesh_overrides" />
+            <xs:element name="by_id" />
+            <xs:element name="by_template" />
+            <xs:element name="crowd" />
+            <xs:element name="race" />
+            <xs:element name="speed" />
+            <xs:element name="pathing" />
+            <xs:element name="pickextents" />
+            <xs:element name="default" />
+            <xs:element name="strict" />
+            <xs:element name="costs" />
+            <xs:element name="conveyorspeeds" />
+            <xs:element name="tag" />
+            <xs:element name="conveyorcurves" />
+            <xs:element name="tag" />
+            <xs:element name="triggerranges" />
+            <xs:element name="tag" />
+            <xs:element name="transporter" />
+            <xs:element name="travelspeed" />
+            <xs:element name="travelcost" />
+            <xs:element name="sustain" />
+            <xs:element name="update" />
+            <xs:element name="bonus" />
+            <xs:element name="growth" />
+            <xs:element name="capacity" />
+            <xs:element name="population" />
+            <xs:element name="factor" />
+            <xs:element name="time" />
+            <xs:element name="buildshortage" />
+            <xs:element name="production" />
+            <xs:element name="warning" />
+            <xs:element name="low" />
+            <xs:element name="trigger" />
+            <xs:element name="transport" />
+            <xs:element name="flag" />
+            <xs:element name="threshold" />
+            <xs:element name="exclusionzone" />
+            <xs:element name="icons" />
+            <xs:element name="entry" />
+            <xs:element name="icons" />
+            <xs:element name="entry" />
+            <xs:element name="cursors" />
+            <xs:element name="cursor" />
+            <xs:element name="vrmouse" />
+            <xs:element name="origin" />
+            <xs:element name="pulse" />
+            <xs:element name="damagefactors" />
+            <xs:element name="speedfactors" />
+            <xs:element name="drops" />
+            <xs:element name="resourcechance" />
+            <xs:element name="yielddensities" />
+            <xs:element name="ware" />
+            <xs:element name="scancolors" />
+            <xs:element name="ware" />
+            <xs:element name="acceleration" />
+            <xs:element name="jet" />
+            <xs:element name="glow" />
+            <xs:element name="align" />
+            <xs:element name="vortex" />
+            <xs:element name="rotation" />
+            <xs:element name="speed" />
+            <xs:element name="thresholds" />
+            <xs:element name="threshold" />
+            <xs:element name="nearby" />
+            <xs:element name="attack" />
+            <xs:element name="sounds" />
+            <xs:element name="sound" />
+            <xs:element name="default" />
+            <xs:element name="scenes" />
+            <xs:element name="curmission" />
+            <xs:element name="bgmission" />
+            <xs:element name="target" />
+            <xs:element name="repeat" />
+            <xs:element name="parameters" />
+            <xs:element name="target" type="highlightdef" />
+            <xs:element name="environmentobject" type="highlightdef" />
+            <xs:element name="scan" type="scan" />
+            <xs:element name="curvefactors" type="curve" />
+            <xs:element name="pitchcurve" type="curve" />
+            <xs:element name="volumecurve" type="curve" />
+            <xs:element name="delaycurve" type="curve" />
+            <xs:element name="pitch" type="swayparams" />
+            <xs:element name="yaw" type="swayparams" />
+            <xs:element name="roll" type="swayparams" />
+            <xs:element name="pitch" type="swayparams" />
+            <xs:element name="yaw" type="swayparams" />
+            <xs:element name="roll" type="swayparams" />
+            <xs:element name="navmesh" type="navmeshcalculationparams" />
+            <xs:element name="playerflight" type="anycontent" />
+            <xs:element name="aiflight" type="anycontent" />
+            <xs:element name="aicombat" type="anycontent" />
+            <xs:element name="spaceflight" type="anycontent" />
+            <xs:element name="playerfirstperson" type="anycontent" />
+            <xs:element name="playerfirstpersongeometry" type="anycontent" />
+            <xs:element name="playerfirstpersonguidance" type="anycontent" />
+            <xs:element name="platformnavigation" type="platformnavigationparams" />
+            <xs:element name="navigation" type="navigationparams" />
+            <xs:element name="playercamera" type="anycontent" />
+            <xs:element name="playerhelmet" type="anycontent" />
+            <xs:element name="environmentobject" type="anycontent" />
+            <xs:element name="highlight" type="highlight" />
+            <xs:element name="scanlevel" type="anycontent" />
+            <xs:element name="stationicon" type="anycontent" />
+            <xs:element name="holomap" type="anycontent" />
+            <xs:element name="minigame" type="anycontent" />
+            <xs:element name="longrangescan" type="anycontent" />
+            <xs:element name="signalleak" type="anycontent" />
+            <xs:element name="drop" type="anycontent" />
+            <xs:element name="hintpositions" type="anycontent" />
+            <xs:element name="physics" type="anycontent" />
+            <xs:element name="bonuscontent" type="anycontent" />
+            <xs:element name="damagestate" type="anycontent" />
+            <xs:element name="engine" type="engineparams" />
+            <xs:element name="controlpanel" type="anycontent" />
+            <xs:element name="materials" type="anycontent" />
+            <xs:element name="economy" type="anycontent" />
+            <xs:element name="hazardwarning" type="anycontent" />
+            <xs:element name="scriptparams" type="scriptparams" />
+            <xs:element name="jobs" type="jobsparams" />
+            <xs:element name="masstraffic" type="masstrafficparams" />
+            <xs:element name="lowattentioncombat" type="lowattentioncombatparams" />
+            <xs:element name="lootmagnet" type="lootmagnetparams" />
+            <xs:element name="docking" type="dockingparams" />
+            <xs:element name="building" type="buildingparams" />
+            <xs:element name="waypoint" type="anycontent" />
+            <xs:element name="render" type="renderparams" />
+            <xs:element name="sound" type="soundparams" />
+            <xs:element name="workforce" type="workforceparams" />
+            <xs:element name="upgraderesources" type="upgraderesourceparams" />
+            <xs:element name="shipyardupgraderesources" type="upgraderesourceparams" />
+            <xs:element name="wharfupgraderesources" type="upgraderesourceparams" />
+            <xs:element name="equipmentdockupgraderesources" type="upgraderesourceparams" />
+            <xs:element name="shipupgraderesources" type="upgraderesourceparams" />
+            <xs:element name="productioncheck" type="productioncheckparams" />
+            <xs:element name="exclusionzones" type="exclusionzoneparams" />
+            <xs:element name="dronemodes" type="dronemodeparams" />
+            <xs:element name="weaponmodes" type="weaponmodeparams" />
+            <xs:element name="pointer" type="pointerparams" />
+            <xs:element name="weaponpointer" type="weaponpointerparams" />
+            <xs:element name="storage" type="storageparams" />
+            <xs:element name="mining" type="miningparams" />
+            <xs:element name="god" type="godparams" />
+            <xs:element name="input" type="anycontent" />
+            <xs:element name="loadout" type="anycontent" />
+            <xs:element name="equipmentmod" type="anycontent" />
+            <xs:element name="voice" type="anycontent" />
+            <xs:element name="fightmusic" type="fightmusicparams" />
+            <xs:element name="enemywarning" type="enemywarningparams" />
+            <xs:element name="playeralert" type="playeralertparams" />
+            <xs:element name="shieldimpact" type="anycontent" />
+            <xs:element name="missions" type="missionparams" />
+            <xs:element name="orders" type="anycontent" />
+            <xs:element name="presentation" type="presentationparams" />
+            <xs:element name="furnace" type="anycontent" />
+            <xs:element name="tug" type="anycontent" />
+            <xs:element name="cutscenes" type="cutsceneparams" />
+            <xs:element name="notifications" type="notificationparams" />
+            <xs:element name="hud" type="hudparams" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +326,253 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="point" />
+            <xs:element name="outline" />
+            <xs:element name="fill" />
+            <xs:element name="outline" />
+            <xs:element name="fill" />
+            <xs:element name="category" />
+            <xs:element name="param" />
+            <xs:element name="factor" />
+            <xs:element name="cleanup" />
+            <xs:element name="factor" />
+            <xs:element name="position" />
+            <xs:element name="rotation" />
+            <xs:element name="objects" />
+            <xs:element name="deviation" />
+            <xs:element name="amplitude" />
+            <xs:element name="period" />
+            <xs:element name="min" />
+            <xs:element name="max" />
+            <xs:element name="phase" />
+            <xs:element name="min" />
+            <xs:element name="max" />
+            <xs:element name="width" />
+            <xs:element name="tag" />
+            <xs:element name="widthfactors" />
+            <xs:element name="point" />
+            <xs:element name="speed" />
+            <xs:element name="tag" />
+            <xs:element name="highwaytrailcolor" />
+            <xs:element name="network" />
+            <xs:element name="blocklinks" />
+            <xs:element name="closelinks" />
+            <xs:element name="tangent" />
+            <xs:element name="curves" />
+            <xs:element name="highway" />
+            <xs:element name="parallelroad" />
+            <xs:element name="entryroad" />
+            <xs:element name="exitroad" />
+            <xs:element name="build" />
+            <xs:element name="repair" />
+            <xs:element name="maxflows" />
+            <xs:element name="attack" />
+            <xs:element name="defence" />
+            <xs:element name="size" />
+            <xs:element name="weaponglow" />
+            <xs:element name="anomaly" />
+            <xs:element name="highspeed" />
+            <xs:element name="enginedetail" />
+            <xs:element name="entry" />
+            <xs:element name="dock" />
+            <xs:element name="dockpath" />
+            <xs:element name="farguidance" />
+            <xs:element name="nearguidance" />
+            <xs:element name="background" />
+            <xs:element name="rotation" />
+            <xs:element name="position" />
+            <xs:element name="maxoffsets" />
+            <xs:element name="maxoffset" />
+            <xs:element name="position" />
+            <xs:element name="rotation" />
+            <xs:element name="landing" />
+            <xs:element name="entry" />
+            <xs:element name="slowdown" />
+            <xs:element name="align" />
+            <xs:element name="move" />
+            <xs:element name="touchdown" />
+            <xs:element name="suspension" />
+            <xs:element name="sway" />
+            <xs:element name="takeoff" />
+            <xs:element name="entry" />
+            <xs:element name="release" />
+            <xs:element name="align" />
+            <xs:element name="sway" />
+            <xs:element name="orders" />
+            <xs:element name="plot" />
+            <xs:element name="gate" />
+            <xs:element name="highway" />
+            <xs:element name="station" />
+            <xs:element name="population" />
+            <xs:element name="prices" />
+            <xs:element name="factor" />
+            <xs:element name="variation" />
+            <xs:element name="recycling" />
+            <xs:element name="ship" />
+            <xs:element name="resources" />
+            <xs:element name="station" />
+            <xs:element name="resources" />
+            <xs:element name="smallnavmesh" />
+            <xs:element name="navmesh_overrides" />
+            <xs:element name="by_id" />
+            <xs:element name="by_template" />
+            <xs:element name="crowd" />
+            <xs:element name="race" />
+            <xs:element name="speed" />
+            <xs:element name="pathing" />
+            <xs:element name="pickextents" />
+            <xs:element name="default" />
+            <xs:element name="strict" />
+            <xs:element name="costs" />
+            <xs:element name="conveyorspeeds" />
+            <xs:element name="tag" />
+            <xs:element name="conveyorcurves" />
+            <xs:element name="tag" />
+            <xs:element name="triggerranges" />
+            <xs:element name="tag" />
+            <xs:element name="transporter" />
+            <xs:element name="travelspeed" />
+            <xs:element name="travelcost" />
+            <xs:element name="sustain" />
+            <xs:element name="update" />
+            <xs:element name="bonus" />
+            <xs:element name="growth" />
+            <xs:element name="capacity" />
+            <xs:element name="population" />
+            <xs:element name="factor" />
+            <xs:element name="time" />
+            <xs:element name="buildshortage" />
+            <xs:element name="production" />
+            <xs:element name="warning" />
+            <xs:element name="low" />
+            <xs:element name="trigger" />
+            <xs:element name="transport" />
+            <xs:element name="flag" />
+            <xs:element name="threshold" />
+            <xs:element name="exclusionzone" />
+            <xs:element name="icons" />
+            <xs:element name="entry" />
+            <xs:element name="icons" />
+            <xs:element name="entry" />
+            <xs:element name="cursors" />
+            <xs:element name="cursor" />
+            <xs:element name="vrmouse" />
+            <xs:element name="origin" />
+            <xs:element name="pulse" />
+            <xs:element name="damagefactors" />
+            <xs:element name="speedfactors" />
+            <xs:element name="drops" />
+            <xs:element name="resourcechance" />
+            <xs:element name="yielddensities" />
+            <xs:element name="ware" />
+            <xs:element name="scancolors" />
+            <xs:element name="ware" />
+            <xs:element name="acceleration" />
+            <xs:element name="jet" />
+            <xs:element name="glow" />
+            <xs:element name="align" />
+            <xs:element name="vortex" />
+            <xs:element name="rotation" />
+            <xs:element name="speed" />
+            <xs:element name="thresholds" />
+            <xs:element name="threshold" />
+            <xs:element name="nearby" />
+            <xs:element name="attack" />
+            <xs:element name="sounds" />
+            <xs:element name="sound" />
+            <xs:element name="default" />
+            <xs:element name="scenes" />
+            <xs:element name="curmission" />
+            <xs:element name="bgmission" />
+            <xs:element name="target" />
+            <xs:element name="repeat" />
+            <xs:element name="parameters" />
+            <xs:element name="target" type="highlightdef" />
+            <xs:element name="environmentobject" type="highlightdef" />
+            <xs:element name="scan" type="scan" />
+            <xs:element name="curvefactors" type="curve" />
+            <xs:element name="pitchcurve" type="curve" />
+            <xs:element name="volumecurve" type="curve" />
+            <xs:element name="delaycurve" type="curve" />
+            <xs:element name="pitch" type="swayparams" />
+            <xs:element name="yaw" type="swayparams" />
+            <xs:element name="roll" type="swayparams" />
+            <xs:element name="pitch" type="swayparams" />
+            <xs:element name="yaw" type="swayparams" />
+            <xs:element name="roll" type="swayparams" />
+            <xs:element name="navmesh" type="navmeshcalculationparams" />
+            <xs:element name="playerflight" type="anycontent" />
+            <xs:element name="aiflight" type="anycontent" />
+            <xs:element name="aicombat" type="anycontent" />
+            <xs:element name="spaceflight" type="anycontent" />
+            <xs:element name="playerfirstperson" type="anycontent" />
+            <xs:element name="playerfirstpersongeometry" type="anycontent" />
+            <xs:element name="playerfirstpersonguidance" type="anycontent" />
+            <xs:element name="platformnavigation" type="platformnavigationparams" />
+            <xs:element name="navigation" type="navigationparams" />
+            <xs:element name="playercamera" type="anycontent" />
+            <xs:element name="playerhelmet" type="anycontent" />
+            <xs:element name="environmentobject" type="anycontent" />
+            <xs:element name="highlight" type="highlight" />
+            <xs:element name="scanlevel" type="anycontent" />
+            <xs:element name="stationicon" type="anycontent" />
+            <xs:element name="holomap" type="anycontent" />
+            <xs:element name="minigame" type="anycontent" />
+            <xs:element name="longrangescan" type="anycontent" />
+            <xs:element name="signalleak" type="anycontent" />
+            <xs:element name="drop" type="anycontent" />
+            <xs:element name="hintpositions" type="anycontent" />
+            <xs:element name="physics" type="anycontent" />
+            <xs:element name="bonuscontent" type="anycontent" />
+            <xs:element name="damagestate" type="anycontent" />
+            <xs:element name="engine" type="engineparams" />
+            <xs:element name="controlpanel" type="anycontent" />
+            <xs:element name="materials" type="anycontent" />
+            <xs:element name="economy" type="anycontent" />
+            <xs:element name="hazardwarning" type="anycontent" />
+            <xs:element name="scriptparams" type="scriptparams" />
+            <xs:element name="jobs" type="jobsparams" />
+            <xs:element name="masstraffic" type="masstrafficparams" />
+            <xs:element name="lowattentioncombat" type="lowattentioncombatparams" />
+            <xs:element name="lootmagnet" type="lootmagnetparams" />
+            <xs:element name="docking" type="dockingparams" />
+            <xs:element name="building" type="buildingparams" />
+            <xs:element name="waypoint" type="anycontent" />
+            <xs:element name="render" type="renderparams" />
+            <xs:element name="sound" type="soundparams" />
+            <xs:element name="workforce" type="workforceparams" />
+            <xs:element name="upgraderesources" type="upgraderesourceparams" />
+            <xs:element name="shipyardupgraderesources" type="upgraderesourceparams" />
+            <xs:element name="wharfupgraderesources" type="upgraderesourceparams" />
+            <xs:element name="equipmentdockupgraderesources" type="upgraderesourceparams" />
+            <xs:element name="shipupgraderesources" type="upgraderesourceparams" />
+            <xs:element name="productioncheck" type="productioncheckparams" />
+            <xs:element name="exclusionzones" type="exclusionzoneparams" />
+            <xs:element name="dronemodes" type="dronemodeparams" />
+            <xs:element name="weaponmodes" type="weaponmodeparams" />
+            <xs:element name="pointer" type="pointerparams" />
+            <xs:element name="weaponpointer" type="weaponpointerparams" />
+            <xs:element name="storage" type="storageparams" />
+            <xs:element name="mining" type="miningparams" />
+            <xs:element name="god" type="godparams" />
+            <xs:element name="input" type="anycontent" />
+            <xs:element name="loadout" type="anycontent" />
+            <xs:element name="equipmentmod" type="anycontent" />
+            <xs:element name="voice" type="anycontent" />
+            <xs:element name="fightmusic" type="fightmusicparams" />
+            <xs:element name="enemywarning" type="enemywarningparams" />
+            <xs:element name="playeralert" type="playeralertparams" />
+            <xs:element name="shieldimpact" type="anycontent" />
+            <xs:element name="missions" type="missionparams" />
+            <xs:element name="orders" type="anycontent" />
+            <xs:element name="presentation" type="presentationparams" />
+            <xs:element name="furnace" type="anycontent" />
+            <xs:element name="tug" type="anycontent" />
+            <xs:element name="cutscenes" type="cutsceneparams" />
+            <xs:element name="notifications" type="notificationparams" />
+            <xs:element name="hud" type="hudparams" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

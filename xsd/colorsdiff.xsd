@@ -65,7 +65,21 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="colormap" />
+            <xs:element name="red" type="transformationrow" />
+            <xs:element name="green" type="transformationrow" />
+            <xs:element name="blue" type="transformationrow" />
+            <xs:element name="long" type="transformationrow" />
+            <xs:element name="middle" type="transformationrow" />
+            <xs:element name="short" type="transformationrow" />
+            <xs:element name="transformation" type="transformation" />
+            <xs:element name="color" type="color" />
+            <xs:element name="mapping" type="mapping" />
+            <xs:element name="daltonization" type="daltonization" />
+            <xs:element name="colors" type="colors" />
+            <xs:element name="mappings" type="mappings" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +94,21 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="colormap" />
+            <xs:element name="red" type="transformationrow" />
+            <xs:element name="green" type="transformationrow" />
+            <xs:element name="blue" type="transformationrow" />
+            <xs:element name="long" type="transformationrow" />
+            <xs:element name="middle" type="transformationrow" />
+            <xs:element name="short" type="transformationrow" />
+            <xs:element name="transformation" type="transformation" />
+            <xs:element name="color" type="color" />
+            <xs:element name="mapping" type="mapping" />
+            <xs:element name="daltonization" type="daltonization" />
+            <xs:element name="colors" type="colors" />
+            <xs:element name="mappings" type="mappings" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

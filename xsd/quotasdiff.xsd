@@ -65,7 +65,44 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="actor" />
+            <xs:element name="actor" />
+            <xs:element name="content" />
+            <xs:element name="ware" />
+            <xs:element name="money" />
+            <xs:element name="ware" />
+            <xs:element name="crate" />
+            <xs:element name="quotas" />
+            <xs:element name="offer" type="quota_offer" />
+            <xs:element name="dock" type="quota_dock" />
+            <xs:element name="character" type="quota_character" />
+            <xs:element name="dock" type="quota_dock" />
+            <xs:element name="character" type="quota_character" />
+            <xs:element name="crate" type="quota_crate" />
+            <xs:element name="offers" type="quota_offers" />
+            <xs:element name="actors" type="quota_actors" />
+            <xs:element name="crates" type="quota_crates" />
+            <xs:element name="crafting" type="quota_crafting" />
+            <xs:element name="offers" type="quota_offers" />
+            <xs:element name="actors" type="quota_actors" />
+            <xs:element name="crates" type="quota_crates" />
+            <xs:element name="crafting" type="quota_crafting" />
+            <xs:element name="zone" type="quota_zone" />
+            <xs:element name="offers" type="quota_offers" />
+            <xs:element name="actors" type="quota_actors" />
+            <xs:element name="crates" type="quota_crates" />
+            <xs:element name="crafting" type="quota_crafting" />
+            <xs:element name="sector" type="quota_sector" />
+            <xs:element name="zone" type="quota_zone" />
+            <xs:element name="offers" type="quota_offers" />
+            <xs:element name="actors" type="quota_actors_root" />
+            <xs:element name="crates" type="quota_crates" />
+            <xs:element name="crafting" type="quota_crafting" />
+            <xs:element name="cluster" type="quota_cluster" />
+            <xs:element name="sector" type="quota_sector" />
+            <xs:element name="zone" type="quota_zone" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +117,44 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="actor" />
+            <xs:element name="actor" />
+            <xs:element name="content" />
+            <xs:element name="ware" />
+            <xs:element name="money" />
+            <xs:element name="ware" />
+            <xs:element name="crate" />
+            <xs:element name="quotas" />
+            <xs:element name="offer" type="quota_offer" />
+            <xs:element name="dock" type="quota_dock" />
+            <xs:element name="character" type="quota_character" />
+            <xs:element name="dock" type="quota_dock" />
+            <xs:element name="character" type="quota_character" />
+            <xs:element name="crate" type="quota_crate" />
+            <xs:element name="offers" type="quota_offers" />
+            <xs:element name="actors" type="quota_actors" />
+            <xs:element name="crates" type="quota_crates" />
+            <xs:element name="crafting" type="quota_crafting" />
+            <xs:element name="offers" type="quota_offers" />
+            <xs:element name="actors" type="quota_actors" />
+            <xs:element name="crates" type="quota_crates" />
+            <xs:element name="crafting" type="quota_crafting" />
+            <xs:element name="zone" type="quota_zone" />
+            <xs:element name="offers" type="quota_offers" />
+            <xs:element name="actors" type="quota_actors" />
+            <xs:element name="crates" type="quota_crates" />
+            <xs:element name="crafting" type="quota_crafting" />
+            <xs:element name="sector" type="quota_sector" />
+            <xs:element name="zone" type="quota_zone" />
+            <xs:element name="offers" type="quota_offers" />
+            <xs:element name="actors" type="quota_actors_root" />
+            <xs:element name="crates" type="quota_crates" />
+            <xs:element name="crafting" type="quota_crafting" />
+            <xs:element name="cluster" type="quota_cluster" />
+            <xs:element name="sector" type="quota_sector" />
+            <xs:element name="zone" type="quota_zone" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

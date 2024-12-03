@@ -65,7 +65,10 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="peopledefinitions" />
+            <xs:element name="people" type="peopleelement" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +83,10 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="peopledefinitions" />
+            <xs:element name="people" type="peopleelement" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

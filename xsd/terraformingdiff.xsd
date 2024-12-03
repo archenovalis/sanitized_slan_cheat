@@ -65,7 +65,34 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="project" />
+            <xs:element name="project" />
+            <xs:element name="group" />
+            <xs:element name="terraforming" />
+            <xs:element name="range" type="statrange" />
+            <xs:element name="condition" type="condition" />
+            <xs:element name="effect" type="effect" />
+            <xs:element name="sideeffect" type="sideeffect" />
+            <xs:element name="rebate" type="rebate" />
+            <xs:element name="ware" type="wareamount" />
+            <xs:element name="ship" type="macroamount" />
+            <xs:element name="conditions" type="conditions" />
+            <xs:element name="effects" type="effects" />
+            <xs:element name="sideeffects" type="sideeffects" />
+            <xs:element name="rebates" type="rebates" />
+            <xs:element name="resources" type="resources" />
+            <xs:element name="deliveries" type="deliveries" />
+            <xs:element name="removedprojects" type="removedprojects" />
+            <xs:element name="blockedprojects" type="blockedprojects" />
+            <xs:element name="blockedgroups" type="blockedgroups" />
+            <xs:element name="stat" type="stat" />
+            <xs:element name="projectgroup" type="projectgroup" />
+            <xs:element name="project" type="project" />
+            <xs:element name="stats" type="stats" />
+            <xs:element name="projectgroups" type="projectgroups" />
+            <xs:element name="projects" type="projects" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +107,34 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="project" />
+            <xs:element name="project" />
+            <xs:element name="group" />
+            <xs:element name="terraforming" />
+            <xs:element name="range" type="statrange" />
+            <xs:element name="condition" type="condition" />
+            <xs:element name="effect" type="effect" />
+            <xs:element name="sideeffect" type="sideeffect" />
+            <xs:element name="rebate" type="rebate" />
+            <xs:element name="ware" type="wareamount" />
+            <xs:element name="ship" type="macroamount" />
+            <xs:element name="conditions" type="conditions" />
+            <xs:element name="effects" type="effects" />
+            <xs:element name="sideeffects" type="sideeffects" />
+            <xs:element name="rebates" type="rebates" />
+            <xs:element name="resources" type="resources" />
+            <xs:element name="deliveries" type="deliveries" />
+            <xs:element name="removedprojects" type="removedprojects" />
+            <xs:element name="blockedprojects" type="blockedprojects" />
+            <xs:element name="blockedgroups" type="blockedgroups" />
+            <xs:element name="stat" type="stat" />
+            <xs:element name="projectgroup" type="projectgroup" />
+            <xs:element name="project" type="project" />
+            <xs:element name="stats" type="stats" />
+            <xs:element name="projectgroups" type="projectgroups" />
+            <xs:element name="projects" type="projects" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

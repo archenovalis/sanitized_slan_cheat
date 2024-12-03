@@ -67,6 +67,13 @@
         <xs:sequence>
           <xs:choice>
             <xs:group ref="properties" />
+            <xs:element name="property" />
+            <xs:element name="scriptproperties" />
+            <xs:element name="property" type="property" />
+            <xs:element name="import" type="import" />
+            <xs:element name="textdb" type="textdb" />
+            <xs:element name="keyword" type="keyword" />
+            <xs:element name="datatype" type="datatype" />
           </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
@@ -84,6 +91,13 @@
         <xs:sequence>
           <xs:choice>
             <xs:group ref="properties" />
+            <xs:element name="property" />
+            <xs:element name="scriptproperties" />
+            <xs:element name="property" type="property" />
+            <xs:element name="import" type="import" />
+            <xs:element name="textdb" type="textdb" />
+            <xs:element name="keyword" type="keyword" />
+            <xs:element name="datatype" type="datatype" />
           </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>

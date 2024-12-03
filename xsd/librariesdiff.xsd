@@ -69,6 +69,131 @@
             <xs:group ref="jobs" />
             <xs:group ref="godentry" />
             <xs:group ref="god" />
+            <xs:element name="ships" />
+            <xs:element name="ship" />
+            <xs:element name="characters" />
+            <xs:element name="character" />
+            <xs:element name="modules" />
+            <xs:element name="module" />
+            <xs:element name="rooms" />
+            <xs:element name="room" />
+            <xs:element name="props" />
+            <xs:element name="prop" />
+            <xs:element name="limits" />
+            <xs:element name="limit" />
+            <xs:element name="modulesets" />
+            <xs:element name="set" />
+            <xs:element name="race" />
+            <xs:element name="stations" />
+            <xs:element name="station" />
+            <xs:element name="param" />
+            <xs:element name="param" />
+            <xs:element name="distance" />
+            <xs:element name="job" />
+            <xs:element name="basket" />
+            <xs:element name="category" />
+            <xs:element name="orders" />
+            <xs:element name="tasks" />
+            <xs:element name="location" />
+            <xs:element name="economy" />
+            <xs:element name="security" />
+            <xs:element name="sunlight" />
+            <xs:element name="factions" />
+            <xs:element name="faction" />
+            <xs:element name="policefactions" />
+            <xs:element name="policefaction" />
+            <xs:element name="stationfactions" />
+            <xs:element name="stationfaction" />
+            <xs:element name="factionraces" />
+            <xs:element name="factionrace" />
+            <xs:element name="stationfactionraces" />
+            <xs:element name="stationfactionrace" />
+            <xs:element name="factionlicences" />
+            <xs:element name="factionlicence" />
+            <xs:element name="commander" />
+            <xs:element name="encounters" />
+            <xs:element name="environment" />
+            <xs:element name="modifiers" />
+            <xs:element name="time" />
+            <xs:element name="expirationtime" />
+            <xs:element name="ship" />
+            <xs:element name="subordinates" />
+            <xs:element name="subordinate" />
+            <xs:element name="masstraffic" />
+            <xs:element name="jobs" />
+            <xs:element name="gamestart" />
+            <xs:element name="corerange" />
+            <xs:element name="economy" />
+            <xs:element name="region" />
+            <xs:element name="security" />
+            <xs:element name="sunlight" />
+            <xs:element name="category" />
+            <xs:element name="objects" />
+            <xs:element name="object" />
+            <xs:element name="object" />
+            <xs:element name="ships" />
+            <xs:element name="ship" />
+            <xs:element name="ship" />
+            <xs:element name="stations" />
+            <xs:element name="defaults" />
+            <xs:element name="location" />
+            <xs:element name="corerange" />
+            <xs:element name="region" />
+            <xs:element name="modules" />
+            <xs:element name="station" />
+            <xs:element name="station" />
+            <xs:element name="products" />
+            <xs:element name="product" />
+            <xs:element name="module" />
+            <xs:element name="god" />
+            <xs:element name="gamestart" />
+            <xs:element name="shaderparam" />
+            <xs:element name="param" />
+            <xs:element name="defaults" />
+            <xs:element name="dataset" />
+            <xs:element name="properties" />
+            <xs:element name="boundaries" />
+            <xs:element name="identification" />
+            <xs:element name="resources" />
+            <xs:element name="ware" />
+            <xs:element name="sounds" />
+            <xs:element name="music" />
+            <xs:element name="fightmusic" />
+            <xs:element name="area" />
+            <xs:element name="backgroundcolor" />
+            <xs:element name="system" />
+            <xs:element name="space" />
+            <xs:element name="suns" />
+            <xs:element name="sun" />
+            <xs:element name="planets" />
+            <xs:element name="planet" />
+            <xs:element name="moons" />
+            <xs:element name="moon" />
+            <xs:element name="worlds" />
+            <xs:element name="world" />
+            <xs:element name="access" />
+            <xs:element name="category" type="shipdbcategory" />
+            <xs:element name="category" type="characterdbcategory" />
+            <xs:element name="category" type="moduledbcategory" />
+            <xs:element name="category" type="roomdbcategory" />
+            <xs:element name="category" type="propdbcategory" />
+            <xs:element name="category" type="stationdbcategory" />
+            <xs:element name="order" type="joborder" />
+            <xs:element name="order" type="joborder" />
+            <xs:element name="task" type="task" />
+            <xs:element name="task" type="task" />
+            <xs:element name="quota" type="basejobquota" />
+            <xs:element name="quotas" type="gamestartjobquotas" />
+            <xs:element name="position" type="positionrange" />
+            <xs:element name="quota" type="basegodquota" />
+            <xs:element name="quotas" type="gamestartgodquotas" />
+            <xs:element name="location" type="godlocationfilters" />
+            <xs:element name="position" type="positionrange" />
+            <xs:element name="quota" type="basegodquota" />
+            <xs:element name="quota" type="gamestartjobquota" />
+            <xs:element name="quota" type="gamestartgodquota" />
+            <xs:element name="shaderparams" type="worldshaderparams" />
+            <xs:element name="shaderparams" type="worldshaderparams" />
           </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
@@ -88,6 +213,131 @@
             <xs:group ref="jobs" />
             <xs:group ref="godentry" />
             <xs:group ref="god" />
+            <xs:element name="ships" />
+            <xs:element name="ship" />
+            <xs:element name="characters" />
+            <xs:element name="character" />
+            <xs:element name="modules" />
+            <xs:element name="module" />
+            <xs:element name="rooms" />
+            <xs:element name="room" />
+            <xs:element name="props" />
+            <xs:element name="prop" />
+            <xs:element name="limits" />
+            <xs:element name="limit" />
+            <xs:element name="modulesets" />
+            <xs:element name="set" />
+            <xs:element name="race" />
+            <xs:element name="stations" />
+            <xs:element name="station" />
+            <xs:element name="param" />
+            <xs:element name="param" />
+            <xs:element name="distance" />
+            <xs:element name="job" />
+            <xs:element name="basket" />
+            <xs:element name="category" />
+            <xs:element name="orders" />
+            <xs:element name="tasks" />
+            <xs:element name="location" />
+            <xs:element name="economy" />
+            <xs:element name="security" />
+            <xs:element name="sunlight" />
+            <xs:element name="factions" />
+            <xs:element name="faction" />
+            <xs:element name="policefactions" />
+            <xs:element name="policefaction" />
+            <xs:element name="stationfactions" />
+            <xs:element name="stationfaction" />
+            <xs:element name="factionraces" />
+            <xs:element name="factionrace" />
+            <xs:element name="stationfactionraces" />
+            <xs:element name="stationfactionrace" />
+            <xs:element name="factionlicences" />
+            <xs:element name="factionlicence" />
+            <xs:element name="commander" />
+            <xs:element name="encounters" />
+            <xs:element name="environment" />
+            <xs:element name="modifiers" />
+            <xs:element name="time" />
+            <xs:element name="expirationtime" />
+            <xs:element name="ship" />
+            <xs:element name="subordinates" />
+            <xs:element name="subordinate" />
+            <xs:element name="masstraffic" />
+            <xs:element name="jobs" />
+            <xs:element name="gamestart" />
+            <xs:element name="corerange" />
+            <xs:element name="economy" />
+            <xs:element name="region" />
+            <xs:element name="security" />
+            <xs:element name="sunlight" />
+            <xs:element name="category" />
+            <xs:element name="objects" />
+            <xs:element name="object" />
+            <xs:element name="object" />
+            <xs:element name="ships" />
+            <xs:element name="ship" />
+            <xs:element name="ship" />
+            <xs:element name="stations" />
+            <xs:element name="defaults" />
+            <xs:element name="location" />
+            <xs:element name="corerange" />
+            <xs:element name="region" />
+            <xs:element name="modules" />
+            <xs:element name="station" />
+            <xs:element name="station" />
+            <xs:element name="products" />
+            <xs:element name="product" />
+            <xs:element name="module" />
+            <xs:element name="god" />
+            <xs:element name="gamestart" />
+            <xs:element name="shaderparam" />
+            <xs:element name="param" />
+            <xs:element name="defaults" />
+            <xs:element name="dataset" />
+            <xs:element name="properties" />
+            <xs:element name="boundaries" />
+            <xs:element name="identification" />
+            <xs:element name="resources" />
+            <xs:element name="ware" />
+            <xs:element name="sounds" />
+            <xs:element name="music" />
+            <xs:element name="fightmusic" />
+            <xs:element name="area" />
+            <xs:element name="backgroundcolor" />
+            <xs:element name="system" />
+            <xs:element name="space" />
+            <xs:element name="suns" />
+            <xs:element name="sun" />
+            <xs:element name="planets" />
+            <xs:element name="planet" />
+            <xs:element name="moons" />
+            <xs:element name="moon" />
+            <xs:element name="worlds" />
+            <xs:element name="world" />
+            <xs:element name="access" />
+            <xs:element name="category" type="shipdbcategory" />
+            <xs:element name="category" type="characterdbcategory" />
+            <xs:element name="category" type="moduledbcategory" />
+            <xs:element name="category" type="roomdbcategory" />
+            <xs:element name="category" type="propdbcategory" />
+            <xs:element name="category" type="stationdbcategory" />
+            <xs:element name="order" type="joborder" />
+            <xs:element name="order" type="joborder" />
+            <xs:element name="task" type="task" />
+            <xs:element name="task" type="task" />
+            <xs:element name="quota" type="basejobquota" />
+            <xs:element name="quotas" type="gamestartjobquotas" />
+            <xs:element name="position" type="positionrange" />
+            <xs:element name="quota" type="basegodquota" />
+            <xs:element name="quotas" type="gamestartgodquotas" />
+            <xs:element name="location" type="godlocationfilters" />
+            <xs:element name="position" type="positionrange" />
+            <xs:element name="quota" type="basegodquota" />
+            <xs:element name="quota" type="gamestartjobquota" />
+            <xs:element name="quota" type="gamestartgodquota" />
+            <xs:element name="shaderparams" type="worldshaderparams" />
+            <xs:element name="shaderparams" type="worldshaderparams" />
           </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>

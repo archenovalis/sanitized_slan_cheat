@@ -65,7 +65,41 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="regions" />
+            <xs:element name="boundaries" />
+            <xs:element name="boundary" />
+            <xs:element name="position" />
+            <xs:element name="rotation" />
+            <xs:element name="quaternion" />
+            <xs:element name="step" />
+            <xs:element name="falloff" />
+            <xs:element name="damage" />
+            <xs:element name="speedcurve" />
+            <xs:element name="region" />
+            <xs:element name="fields" />
+            <xs:element name="offset" />
+            <xs:element name="profile" />
+            <xs:element name="scaneffect" />
+            <xs:element name="color" />
+            <xs:element name="asteroid" />
+            <xs:element name="damagefield" />
+            <xs:element name="effects" />
+            <xs:element name="debris" />
+            <xs:element name="effect" />
+            <xs:element name="nebula" />
+            <xs:element name="object" />
+            <xs:element name="positional" />
+            <xs:element name="viewcorrection" />
+            <xs:element name="ambientsound" />
+            <xs:element name="volumetricfog" />
+            <xs:element name="volumetriccloud" />
+            <xs:element name="gravidar" />
+            <xs:element name="force" />
+            <xs:element name="influence" />
+            <xs:element name="resources" />
+            <xs:element name="resource" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +114,41 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="regions" />
+            <xs:element name="boundaries" />
+            <xs:element name="boundary" />
+            <xs:element name="position" />
+            <xs:element name="rotation" />
+            <xs:element name="quaternion" />
+            <xs:element name="step" />
+            <xs:element name="falloff" />
+            <xs:element name="damage" />
+            <xs:element name="speedcurve" />
+            <xs:element name="region" />
+            <xs:element name="fields" />
+            <xs:element name="offset" />
+            <xs:element name="profile" />
+            <xs:element name="scaneffect" />
+            <xs:element name="color" />
+            <xs:element name="asteroid" />
+            <xs:element name="damagefield" />
+            <xs:element name="effects" />
+            <xs:element name="debris" />
+            <xs:element name="effect" />
+            <xs:element name="nebula" />
+            <xs:element name="object" />
+            <xs:element name="positional" />
+            <xs:element name="viewcorrection" />
+            <xs:element name="ambientsound" />
+            <xs:element name="volumetricfog" />
+            <xs:element name="volumetriccloud" />
+            <xs:element name="gravidar" />
+            <xs:element name="force" />
+            <xs:element name="influence" />
+            <xs:element name="resources" />
+            <xs:element name="resource" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

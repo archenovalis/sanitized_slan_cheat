@@ -65,7 +65,42 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="select" />
+            <xs:element name="point" />
+            <xs:element name="point" />
+            <xs:element name="doppler" />
+            <xs:element name="fade" />
+            <xs:element name="filter" />
+            <xs:element name="reverb" />
+            <xs:element name="pitch" />
+            <xs:element name="override" />
+            <xs:element name="soundlibrary" />
+            <xs:element name="distancecurve" type="distancecurve" />
+            <xs:element name="lfecurve" type="distancecurve" />
+            <xs:element name="lpfdirectcurve" type="distancecurve" />
+            <xs:element name="lpfreverbcurve" type="distancecurve" />
+            <xs:element name="reverbcurve" type="distancecurve" />
+            <xs:element name="customcurve" type="customcurve" />
+            <xs:element name="customcurve" type="customcurve" />
+            <xs:element name="customcurve" type="customcurve" />
+            <xs:element name="distancecurve" type="distancecurve" />
+            <xs:element name="sample" type="sample" />
+            <xs:element name="volume" type="volume" />
+            <xs:element name="pitch" type="pitch" />
+            <xs:element name="lfe" type="lfe" />
+            <xs:element name="effects" type="effects" />
+            <xs:element name="random_noise" type="random_noise" />
+            <xs:element name="sample" type="sample" />
+            <xs:element name="volume" type="volume" />
+            <xs:element name="pitch" type="pitch" />
+            <xs:element name="lfe" type="lfe" />
+            <xs:element name="effects" type="effects" />
+            <xs:element name="random_noise" type="random_noise" />
+            <xs:element name="sound" type="groupsound" />
+            <xs:element name="sound" type="sound" />
+            <xs:element name="group" type="soundgroup" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +115,42 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="select" />
+            <xs:element name="point" />
+            <xs:element name="point" />
+            <xs:element name="doppler" />
+            <xs:element name="fade" />
+            <xs:element name="filter" />
+            <xs:element name="reverb" />
+            <xs:element name="pitch" />
+            <xs:element name="override" />
+            <xs:element name="soundlibrary" />
+            <xs:element name="distancecurve" type="distancecurve" />
+            <xs:element name="lfecurve" type="distancecurve" />
+            <xs:element name="lpfdirectcurve" type="distancecurve" />
+            <xs:element name="lpfreverbcurve" type="distancecurve" />
+            <xs:element name="reverbcurve" type="distancecurve" />
+            <xs:element name="customcurve" type="customcurve" />
+            <xs:element name="customcurve" type="customcurve" />
+            <xs:element name="customcurve" type="customcurve" />
+            <xs:element name="distancecurve" type="distancecurve" />
+            <xs:element name="sample" type="sample" />
+            <xs:element name="volume" type="volume" />
+            <xs:element name="pitch" type="pitch" />
+            <xs:element name="lfe" type="lfe" />
+            <xs:element name="effects" type="effects" />
+            <xs:element name="random_noise" type="random_noise" />
+            <xs:element name="sample" type="sample" />
+            <xs:element name="volume" type="volume" />
+            <xs:element name="pitch" type="pitch" />
+            <xs:element name="lfe" type="lfe" />
+            <xs:element name="effects" type="effects" />
+            <xs:element name="random_noise" type="random_noise" />
+            <xs:element name="sound" type="groupsound" />
+            <xs:element name="sound" type="sound" />
+            <xs:element name="group" type="soundgroup" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

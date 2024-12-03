@@ -65,7 +65,22 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="select" />
+            <xs:element name="select" />
+            <xs:element name="collectable" />
+            <xs:element name="droplists" />
+            <xs:element name="droplist" />
+            <xs:element name="ware" type="wareamount" />
+            <xs:element name="ware" type="wareamount" />
+            <xs:element name="wares" type="collectablewares" />
+            <xs:element name="money" type="collectablemoney" />
+            <xs:element name="money" type="collectablemoney" />
+            <xs:element name="ammo" type="collectableammo" />
+            <xs:element name="fuel" type="collectablefuel" />
+            <xs:element name="shieldrestore" type="collectableshieldrestore" />
+            <xs:element name="drop" type="drop" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +95,22 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="select" />
+            <xs:element name="select" />
+            <xs:element name="collectable" />
+            <xs:element name="droplists" />
+            <xs:element name="droplist" />
+            <xs:element name="ware" type="wareamount" />
+            <xs:element name="ware" type="wareamount" />
+            <xs:element name="wares" type="collectablewares" />
+            <xs:element name="money" type="collectablemoney" />
+            <xs:element name="money" type="collectablemoney" />
+            <xs:element name="ammo" type="collectableammo" />
+            <xs:element name="fuel" type="collectablefuel" />
+            <xs:element name="shieldrestore" type="collectableshieldrestore" />
+            <xs:element name="drop" type="drop" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

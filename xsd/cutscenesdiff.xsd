@@ -65,7 +65,163 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="position" />
+            <xs:element name="rotation" />
+            <xs:element name="quaternion" />
+            <xs:element name="angles" />
+            <xs:element name="bias_relative" />
+            <xs:element name="reference" />
+            <xs:element name="keyframes" />
+            <xs:element name="keyframe" />
+            <xs:element name="value" />
+            <xs:element name="lineofsight" />
+            <xs:element name="betweenobjects" />
+            <xs:element name="orbit" />
+            <xs:element name="perpendicular" />
+            <xs:element name="autodistance" />
+            <xs:element name="autozoom" />
+            <xs:element name="keyframes" />
+            <xs:element name="keyframe" />
+            <xs:element name="value" />
+            <xs:element name="lock" />
+            <xs:element name="takeover_position" />
+            <xs:element name="video" />
+            <xs:element name="camera" />
+            <xs:element name="panloop" />
+            <xs:element name="camera_fromto" />
+            <xs:element name="start" />
+            <xs:element name="end" />
+            <xs:element name="camera_find" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_flyby" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_flyfromto" />
+            <xs:element name="end" />
+            <xs:element name="camera_flyto" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_follow" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_lookat" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_orbit" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_panover" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_panover_param" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_panto" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_detail" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_animated" />
+            <xs:element name="light" />
+            <xs:element name="cutscene" />
+            <xs:element name="director" />
+            <xs:element name="params" />
+            <xs:element name="param" />
+            <xs:element name="environments" />
+            <xs:element name="environment_implicit" />
+            <xs:element name="environment_plot" />
+            <xs:element name="teleport" />
+            <xs:element name="anchor" />
+            <xs:element name="object_group" />
+            <xs:element name="reference" />
+            <xs:element name="presentation" />
+            <xs:element name="actions" />
+            <xs:element name="sequence" />
+            <xs:element name="shot" />
+            <xs:element name="dynamicshots" />
+            <xs:element name="shot" />
+            <xs:element name="timings" />
+            <xs:element name="timing" />
+            <xs:element name="signals" />
+            <xs:element name="signal" />
+            <xs:element name="pitch" type="valuesource_single" />
+            <xs:element name="yaw" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="pivot" type="valuesource_posrot" />
+            <xs:element name="target" type="valuesource_posrot" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="point1" type="valuesource_posrot" />
+            <xs:element name="point2" type="valuesource_posrot" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="center" type="valuesource_posrot" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="point1" type="valuesource_posrot" />
+            <xs:element name="point2" type="valuesource_posrot" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="lookdirection" type="valuesource_posrot" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="lookdirection" type="valuesource_posrot" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="lookdirection" type="valuesource_posrot" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="pitch" type="valuesource_single" />
+            <xs:element name="yaw" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="pitch" type="valuesource_single" />
+            <xs:element name="yaw" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="pitch" type="valuesource_single" />
+            <xs:element name="yaw" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="panstart" type="valuesource_single" />
+            <xs:element name="panend" type="valuesource_single" />
+            <xs:element name="offset" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="offset" type="posrot" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +236,163 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="position" />
+            <xs:element name="rotation" />
+            <xs:element name="quaternion" />
+            <xs:element name="angles" />
+            <xs:element name="bias_relative" />
+            <xs:element name="reference" />
+            <xs:element name="keyframes" />
+            <xs:element name="keyframe" />
+            <xs:element name="value" />
+            <xs:element name="lineofsight" />
+            <xs:element name="betweenobjects" />
+            <xs:element name="orbit" />
+            <xs:element name="perpendicular" />
+            <xs:element name="autodistance" />
+            <xs:element name="autozoom" />
+            <xs:element name="keyframes" />
+            <xs:element name="keyframe" />
+            <xs:element name="value" />
+            <xs:element name="lock" />
+            <xs:element name="takeover_position" />
+            <xs:element name="video" />
+            <xs:element name="camera" />
+            <xs:element name="panloop" />
+            <xs:element name="camera_fromto" />
+            <xs:element name="start" />
+            <xs:element name="end" />
+            <xs:element name="camera_find" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_flyby" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_flyfromto" />
+            <xs:element name="end" />
+            <xs:element name="camera_flyto" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_follow" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_lookat" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_orbit" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_panover" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_panover_param" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_panto" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_detail" />
+            <xs:element name="begin" />
+            <xs:element name="end" />
+            <xs:element name="camera_animated" />
+            <xs:element name="light" />
+            <xs:element name="cutscene" />
+            <xs:element name="director" />
+            <xs:element name="params" />
+            <xs:element name="param" />
+            <xs:element name="environments" />
+            <xs:element name="environment_implicit" />
+            <xs:element name="environment_plot" />
+            <xs:element name="teleport" />
+            <xs:element name="anchor" />
+            <xs:element name="object_group" />
+            <xs:element name="reference" />
+            <xs:element name="presentation" />
+            <xs:element name="actions" />
+            <xs:element name="sequence" />
+            <xs:element name="shot" />
+            <xs:element name="dynamicshots" />
+            <xs:element name="shot" />
+            <xs:element name="timings" />
+            <xs:element name="timing" />
+            <xs:element name="signals" />
+            <xs:element name="signal" />
+            <xs:element name="pitch" type="valuesource_single" />
+            <xs:element name="yaw" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="pivot" type="valuesource_posrot" />
+            <xs:element name="target" type="valuesource_posrot" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="point1" type="valuesource_posrot" />
+            <xs:element name="point2" type="valuesource_posrot" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="center" type="valuesource_posrot" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="point1" type="valuesource_posrot" />
+            <xs:element name="point2" type="valuesource_posrot" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="lookdirection" type="valuesource_posrot" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="lookdirection" type="valuesource_posrot" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="lookdirection" type="valuesource_posrot" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="pitch" type="valuesource_single" />
+            <xs:element name="yaw" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="pitch" type="valuesource_single" />
+            <xs:element name="yaw" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="pitch" type="valuesource_single" />
+            <xs:element name="yaw" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="distance" type="valuesource_single" />
+            <xs:element name="elevation" type="valuesource_single" />
+            <xs:element name="panstart" type="valuesource_single" />
+            <xs:element name="panend" type="valuesource_single" />
+            <xs:element name="offset" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="roll" type="valuesource_single" />
+            <xs:element name="zoom" type="valuesource_single" />
+            <xs:element name="position" type="valuesource_posrot" />
+            <xs:element name="offset" type="posrot" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

@@ -65,7 +65,41 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="scan" />
+            <xs:element name="secrecy" />
+            <xs:element name="adjustment" />
+            <xs:element name="unlocks" />
+            <xs:element name="distance" type="distance" />
+            <xs:element name="owner" type="owner" />
+            <xs:element name="relation" type="relation" />
+            <xs:element name="secrecy" type="secrecy" />
+            <xs:element name="blueprintsecrecy" type="secrecy" />
+            <xs:element name="viewangle" type="viewangle" />
+            <xs:element name="wares" type="wares" />
+            <xs:element name="scannerlevel" type="scannerlevel" />
+            <xs:element name="amount" type="amount" />
+            <xs:element name="duration" type="time" />
+            <xs:element name="distance" type="distance" />
+            <xs:element name="owner" type="owner" />
+            <xs:element name="relation" type="relation" />
+            <xs:element name="secrecy" type="secrecy" />
+            <xs:element name="viewangle" type="viewangle" />
+            <xs:element name="wares" type="wares" />
+            <xs:element name="scannerlevel" type="scannerlevel" />
+            <xs:element name="amount" type="amount" />
+            <xs:element name="rechecktime" type="time" />
+            <xs:element name="conditions" type="conditions" />
+            <xs:element name="actions" type="actions" />
+            <xs:element name="conditions" type="conditions" />
+            <xs:element name="conditions" type="infoconditions" />
+            <xs:element name="actions" type="infoactions" />
+            <xs:element name="globals" type="global" />
+            <xs:element name="discount" type="unlock" />
+            <xs:element name="commission" type="unlock" />
+            <xs:element name="blueprint" type="blueprintunlock" />
+            <xs:element name="information" type="infounlock" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +114,41 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="scan" />
+            <xs:element name="secrecy" />
+            <xs:element name="adjustment" />
+            <xs:element name="unlocks" />
+            <xs:element name="distance" type="distance" />
+            <xs:element name="owner" type="owner" />
+            <xs:element name="relation" type="relation" />
+            <xs:element name="secrecy" type="secrecy" />
+            <xs:element name="blueprintsecrecy" type="secrecy" />
+            <xs:element name="viewangle" type="viewangle" />
+            <xs:element name="wares" type="wares" />
+            <xs:element name="scannerlevel" type="scannerlevel" />
+            <xs:element name="amount" type="amount" />
+            <xs:element name="duration" type="time" />
+            <xs:element name="distance" type="distance" />
+            <xs:element name="owner" type="owner" />
+            <xs:element name="relation" type="relation" />
+            <xs:element name="secrecy" type="secrecy" />
+            <xs:element name="viewangle" type="viewangle" />
+            <xs:element name="wares" type="wares" />
+            <xs:element name="scannerlevel" type="scannerlevel" />
+            <xs:element name="amount" type="amount" />
+            <xs:element name="rechecktime" type="time" />
+            <xs:element name="conditions" type="conditions" />
+            <xs:element name="actions" type="actions" />
+            <xs:element name="conditions" type="conditions" />
+            <xs:element name="conditions" type="infoconditions" />
+            <xs:element name="actions" type="infoactions" />
+            <xs:element name="globals" type="global" />
+            <xs:element name="discount" type="unlock" />
+            <xs:element name="commission" type="unlock" />
+            <xs:element name="blueprint" type="blueprintunlock" />
+            <xs:element name="information" type="infounlock" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>

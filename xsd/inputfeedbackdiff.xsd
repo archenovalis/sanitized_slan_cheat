@@ -65,7 +65,13 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element name="inputfeedback" />
+            <xs:element name="action" type="action" />
+            <xs:element name="state" type="state" />
+            <xs:element name="range" type="rangenode" />
+            <xs:element name="config" type="config" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
         <xs:attribute name="pos" type="pos"/>
@@ -80,7 +86,13 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:any processContents="strict" namespace="##any" minOccurs="0" maxOccurs="1"/>
+          <xs:choice>
+            <xs:element name="inputfeedback" />
+            <xs:element name="action" type="action" />
+            <xs:element name="state" type="state" />
+            <xs:element name="range" type="rangenode" />
+            <xs:element name="config" type="config" />
+          </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>
         <xs:attribute name="if" type="xpath-cond"/>
