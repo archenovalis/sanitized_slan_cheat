@@ -70,15 +70,9 @@
             <xs:element name="unit" />
             <xs:element name="macros" />
             <xs:element name="macro" />
-            <xs:element name="rules" />
             <xs:element name="ruleset" />
             <xs:element name="rule" />
             <xs:element name="deployable" />
-            <xs:element name="macros" />
-            <xs:element name="macro" />
-            <xs:element name="rules" />
-            <xs:element name="ruleset" />
-            <xs:element name="rule" />
           </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath-add" use="required"/>
@@ -99,15 +93,9 @@
             <xs:element name="unit" />
             <xs:element name="macros" />
             <xs:element name="macro" />
-            <xs:element name="rules" />
             <xs:element name="ruleset" />
             <xs:element name="rule" />
             <xs:element name="deployable" />
-            <xs:element name="macros" />
-            <xs:element name="macro" />
-            <xs:element name="rules" />
-            <xs:element name="ruleset" />
-            <xs:element name="rule" />
           </xs:choice>
         </xs:sequence>
         <xs:attribute name="sel" type="xpath" use="required"/>

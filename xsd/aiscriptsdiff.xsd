@@ -65,16 +65,27 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice>
-            <xs:group ref="conditions_single_nonevent" />
-            <xs:group ref="conditions_single_event" />
-            <xs:group ref="conditions_nonevent" />
-            <xs:group ref="conditions" />
-            <xs:group ref="blockingaction" />
-            <xs:group ref="specificactions" />
-            <xs:group ref="actionchoice" />
-            <xs:group ref="actions" />
-            <xs:group ref="actionswithlabel" />
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="check_all" type="checkall" />
+            <xs:element name="check_any" type="checkany" />
+            <xs:element name="conditions" type="interrupt_conditions_withref" />
+            <xs:element name="actions" type="interrupt_actions" />
+            <xs:element name="position" type="position" />
+            <xs:element name="rotation" type="rotation" />
+            <xs:element name="nextposition" type="position" />
+            <xs:element name="param" type="run_script_param" />
+            <xs:element name="do_all" type="doall" />
+            <xs:element name="do_for_each" type="doforeach" />
+            <xs:element name="do_any" type="doany" />
+            <xs:element name="do_if" type="doif" />
+            <xs:element name="do_elseif" type="doelseif" />
+            <xs:element name="do_else" type="doelse" />
+            <xs:element name="do_while" type="dowhile" />
+            <xs:element name="library" type="interrupt_library" />
+            <xs:element name="handler" type="interrupt_handler_withref" />
+            <xs:element name="documentation" type="filedoc" />
+            <xs:element name="order" type="orderdef" />
+            <xs:element name="interrupts" type="interrupts" />
             <xs:element name="event_..." />
             <xs:element name="on_attentionchange" />
             <xs:element name="interrupt_after_time" />
@@ -98,9 +109,7 @@
             <xs:element name="detach_from_masstraffic" />
             <xs:element name="run_script" />
             <xs:element name="save_retval" />
-            <xs:element name="on_attentionchange" />
             <xs:element name="run_order_script" />
-            <xs:element name="on_attentionchange" />
             <xs:element name="run_interrupt_script" />
             <xs:element name="abort_called_scripts" />
             <xs:element name="wait_for_prev_script" />
@@ -118,23 +127,15 @@
             <xs:element name="stop_moving" />
             <xs:element name="wait" />
             <xs:element name="label" />
-            <xs:element name="handler" />
-            <xs:element name="conditions" />
-            <xs:element name="actions" />
             <xs:element name="params" />
-            <xs:element name="param" />
             <xs:element name="input_param" />
             <xs:element name="editable" />
-            <xs:element name="conditions" />
             <xs:element name="patch" />
             <xs:element name="skill" />
             <xs:element name="requires" />
             <xs:element name="location" />
             <xs:element name="aiscript" />
-            <xs:element name="params" />
-            <xs:element name="param" />
             <xs:element name="init" />
-            <xs:element name="patch" />
             <xs:element name="attention" />
             <xs:element name="on_abort" />
             <xs:element name="signature" />
@@ -186,16 +187,27 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice>
-            <xs:group ref="conditions_single_nonevent" />
-            <xs:group ref="conditions_single_event" />
-            <xs:group ref="conditions_nonevent" />
-            <xs:group ref="conditions" />
-            <xs:group ref="blockingaction" />
-            <xs:group ref="specificactions" />
-            <xs:group ref="actionchoice" />
-            <xs:group ref="actions" />
-            <xs:group ref="actionswithlabel" />
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="check_all" type="checkall" />
+            <xs:element name="check_any" type="checkany" />
+            <xs:element name="conditions" type="interrupt_conditions_withref" />
+            <xs:element name="actions" type="interrupt_actions" />
+            <xs:element name="position" type="position" />
+            <xs:element name="rotation" type="rotation" />
+            <xs:element name="nextposition" type="position" />
+            <xs:element name="param" type="run_script_param" />
+            <xs:element name="do_all" type="doall" />
+            <xs:element name="do_for_each" type="doforeach" />
+            <xs:element name="do_any" type="doany" />
+            <xs:element name="do_if" type="doif" />
+            <xs:element name="do_elseif" type="doelseif" />
+            <xs:element name="do_else" type="doelse" />
+            <xs:element name="do_while" type="dowhile" />
+            <xs:element name="library" type="interrupt_library" />
+            <xs:element name="handler" type="interrupt_handler_withref" />
+            <xs:element name="documentation" type="filedoc" />
+            <xs:element name="order" type="orderdef" />
+            <xs:element name="interrupts" type="interrupts" />
             <xs:element name="event_..." />
             <xs:element name="on_attentionchange" />
             <xs:element name="interrupt_after_time" />
@@ -219,9 +231,7 @@
             <xs:element name="detach_from_masstraffic" />
             <xs:element name="run_script" />
             <xs:element name="save_retval" />
-            <xs:element name="on_attentionchange" />
             <xs:element name="run_order_script" />
-            <xs:element name="on_attentionchange" />
             <xs:element name="run_interrupt_script" />
             <xs:element name="abort_called_scripts" />
             <xs:element name="wait_for_prev_script" />
@@ -239,23 +249,15 @@
             <xs:element name="stop_moving" />
             <xs:element name="wait" />
             <xs:element name="label" />
-            <xs:element name="handler" />
-            <xs:element name="conditions" />
-            <xs:element name="actions" />
             <xs:element name="params" />
-            <xs:element name="param" />
             <xs:element name="input_param" />
             <xs:element name="editable" />
-            <xs:element name="conditions" />
             <xs:element name="patch" />
             <xs:element name="skill" />
             <xs:element name="requires" />
             <xs:element name="location" />
             <xs:element name="aiscript" />
-            <xs:element name="params" />
-            <xs:element name="param" />
             <xs:element name="init" />
-            <xs:element name="patch" />
             <xs:element name="attention" />
             <xs:element name="on_abort" />
             <xs:element name="signature" />

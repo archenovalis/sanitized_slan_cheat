@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE schema [
   <!ENTITY ncname "\i\c*">
-  <!ENTITY qname  "(&ncname;:)?&ncname;">
-  <!ENTITY aname  "@&qname;">
-  <!ENTITY pos    "\[\d+\]">
-  <!ENTITY attr   "\[&aname;='(.)*'\]|\[&aname;=&quot;(.)*&quot;\]">
+  <!ENTITY qname "(&ncname;:)?&ncname;">
+  <!ENTITY aname "@&qname;">
+  <!ENTITY pos "\[\d+\]">
+  <!ENTITY attr "\[&aname;='(.)*'\]|\[&aname;=&quot;(.)*&quot;\]">
   <!ENTITY valueq "\[(&qname;|\.)=&quot;(.)*&quot;\]">
-  <!ENTITY value  "\[(&qname;|\.)='(.)*'\]|&valueq;">
-  <!ENTITY cond   "&attr;|&value;|&pos;">
-  <!ENTITY step   "(&qname;|\*)(&cond;)*">
-  <!ENTITY arg    "&qname;">
-  <!ENTITY fn     "(not\(&arg;\)|boolean\(&arg;\)|true\(\)|false\(\)|name\(\)|root\((&arg;)?\)|position\(\)|last\(\))">
-  <!ENTITY func   "\[&fn;\]">
-  <!ENTITY piq    "processing-instruction\((&quot;&ncname;&quot;)\)">
-  <!ENTITY pi     "processing-instruction\(('&ncname;')?\)|&piq;">
-  <!ENTITY id     "id\(('&ncname;')?\)|id\((&quot;&ncname;&quot;)?\)">
-  <!ENTITY com    "comment\(\)">
-  <!ENTITY text   "text\(\)">
-  <!ENTITY nspa   "namespace::&ncname;">
+  <!ENTITY value "\[(&qname;|\.)='(.)*'\]|&valueq;">
+  <!ENTITY cond "&attr;|&value;|&pos;">
+  <!ENTITY step "(&qname;|\*)(&cond;)*">
+  <!ENTITY arg "&qname;">
+  <!ENTITY fn "(not\(&arg;\)|boolean\(&arg;\)|true\(\)|false\(\)|name\(\)|root\((&arg;)?\)|position\(\)|last\(\))">
+  <!ENTITY func "\[&fn;\]">
+  <!ENTITY piq "processing-instruction\((&quot;&ncname;&quot;)\)">
+  <!ENTITY pi "processing-instruction\(('&ncname;')?\)|&piq;">
+  <!ENTITY id "id\(('&ncname;')?\)|id\((&quot;&ncname;&quot;)?\)">
+  <!ENTITY com "comment\(\)">
+  <!ENTITY text "text\(\)">
+  <!ENTITY nspa "namespace::&ncname;">
   <!ENTITY cnodes "(&text;(&pos;)?)|(&com;(&pos;)?)|((&pi;)(&pos;)?)">
-  <!ENTITY child  "(&cnodes;|(&step;(&func;)?))">
-  <!ENTITY last   "(&child;|&aname;|&nspa;)">
-  <!ENTITY path   "(/|//)?((&id;)(((/|//)&step;)*((/|//)&last;))?|(&step;(/|//))*(&last;))">
-  <!ENTITY patha  "(/|//)?((&id;)(((/|//)&step;)*((/|//)&child;))?|(&step;(/|//))*(&child;))">
-  <!ENTITY pathc  "(&patha;|not\(&patha;\)|&fn;)">
+  <!ENTITY child "(&cnodes;|(&step;(&func;)?))">
+  <!ENTITY last "(&child;|&aname;|&nspa;)">
+  <!ENTITY path "(/|//)?((&id;)(((/|//)&step;)*((/|//)&last;))?|(&step;(/|//))*(&last;))">
+  <!ENTITY patha "(/|//)?((&id;)(((/|//)&step;)*((/|//)&child;))?|(&step;(/|//))*(&child;))">
+  <!ENTITY pathc "(&patha;|not\(&patha;\)|&fn;)">
 ]>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
   <xs:include schemaLocation="common.xsd" />
-  
+
   <xs:simpleType name="xpath">
     <xs:restriction base="xs:string">
-      <xs:pattern value="&path;"/>
+      <xs:pattern value="&path;" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="xpath-add">
     <xs:restriction base="xs:string">
-      <xs:pattern value="&patha;"/>
+      <xs:pattern value="&patha;" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="xpath-cond">
     <xs:restriction base="xs:string">
-      <xs:pattern value="&pathc;"/>
+      <xs:pattern value="&pathc;" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="pos">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="before"/>
-      <xs:enumeration value="after"/>
-      <xs:enumeration value="prepend"/>
+      <xs:enumeration value="before" />
+      <xs:enumeration value="after" />
+      <xs:enumeration value="prepend" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="type">
     <xs:restriction base="xs:string">
-      <xs:pattern value="&aname;|&nspa;"/>
+      <xs:pattern value="&aname;|&nspa;" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -65,21 +65,99 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice>
-            <xs:group ref="selectrandom" />
-            <xs:group ref="equipmentmods" />
-            <xs:group ref="createship" />
-            <xs:group ref="createnpc" />
-            <xs:group ref="createmodule" />
-            <xs:group ref="createstation" />
-            <xs:group ref="createobject" />
-            <xs:group ref="people" />
-            <xs:group ref="loadoutelements" />
-            <xs:group ref="constructionsequenceelements" />
-            <xs:group ref="voicedata" />
-            <xs:group ref="commonconditions_event" />
-            <xs:group ref="commonconditions_nonevent" />
-            <xs:group ref="commonactions" />
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="match" type="matchsubfilter" />
+            <xs:element name="match_any" type="matchsubfilter" />
+            <xs:element name="match_parent" type="matchsubfilter" />
+            <xs:element name="match_context" type="matchsubfilter" />
+            <xs:element name="match_child" type="matchsubfilterrange" />
+            <xs:element name="match_content" type="matchsubfilterrange" />
+            <xs:element name="match_macro_children" type="matchrange" />
+            <xs:element name="match_hull" type="matchrange" />
+            <xs:element name="match_max_hull" type="matchrange" />
+            <xs:element name="match_shield" type="matchrange" />
+            <xs:element name="match_secrecy_level" type="matchrange" />
+            <xs:element name="match_revealed_percentage" type="matchrevealedpercentage" />
+            <xs:element name="match_buyoffer" type="matchtradeoffer" />
+            <xs:element name="match_selloffer" type="matchtradeoffer" />
+            <xs:element name="match_build" type="matchbuild" />
+            <xs:element name="match_products" type="matchwarelist" />
+            <xs:element name="match_resources" type="matchwarelist" />
+            <xs:element name="match_any_cargo" type="matchwarelist" />
+            <xs:element name="match_any_wares" type="matchwarelist" />
+            <xs:element name="match_basket_wares" type="matchwarelist" />
+            <xs:element name="match_units_stored" type="matchunits" />
+            <xs:element name="match_units_available" type="matchunits" />
+            <xs:element name="match_units_unavailable" type="matchunits" />
+            <xs:element name="match_cargo" type="matchwaresorcargo" />
+            <xs:element name="match_wares" type="matchwaresorcargo" />
+            <xs:element name="match_loadout" type="matchloadout" />
+            <xs:element name="match_weapon_mod" type="matchweaponmod" />
+            <xs:element name="match_engine_mod" type="matchenginemod" />
+            <xs:element name="match_shield_mod" type="matchshieldmod" />
+            <xs:element name="match_ship_mod" type="matchshipmod" />
+            <xs:element name="match_paint_mod" type="matchpaintmod" />
+            <xs:element name="amount" type="range" />
+            <xs:element name="minamount" type="range" />
+            <xs:element name="totalprice" type="range" />
+            <xs:element name="minprice" type="range" />
+            <xs:element name="offeramount" type="rangefilter_withtradepartner" />
+            <xs:element name="offervolume" type="rangefilter_withtradepartner" />
+            <xs:element name="price" type="rangefilter_withtradepartner_fordiscounts" />
+            <xs:element name="relativeprice" type="rangefilter_withtradepartner_fordiscounts" />
+            <xs:element name="stocklevel" type="rangefilter" />
+            <xs:element name="volume" type="rangefilter" />
+            <xs:element name="totalvolume" type="rangefilter" />
+            <xs:element name="mintotalvolume" type="rangefilter" />
+            <xs:element name="match_buyer" type="matchbuyer" />
+            <xs:element name="match_seller" type="matchseller" />
+            <xs:element name="position" type="position" />
+            <xs:element name="condition" type="terraformingcondition" />
+            <xs:element name="effect" type="terraformingeffect" />
+            <xs:element name="sideeffect" type="terraformingsideeffect" />
+            <xs:element name="rebate" type="terraformingrebate" />
+            <xs:element name="ware" type="terraformingwareamount" />
+            <xs:element name="ship" type="terraformingdelivery" />
+            <xs:element name="conditions" type="terraformingconditions" />
+            <xs:element name="effects" type="terraformingeffects" />
+            <xs:element name="sideeffects" type="terraformingsideeffects" />
+            <xs:element name="rebates" type="terraformingrebates" />
+            <xs:element name="resources" type="terraformingresources" />
+            <xs:element name="deliveries" type="terraformingdeliveries" />
+            <xs:element name="predecessors" type="terraformingpredecessors" />
+            <xs:element name="removedprojects" type="terraformingremovedprojects" />
+            <xs:element name="select" type="shipdbcategoryselect" />
+            <xs:element name="owner" type="selectrandom" />
+            <xs:element name="engine" type="loadoutmacro" />
+            <xs:element name="weapon" type="loadoutmacro" />
+            <xs:element name="shield" type="loadoutmacro" />
+            <xs:element name="turret" type="loadoutmacro" />
+            <xs:element name="shields" type="loadoutgroup" />
+            <xs:element name="turrets" type="loadoutgroup" />
+            <xs:element name="ammunition" type="loadoutammo" />
+            <xs:element name="unit" type="loadoutammo" />
+            <xs:element name="software" type="loadoutsoftware" />
+            <xs:element name="thruster" type="loadoutvirtualmacro" />
+            <xs:element name="crew" type="loadoutcrew" />
+            <xs:element name="rotation" type="rotation" />
+            <xs:element name="event_player_commission_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_trader_commission_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_trader_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_hiring_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_modding_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_repair_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="boundingbox" type="boundingbox" />
+            <xs:element name="safepos" type="createobjectsafepos" />
+            <xs:element name="orientation" type="orientation" />
+            <xs:element name="end" type="position" />
+            <xs:element name="offsetrotation" type="rotation" />
+            <xs:element name="refposition" type="position" />
+            <xs:element name="rangecenter" type="position" />
+            <xs:element name="start" type="componentoffset" />
+            <xs:element name="startposition" type="position" />
+            <xs:element name="targetposition" type="position" />
+            <xs:element name="add_terraforming_event" type="terraformingaction" />
             <xs:element name="author" />
             <xs:element name="content" />
             <xs:element name="version" />
@@ -96,20 +174,13 @@
             <xs:element name="match_requires_licence" />
             <xs:element name="match_dock" />
             <xs:element name="match_any_equipment_mod" />
-            <xs:element name="ware" />
             <xs:element name="security" />
             <xs:element name="economy" />
             <xs:element name="maintenance" />
             <xs:element name="project" />
             <xs:element name="predecessor" />
-            <xs:element name="select" />
             <xs:element name="chance" />
-            <xs:element name="engine" />
-            <xs:element name="weapon" />
-            <xs:element name="shield" />
-            <xs:element name="ship" />
             <xs:element name="mods" />
-            <xs:element name="owner" />
             <xs:element name="pilot" />
             <xs:element name="loadout" />
             <xs:element name="level" />
@@ -123,15 +194,10 @@
             <xs:element name="fillamount" />
             <xs:element name="cargo" />
             <xs:element name="wares" />
-            <xs:element name="fillpercent" />
             <xs:element name="fillvalue" />
             <xs:element name="inventory" />
-            <xs:element name="wares" />
-            <xs:element name="fillamount" />
-            <xs:element name="fillvalue" />
             <xs:element name="drop" />
             <xs:element name="units" />
-            <xs:element name="unit" />
             <xs:element name="people" />
             <xs:element name="name" />
             <xs:element name="page" />
@@ -142,26 +208,15 @@
             <xs:element name="compatibilities" />
             <xs:element name="limits" />
             <xs:element name="production" />
-            <xs:element name="name" />
-            <xs:element name="loadout" />
-            <xs:element name="level" />
-            <xs:element name="variation" />
-            <xs:element name="name" />
-            <xs:element name="fillpercent" />
             <xs:element name="person" />
             <xs:element name="macros" />
             <xs:element name="groups" />
-            <xs:element name="ammunition" />
-            <xs:element name="software" />
             <xs:element name="values" />
             <xs:element name="virtualmacros" />
-            <xs:element name="crew" />
             <xs:element name="entry" />
-            <xs:element name="predecessor" />
             <xs:element name="offset" />
             <xs:element name="upgrades" />
             <xs:element name="text" />
-            <xs:element name="name" />
             <xs:element name="description" />
             <xs:element name="event_repair_requested" />
             <xs:element name="event_ui_triggered" />
@@ -556,7 +611,6 @@
             <xs:element name="deactivate_landinggears" />
             <xs:element name="animate_chair" />
             <xs:element name="trigger_animation" />
-            <xs:element name="check_animation_state" />
             <xs:element name="activate_weapongroup" />
             <xs:element name="reset_weapongroups" />
             <xs:element name="add_weapon_to_weapongroup" />
@@ -684,20 +738,15 @@
             <xs:element name="add_build_to_recycle_ship" />
             <xs:element name="add_build_to_expand_station" />
             <xs:element name="add_build_to_modify_ship" />
-            <xs:element name="people" />
             <xs:element name="add" />
             <xs:element name="existing_people" />
             <xs:element name="matching_people" />
             <xs:element name="remove" />
-            <xs:element name="existing_people" />
-            <xs:element name="matching_people" />
             <xs:element name="get_build_people" />
             <xs:element name="reassign_existing_people" />
             <xs:element name="reassign_matching_people" />
             <xs:element name="transfer_people" />
             <xs:element name="failed" />
-            <xs:element name="existing_people" />
-            <xs:element name="matching_people" />
             <xs:element name="remove_build" />
             <xs:element name="process_build" />
             <xs:element name="reserve_build_plot" />
@@ -719,7 +768,6 @@
             <xs:element name="get_subordinate_macro" />
             <xs:element name="organise_job_ship_subordinates" />
             <xs:element name="get_suitable_job" />
-            <xs:element name="check_job_active" />
             <xs:element name="request_job_ship" />
             <xs:element name="remove_job_ship_request" />
             <xs:element name="set_requested_job_ship_timeout" />
@@ -752,7 +800,6 @@
             <xs:element name="create_construction_sequence" />
             <xs:element name="immediate" />
             <xs:element name="remove_from_construction_sequence" />
-            <xs:element name="result" />
             <xs:element name="generate_loadout" />
             <xs:element name="get_loadout" />
             <xs:element name="create_loadout" />
@@ -768,7 +815,6 @@
             <xs:element name="create_position_outside_boundingbox" />
             <xs:element name="check_is_position_inside_boundingbox" />
             <xs:element name="find_object_surface" />
-            <xs:element name="match" />
             <xs:element name="create_position" />
             <xs:element name="transform_position" />
             <xs:element name="create_rotation" />
@@ -792,7 +838,6 @@
             <xs:element name="create_npc_template" />
             <xs:element name="remove_npc_template" />
             <xs:element name="cutscene_event" />
-            <xs:element name="debug_text" />
             <xs:element name="debug_to_file" />
             <xs:element name="deplete_yield" />
             <xs:element name="get_highest_resource_yield" />
@@ -842,7 +887,6 @@
             <xs:element name="find_npc_slot" />
             <xs:element name="find_npc_waypoint" />
             <xs:element name="get_floor_position" />
-            <xs:element name="result" />
             <xs:element name="find_crate_slot" />
             <xs:element name="find_prop_slot" />
             <xs:element name="find_player_transporter_slot" />
@@ -858,7 +902,6 @@
             <xs:element name="find_scenarioconsole_slot" />
             <xs:element name="find_object_component" />
             <xs:element name="find_resource" />
-            <xs:element name="check_object" />
             <xs:element name="end_repair_mass_traffic" />
             <xs:element name="find_active_repair_mass_traffic" />
             <xs:element name="find_pos_in_mass_traffic_at_time" />
@@ -878,11 +921,9 @@
             <xs:element name="find_zone" />
             <xs:element name="fire_turret" />
             <xs:element name="get_attackstrength" />
-            <xs:element name="result" />
             <xs:element name="missileresult" />
             <xs:element name="get_character_definition" />
             <xs:element name="get_crew_exchange_lists" />
-            <xs:element name="result" />
             <xs:element name="get_docking_approach_pos" />
             <xs:element name="get_gate_approach_pos" />
             <xs:element name="get_global_path" />
@@ -894,7 +935,6 @@
             <xs:element name="get_ship_definition_macros" />
             <xs:element name="get_module_definition" />
             <xs:element name="get_module_set_macro" />
-            <xs:element name="check_production_allowed" />
             <xs:element name="get_construction_plan" />
             <xs:element name="get_god_station_construction_plan" />
             <xs:element name="get_station_definition" />
@@ -905,7 +945,6 @@
             <xs:element name="get_text_ids_in_range" />
             <xs:element name="get_trade_parking_pos" />
             <xs:element name="get_ware_definition" />
-            <xs:element name="owner" />
             <xs:element name="add_ware_reservation" />
             <xs:element name="remove_ware_reservation" />
             <xs:element name="get_ware_reservation" />
@@ -941,7 +980,6 @@
             <xs:element name="sort_collectables_by_value" />
             <xs:element name="play_cutscene" />
             <xs:element name="interaction" />
-            <xs:element name="param" />
             <xs:element name="raise_lua_event" />
             <xs:element name="remove_object_account" />
             <xs:element name="remove_actor_from_room" />
@@ -949,12 +987,9 @@
             <xs:element name="remove_from_list" />
             <xs:element name="remove_object_commander" />
             <xs:element name="remove_representative" />
-            <xs:element name="remove_value" />
             <xs:element name="return" />
             <xs:element name="retval" />
             <xs:element name="check_walk_path" />
-            <xs:element name="check_weapon_active" />
-            <xs:element name="check_weapon_installed" />
             <xs:element name="request_docking" />
             <xs:element name="request_undocking" />
             <xs:element name="request_retrieval" />
@@ -978,7 +1013,6 @@
             <xs:element name="add_boarding_pod_to_operation" />
             <xs:element name="remove_boarding_pod_from_operation" />
             <xs:element name="dispatch_marines" />
-            <xs:element name="marines" />
             <xs:element name="transfer_marines_from_operation" />
             <xs:element name="transfer_marine_to_operation" />
             <xs:element name="set_marine_status" />
@@ -1076,11 +1110,7 @@
             <xs:element name="set_object_hull_unrepairable" />
             <xs:element name="set_object_shield_unrepairable" />
             <xs:element name="set_object_velocity" />
-            <xs:element name="linear" />
-            <xs:element name="angular" />
             <xs:element name="add_object_velocity" />
-            <xs:element name="linear" />
-            <xs:element name="angular" />
             <xs:element name="set_object_affected_by_force_effect" />
             <xs:element name="set_object_unlock_state" />
             <xs:element name="set_room_private" />
@@ -1133,10 +1163,8 @@
             <xs:element name="set_tolerance_boost" />
             <xs:element name="set_allowed_weapon_systems" />
             <xs:element name="set_trade_restrictions" />
-            <xs:element name="override" />
             <xs:element name="set_tradeoffers_enabled" />
             <xs:element name="set_turret_targets" />
-            <xs:element name="set_value" />
             <xs:element name="set_weapon_mode" />
             <xs:element name="set_weapon_ammo" />
             <xs:element name="set_turrets_armed" />
@@ -1146,7 +1174,6 @@
             <xs:element name="remove_help" />
             <xs:element name="show_input_help" />
             <xs:element name="show_help_multi" />
-            <xs:element name="text" />
             <xs:element name="show_help_overlay" />
             <xs:element name="remove_help_overlay" />
             <xs:element name="show_overlay_text" />
@@ -1155,7 +1182,6 @@
             <xs:element name="remove_overlay_text" />
             <xs:element name="show_notification" />
             <xs:element name="show_interactive_notification" />
-            <xs:element name="interaction" />
             <xs:element name="stop_interactive_notification" />
             <xs:element name="shuffle_group" />
             <xs:element name="shuffle_list" />
@@ -1170,7 +1196,6 @@
             <xs:element name="start_long_range_scan" />
             <xs:element name="stop_long_range_scan" />
             <xs:element name="start_script" />
-            <xs:element name="param" />
             <xs:element name="stop_boost" />
             <xs:element name="stop_cutscene" />
             <xs:element name="stop_firing_at_target" />
@@ -1468,11 +1493,11 @@
             <xs:element name="rotation" type="rotation" />
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name="sel" type="xpath-add" use="required"/>
-        <xs:attribute name="pos" type="pos"/>
-        <xs:attribute name="type" type="type"/>
-        <xs:attribute name="if" type="xpath-cond"/>
-        <xs:attribute name="silent" type="xs:boolean"/>
+        <xs:attribute name="sel" type="xpath-add" use="required" />
+        <xs:attribute name="pos" type="pos" />
+        <xs:attribute name="type" type="type" />
+        <xs:attribute name="if" type="xpath-cond" />
+        <xs:attribute name="silent" type="xs:boolean" />
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
@@ -1481,21 +1506,99 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice>
-            <xs:group ref="selectrandom" />
-            <xs:group ref="equipmentmods" />
-            <xs:group ref="createship" />
-            <xs:group ref="createnpc" />
-            <xs:group ref="createmodule" />
-            <xs:group ref="createstation" />
-            <xs:group ref="createobject" />
-            <xs:group ref="people" />
-            <xs:group ref="loadoutelements" />
-            <xs:group ref="constructionsequenceelements" />
-            <xs:group ref="voicedata" />
-            <xs:group ref="commonconditions_event" />
-            <xs:group ref="commonconditions_nonevent" />
-            <xs:group ref="commonactions" />
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="match" type="matchsubfilter" />
+            <xs:element name="match_any" type="matchsubfilter" />
+            <xs:element name="match_parent" type="matchsubfilter" />
+            <xs:element name="match_context" type="matchsubfilter" />
+            <xs:element name="match_child" type="matchsubfilterrange" />
+            <xs:element name="match_content" type="matchsubfilterrange" />
+            <xs:element name="match_macro_children" type="matchrange" />
+            <xs:element name="match_hull" type="matchrange" />
+            <xs:element name="match_max_hull" type="matchrange" />
+            <xs:element name="match_shield" type="matchrange" />
+            <xs:element name="match_secrecy_level" type="matchrange" />
+            <xs:element name="match_revealed_percentage" type="matchrevealedpercentage" />
+            <xs:element name="match_buyoffer" type="matchtradeoffer" />
+            <xs:element name="match_selloffer" type="matchtradeoffer" />
+            <xs:element name="match_build" type="matchbuild" />
+            <xs:element name="match_products" type="matchwarelist" />
+            <xs:element name="match_resources" type="matchwarelist" />
+            <xs:element name="match_any_cargo" type="matchwarelist" />
+            <xs:element name="match_any_wares" type="matchwarelist" />
+            <xs:element name="match_basket_wares" type="matchwarelist" />
+            <xs:element name="match_units_stored" type="matchunits" />
+            <xs:element name="match_units_available" type="matchunits" />
+            <xs:element name="match_units_unavailable" type="matchunits" />
+            <xs:element name="match_cargo" type="matchwaresorcargo" />
+            <xs:element name="match_wares" type="matchwaresorcargo" />
+            <xs:element name="match_loadout" type="matchloadout" />
+            <xs:element name="match_weapon_mod" type="matchweaponmod" />
+            <xs:element name="match_engine_mod" type="matchenginemod" />
+            <xs:element name="match_shield_mod" type="matchshieldmod" />
+            <xs:element name="match_ship_mod" type="matchshipmod" />
+            <xs:element name="match_paint_mod" type="matchpaintmod" />
+            <xs:element name="amount" type="range" />
+            <xs:element name="minamount" type="range" />
+            <xs:element name="totalprice" type="range" />
+            <xs:element name="minprice" type="range" />
+            <xs:element name="offeramount" type="rangefilter_withtradepartner" />
+            <xs:element name="offervolume" type="rangefilter_withtradepartner" />
+            <xs:element name="price" type="rangefilter_withtradepartner_fordiscounts" />
+            <xs:element name="relativeprice" type="rangefilter_withtradepartner_fordiscounts" />
+            <xs:element name="stocklevel" type="rangefilter" />
+            <xs:element name="volume" type="rangefilter" />
+            <xs:element name="totalvolume" type="rangefilter" />
+            <xs:element name="mintotalvolume" type="rangefilter" />
+            <xs:element name="match_buyer" type="matchbuyer" />
+            <xs:element name="match_seller" type="matchseller" />
+            <xs:element name="position" type="position" />
+            <xs:element name="condition" type="terraformingcondition" />
+            <xs:element name="effect" type="terraformingeffect" />
+            <xs:element name="sideeffect" type="terraformingsideeffect" />
+            <xs:element name="rebate" type="terraformingrebate" />
+            <xs:element name="ware" type="terraformingwareamount" />
+            <xs:element name="ship" type="terraformingdelivery" />
+            <xs:element name="conditions" type="terraformingconditions" />
+            <xs:element name="effects" type="terraformingeffects" />
+            <xs:element name="sideeffects" type="terraformingsideeffects" />
+            <xs:element name="rebates" type="terraformingrebates" />
+            <xs:element name="resources" type="terraformingresources" />
+            <xs:element name="deliveries" type="terraformingdeliveries" />
+            <xs:element name="predecessors" type="terraformingpredecessors" />
+            <xs:element name="removedprojects" type="terraformingremovedprojects" />
+            <xs:element name="select" type="shipdbcategoryselect" />
+            <xs:element name="owner" type="selectrandom" />
+            <xs:element name="engine" type="loadoutmacro" />
+            <xs:element name="weapon" type="loadoutmacro" />
+            <xs:element name="shield" type="loadoutmacro" />
+            <xs:element name="turret" type="loadoutmacro" />
+            <xs:element name="shields" type="loadoutgroup" />
+            <xs:element name="turrets" type="loadoutgroup" />
+            <xs:element name="ammunition" type="loadoutammo" />
+            <xs:element name="unit" type="loadoutammo" />
+            <xs:element name="software" type="loadoutsoftware" />
+            <xs:element name="thruster" type="loadoutvirtualmacro" />
+            <xs:element name="crew" type="loadoutcrew" />
+            <xs:element name="rotation" type="rotation" />
+            <xs:element name="event_player_commission_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_trader_commission_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_trader_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_hiring_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_modding_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="event_player_repair_discount_added" type="event_playerpricemodifier" />
+            <xs:element name="boundingbox" type="boundingbox" />
+            <xs:element name="safepos" type="createobjectsafepos" />
+            <xs:element name="orientation" type="orientation" />
+            <xs:element name="end" type="position" />
+            <xs:element name="offsetrotation" type="rotation" />
+            <xs:element name="refposition" type="position" />
+            <xs:element name="rangecenter" type="position" />
+            <xs:element name="start" type="componentoffset" />
+            <xs:element name="startposition" type="position" />
+            <xs:element name="targetposition" type="position" />
+            <xs:element name="add_terraforming_event" type="terraformingaction" />
             <xs:element name="author" />
             <xs:element name="content" />
             <xs:element name="version" />
@@ -1512,20 +1615,13 @@
             <xs:element name="match_requires_licence" />
             <xs:element name="match_dock" />
             <xs:element name="match_any_equipment_mod" />
-            <xs:element name="ware" />
             <xs:element name="security" />
             <xs:element name="economy" />
             <xs:element name="maintenance" />
             <xs:element name="project" />
             <xs:element name="predecessor" />
-            <xs:element name="select" />
             <xs:element name="chance" />
-            <xs:element name="engine" />
-            <xs:element name="weapon" />
-            <xs:element name="shield" />
-            <xs:element name="ship" />
             <xs:element name="mods" />
-            <xs:element name="owner" />
             <xs:element name="pilot" />
             <xs:element name="loadout" />
             <xs:element name="level" />
@@ -1539,15 +1635,10 @@
             <xs:element name="fillamount" />
             <xs:element name="cargo" />
             <xs:element name="wares" />
-            <xs:element name="fillpercent" />
             <xs:element name="fillvalue" />
             <xs:element name="inventory" />
-            <xs:element name="wares" />
-            <xs:element name="fillamount" />
-            <xs:element name="fillvalue" />
             <xs:element name="drop" />
             <xs:element name="units" />
-            <xs:element name="unit" />
             <xs:element name="people" />
             <xs:element name="name" />
             <xs:element name="page" />
@@ -1558,26 +1649,15 @@
             <xs:element name="compatibilities" />
             <xs:element name="limits" />
             <xs:element name="production" />
-            <xs:element name="name" />
-            <xs:element name="loadout" />
-            <xs:element name="level" />
-            <xs:element name="variation" />
-            <xs:element name="name" />
-            <xs:element name="fillpercent" />
             <xs:element name="person" />
             <xs:element name="macros" />
             <xs:element name="groups" />
-            <xs:element name="ammunition" />
-            <xs:element name="software" />
             <xs:element name="values" />
             <xs:element name="virtualmacros" />
-            <xs:element name="crew" />
             <xs:element name="entry" />
-            <xs:element name="predecessor" />
             <xs:element name="offset" />
             <xs:element name="upgrades" />
             <xs:element name="text" />
-            <xs:element name="name" />
             <xs:element name="description" />
             <xs:element name="event_repair_requested" />
             <xs:element name="event_ui_triggered" />
@@ -1972,7 +2052,6 @@
             <xs:element name="deactivate_landinggears" />
             <xs:element name="animate_chair" />
             <xs:element name="trigger_animation" />
-            <xs:element name="check_animation_state" />
             <xs:element name="activate_weapongroup" />
             <xs:element name="reset_weapongroups" />
             <xs:element name="add_weapon_to_weapongroup" />
@@ -2100,20 +2179,15 @@
             <xs:element name="add_build_to_recycle_ship" />
             <xs:element name="add_build_to_expand_station" />
             <xs:element name="add_build_to_modify_ship" />
-            <xs:element name="people" />
             <xs:element name="add" />
             <xs:element name="existing_people" />
             <xs:element name="matching_people" />
             <xs:element name="remove" />
-            <xs:element name="existing_people" />
-            <xs:element name="matching_people" />
             <xs:element name="get_build_people" />
             <xs:element name="reassign_existing_people" />
             <xs:element name="reassign_matching_people" />
             <xs:element name="transfer_people" />
             <xs:element name="failed" />
-            <xs:element name="existing_people" />
-            <xs:element name="matching_people" />
             <xs:element name="remove_build" />
             <xs:element name="process_build" />
             <xs:element name="reserve_build_plot" />
@@ -2135,7 +2209,6 @@
             <xs:element name="get_subordinate_macro" />
             <xs:element name="organise_job_ship_subordinates" />
             <xs:element name="get_suitable_job" />
-            <xs:element name="check_job_active" />
             <xs:element name="request_job_ship" />
             <xs:element name="remove_job_ship_request" />
             <xs:element name="set_requested_job_ship_timeout" />
@@ -2168,7 +2241,6 @@
             <xs:element name="create_construction_sequence" />
             <xs:element name="immediate" />
             <xs:element name="remove_from_construction_sequence" />
-            <xs:element name="result" />
             <xs:element name="generate_loadout" />
             <xs:element name="get_loadout" />
             <xs:element name="create_loadout" />
@@ -2184,7 +2256,6 @@
             <xs:element name="create_position_outside_boundingbox" />
             <xs:element name="check_is_position_inside_boundingbox" />
             <xs:element name="find_object_surface" />
-            <xs:element name="match" />
             <xs:element name="create_position" />
             <xs:element name="transform_position" />
             <xs:element name="create_rotation" />
@@ -2208,7 +2279,6 @@
             <xs:element name="create_npc_template" />
             <xs:element name="remove_npc_template" />
             <xs:element name="cutscene_event" />
-            <xs:element name="debug_text" />
             <xs:element name="debug_to_file" />
             <xs:element name="deplete_yield" />
             <xs:element name="get_highest_resource_yield" />
@@ -2258,7 +2328,6 @@
             <xs:element name="find_npc_slot" />
             <xs:element name="find_npc_waypoint" />
             <xs:element name="get_floor_position" />
-            <xs:element name="result" />
             <xs:element name="find_crate_slot" />
             <xs:element name="find_prop_slot" />
             <xs:element name="find_player_transporter_slot" />
@@ -2274,7 +2343,6 @@
             <xs:element name="find_scenarioconsole_slot" />
             <xs:element name="find_object_component" />
             <xs:element name="find_resource" />
-            <xs:element name="check_object" />
             <xs:element name="end_repair_mass_traffic" />
             <xs:element name="find_active_repair_mass_traffic" />
             <xs:element name="find_pos_in_mass_traffic_at_time" />
@@ -2294,11 +2362,9 @@
             <xs:element name="find_zone" />
             <xs:element name="fire_turret" />
             <xs:element name="get_attackstrength" />
-            <xs:element name="result" />
             <xs:element name="missileresult" />
             <xs:element name="get_character_definition" />
             <xs:element name="get_crew_exchange_lists" />
-            <xs:element name="result" />
             <xs:element name="get_docking_approach_pos" />
             <xs:element name="get_gate_approach_pos" />
             <xs:element name="get_global_path" />
@@ -2310,7 +2376,6 @@
             <xs:element name="get_ship_definition_macros" />
             <xs:element name="get_module_definition" />
             <xs:element name="get_module_set_macro" />
-            <xs:element name="check_production_allowed" />
             <xs:element name="get_construction_plan" />
             <xs:element name="get_god_station_construction_plan" />
             <xs:element name="get_station_definition" />
@@ -2321,7 +2386,6 @@
             <xs:element name="get_text_ids_in_range" />
             <xs:element name="get_trade_parking_pos" />
             <xs:element name="get_ware_definition" />
-            <xs:element name="owner" />
             <xs:element name="add_ware_reservation" />
             <xs:element name="remove_ware_reservation" />
             <xs:element name="get_ware_reservation" />
@@ -2357,7 +2421,6 @@
             <xs:element name="sort_collectables_by_value" />
             <xs:element name="play_cutscene" />
             <xs:element name="interaction" />
-            <xs:element name="param" />
             <xs:element name="raise_lua_event" />
             <xs:element name="remove_object_account" />
             <xs:element name="remove_actor_from_room" />
@@ -2365,12 +2428,9 @@
             <xs:element name="remove_from_list" />
             <xs:element name="remove_object_commander" />
             <xs:element name="remove_representative" />
-            <xs:element name="remove_value" />
             <xs:element name="return" />
             <xs:element name="retval" />
             <xs:element name="check_walk_path" />
-            <xs:element name="check_weapon_active" />
-            <xs:element name="check_weapon_installed" />
             <xs:element name="request_docking" />
             <xs:element name="request_undocking" />
             <xs:element name="request_retrieval" />
@@ -2394,7 +2454,6 @@
             <xs:element name="add_boarding_pod_to_operation" />
             <xs:element name="remove_boarding_pod_from_operation" />
             <xs:element name="dispatch_marines" />
-            <xs:element name="marines" />
             <xs:element name="transfer_marines_from_operation" />
             <xs:element name="transfer_marine_to_operation" />
             <xs:element name="set_marine_status" />
@@ -2492,11 +2551,7 @@
             <xs:element name="set_object_hull_unrepairable" />
             <xs:element name="set_object_shield_unrepairable" />
             <xs:element name="set_object_velocity" />
-            <xs:element name="linear" />
-            <xs:element name="angular" />
             <xs:element name="add_object_velocity" />
-            <xs:element name="linear" />
-            <xs:element name="angular" />
             <xs:element name="set_object_affected_by_force_effect" />
             <xs:element name="set_object_unlock_state" />
             <xs:element name="set_room_private" />
@@ -2549,10 +2604,8 @@
             <xs:element name="set_tolerance_boost" />
             <xs:element name="set_allowed_weapon_systems" />
             <xs:element name="set_trade_restrictions" />
-            <xs:element name="override" />
             <xs:element name="set_tradeoffers_enabled" />
             <xs:element name="set_turret_targets" />
-            <xs:element name="set_value" />
             <xs:element name="set_weapon_mode" />
             <xs:element name="set_weapon_ammo" />
             <xs:element name="set_turrets_armed" />
@@ -2562,7 +2615,6 @@
             <xs:element name="remove_help" />
             <xs:element name="show_input_help" />
             <xs:element name="show_help_multi" />
-            <xs:element name="text" />
             <xs:element name="show_help_overlay" />
             <xs:element name="remove_help_overlay" />
             <xs:element name="show_overlay_text" />
@@ -2571,7 +2623,6 @@
             <xs:element name="remove_overlay_text" />
             <xs:element name="show_notification" />
             <xs:element name="show_interactive_notification" />
-            <xs:element name="interaction" />
             <xs:element name="stop_interactive_notification" />
             <xs:element name="shuffle_group" />
             <xs:element name="shuffle_list" />
@@ -2586,7 +2637,6 @@
             <xs:element name="start_long_range_scan" />
             <xs:element name="stop_long_range_scan" />
             <xs:element name="start_script" />
-            <xs:element name="param" />
             <xs:element name="stop_boost" />
             <xs:element name="stop_cutscene" />
             <xs:element name="stop_firing_at_target" />
@@ -2884,49 +2934,41 @@
             <xs:element name="rotation" type="rotation" />
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name="sel" type="xpath" use="required"/>
-        <xs:attribute name="if" type="xpath-cond"/>
-        <xs:attribute name="silent" type="xs:boolean"/>
+        <xs:attribute name="sel" type="xpath" use="required" />
+        <xs:attribute name="if" type="xpath-cond" />
+        <xs:attribute name="silent" type="xs:boolean" />
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="remove">
-    <xs:attribute name="sel" type="xpath" use="required"/>
-    <xs:attribute name="if" type="xpath-cond"/>
-    <xs:attribute name="silent" type="xs:boolean"/>
+    <xs:attribute name="sel" type="xpath" use="required" />
+    <xs:attribute name="if" type="xpath-cond" />
+    <xs:attribute name="silent" type="xs:boolean" />
   </xs:complexType>
 
   <!-- ===== Root element ==== -->
 
   <xs:element name="diff">
     <xs:annotation>
-      <xs:documentation>
-        XML Patch data
-      </xs:documentation>
+      <xs:documentation> XML Patch data </xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence minOccurs="0" maxOccurs="unbounded">
         <xs:choice>
           <xs:element name="add" type="add">
             <xs:annotation>
-              <xs:documentation>
-                Add content
-              </xs:documentation>
+              <xs:documentation> Add content </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="replace" type="replace">
             <xs:annotation>
-              <xs:documentation>
-                Replace content
-              </xs:documentation>
+              <xs:documentation> Replace content </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="remove" type="remove">
             <xs:annotation>
-              <xs:documentation>
-                Remove content
-              </xs:documentation>
+              <xs:documentation> Remove content </xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:choice>
