@@ -65,7 +65,7 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="groups" />
             <xs:element name="group" />
             <xs:element name="select" />
@@ -84,7 +84,7 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="groups" />
             <xs:element name="group" />
             <xs:element name="select" />

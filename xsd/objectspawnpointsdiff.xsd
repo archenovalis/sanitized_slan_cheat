@@ -65,7 +65,7 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="objectspawnpoints" />
             <xs:element name="space" />
             <xs:element name="spawnpoint" />
@@ -87,7 +87,7 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="objectspawnpoints" />
             <xs:element name="space" />
             <xs:element name="spawnpoint" />

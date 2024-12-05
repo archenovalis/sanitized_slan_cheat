@@ -46,9 +46,8 @@ def process_files():
     if match:
       spacing = match[1]
       names = []
-      choice_block = spacing+'<xs:choice minOccurs="1" maxOccurs="unbounded">\n'
+      choice_block = spacing+'<xs:choice minOccurs="0" maxOccurs="unbounded">\n'
       if (group_names != []):
-        choice_block = spacing+'<xs:choice>\n'
         for group in group_names:
           choice_block = choice_block+spacing+f'  <xs:group ref="{group}" />\n'
       if (complex_names != []):

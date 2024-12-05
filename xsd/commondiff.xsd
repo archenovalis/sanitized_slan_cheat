@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE schema [
   <!ENTITY ncname "\i\c*">
-  <!ENTITY qname "(&ncname;:)?&ncname;">
-  <!ENTITY aname "@&qname;">
-  <!ENTITY pos "\[\d+\]">
-  <!ENTITY attr "\[&aname;='(.)*'\]|\[&aname;=&quot;(.)*&quot;\]">
+  <!ENTITY qname  "(&ncname;:)?&ncname;">
+  <!ENTITY aname  "@&qname;">
+  <!ENTITY pos    "\[\d+\]">
+  <!ENTITY attr   "\[&aname;='(.)*'\]|\[&aname;=&quot;(.)*&quot;\]">
   <!ENTITY valueq "\[(&qname;|\.)=&quot;(.)*&quot;\]">
-  <!ENTITY value "\[(&qname;|\.)='(.)*'\]|&valueq;">
-  <!ENTITY cond "&attr;|&value;|&pos;">
-  <!ENTITY step "(&qname;|\*)(&cond;)*">
-  <!ENTITY arg "&qname;">
-  <!ENTITY fn "(not\(&arg;\)|boolean\(&arg;\)|true\(\)|false\(\)|name\(\)|root\((&arg;)?\)|position\(\)|last\(\))">
-  <!ENTITY func "\[&fn;\]">
-  <!ENTITY piq "processing-instruction\((&quot;&ncname;&quot;)\)">
-  <!ENTITY pi "processing-instruction\(('&ncname;')?\)|&piq;">
-  <!ENTITY id "id\(('&ncname;')?\)|id\((&quot;&ncname;&quot;)?\)">
-  <!ENTITY com "comment\(\)">
-  <!ENTITY text "text\(\)">
-  <!ENTITY nspa "namespace::&ncname;">
+  <!ENTITY value  "\[(&qname;|\.)='(.)*'\]|&valueq;">
+  <!ENTITY cond   "&attr;|&value;|&pos;">
+  <!ENTITY step   "(&qname;|\*)(&cond;)*">
+  <!ENTITY arg    "&qname;">
+  <!ENTITY fn     "(not\(&arg;\)|boolean\(&arg;\)|true\(\)|false\(\)|name\(\)|root\((&arg;)?\)|position\(\)|last\(\))">
+  <!ENTITY func   "\[&fn;\]">
+  <!ENTITY piq    "processing-instruction\((&quot;&ncname;&quot;)\)">
+  <!ENTITY pi     "processing-instruction\(('&ncname;')?\)|&piq;">
+  <!ENTITY id     "id\(('&ncname;')?\)|id\((&quot;&ncname;&quot;)?\)">
+  <!ENTITY com    "comment\(\)">
+  <!ENTITY text   "text\(\)">
+  <!ENTITY nspa   "namespace::&ncname;">
   <!ENTITY cnodes "(&text;(&pos;)?)|(&com;(&pos;)?)|((&pi;)(&pos;)?)">
-  <!ENTITY child "(&cnodes;|(&step;(&func;)?))">
-  <!ENTITY last "(&child;|&aname;|&nspa;)">
-  <!ENTITY path "(/|//)?((&id;)(((/|//)&step;)*((/|//)&last;))?|(&step;(/|//))*(&last;))">
-  <!ENTITY patha "(/|//)?((&id;)(((/|//)&step;)*((/|//)&child;))?|(&step;(/|//))*(&child;))">
-  <!ENTITY pathc "(&patha;|not\(&patha;\)|&fn;)">
+  <!ENTITY child  "(&cnodes;|(&step;(&func;)?))">
+  <!ENTITY last   "(&child;|&aname;|&nspa;)">
+  <!ENTITY path   "(/|//)?((&id;)(((/|//)&step;)*((/|//)&last;))?|(&step;(/|//))*(&last;))">
+  <!ENTITY patha  "(/|//)?((&id;)(((/|//)&step;)*((/|//)&child;))?|(&step;(/|//))*(&child;))">
+  <!ENTITY pathc  "(&patha;|not\(&patha;\)|&fn;)">
 ]>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
   <xs:include schemaLocation="common.xsd" />
-
+  
   <xs:simpleType name="xpath">
     <xs:restriction base="xs:string">
-      <xs:pattern value="&path;" />
+      <xs:pattern value="&path;"/>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="xpath-add">
     <xs:restriction base="xs:string">
-      <xs:pattern value="&patha;" />
+      <xs:pattern value="&patha;"/>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="xpath-cond">
     <xs:restriction base="xs:string">
-      <xs:pattern value="&pathc;" />
+      <xs:pattern value="&pathc;"/>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="pos">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="before" />
-      <xs:enumeration value="after" />
-      <xs:enumeration value="prepend" />
+      <xs:enumeration value="before"/>
+      <xs:enumeration value="after"/>
+      <xs:enumeration value="prepend"/>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="type">
     <xs:restriction base="xs:string">
-      <xs:pattern value="&aname;|&nspa;" />
+      <xs:pattern value="&aname;|&nspa;"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -65,7 +65,7 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice minOccurs="1" maxOccurs="unbounded">
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="match" type="matchsubfilter" />
             <xs:element name="match_any" type="matchsubfilter" />
             <xs:element name="match_parent" type="matchsubfilter" />
@@ -1316,188 +1316,13 @@
             <xs:element name="reload_envmap_probes" />
             <xs:element name="perform_gate_transition" />
             <xs:element name="attach_component_to_interior" />
-            <xs:element name="match" type="matchsubfilter" />
-            <xs:element name="match_any" type="matchsubfilter" />
-            <xs:element name="match_parent" type="matchsubfilter" />
-            <xs:element name="match_context" type="matchsubfilter" />
-            <xs:element name="match_child" type="matchsubfilterrange" />
-            <xs:element name="match_content" type="matchsubfilterrange" />
-            <xs:element name="match_macro_children" type="matchrange" />
-            <xs:element name="match_hull" type="matchrange" />
-            <xs:element name="match_max_hull" type="matchrange" />
-            <xs:element name="match_shield" type="matchrange" />
-            <xs:element name="match_secrecy_level" type="matchrange" />
-            <xs:element name="match_revealed_percentage" type="matchrevealedpercentage" />
-            <xs:element name="match_buyoffer" type="matchtradeoffer" />
-            <xs:element name="match_selloffer" type="matchtradeoffer" />
-            <xs:element name="match_build" type="matchbuild" />
-            <xs:element name="match_products" type="matchwarelist" />
-            <xs:element name="match_resources" type="matchwarelist" />
-            <xs:element name="match_any_cargo" type="matchwarelist" />
-            <xs:element name="match_any_wares" type="matchwarelist" />
-            <xs:element name="match_basket_wares" type="matchwarelist" />
-            <xs:element name="match_units_stored" type="matchunits" />
-            <xs:element name="match_units_available" type="matchunits" />
-            <xs:element name="match_units_unavailable" type="matchunits" />
-            <xs:element name="match_cargo" type="matchwaresorcargo" />
-            <xs:element name="match_wares" type="matchwaresorcargo" />
-            <xs:element name="match_loadout" type="matchloadout" />
-            <xs:element name="match_weapon_mod" type="matchweaponmod" />
-            <xs:element name="match_engine_mod" type="matchenginemod" />
-            <xs:element name="match_shield_mod" type="matchshieldmod" />
-            <xs:element name="match_ship_mod" type="matchshipmod" />
-            <xs:element name="match_paint_mod" type="matchpaintmod" />
-            <xs:element name="amount" type="range" />
-            <xs:element name="minamount" type="range" />
-            <xs:element name="totalprice" type="range" />
-            <xs:element name="minprice" type="range" />
-            <xs:element name="amount" type="rangefilter" />
-            <xs:element name="offeramount" type="rangefilter_withtradepartner" />
-            <xs:element name="offervolume" type="rangefilter_withtradepartner" />
-            <xs:element name="price" type="rangefilter_withtradepartner_fordiscounts" />
-            <xs:element name="relativeprice" type="rangefilter_withtradepartner_fordiscounts" />
-            <xs:element name="totalprice" type="rangefilter_withtradepartner_fordiscounts" />
-            <xs:element name="stocklevel" type="rangefilter" />
-            <xs:element name="volume" type="rangefilter" />
-            <xs:element name="totalvolume" type="rangefilter" />
-            <xs:element name="mintotalvolume" type="rangefilter" />
-            <xs:element name="match_buyer" type="matchbuyer" />
-            <xs:element name="match_seller" type="matchseller" />
-            <xs:element name="price" type="rangefilter" />
-            <xs:element name="position" type="position" />
-            <xs:element name="condition" type="terraformingcondition" />
-            <xs:element name="effect" type="terraformingeffect" />
-            <xs:element name="sideeffect" type="terraformingsideeffect" />
-            <xs:element name="rebate" type="terraformingrebate" />
-            <xs:element name="ware" type="terraformingwareamount" />
-            <xs:element name="ship" type="terraformingdelivery" />
-            <xs:element name="conditions" type="terraformingconditions" />
-            <xs:element name="effects" type="terraformingeffects" />
-            <xs:element name="sideeffects" type="terraformingsideeffects" />
-            <xs:element name="rebates" type="terraformingrebates" />
-            <xs:element name="resources" type="terraformingresources" />
-            <xs:element name="deliveries" type="terraformingdeliveries" />
-            <xs:element name="predecessors" type="terraformingpredecessors" />
-            <xs:element name="removedprojects" type="terraformingremovedprojects" />
-            <xs:element name="select" type="shipdbcategoryselect" />
-            <xs:element name="select" type="characterdbcategoryselect" />
-            <xs:element name="owner" type="selectrandom" />
-            <xs:element name="select" type="moduledbcategoryselect" />
-            <xs:element name="select" type="stationdbcategoryselect" />
-            <xs:element name="owner" type="selectrandom" />
-            <xs:element name="owner" type="selectrandom" />
-            <xs:element name="engine" type="loadoutmacro" />
-            <xs:element name="weapon" type="loadoutmacro" />
-            <xs:element name="shield" type="loadoutmacro" />
-            <xs:element name="turret" type="loadoutmacro" />
-            <xs:element name="shields" type="loadoutgroup" />
-            <xs:element name="turrets" type="loadoutgroup" />
-            <xs:element name="ammunition" type="loadoutammo" />
-            <xs:element name="unit" type="loadoutammo" />
-            <xs:element name="software" type="loadoutsoftware" />
-            <xs:element name="thruster" type="loadoutvirtualmacro" />
-            <xs:element name="crew" type="loadoutcrew" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="event_player_commission_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_trader_commission_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_trader_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_hiring_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_modding_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_repair_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="boundingbox" type="boundingbox" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="orientation" type="orientation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="end" type="position" />
-            <xs:element name="offsetrotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="orientation" type="orientation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="refposition" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rangecenter" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="start" type="componentoffset" />
-            <xs:element name="end" type="componentoffset" />
-            <xs:element name="start" type="componentoffset" />
-            <xs:element name="end" type="componentoffset" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="start" type="position" />
-            <xs:element name="end" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="safepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="orientation" type="orientation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="startposition" type="position" />
-            <xs:element name="targetposition" type="position" />
-            <xs:element name="add_terraforming_event" type="terraformingaction" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name="sel" type="xpath-add" use="required" />
-        <xs:attribute name="pos" type="pos" />
-        <xs:attribute name="type" type="type" />
-        <xs:attribute name="if" type="xpath-cond" />
-        <xs:attribute name="silent" type="xs:boolean" />
+        <xs:attribute name="sel" type="xpath-add" use="required"/>
+        <xs:attribute name="pos" type="pos"/>
+        <xs:attribute name="type" type="type"/>
+        <xs:attribute name="if" type="xpath-cond"/>
+        <xs:attribute name="silent" type="xs:boolean"/>
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
@@ -1506,7 +1331,7 @@
     <xs:complexContent mixed="true">
       <xs:restriction base="xs:anyType">
         <xs:sequence>
-          <xs:choice minOccurs="1" maxOccurs="unbounded">
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="match" type="matchsubfilter" />
             <xs:element name="match_any" type="matchsubfilter" />
             <xs:element name="match_parent" type="matchsubfilter" />
@@ -2757,218 +2582,51 @@
             <xs:element name="reload_envmap_probes" />
             <xs:element name="perform_gate_transition" />
             <xs:element name="attach_component_to_interior" />
-            <xs:element name="match" type="matchsubfilter" />
-            <xs:element name="match_any" type="matchsubfilter" />
-            <xs:element name="match_parent" type="matchsubfilter" />
-            <xs:element name="match_context" type="matchsubfilter" />
-            <xs:element name="match_child" type="matchsubfilterrange" />
-            <xs:element name="match_content" type="matchsubfilterrange" />
-            <xs:element name="match_macro_children" type="matchrange" />
-            <xs:element name="match_hull" type="matchrange" />
-            <xs:element name="match_max_hull" type="matchrange" />
-            <xs:element name="match_shield" type="matchrange" />
-            <xs:element name="match_secrecy_level" type="matchrange" />
-            <xs:element name="match_revealed_percentage" type="matchrevealedpercentage" />
-            <xs:element name="match_buyoffer" type="matchtradeoffer" />
-            <xs:element name="match_selloffer" type="matchtradeoffer" />
-            <xs:element name="match_build" type="matchbuild" />
-            <xs:element name="match_products" type="matchwarelist" />
-            <xs:element name="match_resources" type="matchwarelist" />
-            <xs:element name="match_any_cargo" type="matchwarelist" />
-            <xs:element name="match_any_wares" type="matchwarelist" />
-            <xs:element name="match_basket_wares" type="matchwarelist" />
-            <xs:element name="match_units_stored" type="matchunits" />
-            <xs:element name="match_units_available" type="matchunits" />
-            <xs:element name="match_units_unavailable" type="matchunits" />
-            <xs:element name="match_cargo" type="matchwaresorcargo" />
-            <xs:element name="match_wares" type="matchwaresorcargo" />
-            <xs:element name="match_loadout" type="matchloadout" />
-            <xs:element name="match_weapon_mod" type="matchweaponmod" />
-            <xs:element name="match_engine_mod" type="matchenginemod" />
-            <xs:element name="match_shield_mod" type="matchshieldmod" />
-            <xs:element name="match_ship_mod" type="matchshipmod" />
-            <xs:element name="match_paint_mod" type="matchpaintmod" />
-            <xs:element name="amount" type="range" />
-            <xs:element name="minamount" type="range" />
-            <xs:element name="totalprice" type="range" />
-            <xs:element name="minprice" type="range" />
-            <xs:element name="amount" type="rangefilter" />
-            <xs:element name="offeramount" type="rangefilter_withtradepartner" />
-            <xs:element name="offervolume" type="rangefilter_withtradepartner" />
-            <xs:element name="price" type="rangefilter_withtradepartner_fordiscounts" />
-            <xs:element name="relativeprice" type="rangefilter_withtradepartner_fordiscounts" />
-            <xs:element name="totalprice" type="rangefilter_withtradepartner_fordiscounts" />
-            <xs:element name="stocklevel" type="rangefilter" />
-            <xs:element name="volume" type="rangefilter" />
-            <xs:element name="totalvolume" type="rangefilter" />
-            <xs:element name="mintotalvolume" type="rangefilter" />
-            <xs:element name="match_buyer" type="matchbuyer" />
-            <xs:element name="match_seller" type="matchseller" />
-            <xs:element name="price" type="rangefilter" />
-            <xs:element name="position" type="position" />
-            <xs:element name="condition" type="terraformingcondition" />
-            <xs:element name="effect" type="terraformingeffect" />
-            <xs:element name="sideeffect" type="terraformingsideeffect" />
-            <xs:element name="rebate" type="terraformingrebate" />
-            <xs:element name="ware" type="terraformingwareamount" />
-            <xs:element name="ship" type="terraformingdelivery" />
-            <xs:element name="conditions" type="terraformingconditions" />
-            <xs:element name="effects" type="terraformingeffects" />
-            <xs:element name="sideeffects" type="terraformingsideeffects" />
-            <xs:element name="rebates" type="terraformingrebates" />
-            <xs:element name="resources" type="terraformingresources" />
-            <xs:element name="deliveries" type="terraformingdeliveries" />
-            <xs:element name="predecessors" type="terraformingpredecessors" />
-            <xs:element name="removedprojects" type="terraformingremovedprojects" />
-            <xs:element name="select" type="shipdbcategoryselect" />
-            <xs:element name="select" type="characterdbcategoryselect" />
-            <xs:element name="owner" type="selectrandom" />
-            <xs:element name="select" type="moduledbcategoryselect" />
-            <xs:element name="select" type="stationdbcategoryselect" />
-            <xs:element name="owner" type="selectrandom" />
-            <xs:element name="owner" type="selectrandom" />
-            <xs:element name="engine" type="loadoutmacro" />
-            <xs:element name="weapon" type="loadoutmacro" />
-            <xs:element name="shield" type="loadoutmacro" />
-            <xs:element name="turret" type="loadoutmacro" />
-            <xs:element name="shields" type="loadoutgroup" />
-            <xs:element name="turrets" type="loadoutgroup" />
-            <xs:element name="ammunition" type="loadoutammo" />
-            <xs:element name="unit" type="loadoutammo" />
-            <xs:element name="software" type="loadoutsoftware" />
-            <xs:element name="thruster" type="loadoutvirtualmacro" />
-            <xs:element name="crew" type="loadoutcrew" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="event_player_commission_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_trader_commission_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_trader_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_hiring_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_modding_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="event_player_repair_discount_added" type="event_playerpricemodifier" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="boundingbox" type="boundingbox" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="orientation" type="orientation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="end" type="position" />
-            <xs:element name="offsetrotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="orientation" type="orientation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="createobjectsafepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="refposition" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rangecenter" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="start" type="componentoffset" />
-            <xs:element name="end" type="componentoffset" />
-            <xs:element name="start" type="componentoffset" />
-            <xs:element name="end" type="componentoffset" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="start" type="position" />
-            <xs:element name="end" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="safepos" type="safepos" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="orientation" type="orientation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
-            <xs:element name="startposition" type="position" />
-            <xs:element name="targetposition" type="position" />
-            <xs:element name="add_terraforming_event" type="terraformingaction" />
-            <xs:element name="position" type="position" />
-            <xs:element name="position" type="position" />
-            <xs:element name="rotation" type="rotation" />
           </xs:choice>
         </xs:sequence>
-        <xs:attribute name="sel" type="xpath" use="required" />
-        <xs:attribute name="if" type="xpath-cond" />
-        <xs:attribute name="silent" type="xs:boolean" />
+        <xs:attribute name="sel" type="xpath" use="required"/>
+        <xs:attribute name="if" type="xpath-cond"/>
+        <xs:attribute name="silent" type="xs:boolean"/>
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="remove">
-    <xs:attribute name="sel" type="xpath" use="required" />
-    <xs:attribute name="if" type="xpath-cond" />
-    <xs:attribute name="silent" type="xs:boolean" />
+    <xs:attribute name="sel" type="xpath" use="required"/>
+    <xs:attribute name="if" type="xpath-cond"/>
+    <xs:attribute name="silent" type="xs:boolean"/>
   </xs:complexType>
 
   <!-- ===== Root element ==== -->
 
   <xs:element name="diff">
     <xs:annotation>
-      <xs:documentation> XML Patch data </xs:documentation>
+      <xs:documentation>
+        XML Patch data
+      </xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence minOccurs="0" maxOccurs="unbounded">
         <xs:choice>
           <xs:element name="add" type="add">
             <xs:annotation>
-              <xs:documentation> Add content </xs:documentation>
+              <xs:documentation>
+                Add content
+              </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="replace" type="replace">
             <xs:annotation>
-              <xs:documentation> Replace content </xs:documentation>
+              <xs:documentation>
+                Replace content
+              </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="remove" type="remove">
             <xs:annotation>
-              <xs:documentation> Remove content </xs:documentation>
+              <xs:documentation>
+                Remove content
+              </xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:choice>
