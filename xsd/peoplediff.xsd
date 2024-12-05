@@ -66,7 +66,20 @@
       <xs:restriction base="xs:anyType">
         <xs:sequence>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="people" type="peopleelement" />
+            <xs:group ref="selectrandom" />
+            <xs:group ref="equipmentmods" />
+            <xs:group ref="createship" />
+            <xs:group ref="createnpc" />
+            <xs:group ref="createmodule" />
+            <xs:group ref="createstation" />
+            <xs:group ref="createobject" />
+            <xs:group ref="people" />
+            <xs:group ref="loadoutelements" />
+            <xs:group ref="constructionsequenceelements" />
+            <xs:group ref="voicedata" />
+            <xs:group ref="commonconditions_event" />
+            <xs:group ref="commonconditions_nonevent" />
+            <xs:group ref="commonactions" />
             <xs:element name="peopledefinitions" />
           </xs:choice>
         </xs:sequence>
@@ -84,7 +97,20 @@
       <xs:restriction base="xs:anyType">
         <xs:sequence>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="people" type="peopleelement" />
+            <xs:group ref="selectrandom" />
+            <xs:group ref="equipmentmods" />
+            <xs:group ref="createship" />
+            <xs:group ref="createnpc" />
+            <xs:group ref="createmodule" />
+            <xs:group ref="createstation" />
+            <xs:group ref="createobject" />
+            <xs:group ref="people" />
+            <xs:group ref="loadoutelements" />
+            <xs:group ref="constructionsequenceelements" />
+            <xs:group ref="voicedata" />
+            <xs:group ref="commonconditions_event" />
+            <xs:group ref="commonconditions_nonevent" />
+            <xs:group ref="commonactions" />
             <xs:element name="peopledefinitions" />
           </xs:choice>
         </xs:sequence>

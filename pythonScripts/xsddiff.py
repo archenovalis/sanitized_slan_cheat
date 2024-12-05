@@ -16,10 +16,24 @@ def process_files():
   for filename in xsd_files:
     group_names = []
     complex_names = []
-    element_names = []
     elementType_names = []
+    element_names = []
+    commonGroup_names = []
+    commonElementType_names = []
+    commonElement_names = []
     with open(filename, 'r', encoding='utf-8') as file:
       content = file.read()
+      common = re.search(r'.*common\.xsd.*', content)
+      if common:
+        with open('common.xsd', 'r', encoding='utf-8') as commonFile:
+          commonContent = commonFile.read()
+          commonGroupMatches = re.findall(r'<xs:group name="(.*?)"\s*>', commonContent)
+          commonGroup_names.extend(commonGroupMatches)
+#          commonElementTypeMatches = re.findall(r'<xs:element name="(.*?)".*type="(.*?)"', commonContent)
+#          commonElementType_names.extend(commonElementTypeMatches)
+#          commonElementMatches = re.findall(r'(?!.*type).*?<xs:element name="(.*?)"', commonContent)
+#          commonElement_names.extend(commonElementMatches)
+
 # correct code for md.xsd, seems right now
 #      groupMatches = re.findall(r'<xs:group name="(.*?)"\s*>', content)
 #      group_names.extend(groupMatches)
@@ -47,9 +61,14 @@ def process_files():
       spacing = match[1]
       names = []
       choice_block = spacing+'<xs:choice minOccurs="0" maxOccurs="unbounded">\n'
-      if (group_names != []):
-        for group in group_names:
-          choice_block = choice_block+spacing+f'  <xs:group ref="{group}" />\n'
+#      if (group_names != []):
+#        for group in group_names:
+#          choice_block = choice_block+spacing+f'  <xs:group ref="{group}" />\n'
+      if (commonGroup_names != []):
+        for complex in commonGroup_names:
+          if complex not in names:
+            choice_block = choice_block+spacing+f'  <xs:group ref="{complex}" />\n'
+            names.append(complex)
       if (complex_names != []):
         for complex in complex_names:
           choice_block = choice_block+spacing+f'  <xs:element name="{complex}" />\n'
@@ -58,8 +77,18 @@ def process_files():
           if complex[0] not in names:
             choice_block = choice_block+spacing+f'  <xs:element name="{complex[0]}" type="{complex[1]}" />\n'
             names.append(complex[0])
+      if (commonElementType_names != []):
+        for complex in commonElementType_names:
+          if complex not in names:
+            choice_block = choice_block+spacing+f'  <xs:element name="{complex[0]}" type="{complex[1]}" />\n'
+            names.append(complex)
       if (element_names != []):
         for complex in element_names:
+          if complex not in names:
+            choice_block = choice_block+spacing+f'  <xs:element name="{complex}" />\n'
+            names.append(complex)
+      if (commonElement_names != []):
+        for complex in commonElement_names:
           if complex not in names:
             choice_block = choice_block+spacing+f'  <xs:element name="{complex}" />\n'
             names.append(complex)
