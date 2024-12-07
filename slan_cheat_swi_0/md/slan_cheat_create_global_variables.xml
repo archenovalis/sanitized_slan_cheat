@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="slan_cheat_create_global_variables" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+	<cues>
+		<cue name="slan_cheat_create_global_variables" instantiate="true" namespace="this">
+			<conditions>
+				<check_any>
+					<event_game_loaded />
+					<event_game_started />
+				</check_any>
+			</conditions>
+			<actions>
+				<set_value name="global.$slanjumpset" exact="false"/>
+				<set_value name="global.$slanjchainscanset" exact="false"/>
+				<!-- <set_value name="global.$conversation_mode_name" exact=""/> -->
+				<create_list name="global.$conversation_list_temp"/>
+				<set_value name="global.$slanscan_running" exact="false"/>
+				<set_value name="global.$slancreate_ship_num" exact="1"/>
+				<set_value name="global.$slancreate_ship_set" exact="[faction.player,true,true,'player',null,null]"/>
+				<set_value name="global.$slancreate_ship_num" exact="1"/>
+				<set_value name="global.$slanscan_instant_stop" exact="false"/>
+				<set_value name="global.$slanscan_instant_arrive" exact="false"/>
+				
+				<!-- <set_value name="global.$playertargetstation" /> -->
+				<!-- <set_value name="global.$playertargetship" /> -->
+			</actions>
+		</cue>
+	</cues>
+</mdscript>

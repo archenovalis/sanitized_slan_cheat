@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<language id="44">
+    <page id="357423"  voice="no">
+		<t id="1">\033BCHEAT\033X</t>
+		<t id="2">JUMP</t>
+		<t id="3">add ship</t>
+		<t id="4">modify ship</t>
+		<t id="5">modify station</t>
+		<t id="6">modify player</t>
+		<t id="7">Global set</t>
+		<t id="8">Closed</t>
+		<t id="9">opened</t>
+		<t id="1001">add money</t>
+		<t id="1002">modify faction</t>
+		<t id="1003">add_inventory</t>
+		<t id="1004">add_blueprints</t>
+		<t id="1005">add_research</t>
+		<t id="1006">add_encyclopedia</t>
+		<t id="1011">modify_prestige</t>
+		<t id="1012">add_licences</t>
+		<t id="1021">crafting_inventory</t>
+		<t id="1022">crafting_equipmentmodpart</t>
+		<t id="1023">paintmod</t>
+		<t id="1024">SETA</t>
+		<t id="2001">player</t>
+		<t id="2002">map Select</t>
+		<t id="2003">Selected</t>
+		<t id="2004">all own</t>
+		<t id="2011">Invincible</t>
+		<t id="2021">modify_ship ammo</t>
+		<t id="2031">crew level</t>
+		<t id="2041">building resource</t>
+		<t id="2051">set faction</t>
+		<t id="2061">set cargo</t>
+		<t id="2071">add staff</t>
+		<t id="2301">resources</t>
+		<t id="2302">products</t>
+		<t id="2101">drones</t>
+		<t id="2102">missile</t>
+		<t id="2103">mine</t>
+		<t id="2104">satellite</t>
+		<t id="2105">waypoint marker</t>
+		<t id="2106">laser tower</t>
+		<t id="2201">Full</t>
+		<t id="2202">delete</t>
+		<t id="2301">resources</t>
+		<t id="2302">products</t>
+		<t id="2303">tradewares</t>
+		<t id="2304">allcargo</t>
+		<t id="3001">reveal map</t>
+		<t id="3002">scan all stations</t>
+		<t id="3003">Chain scan</t>
+		<t id="4001">XL</t>
+		<t id="4002">L</t>
+		<t id="4003">S</t>
+		<t id="4004">M</t>
+		<t id="5001">crew full</t>
+		<t id="5002">Move the selected object to the navigation point</t>
+		<t id="5003">Player pilots stop instantly</t>
+		<t id="5004">Player pilots arrive instantly</t>
+
+	</page>
+</language>

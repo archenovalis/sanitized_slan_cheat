@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="slan_cheat_add_ship_subject" xsi:noNamespaceSchemaLocation="md.xsd">
+  <cues>
+    <cue name="slan_cheat_add_ship" instantiate="true" namespace="this">
+      <conditions>
+        <check_any>
+          <event_conversation_next_section section="slan_cheat_menu_list_selection" />
+          <event_conversation_returned_to_section section="slan_cheat_menu_list_selection" />
+          <check_all>
+            <event_conversation_started conversation="slan_cheat_menu_list_selection" />
+          </check_all>
+        </check_any>
+        <check_all>
+          <check_value value="global.$conversation_mode_name == 'slan_cheat_add_ship'" />
+        </check_all>
+      </conditions>
+      <actions>
+        <do_if value="event.name == 'event_conversation_next_section'">
+          <do_if value="event.param2.{1} == 'slan_cheat_add_ship'">
+            <do_if value="event.param2.{2} lt 0">
+              <set_value name="global.$slancreate_ship_num" exact="1" />
+            </do_if>
+            <do_else>
+              <set_value name="global.$slancreate_ship_num" exact="global.$slancreate_ship_num + event.param2.{2}" />
+            </do_else>
+          </do_if>
+        </do_if>
+        <do_elseif value="event.name == 'event_conversation_started'">
+          <set_value name="md.$slancreate_ship_macro" exact="event.param2.{1}" />
+        </do_elseif>
+        <add_player_choice_sub text="'+ 1' + ' ' + '(' + (global.$slancreate_ship_num + 1) + ')'" position="top_left" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',1]" />
+        <add_player_choice_sub text="'+ 5' + ' ' + '(' + (global.$slancreate_ship_num + 5) + ')'" position="left" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',5]" />
+        <add_player_choice_sub text="{1001,2679}" position="bottom_left" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_menu']" />        
+		<add_player_choice_sub text="'+ 20' + ' ' + '(' + (global.$slancreate_ship_num + 20)+ ')'" position="top_right" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',20]" />
+        <add_player_choice_sub text="{1001,3239}" position="right" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',-10]" />
+        <add_player_choice_sub text="{1001,3901} + ' ' + '(' + global.$slancreate_ship_num + ')'" position="bottom_right" section="slan_cheat_add_ship_run" />
+      </actions>
+    </cue>
+    <cue name="slan_cheat_add_ship_menu" instantiate="true" namespace="this">
+      <conditions>
+        <event_conversation_next_section section="slan_cheat_add_ship_menu" />
+      </conditions>
+      <actions>
+        <do_if value="event.param2.{1} == 'slan_cheat_add_ship_set'">
+          <do_if value="global.$slancreate_ship_set.{event.param2.{2}}">
+            <do_if value="event.param2.{2} == 1">
+              <do_if value="global.$slan_cheat_faction_list.indexof.{global.$slancreate_ship_set.{1}} == global.$slan_cheat_faction_list.count and event.param2.{3} == 1">
+                <set_value name="global.$slancreate_ship_set.{1}" exact="global.$slan_cheat_faction_list.{1}" />
+              </do_if>
+              <do_elseif value="global.$slan_cheat_faction_list.indexof.{global.$slancreate_ship_set.{1}} == 1 and event.param2.{3} == -1">
+                <set_value name="global.$slancreate_ship_set.{1}" exact="global.$slan_cheat_faction_list.{global.$slan_cheat_faction_list.count}" />
+              </do_elseif>
+              <do_else>
+                <set_value name="global.$slancreate_ship_set.{1}" exact="global.$slan_cheat_faction_list.{global.$slan_cheat_faction_list.indexof.{global.$slancreate_ship_set.{1}} + event.param2.{3}}" />
+              </do_else>
+            </do_if>
+            <do_elseif value="event.param2.{2} == 4">
+              <do_if value="global.$slancreate_ship_set.{4} == 'player'">
+                <set_value name="global.$slancreate_ship_set.{4}" exact="'Guidance'" />
+              </do_if>
+              <do_elseif value="global.$slancreate_ship_set.{4} == 'Guidance'">
+                <set_value name="global.$slancreate_ship_set.{4}" exact="'player'" />
+              </do_elseif>
+            </do_elseif>
+            <do_else>
+              <set_value name="global.$slancreate_ship_set.{event.param2.{2}}" exact="false" />
+            </do_else>
+          </do_if>
+          <do_else>
+            <set_value name="global.$slancreate_ship_set.{event.param2.{2}}" exact="true" />
+          </do_else>
+        </do_if>
+        <do_if value="global.$slancreate_ship_set.{2}">
+          <set_value name="$ship_set2" exact="{357423,5001} + ' ' + {357423,9}" />
+        </do_if>
+        <do_else>
+          <set_value name="$ship_set2" exact="{357423,5001} + ' ' + {357423,8}" />
+        </do_else>
+        <do_if value="global.$slancreate_ship_set.{3}">
+          <set_value name="$ship_set3" exact="{357423,2031} + ' ' + {357423,9}" />
+        </do_if>
+        <do_else>
+          <set_value name="$ship_set3" exact="{357423,2031} + ' ' + {357423,8}" />
+        </do_else>
+        <do_if value="global.$slancreate_ship_set.{4} == 'player'">
+          <set_value name="$ship_set4" exact="{1001,2943} + ':' + {1014,102}" />
+        </do_if>
+        <do_elseif value="global.$slancreate_ship_set.{4} == 'Guidance'">
+          <set_value name="$ship_set4" exact="{1001,2943} + ':' + {1025,35}" />
+        </do_elseif>
+        <add_player_choice_sub text="{1001,9040}" position="top_left" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_set', 1,-1]" />
+        <add_player_choice_sub text="$ship_set2" position="left" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_set', 2]" comment="" />
+        <add_player_choice_sub text="$ship_set3" position="bottom_left" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_set', 3]" comment="" />
+        <add_player_choice_sub text="global.$slancreate_ship_set.{1}.name" position="top_right" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_set', 1,1]" />
+        <add_player_choice_sub text="$ship_set4" position="right" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_set', 4]" />
+      </actions>
+    </cue>
+    <cue name="slan_cheat_add_ship_run" instantiate="true" namespace="this">
+      <conditions>
+        <event_conversation_next_section section="slan_cheat_add_ship_run" />
+      </conditions>
+      <actions>
+        <set_value name="$ship_count" exact="global.$slancreate_ship_num" />
+        <do_if value="global.$slancreate_ship_set.{4} == 'player'">
+          <set_value name="$ship_position" exact="player.ship.position" />
+          <set_value name="$ship_object" exact="player.ship" />
+          <set_value name="$ship_zone" exact="player.zone" />
+        </do_if>
+        <do_elseif value="global.$slancreate_ship_set.{4} == 'Guidance'">
+          <set_value name="$ship_position" exact="global.$slancreate_ship_set.{6}" />
+          <set_value name="$ship_object" exact="global.$slancreate_ship_set.{5}" />
+          <set_value name="$ship_zone" exact="global.$slancreate_ship_set.{5}" />
+        </do_elseif>
+        <do_if value="global.$slancreate_ship_set.{2}">
+          <set_value name="$fillpercent" exact="100" />
+        </do_if>
+        <do_else>
+          <set_value name="$fillpercent" exact="0" />
+        </do_else>
+        <do_while value="$ship_count">
+          <create_ship name="$ship" macro="md.$slancreate_ship_macro" zone="$ship_zone">
+            <owner exact="global.$slancreate_ship_set.{1}" overridenpc="true" />
+            <loadout>
+              <level min="10" max="10000" />
+            </loadout>
+            <pilot>
+              <select faction="global.$slancreate_ship_set.{1}" tags="tag.commander" />
+            </pilot>
+            <people>
+              <fillpercent exact="$fillpercent" />
+              <person role="marine" weight="100">
+                <select faction="global.$slancreate_ship_set.{1}" tags="tag.marine" />
+              </person>
+            </people>
+            <safepos object="$ship_object" value="$ship_position" ignoredangerousregions="true" />
+          </create_ship>
+          <do_if value="global.$slancreate_ship_set.{3}">
+            <!-- <run_actions ref="md.slan_cheat_create_global_variables.slan_cheat_TransferShipOwnership">
+              <param name="Ship" value="$ship" />
+              <param name="Faction" value="global.$slancreate_ship_set.{1}" />
+            </run_actions>
+            <wait exact="md.slan_cheat_create_global_variables.slan_cheat_TransferShipOwnership" /> -->
+            <set_value name="$Thisship" exact="$ship" />
+            <set_value name="$Crew" exact="$Thisship.people.list" />
+            <do_all exact="$Crew.count" counter="$j">
+              <set_skill object="$Thisship" template="$Crew.{$j}" type="skilltype.boarding" exact="15" />
+              <set_skill object="$Thisship" template="$Crew.{$j}" type="skilltype.engineering" exact="15" />
+              <set_skill object="$Thisship" template="$Crew.{$j}" type="skilltype.management" exact="15" />
+              <set_skill object="$Thisship" template="$Crew.{$j}" type="skilltype.morale" exact="15" />
+              <set_skill object="$Thisship" template="$Crew.{$j}" type="skilltype.piloting" exact="15" />
+            </do_all>
+            <get_control_entities groupname="$controlCrew" object="$Thisship" />
+            <do_all exact="$controlCrew.count" counter="$j">
+              <set_skill entity="$controlCrew.{$j}" type="skilltype.boarding" exact="15" />
+              <set_skill entity="$controlCrew.{$j}" type="skilltype.engineering" exact="15" />
+              <set_skill entity="$controlCrew.{$j}" type="skilltype.management" exact="15" />
+              <set_skill entity="$controlCrew.{$j}" type="skilltype.morale" exact="15" />
+              <set_skill entity="$controlCrew.{$j}" type="skilltype.piloting" exact="15" />
+            </do_all>
+          </do_if>
+          <set_value name="$ship_count" exact="$ship_count - 1" />
+        </do_while>
+      </actions>
+    </cue>
+  </cues>
+</mdscript>

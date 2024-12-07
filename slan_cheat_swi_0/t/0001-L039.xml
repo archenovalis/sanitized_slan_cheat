@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<language id="39">
+<!-- Thanks vagappc, for for providing Italian -->
+    <page id="357423"  voice="no">
+		<t id="1">\033BCHEAT\033X</t>
+		<t id="2">JUMP</t>
+		<t id="3">Aggiungi nave </t>
+		<t id="4">Modifica nave </t>
+		<t id="5">Modifica station </t>
+		<t id="6">Modifica player </t>
+		<t id="7">Impostazioni Globali</t>
+		<t id="8"> Chiudi</t>
+		<t id="9"> Aperto</t>
+		<t id="1001">Aggiungi crediti</t>
+		<t id="1002">Modifica Fazione</t>
+		<t id="1003">Aggiungi_inventario</t>
+		<t id="1004">Aggiungi_blueprints</t>
+		<t id="1005">Aggiungi_ricerca</t>
+		<t id="1006">Aggiungi_enciclopedia</t>
+		<t id="1011">Modifica_relazioni</t>
+		<t id="1012">Aggiungi_licenza</t>
+		<t id="1021">Craft_inventario</t>
+		<t id="1022">Craft_EquipaggiamentoModPart</t>
+		<t id="1023">paintmod</t>
+		<t id="1024">SETA</t>
+		<t id="2001">player</t>
+		<t id="2002">Seleziona Mappa</t>
+		<t id="2003">Selezionato</t>
+		<t id="2004">all own</t>
+		<t id="2011">Invincibile</t>
+		<t id="2021">Modifica_nave Munizioni</t>
+		<t id="2031">Livello Equipaggio</t>
+		<t id="2041">Costruisci risorse</t>
+		<t id="2051">Seleziona Fazione</t>
+		<t id="2061">Seleziona cargo</t>
+		<t id="2071">Aggiungi staff</t>
+		<t id="2301">risorse</t>
+		<t id="2302">produzioni</t>
+		<t id="2101">droni</t>
+		<t id="2102">missili</t>
+		<t id="2103">mine</t>
+		<t id="2104">satellite</t>
+		<t id="2105">segna waypoint</t>
+		<t id="2106">laser tower</t>
+		<t id="2201">Riempi</t>
+		<t id="2202">cancella</t>
+		<t id="2301">risorse</t>
+		<t id="2302">prodotti</t>
+		<t id="2303">tradewares</t>
+		<t id="2304">allcargo</t>
+		<t id="3001">rivela mappa</t>
+		<t id="3002">scansione di tutte le stazioni</t>
+		<t id="3003">Chain scan</t>
+		<t id="4001">XL</t>
+		<t id="4002">L</t>
+		<t id="4003">S</t>
+		<t id="4004">M</t>
+		<t id="5001">Personale al completo</t>
+		<t id="5002">Move the selected object to the navigation point</t>
+		<t id="5003">Player pilots stop instantly</t>
+		<t id="5004">Player pilots arrive instantly</t>
+
+	</page>
+</language>
