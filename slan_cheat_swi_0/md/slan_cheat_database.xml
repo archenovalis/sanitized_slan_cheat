@@ -6,8 +6,6 @@
         <check_any>
           <event_game_loaded />
           <event_game_started />
-          <event_player_changed_activity />
-          <check_value value="player.ship" />
         </check_any>
       </conditions>
       <actions>
@@ -56,8 +54,6 @@
         <check_any>
           <event_game_loaded />
           <event_game_started />
-          <event_player_changed_activity />
-          <check_value value="player.ship" />
         </check_any>
       </conditions>
       <actions>
@@ -248,8 +244,6 @@
         <check_any>
           <event_game_loaded />
           <event_game_started />
-          <event_player_changed_activity />
-          <check_value value="player.ship" />
         </check_any>
       </conditions>
       <actions>
