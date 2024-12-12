@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="slan_cheat_add_ship_subject" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="slan_cheat_add_ship_subject" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
   <cues>
     <cue name="slan_cheat_add_ship" instantiate="true" namespace="this">
       <conditions>
@@ -30,8 +30,8 @@
         </do_elseif>
         <add_player_choice_sub text="'+ 1' + ' ' + '(' + (global.$slancreate_ship_num + 1) + ')'" position="top_left" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',1]" />
         <add_player_choice_sub text="'+ 5' + ' ' + '(' + (global.$slancreate_ship_num + 5) + ')'" position="left" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',5]" />
-        <add_player_choice_sub text="{1001,2679}" position="bottom_left" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_menu']" />        
-		<add_player_choice_sub text="'+ 20' + ' ' + '(' + (global.$slancreate_ship_num + 20)+ ')'" position="top_right" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',20]" />
+        <add_player_choice_sub text="{1001,2679}" position="bottom_left" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_menu']" />
+        <add_player_choice_sub text="'+ 20' + ' ' + '(' + (global.$slancreate_ship_num + 20)+ ')'" position="top_right" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',20]" />
         <add_player_choice_sub text="{1001,3239}" position="right" section="slan_cheat_menu_list_selection" choiceparam="['slan_cheat_add_ship',-10]" />
         <add_player_choice_sub text="{1001,3901} + ' ' + '(' + global.$slancreate_ship_num + ')'" position="bottom_right" section="slan_cheat_add_ship_run" />
       </actions>
@@ -118,11 +118,9 @@
           <set_value name="$fillpercent" exact="0" />
         </do_else>
         <do_while value="$ship_count">
+          <generate_loadout result="$loadout" macro="md.$slancreate_ship_macro" level="1" />
           <create_ship name="$ship" macro="md.$slancreate_ship_macro" zone="$ship_zone">
             <owner exact="global.$slancreate_ship_set.{1}" overridenpc="true" />
-            <loadout>
-              <level min="10" max="10000" />
-            </loadout>
             <pilot>
               <select faction="global.$slancreate_ship_set.{1}" tags="tag.commander" />
             </pilot>
@@ -134,6 +132,7 @@
             </people>
             <safepos object="$ship_object" value="$ship_position" ignoredangerousregions="true" />
           </create_ship>
+          <apply_loadout object="$ship" loadout="$loadout.{1}" />
           <do_if value="global.$slancreate_ship_set.{3}">
             <!-- <run_actions ref="md.slan_cheat_create_global_variables.slan_cheat_TransferShipOwnership">
               <param name="Ship" value="$ship" />
