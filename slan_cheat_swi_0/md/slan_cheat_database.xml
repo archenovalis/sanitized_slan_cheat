@@ -45,7 +45,6 @@
         <append_to_list name="global.$slan_cheat_faction_list" exact="faction.player" />
         <append_to_list name="global.$slan_cheat_faction_list" exact="faction.xenon" />
         <append_to_list name="global.$slan_cheat_faction_list" exact="faction.khaak" />
-        <append_to_list name="global.$slan_cheat_faction_list" exact="faction.thebankingclan" />
         <reset_cue cue="this" />
       </actions>
     </cue>
