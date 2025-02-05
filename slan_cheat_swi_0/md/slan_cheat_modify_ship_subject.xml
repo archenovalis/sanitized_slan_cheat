@@ -9,32 +9,32 @@
 				<do_if value="md.$slanmodifyships?">
 					<remove_value name="md.$slanmodifyships" />
 				</do_if>
-				<do_if value="global.$slanmodifyshipchoicemode == 'player'">
+				<do_if value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'player'">
 					<do_if value="player.ship">
 						<create_list name="md.$slanmodifyships" />
 						<append_to_list name="md.$slanmodifyships" exact="player.ship" />
 					</do_if>
 				</do_if>
-				<do_elseif value="global.$slanmodifyshipchoicemode == 'Selected'">
-					<do_if value="global.$playertargetship">
-						<do_if value="global.$playertargetship.isclass.ship">
+				<do_elseif value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'Selected'">
+					<do_if value="global.$swi_slancheat.$playertargetship">
+						<do_if value="global.$swi_slancheat.$playertargetship.isclass.ship">
 						</do_if>
-						<do_elseif value="global.$playertargetship.container.isclass.ship">
-							<set_value name="global.$playertargetship" exact="global.$playertargetship.container" />
+						<do_elseif value="global.$swi_slancheat.$playertargetship.container.isclass.ship">
+							<set_value name="global.$swi_slancheat.$playertargetship" exact="global.$swi_slancheat.$playertargetship.container" />
 						</do_elseif>
-						<!-- <do_elseif value="global.$playertargetship.parent.isclass.ship">
-							<set_value name="global.$playertargetship" exact="global.$playertargetship.parent"/>
+						<!-- <do_elseif value="global.$swi_slancheat.$playertargetship.parent.isclass.ship">
+							<set_value name="global.$swi_slancheat.$playertargetship" exact="global.$swi_slancheat.$playertargetship.parent"/>
 						</do_elseif>
 						<do_else>
-							<set_value name="global.$playertargetship" exact="global.$playertargetship.parent.parent"/>
+							<set_value name="global.$swi_slancheat.$playertargetship" exact="global.$swi_slancheat.$playertargetship.parent.parent"/>
 						</do_else> -->
 					</do_if>
 					<create_list name="md.$slanmodifyships" />
-					<do_if value="global.$playertargetship?">
-						<append_to_list name="md.$slanmodifyships" exact="global.$playertargetship" />
+					<do_if value="global.$swi_slancheat.$playertargetship?">
+						<append_to_list name="md.$slanmodifyships" exact="global.$swi_slancheat.$playertargetship" />
 					</do_if>
 				</do_elseif>
-				<do_elseif value="global.$slanmodifyshipchoicemode == 'allowner'">
+				<do_elseif value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'allowner'">
 					<find_ship name="md.$slanmodifyships" owner="faction.player" space="player.galaxy" multiple="true" />
 				</do_elseif>
 			</actions>
@@ -74,15 +74,15 @@
 		<cue name="slan_cheat_modify_ship_equipment" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$conversation_mode_name == 'slan_cheat_modify_ship_equipment'" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_ship_equipment'" />
 			</conditions>
 			<actions>
 				<signal_cue_instantly cue="aslan_cheat_modify_ship_Initialization" />
-				<do_if value="global.$slanmodifyshipchoicemode == 'Selected' or global.$slanmodifyshipchoicemode == 'player'">
-					<do_if value="global.$slanmodifyshipchoicemode == 'Selected'">
-						<set_value name="$ship" exact="global.$playertargetship" />
+				<do_if value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'Selected' or global.$swi_slancheat.$slanmodifyshipchoicemode == 'player'">
+					<do_if value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'Selected'">
+						<set_value name="$ship" exact="global.$swi_slancheat.$playertargetship" />
 					</do_if>
-					<do_elseif value="global.$slanmodifyshipchoicemode == 'player'">
+					<do_elseif value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'player'">
 						<set_value name="$ship" exact="player.ship" />
 					</do_elseif>
 
@@ -195,7 +195,7 @@
 					<event_conversation_started conversation="slan_cheat_modify_ship_faction" />
 					<check_all>
 						<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-						<check_value value="global.$conversation_mode_name == 'slan_cheat_modify_ship_faction'" />
+						<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_ship_faction'" />
 					</check_all>
 				</check_any>
 			</conditions>
@@ -258,17 +258,17 @@
 		<cue name="slan_cheat_modify_ship_set_cargo" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$conversation_mode_name == 'slan_cheat_modify_ship_set_cargo'" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_ship_set_cargo'" />
 			</conditions>
 			<actions>
 				<!-- <add_conversation_view/> -->
 				<signal_cue_instantly cue="aslan_cheat_modify_ship_Initialization" />
-				<do_if value="global.$slanmodifyshipchoicemode == 'Selected' or global.$slanmodifyshipchoicemode == 'player'">
-					<do_if value="global.$slanmodifyshipchoicemode == 'Selected'">
-						<set_value name="$max" exact="global.$playertargetship.cargo.{event.param2.{1}}.max" />
-						<set_value name="$count" exact="global.$playertargetship.cargo.{event.param2.{1}}.count" />
+				<do_if value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'Selected' or global.$swi_slancheat.$slanmodifyshipchoicemode == 'player'">
+					<do_if value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'Selected'">
+						<set_value name="$max" exact="global.$swi_slancheat.$playertargetship.cargo.{event.param2.{1}}.max" />
+						<set_value name="$count" exact="global.$swi_slancheat.$playertargetship.cargo.{event.param2.{1}}.count" />
 					</do_if>
-					<do_elseif value="global.$slanmodifyshipchoicemode == 'player'">
+					<do_elseif value="global.$swi_slancheat.$slanmodifyshipchoicemode == 'player'">
 						<set_value name="$max" exact="player.ship.cargo.{event.param2.{1}}.max" />
 						<set_value name="$count" exact="player.ship.cargo.{event.param2.{1}}.count" />
 					</do_elseif>
