@@ -103,8 +103,8 @@
 				</check_any>
 			</conditions>
 			<actions>
-				<add_player_choice_subconv text="{357423,1021}" position="top_left" conversation="slan_cheat_add_inventory" convparam="[tag.equipmentmodpart]" actor="player.computer" comment="" />
-				<add_player_choice_subconv text="{357423,1022}" position="left" conversation="slan_cheat_add_inventory" convparam="['crafting_inventory']" actor="player.computer" comment="" />
+				<add_player_choice_subconv text="{357423,1021}" position="top_left" conversation="slan_cheat_add_inventory" convparam="['crafting_inventory']" actor="player.computer" comment="" />
+				<add_player_choice_subconv text="{357423,1022}" position="left" conversation="slan_cheat_add_inventory" convparam="[tag.equipmentmod]" actor="player.computer" comment="" />
 				<add_player_choice_subconv text="{357423,1023}" position="bottom_left" conversation="slan_cheat_add_inventory" convparam="[tag.paintmod]" actor="player.computer" comment="" />
 				<add_player_choice_subconv text="{357423,1024}" position="top_right" conversation="slan_cheat_add_inventory" convparam="[ware.inv_timewarp]" actor="player.computer" comment="" />
 				<add_player_choice_sub text="{1001,7716}" position="right" section="slan_cheat_menu_list" choiceparam="[0, 'slan_cheat_add_inventory_personal_upgrade']" comment="" />
@@ -325,10 +325,11 @@
 				</check_any>
 			</conditions>
 			<actions>
-				<add_player_choice_sub text="{357423,4001}" section="slan_cheat_menu_list" choiceparam="[class.ship_xl, 'slan_cheat_add_ship']" position="top_left" comment="shiptypes_xl" />
-				<add_player_choice_sub text="{357423,4002}" section="slan_cheat_menu_list" choiceparam="[class.ship_l, 'slan_cheat_add_ship']" position="left" comment="shiptypes_l" />
-				<add_player_choice_sub text="{357423,4003}" section="slan_cheat_menu_list" choiceparam="[class.ship_s, 'slan_cheat_add_ship']" position="bottom_left" comment="shiptypes_s" />
+				<add_player_choice_sub text="'XXL'" section="slan_cheat_menu_list" choiceparam="['XXL', 'slan_cheat_add_ship']" position="top_left" comment="shiptypes_xl" />
+				<add_player_choice_sub text="{357423,4001}" section="slan_cheat_menu_list" choiceparam="['XL', 'slan_cheat_add_ship']" position="left" comment="shiptypes_xl" />
+				<add_player_choice_sub text="{357423,4002}" section="slan_cheat_menu_list" choiceparam="[class.ship_l, 'slan_cheat_add_ship']" position="bottom_left" comment="shiptypes_l" />
 				<add_player_choice_sub text="{357423,4004}" section="slan_cheat_menu_list" choiceparam="[class.ship_m, 'slan_cheat_add_ship']" position="top_right" comment="shiptypes_m" />
+				<add_player_choice_sub text="{357423,4003}" section="slan_cheat_menu_list" choiceparam="[class.ship_s, 'slan_cheat_add_ship']" position="right" comment="shiptypes_s" />
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>

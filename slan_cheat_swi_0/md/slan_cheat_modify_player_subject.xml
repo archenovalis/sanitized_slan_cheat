@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_modify_player_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="slan_cheat_modify_player_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
 	<cues>
 		<cue name="slan_cheat_add_money" instantiate="true" namespace="this">
 			<conditions>
@@ -71,37 +71,11 @@
 					<append_to_list name="$WaresList" exact="event.param2.{1}" />
 				</do_if>
 				<do_elseif value="event.param2.{1} == 'crafting_inventory'">
-					<append_to_list name="$WaresList" exact="ware.inv_agidevice_01" />
-					<append_to_list name="$WaresList" exact="ware.inv_agidevice_02" />
-					<append_to_list name="$WaresList" exact="ware.inv_agidevice_03" />
-					<append_to_list name="$WaresList" exact="ware.inv_argnusteak" />
-					<append_to_list name="$WaresList" exact="ware.inv_bandages" />
-					<append_to_list name="$WaresList" exact="ware.inv_damagedsingularityengine" />
-					<append_to_list name="$WaresList" exact="ware.inv_decryptionmodule" />
-					<append_to_list name="$WaresList" exact="ware.inv_electronics" />
-					<append_to_list name="$WaresList" exact="ware.inv_finemeal" />
-					<append_to_list name="$WaresList" exact="ware.inv_firstaidkit" />
-					<append_to_list name="$WaresList" exact="ware.inv_fluxcapacitor" />
-					<append_to_list name="$WaresList" exact="ware.inv_hallucinogenics" />
-					<append_to_list name="$WaresList" exact="ware.inv_harddrug_01" />
-					<append_to_list name="$WaresList" exact="ware.inv_interfaceunit" />
-					<append_to_list name="$WaresList" exact="ware.inv_kyondevice_01" />
-					<append_to_list name="$WaresList" exact="ware.inv_kyondevice_02" />
-					<append_to_list name="$WaresList" exact="ware.inv_kyondevice_03" />
-					<append_to_list name="$WaresList" exact="ware.inv_magneticmaterial" />
-					<append_to_list name="$WaresList" exact="ware.inv_mixedfruit" />
-					<append_to_list name="$WaresList" exact="ware.inv_needle" />
-					<append_to_list name="$WaresList" exact="ware.inv_programmablefieldarray" />
-					<append_to_list name="$WaresList" exact="ware.inv_rarespices" />
-					<append_to_list name="$WaresList" exact="ware.inv_remotedetonator" />
-					<append_to_list name="$WaresList" exact="ware.inv_salvagedelectronics" />
-					<append_to_list name="$WaresList" exact="ware.inv_securecontainer" />
-					<append_to_list name="$WaresList" exact="ware.inv_securitybypasssystem" />
-					<append_to_list name="$WaresList" exact="ware.inv_securitydecryptionsystem" />
-					<append_to_list name="$WaresList" exact="ware.inv_securityslicer" />
-					<append_to_list name="$WaresList" exact="ware.inv_sedative" />
-					<append_to_list name="$WaresList" exact="ware.inv_spaceflyeggs" />
-					<append_to_list name="$WaresList" exact="ware.inv_unstablecrystal" />
+					<do_for_each name="$ware" in="global.$swi_slancheat.$slan_cheat_ware_list">
+						<do_if value="$ware.hastag.inventory and $ware.hastag.crafting">
+							<append_to_list name="$WaresList" exact="$ware" />
+						</do_if>
+					</do_for_each>
 				</do_elseif>
 				<do_else>
 					<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
@@ -171,10 +145,10 @@
 					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.paintmod}">
 						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
 					</do_elseif>
-					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.turret} and not global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.noplayerblueprint}">
+					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.turret}">
 						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
 					</do_elseif>
-					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.shield} and not global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.noplayerblueprint}">
+					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.shield}">
 						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
 					</do_elseif>
 				</do_all>
@@ -186,21 +160,16 @@
 			</conditions>
 			<actions>
 				<create_list name="$WaresList" />
-				<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
-					<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.research} and not global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.hidden}">
-						<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.research.unlocked">
-							<set_value name="$finishtask" exact="true" />
+				<do_for_each name="$ware" in="global.$swi_slancheat.$slan_cheat_ware_list">
+					<do_if value="$ware.tags.indexof.{tag.research}">
+						<do_if value="not $ware.research.unlocked">
+							<append_to_list name="$WaresList" exact="$ware" />
 						</do_if>
-						<do_else>
-							<append_to_list name="$WaresList" exact="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
-						</do_else>
 					</do_if>
+				</do_for_each>
+				<do_all exact="$WaresList.count" counter="$i">
+					<add_research ware="$WaresList.{$i}" />
 				</do_all>
-				<do_if value="$finishtask">
-					<do_all exact="$WaresList.count" counter="$i">
-						<add_research ware="$WaresList.{$i}" />
-					</do_all>
-				</do_if>
 
 			</actions>
 		</cue>

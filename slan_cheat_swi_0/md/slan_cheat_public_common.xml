@@ -21,9 +21,21 @@
 						<set_value name="global.$swi_slancheat.$conversation_mode_name" exact="event.param2.{2}" />
 						<do_if value="event.param2.{2} == 'slan_cheat_add_ship'">
 							<do_all exact="global.$swi_slancheat.$slan_cheat_ship_list.count" counter="$i">
-								<do_if value="global.$swi_slancheat.$slan_cheat_ship_list.{$i}.isclass.[event.param2.{1}]">
-									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ship_list.{$i}" />
+								<do_if value="event.param2.{1} == 'XL'">
+									<do_if value="global.$swi_slancheat.$slan_cheat_ship_list.{$i}.docksize == tag.dock_xl">
+										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ship_list.{$i}" />
+									</do_if>
 								</do_if>
+								<do_if value="event.param2.{1} == 'XXL'">
+									<do_if value="global.$swi_slancheat.$slan_cheat_ship_list.{$i}.docksize == tag.dock_xxl">
+										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ship_list.{$i}" />
+									</do_if>
+								</do_if>
+								<do_else>
+									<do_if value="global.$swi_slancheat.$slan_cheat_ship_list.{$i}.isclass.[event.param2.{1}]">
+										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ship_list.{$i}" />
+									</do_if>
+								</do_else>
 							</do_all>
 						</do_if>
 
