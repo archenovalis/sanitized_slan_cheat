@@ -19,8 +19,8 @@
 					<do_if value="global.$swi_slancheat.$playertargetship">
 						<do_if value="global.$swi_slancheat.$playertargetship.isclass.ship">
 						</do_if>
-						<do_elseif value="global.$swi_slancheat.$playertargetship.container.isclass.ship">
-							<set_value name="global.$swi_slancheat.$playertargetship" exact="global.$swi_slancheat.$playertargetship.container" />
+						<do_elseif value="global.$swi_slancheat.$playertargetship.isclass.ship">
+							<set_value name="global.$swi_slancheat.$playertargetship" exact="global.$swi_slancheat.$playertargetship" />
 						</do_elseif>
 						<!-- <do_elseif value="global.$swi_slancheat.$playertargetship.parent.isclass.ship">
 							<set_value name="global.$swi_slancheat.$playertargetship" exact="global.$swi_slancheat.$playertargetship.parent"/>

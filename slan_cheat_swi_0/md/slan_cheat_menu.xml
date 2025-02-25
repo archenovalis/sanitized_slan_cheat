@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_menu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="slan_cheat_menu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
 	<cues>
 		<!-- ////  ======================  Main Menu  ======================  \\\\ -->
 		<cue name="slan_cheat_menu_entrance" instantiate="true">
@@ -325,12 +325,21 @@
 				</check_any>
 			</conditions>
 			<actions>
-				<add_player_choice_sub text="'XXL'" section="slan_cheat_menu_list" choiceparam="['XXL', 'slan_cheat_add_ship']" position="top_left" comment="shiptypes_xl" />
-				<add_player_choice_sub text="{357423,4001}" section="slan_cheat_menu_list" choiceparam="['XL', 'slan_cheat_add_ship']" position="left" comment="shiptypes_xl" />
-				<add_player_choice_sub text="{357423,4002}" section="slan_cheat_menu_list" choiceparam="[class.ship_l, 'slan_cheat_add_ship']" position="bottom_left" comment="shiptypes_l" />
-				<add_player_choice_sub text="{357423,4004}" section="slan_cheat_menu_list" choiceparam="[class.ship_m, 'slan_cheat_add_ship']" position="top_right" comment="shiptypes_m" />
-				<add_player_choice_sub text="{357423,4003}" section="slan_cheat_menu_list" choiceparam="[class.ship_s, 'slan_cheat_add_ship']" position="right" comment="shiptypes_s" />
-				<add_player_choice_return text="{1002,20}" comment="(Back)" />
+				<do_if value="player.galaxy.macro == macro.swi_galaxy_macro">
+					<add_player_choice_sub text="'XXL'" section="slan_cheat_menu_list" choiceparam="['XXL', 'slan_cheat_add_ship']" position="top_left" comment="shiptypes_xxl" />
+					<add_player_choice_sub text="{357423,4001}" section="slan_cheat_menu_list" choiceparam="['XL', 'slan_cheat_add_ship']" position="left" comment="shiptypes_xl" />
+					<add_player_choice_sub text="{357423,4002}" section="slan_cheat_menu_list" choiceparam="[class.ship_l, 'slan_cheat_add_ship']" position="bottom_left" comment="shiptypes_l" />
+					<add_player_choice_sub text="{357423,4004}" section="slan_cheat_menu_list" choiceparam="[class.ship_m, 'slan_cheat_add_ship']" position="top_right" comment="shiptypes_m" />
+					<add_player_choice_sub text="{357423,4003}" section="slan_cheat_menu_list" choiceparam="[class.ship_s, 'slan_cheat_add_ship']" position="right" comment="shiptypes_s" />
+					<add_player_choice_return text="{1002,20}" comment="(Back)" />
+				</do_if>
+				<do_else>
+					<add_player_choice_sub text="{357423,4001}" section="slan_cheat_menu_list" choiceparam="['XL', 'slan_cheat_add_ship']" position="top_left" comment="shiptypes_xl" />
+					<add_player_choice_sub text="{357423,4002}" section="slan_cheat_menu_list" choiceparam="[class.ship_l, 'slan_cheat_add_ship']" position="left" comment="shiptypes_l" />
+					<add_player_choice_sub text="{357423,4004}" section="slan_cheat_menu_list" choiceparam="[class.ship_m, 'slan_cheat_add_ship']" position="bottom_left" comment="shiptypes_m" />
+					<add_player_choice_sub text="{357423,4003}" section="slan_cheat_menu_list" choiceparam="[class.ship_s, 'slan_cheat_add_ship']" position="top_right" comment="shiptypes_s" />
+					<add_player_choice_return text="{1002,20}" comment="(Back)" />
+				</do_else>
 			</actions>
 		</cue>
 	</cues>

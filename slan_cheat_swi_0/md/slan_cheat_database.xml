@@ -11,41 +11,69 @@
       </conditions>
       <actions>
         <set_value name="global.$swi_slancheat.$slan_cheat_faction_list" exact="[]" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.galempire" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.newrepublic" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.ascendancy" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.anoat" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.corporate" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.commerceguild" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.mandodw" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.huttcartel" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.rebelalliance" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.huttpirates" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.blacksun" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.valarian" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.mandoraiders" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.hapes" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.sith" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.kamino" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.miningguild" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.bountyhunters" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.bankingclan" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.tagge" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.tradefederation" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.baobab" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.twinsuns" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.moncal" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.transgalmeg" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.incom" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.rendili" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.hoersh" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.sienar" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.corellia" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.kuat" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.naboo" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.player" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.xenon" />
-        <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.khaak" />
+        <do_if value="player.galaxy.macro == macro.swi_galaxy_macro">
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.galempire" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.newrepublic" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.ascendancy" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.anoat" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.corporate" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.commerceguild" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.mandodw" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.huttcartel" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.rebelalliance" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.huttpirates" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.blacksun" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.valarian" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.mandoraiders" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.hapes" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.sith" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.kamino" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.miningguild" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.bountyhunters" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.bankingclan" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.tagge" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.tradefederation" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.baobab" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.twinsuns" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.moncal" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.transgalmeg" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.incom" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.rendili" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.hoersh" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.sienar" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.corellia" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.kuat" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.naboo" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.player" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.xenon" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.khaak" />
+        </do_if>
+        <do_else>
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.alliance" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.antigone" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.argon" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.player" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.buccaneers" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.hatikvah" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.holyorder" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.holyorderfanatic" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.ministry" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.paranid" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.scaleplate" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.teladi" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.trinity" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.xenon" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.khaak" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.pioneers" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.terran" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.yaki" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.court" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.fallensplit" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.freesplit" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.split" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.boron" />
+          <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.kaori" />
+        </do_else>
       </actions>
     </cue>
     <cue name="slan_cheat_set_wares" instantiate="true" namespace="this">
