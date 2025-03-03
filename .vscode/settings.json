@@ -1,0 +1,25 @@
+{
+  "Lua.diagnostics.globals": [
+    "Helper",
+    "ReadText",
+    "GetMacroData",
+    "NewGame",
+    "getElapsedTime",
+    "GetComponentData",
+    "ConvertStringToLuaID",
+    "IsCheatVersion",
+    "GetFactionData",
+    "Color",
+    "IsMacroClass",
+    "ColorText",
+    "SetComponentName",
+    "GetExtensionList",
+    "GetRenderTargetMousePosition",
+    "GetRenderTargetTexture",
+    "GetLocalMousePosition",
+    "ConvertStringTo64Bit",
+    "StopPlayingSound",
+    "AddUITriggeredEvent",
+    "PlaySound"
+  ]
+}
