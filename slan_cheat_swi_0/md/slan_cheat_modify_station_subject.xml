@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_modify_station_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="Slan_cheat_modify_station_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
 	<cues>
 		<cue name="aslan_cheat_modify_station_Initialization" instantiate="true" namespace="this">
 			<conditions>
@@ -22,7 +22,7 @@
 				</do_elseif>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_Invincible" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_Invincible" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_modify_station_Invincible" />
 			</conditions>
@@ -33,7 +33,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_Invincible_set" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_Invincible_set" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_modify_station_Invincible_set" />
 			</conditions>
@@ -54,7 +54,7 @@
 			</actions>
 		</cue>
 
-		<cue name="slan_cheat_modify_station_building_resource" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_building_resource" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_modify_station_building_resource" />
 			</conditions>
@@ -72,7 +72,7 @@
 			</actions>
 		</cue>
 
-		<cue name="slan_cheat_modify_station_equipment" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_equipment" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
 				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_station_equipment'" />
@@ -116,7 +116,7 @@
 				</do_else>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_equipment_count" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_equipment_count" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_modify_station_equipment_count" />
 			</conditions>
@@ -144,7 +144,7 @@
 			</actions>
 		</cue>
 
-		<cue name="slan_cheat_modify_station_people" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_people" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_modify_station_people" />
 			</conditions>
@@ -172,7 +172,7 @@
 				</do_all>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_delete" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_delete" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_modify_station_delete" />
 			</conditions>
@@ -185,7 +185,7 @@
 				</do_all>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_faction" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_faction" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
 				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_station_faction'" />
@@ -247,7 +247,7 @@
 				</do_all>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_add_cargotype" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_add_cargotype" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_modify_station_add_cargotype" />
 			</conditions>
@@ -258,7 +258,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_add_cargotype_count" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_add_cargotype_count" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_modify_station_add_cargotype_count" />
 			</conditions>
@@ -306,7 +306,7 @@
 				</do_all>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_add_cargo_specified" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_add_cargo_specified" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
 				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_station_add_cargo_specified'" />
@@ -325,7 +325,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_add_cargo_specified_count" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_add_cargo_specified_count" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_modify_station_add_cargo_specified_count" />
 			</conditions>
@@ -341,7 +341,7 @@
 				</do_if>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_workforce" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_workforce" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_modify_station_workforce" />
 			</conditions>
@@ -351,7 +351,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_workforce_set" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_workforce_set" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_modify_station_workforce_set" />
 			</conditions>

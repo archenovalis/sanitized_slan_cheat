@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_database" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
+<mdscript name="Slan_cheat_database" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../xsd/md.xsd">
   <cues>
 
-    <cue name="slan_cheat_set_faction" instantiate="true" namespace="this">
+    <cue name="Slan_cheat_set_faction" instantiate="true" namespace="this">
       <conditions>
         <check_any>
-          <event_game_loaded />
-          <event_game_started />
+          <check_all>
+            <event_ui_triggered screen="'Chat_Window_API'" control="'text_entered'" />
+            <check_value value="event.param3.$text == '/refreshmd'" />
+          </check_all>
+          <event_cue_signalled />
         </check_any>
       </conditions>
       <actions>
         <set_value name="global.$swi_slancheat.$slan_cheat_faction_list" exact="[]" />
-        <do_if value="player.galaxy.macro == macro.swi_galaxy_macro">
+        <do_if value="player.galaxy.macro == @macro.swi_galaxy_macro">
           <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.galempire" />
           <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.newrepublic" />
           <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.ascendancy" />
@@ -48,6 +51,7 @@
           <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.xenon" />
           <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.khaak" />
         </do_if>
+        <!-- vanilla factions -->
         <do_else>
           <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.alliance" />
           <append_to_list name="global.$swi_slancheat.$slan_cheat_faction_list" exact="@faction.antigone" />
@@ -76,17 +80,14 @@
         </do_else>
       </actions>
     </cue>
-    <cue name="slan_cheat_set_wares" instantiate="true" namespace="this">
+    <cue name="Slan_cheat_set_wares" instantiate="true" namespace="this">
       <conditions>
         <check_any>
           <check_all>
             <event_ui_triggered screen="'Chat_Window_API'" control="'text_entered'" />
             <check_value value="event.param3.$text == '/refreshmd'" />
           </check_all>
-          <event_game_loaded />
-          <event_game_started />
-          <event_player_created />
-          <event_cue_signalled cue="md.Setup.Start" />
+          <event_cue_signalled />
         </check_any>
       </conditions>
       <actions>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_create_global_variables" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="Slan_cheat_create_global_variables" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../xsd/md.xsd">
 	<cues>
-		<cue name="slan_cheat_create_global_variables" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_create_global_variables" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_game_loaded />
@@ -23,6 +23,8 @@
 
 				<!-- <set_value name="global.$swi_slancheat.$playertargetstation" /> -->
 				<!-- <set_value name="global.$swi_slancheat.$playertargetship" /> -->
+				<signal_cue_instantly cue="md.Slan_cheat_database.Slan_cheat_set_faction" />
+				<signal_cue_instantly cue="md.Slan_cheat_database.Slan_cheat_set_wares" />
 			</actions>
 		</cue>
 	</cues>

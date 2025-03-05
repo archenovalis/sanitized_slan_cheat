@@ -10,12 +10,12 @@
           <event_cue_signalled cue="md.Setup.Start" />
         </check_any>
       </conditions>
-      <delay exact="1ms" />
+      <delay exact="1s" />
       <actions>
         <set_value name="md.$slancreate_ship_macro" exact="null" />
       </actions>
       <cues>
-        <cue name="slan_cheat_add_ship" instantiate="true">
+        <cue name="Slan_cheat_add_ship" instantiate="true">
           <conditions>
             <check_any>
               <event_conversation_next_section section="slan_cheat_menu_list_selection" />
@@ -51,7 +51,7 @@
             <add_player_choice_sub text="{1001,3901} + ' ' + '(' + global.$swi_slancheat.$slancreate_ship_num + ')'" position="bottom_right" section="slan_cheat_add_ship_run" />
           </actions>
         </cue>
-        <cue name="slan_cheat_add_ship_menu" instantiate="true" namespace="this">
+        <cue name="Slan_cheat_add_ship_menu" instantiate="true" namespace="this">
           <conditions>
             <event_conversation_next_section section="slan_cheat_add_ship_menu" />
           </conditions>
@@ -111,7 +111,7 @@
             <add_player_choice_sub text="$ship_set4" position="right" section="slan_cheat_add_ship_menu" choiceparam="['slan_cheat_add_ship_set', 4]" />
           </actions>
         </cue>
-        <cue name="slan_cheat_add_ship_run" instantiate="true" namespace="this">
+        <cue name="Slan_cheat_add_ship_run" instantiate="true" namespace="this">
           <conditions>
             <event_conversation_next_section section="slan_cheat_add_ship_run" />
           </conditions>

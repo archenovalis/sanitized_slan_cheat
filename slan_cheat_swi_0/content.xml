@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<content id="slan_cheat_menu_swi_0" name="slan_cheats_updated" description="slim cheat mod - updated" author="Slan, others, archie" version="102" save="0" date="2025-2-25" enabled="true">
-  <text language="7" name="Читы от Slan" description="Мод X4 читы" author="Slan (Перевел Oceloterus aka Deeperman)" />
-  <text language="44" name="cheats" description="X4 cheat MOD" author="Slan" />
-  <text language="86" name="作弊脚本" description="X4修改MOD" author="Slan" />
-  <text language="33" name="cheats" description="X4 cheat MOD" author="Slan" />
-  <text language="34" name="cheats" description="X4 cheat MOD" author="Slan" />
-  <text language="39" name="cheats" description="X4 cheat MOD" author="Slan (Grazie a vagappc fornire Italiano)" />
-  <text language="49" name="cheats" description="X4 cheat MOD" author="Slan" />
-  <text language="55" name="cheats" description="X4 cheat MOD" author="Slan" />
-  <text language="81" name="cheats" description="X4 cheat MOD" author="Slan" />
-  <text language="82" name="cheats" description="X4 cheat MOD" author="Slan" />
-  <text language="88" name="作弊脚本" description="X4修改MOD" author="Slan" />
+<content id="slan_cheat_menu_swi_0" name="sanitized slan_cheats" description="sanitized slim cheat mod" author="Slan, others, archie" version="103" save="0" date="2025-3-5" enabled="true">
+  <text language="7" name="sanitized Читы" description="Мод X4 читы" />
+  <text language="44" name="sanitized cheats" description="X4 cheat MOD" />
+  <text language="86" name="sanitized 作弊脚本" description="X4修改MOD" />
+  <text language="33" name="sanitized cheats" description="X4 cheat MOD" />
+  <text language="34" name="sanitized cheats" description="X4 cheat MOD" />
+  <text language="39" name="sanitized cheats" description="X4 cheat MOD" />
+  <text language="49" name="sanitized cheats" description="X4 cheat MOD" />
+  <text language="55" name="sanitized cheats" description="X4 cheat MOD" />
+  <text language="81" name="sanitized cheats" description="X4 cheat MOD" />
+  <text language="82" name="sanitized cheats" description="X4 cheat MOD" />
+  <text language="88" name="sanitized 作弊脚本" description="X4修改MOD" />
   <dependency id="SW Interworlds" optional="true" name="SW Interworlds" />
 </content>

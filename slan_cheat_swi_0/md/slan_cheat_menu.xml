@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_menu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
+<mdscript name="Slan_cheat_menu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
 	<cues>
 		<!-- ////  ======================  Main Menu  ======================  \\\\ -->
-		<cue name="slan_cheat_menu_entrance" instantiate="true">
+		<cue name="Slan_cheat_menu_entrance" instantiate="true">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="g_mainmore" />
@@ -14,7 +14,7 @@
 				<add_player_choice_sub text="{357423,1}" position="top_right" section="slan_cheat_menu" comment="Entrance" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_Backdoor" namespace="this" instantiate="true">
+		<cue name="Slan_cheat_Backdoor" namespace="this" instantiate="true">
 			<conditions>
 				<event_player_changed_activity />
 				<check_value value="player.ship" />
@@ -27,7 +27,7 @@
 				</do_if>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_menu" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_menu" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_menu" />
@@ -47,7 +47,7 @@
 			</actions>
 		</cue>
 		<!-- ////  ======================  Player  ======================  \\\\ -->
-		<cue name="slan_cheat_modify_player" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_player" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_player" />
@@ -64,7 +64,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_add_money" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_add_money" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_add_money" />
@@ -81,7 +81,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_faction" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_faction" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_faction" />
@@ -95,7 +95,7 @@
 			</actions>
 		</cue>
 
-		<cue name="slan_cheat_add_inventory" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_add_inventory" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_add_inventory" />
@@ -113,7 +113,7 @@
 			</actions>
 		</cue>
 		<!-- ////  ======================   Modify Ship  ======================  \\\\ -->
-		<cue name="slan_cheat_modify_ship" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_ship" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_ship" />
@@ -129,7 +129,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_ship_set" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_ship_set" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_ship_set" />
@@ -165,7 +165,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_ship_Storage" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_ship_Storage" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_ship_Storage" />
@@ -178,7 +178,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_ship_equipment" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_ship_equipment" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section sectionprefix="slan_cheat_modify_ship_equipment" />
@@ -204,7 +204,7 @@
 			</actions>
 		</cue>
 		<!-- ////  ======================   Modify Station  ======================  \\\\ -->
-		<cue name="slan_cheat_modify_station" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_station" />
@@ -218,7 +218,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_set" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_set" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_station_set" />
@@ -255,7 +255,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_Storage" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_Storage" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_station_Storage" />
@@ -272,7 +272,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_equipment" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_equipment" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_station_equipment" />
@@ -285,7 +285,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_station_cargo" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_station_cargo" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_station_cargo" />
@@ -302,7 +302,7 @@
 			</actions>
 		</cue>
 		<!-- ////  ======================   Universe  ======================  \\\\ -->
-		<cue name="slan_cheat_modify_universe" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_universe" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_modify_universe" />
@@ -317,7 +317,7 @@
 			</actions>
 		</cue>
 		<!-- ////  ======================  Add Ship  ======================  \\\\ -->
-		<cue name="slan_cheat_add_ship" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_add_ship" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_add_ship" />
@@ -325,7 +325,7 @@
 				</check_any>
 			</conditions>
 			<actions>
-				<do_if value="player.galaxy.macro == macro.swi_galaxy_macro">
+				<do_if value="player.galaxy.macro == @macro.swi_galaxy_macro">
 					<add_player_choice_sub text="'XXL'" section="slan_cheat_menu_list" choiceparam="['XXL', 'slan_cheat_add_ship']" position="top_left" comment="shiptypes_xxl" />
 					<add_player_choice_sub text="{357423,4001}" section="slan_cheat_menu_list" choiceparam="['XL', 'slan_cheat_add_ship']" position="left" comment="shiptypes_xl" />
 					<add_player_choice_sub text="{357423,4002}" section="slan_cheat_menu_list" choiceparam="[class.ship_l, 'slan_cheat_add_ship']" position="bottom_left" comment="shiptypes_l" />

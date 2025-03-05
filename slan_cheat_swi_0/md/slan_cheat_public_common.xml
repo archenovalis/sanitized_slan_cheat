@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_public_common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
+<mdscript name="Slan_cheat_public_common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
 	<cues>
-		<cue name="slan_cheat_menu_list" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_menu_list" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_menu_list" />
@@ -168,7 +168,7 @@
 			</actions>
 		</cue>
 
-		<cue name="slan_cheat_menu_changed_target" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_menu_changed_target" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<!-- <event_object_target_invalid object="player.ship" /> -->
@@ -186,7 +186,7 @@
 				</do_elseif>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_menu_map_changed_target" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_menu_map_changed_target" instantiate="true" namespace="this">
 			<conditions>
 				<event_object_signalled object="player.entity" param="'set guidance'" comment="arguments passed with param2" />
 			</conditions>
@@ -220,7 +220,7 @@
 				<set_value name="global.$swi_slancheat.$slancreate_ship_set.{5}" exact="$zone" />
 				<set_value name="global.$swi_slancheat.$slancreate_ship_set.{6}" exact="$JumpPosition" />
 
-				<signal_cue_instantly cue="md.slan_cheat_jump_subject.slan_cheat_jump_run" />
+				<signal_cue_instantly cue="md.Slan_cheat_jump_subject.slan_cheat_jump_run" />
 			</actions>
 		</cue>
 	</cues>

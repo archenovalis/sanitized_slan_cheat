@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_menu_quick_menu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="Slan_cheat_menu_quick_menu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
 	<cues>
-		<cue name="slan_cheat_Backdoor" namespace="this" instantiate="true">
+		<cue name="Slan_cheat_Backdoor" namespace="this" instantiate="true">
 			<conditions>
 				<event_player_changed_activity />
 				<check_value value="player.ship" />
@@ -12,7 +12,7 @@
 				</do_if>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_menu_quick_menu" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_menu_quick_menu" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_next_section section="slan_cheat_menu_quick_menu" />
@@ -31,7 +31,7 @@
 			</actions>
 		</cue>
 
-		<cue name="slan_cheat_modify_quick_ship_Invincible" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_quick_ship_Invincible" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_modify_quick_ship_Invincible" />
 			</conditions>
@@ -42,7 +42,7 @@
 				</do_if>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_modify_quick_ship_faction" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_modify_quick_ship_faction" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_modify_quick_ship_faction" />
 			</conditions>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_jump_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="Slan_cheat_jump_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
 	<cues>
-		<cue name="slan_cheat_jump" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_jump" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
 					<event_conversation_started conversation="slan_cheat_jump" />
@@ -53,7 +53,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_jump_set" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_jump_set" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_jump_set" />
 			</conditions>
@@ -64,7 +64,7 @@
 				</do_if>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_jump_run" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_jump_run" instantiate="true" namespace="this">
 			<conditions>
 				<event_cue_signalled />
 			</conditions>
@@ -77,7 +77,7 @@
 				</do_if>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_menu_move_object" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_menu_move_object" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_menu_move_object" />
 			</conditions>
@@ -90,7 +90,7 @@
 				</do_if>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_quick_summoning_subordinates" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_quick_summoning_subordinates" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_quick_summoning_subordinates" />
 			</conditions>
@@ -112,7 +112,7 @@
 				<show_notification text="{1001,1503} + {1001,6303} + player.zone.name" comment="" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_menu_spawn_docked" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_menu_spawn_docked" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_next_section section="slan_cheat_menu_spawn_docked" />
 			</conditions>

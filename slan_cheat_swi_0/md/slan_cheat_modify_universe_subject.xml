@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="slan_cheat_modify_universe_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="Slan_cheat_modify_universe_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../xsd/md.xsd">
 	<cues>
-		<cue name="slan_cheat_map_reveal" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_map_reveal" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_map_reveal" />
+				<check_any>
+					<event_conversation_started conversation="slan_cheat_map_reveal" />
+					<event_ui_triggered screen="'CheatMenu'" control="'full_reveal'" />
+				</check_any>
 			</conditions>
 			<actions>
 				<find_cluster groupname="$Clusters" multiple="true" />
@@ -28,7 +31,7 @@
 				</do_all>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_map_scan_all_stations" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_map_scan_all_stations" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_map_scan_all_stations" />
 			</conditions>
@@ -40,7 +43,7 @@
 				</do_all>
 			</actions>
 		</cue>
-		<cue name="slan_cheat_map_chain_scan" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_map_chain_scan" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_map_chain_scan" />
 			</conditions>
@@ -55,7 +58,7 @@
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_map_chain_scan_set" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_map_chain_scan_set" instantiate="true" namespace="this">
 			<conditions>
 				<event_conversation_started conversation="slan_cheat_map_chain_scan_set" />
 			</conditions>
@@ -63,7 +66,7 @@
 				<set_value name="global.$swi_slancheat.$slanjchainscanset" exact="event.param2.{1}" />
 			</actions>
 		</cue>
-		<cue name="slan_cheat_map_chain_scan_run" instantiate="true" namespace="this">
+		<cue name="Slan_cheat_map_chain_scan_run" instantiate="true" namespace="this">
 			<conditions>
 				<event_player_discovered_object />
 				<check_value value="event.param.station and not global.$swi_slancheat.$slanscan_running" />
