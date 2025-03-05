@@ -20,6 +20,8 @@
     "ConvertStringTo64Bit",
     "StopPlayingSound",
     "AddUITriggeredEvent",
-    "PlaySound"
+    "PlaySound",
+    "DebugError",
+    "RegisterEvent"
   ]
 }

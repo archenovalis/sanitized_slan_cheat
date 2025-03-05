@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon name="sanitized_slan_cheats" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/addon.xsd">
+  <environment type="menus">
+    <file name="ui/mapeditor.lua" />
+    <dependency name="kuertee_ui_extensions" />
+  </environment>
+</addon>

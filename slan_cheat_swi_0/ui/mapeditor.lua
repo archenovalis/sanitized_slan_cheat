@@ -2,142 +2,142 @@
 local ffi = require("ffi")
 local C = ffi.C
 ffi.cdef [[
-	typedef uint64_t UniverseID;
+  typedef uint64_t UniverseID;
 
-	typedef struct {
-		float x;
-		float y;
-		float z;
-	} Coord3D;
-	typedef struct {
-		const char* id;
-		const char* name;
-		int32_t state;
-		const char* requiredversion;
-		const char* installedversion;
-	} InvalidPatchInfo;
-	typedef struct {
-		const char* classid;
-		Coord3D size;
-		bool inverted;
-	} RegionBoundary;
-	typedef struct {
-		const char* id;
-		uint32_t numfields;
-		uint32_t numboundaries;
-		uint32_t numresources;
-		Coord3D size;
-		float density;
-		float speed;
-		float rotationSpeed;
-		float defaultNoiseScale;
-		float defaultMinNoiseValue;
-		float defaultMaxNoiseValue;
-	} RegionDefinition;
-	typedef struct {
-		const char* fieldtype;
-		const char* groupref;
-	} RegionField;
-	typedef struct {
-		const char* wareid;
-		const char* yield;
-	} RegionResource;
-	typedef struct {
-		Coord3D offset;
-		Coord3D tangent;
-		float weight;
-		float inlength;
-		float outlength;
-	} SplineData;
-	typedef struct {
-		const char* name;
-		const char* id;
-		const char* source;
-		bool deleteable;
-	} UIConstructionPlan;
-	typedef struct {
-		float x;
-		float y;
-		float z;
-		float yaw;
-		float pitch;
-		float roll;
-	} UIPosRot;
+  typedef struct {
+    float x;
+    float y;
+    float z;
+  } Coord3D;
+  typedef struct {
+    const char* id;
+    const char* name;
+    int32_t state;
+    const char* requiredversion;
+    const char* installedversion;
+  } InvalidPatchInfo;
+  typedef struct {
+    const char* classid;
+    Coord3D size;
+    bool inverted;
+  } RegionBoundary;
+  typedef struct {
+    const char* id;
+    uint32_t numfields;
+    uint32_t numboundaries;
+    uint32_t numresources;
+    Coord3D size;
+    float density;
+    float speed;
+    float rotationSpeed;
+    float defaultNoiseScale;
+    float defaultMinNoiseValue;
+    float defaultMaxNoiseValue;
+  } RegionDefinition;
+  typedef struct {
+    const char* fieldtype;
+    const char* groupref;
+  } RegionField;
+  typedef struct {
+    const char* wareid;
+    const char* yield;
+  } RegionResource;
+  typedef struct {
+    Coord3D offset;
+    Coord3D tangent;
+    float weight;
+    float inlength;
+    float outlength;
+  } SplineData;
+  typedef struct {
+    const char* name;
+    const char* id;
+    const char* source;
+    bool deleteable;
+  } UIConstructionPlan;
+  typedef struct {
+    float x;
+    float y;
+    float z;
+    float yaw;
+    float pitch;
+    float roll;
+  } UIPosRot;
 
-	void AddCluster(const char* macroname, UIPosRot offset);
-	void AddGateConnection(UniverseID gateid, UniverseID othergateid);
-	UniverseID AddHoloMap(const char* texturename, float x0, float x1, float y0, float y1, float aspectx, float aspecty);
-	void AddSector(UniverseID clusterid, const char* macroname, UIPosRot offset);
-	void ClearSelectedMapComponents(UniverseID holomapid);
-	uint64_t ConvertStringTo64Bit(const char* idstring);
-	void ExportMap(const char* mapname, const char* extensionid, bool personal);
-	bool FindMacro(const char* macroname);
-	uint32_t GetAllFactions(const char** result, uint32_t resultlen, bool includehidden);
-	uint32_t GetCatalogTemplates(const char** result, uint32_t resultlen, const char* classid);
-	int32_t GetCheckpointSequence(UniverseID checkpointid);
-	const char* GetClusterBackground(UniverseID clusterid);
-	const char* GetComponentName(UniverseID componentid);
-	uint32_t GetConstructionPlanInvalidPatches(InvalidPatchInfo* result, uint32_t resultlen, const char* constructionplanid);
-	uint32_t GetConstructionPlans(UIConstructionPlan* result, uint32_t resultlen);
-	UniverseID GetContextByClass(UniverseID componentid, const char* classname, bool includeself);
-	uint32_t GetHighwaySplinePoints(SplineData* result, uint32_t resultlen, UniverseID highwayid);
-	const char* GetMacroClass(const char* macroname);
-	uint32_t GetMacrosStartingWith(const char** result, uint32_t resultlen, const char* partialmacroname);
-	uint32_t GetMapEditorObjectList(UniverseID* result, uint32_t resultlen);
-	uint32_t GetNumAllFactions(bool includehidden);
-	uint32_t GetNumCatalogTemplates(const char* classid);
-	uint32_t GetNumConstructionPlans(void);
-	uint32_t GetNumHighwaySplinePoints(UniverseID highwayid);
-	uint32_t GetNumMacrosStartingWith(const char* partialmacroname);
-	uint32_t GetNumMapEditorObjectList(void);
-	uint32_t GetNumRegionDefinitions(void);
-	uint32_t GetNumSectors(UniverseID clusterid);
-	UIPosRot GetObjectPositionInSector(UniverseID objectid);
-	UniverseID GetPlayerGalaxyID(void);
-	UniverseID GetPlayerID(void);
-	UIPosRot GetPositionalOffset(UniverseID positionalid, UniverseID spaceid);
-	uint32_t GetRegionBoundaries(RegionBoundary* result, uint32_t resultlen, const char* regiondefinition);
-	const char* GetRegionDefinition(UniverseID regionid);
-	uint32_t GetRegionDefinitions(RegionDefinition* result, uint32_t resultlen);
-	uint32_t GetRegionFields(RegionField* result, uint32_t resultlen, const char* regiondefinition);
-	uint32_t GetRegionResources(RegionResource* result, uint32_t resultlen, const char* regiondefinition);
-	bool IsConstructionPlanValid(const char* constructionplanid, uint32_t* numinvalidpatches);
-	bool IsMasterVersion(void);
-	bool IsPlayerContext(UniverseID componentid);
-	void RemoveComponent(UniverseID componentid);
-	void RemoveGateConnection(UniverseID gateid, UniverseID othergateid);
-	void RemoveHoloMap(void);
-	void ReplaceHighwaySpline(UniverseID highwayid, SplineData* splinepoints, uint32_t numsplinepoints, UniverseID holomapid);
-	void RevealMap(void);
-	void SaveUIUserData(void);
-	void SetCheckpointSequence(UniverseID checkpointid, int32_t sequence);
-	void SetClusterBackground(UniverseID clusterid, const char* macroname);
-	void SetComponentDescription(UniverseID componentid, const char* desc);
-	void SetEditBoxText(const int editboxid, const char* text);
-	void SetKnownTo(UniverseID componentid, const char* factionid);
-	void SetMapPicking(UniverseID holomapid, bool enable);
-	void SetMapRelativeMousePosition(UniverseID holomapid, bool valid, float x, float y);
-	void SetObjectForcedRadarVisible(UniverseID objectid, bool value);
-	void SetObjectSectorPos(UniverseID objectid, UniverseID sectorid, UIPosRot offset);
-	void SetComponentOwner(UniverseID componentid, const char* factionid);
-	void SetPositionalOffset(UniverseID positionalid, UIPosRot offset);
-	void SetRegionDefinition(UniverseID regionid, const char* definition);
-	void SetSelectedMapComponent(UniverseID holomapid, UniverseID componentid);
-	void ShowEditorMap(UniverseID holomapid, UniverseID sectorid);
-	void SpawnLocalHighwayAtPos(const char* macroname, UniverseID sectorid, UIPosRot offset);
-	UniverseID SpawnObjectAtPos2(const char* macroname, UniverseID sectorid, UIPosRot offset, const char* ownerid);
-	UniverseID SpawnRegionAtPos(const char* regiondefinition, UniverseID sectorid, UIPosRot offset);
-	UniverseID SpawnStationAtPos(const char* macroname, UniverseID sectorid, UIPosRot offset, const char* constructionplanid, const char* ownerid);
-	void StartMapBoxSelect(UniverseID holomapid, bool selectenemies);
-	void StartPanMap(UniverseID holomapid);
-	void StartRotateMap(UniverseID holomapid);
-	void StopMapBoxSelect(UniverseID holomapid);
-	bool StopPanMap(UniverseID holomapid);
-	bool StopRotateMap(UniverseID holomapid);
-	void ZoomMap(UniverseID holomapid, float zoomstep);
+  void AddCluster(const char* macroname, UIPosRot offset);
+  void AddGateConnection(UniverseID gateid, UniverseID othergateid);
+  UniverseID AddHoloMap(const char* texturename, float x0, float x1, float y0, float y1, float aspectx, float aspecty);
+  void AddSector(UniverseID clusterid, const char* macroname, UIPosRot offset);
+  void ClearSelectedMapComponents(UniverseID holomapid);
+  uint64_t ConvertStringTo64Bit(const char* idstring);
+  void ExportMap(const char* mapname, const char* extensionid, bool personal);
+  bool FindMacro(const char* macroname);
+  uint32_t GetAllFactions(const char** result, uint32_t resultlen, bool includehidden);
+  uint32_t GetCatalogTemplates(const char** result, uint32_t resultlen, const char* classid);
+  int32_t GetCheckpointSequence(UniverseID checkpointid);
+  const char* GetClusterBackground(UniverseID clusterid);
+  const char* GetComponentName(UniverseID componentid);
+  uint32_t GetConstructionPlanInvalidPatches(InvalidPatchInfo* result, uint32_t resultlen, const char* constructionplanid);
+  uint32_t GetConstructionPlans(UIConstructionPlan* result, uint32_t resultlen);
+  UniverseID GetContextByClass(UniverseID componentid, const char* classname, bool includeself);
+  uint32_t GetHighwaySplinePoints(SplineData* result, uint32_t resultlen, UniverseID highwayid);
+  const char* GetMacroClass(const char* macroname);
+  uint32_t GetMacrosStartingWith(const char** result, uint32_t resultlen, const char* partialmacroname);
+  uint32_t GetMapEditorObjectList(UniverseID* result, uint32_t resultlen);
+  uint32_t GetNumAllFactions(bool includehidden);
+  uint32_t GetNumCatalogTemplates(const char* classid);
+  uint32_t GetNumConstructionPlans(void);
+  uint32_t GetNumHighwaySplinePoints(UniverseID highwayid);
+  uint32_t GetNumMacrosStartingWith(const char* partialmacroname);
+  uint32_t GetNumMapEditorObjectList(void);
+  uint32_t GetNumRegionDefinitions(void);
+  uint32_t GetNumSectors(UniverseID clusterid);
+  UIPosRot GetObjectPositionInSector(UniverseID objectid);
+  UniverseID GetPlayerGalaxyID(void);
+  UniverseID GetPlayerID(void);
+  UIPosRot GetPositionalOffset(UniverseID positionalid, UniverseID spaceid);
+  uint32_t GetRegionBoundaries(RegionBoundary* result, uint32_t resultlen, const char* regiondefinition);
+  const char* GetRegionDefinition(UniverseID regionid);
+  uint32_t GetRegionDefinitions(RegionDefinition* result, uint32_t resultlen);
+  uint32_t GetRegionFields(RegionField* result, uint32_t resultlen, const char* regiondefinition);
+  uint32_t GetRegionResources(RegionResource* result, uint32_t resultlen, const char* regiondefinition);
+  bool IsConstructionPlanValid(const char* constructionplanid, uint32_t* numinvalidpatches);
+  bool IsMasterVersion(void);
+  bool IsPlayerContext(UniverseID componentid);
+  void RemoveComponent(UniverseID componentid);
+  void RemoveGateConnection(UniverseID gateid, UniverseID othergateid);
+  void RemoveHoloMap(void);
+  void ReplaceHighwaySpline(UniverseID highwayid, SplineData* splinepoints, uint32_t numsplinepoints, UniverseID holomapid);
+  void RevealMap(void);
+  void SaveUIUserData(void);
+  void SetCheckpointSequence(UniverseID checkpointid, int32_t sequence);
+  void SetClusterBackground(UniverseID clusterid, const char* macroname);
+  void SetComponentDescription(UniverseID componentid, const char* desc);
+  void SetEditBoxText(const int editboxid, const char* text);
+  void SetKnownTo(UniverseID componentid, const char* factionid);
+  void SetMapPicking(UniverseID holomapid, bool enable);
+  void SetMapRelativeMousePosition(UniverseID holomapid, bool valid, float x, float y);
+  void SetObjectForcedRadarVisible(UniverseID objectid, bool value);
+  void SetObjectSectorPos(UniverseID objectid, UniverseID sectorid, UIPosRot offset);
+  void SetComponentOwner(UniverseID componentid, const char* factionid);
+  void SetPositionalOffset(UniverseID positionalid, UIPosRot offset);
+  void SetRegionDefinition(UniverseID regionid, const char* definition);
+  void SetSelectedMapComponent(UniverseID holomapid, UniverseID componentid);
+  void ShowEditorMap(UniverseID holomapid, UniverseID sectorid);
+  void SpawnLocalHighwayAtPos(const char* macroname, UniverseID sectorid, UIPosRot offset);
+  UniverseID SpawnObjectAtPos2(const char* macroname, UniverseID sectorid, UIPosRot offset, const char* ownerid);
+  UniverseID SpawnRegionAtPos(const char* regiondefinition, UniverseID sectorid, UIPosRot offset);
+  UniverseID SpawnStationAtPos(const char* macroname, UniverseID sectorid, UIPosRot offset, const char* constructionplanid, const char* ownerid);
+  void StartMapBoxSelect(UniverseID holomapid, bool selectenemies);
+  void StartPanMap(UniverseID holomapid);
+  void StartRotateMap(UniverseID holomapid);
+  void StopMapBoxSelect(UniverseID holomapid);
+  bool StopPanMap(UniverseID holomapid);
+  bool StopRotateMap(UniverseID holomapid);
+  void ZoomMap(UniverseID holomapid, float zoomstep);
 ]]
 
-local menu = {
+local UixMenu = {
   name = "Cheat_MapEditorMenu",
   holomap = 0,
 
@@ -151,9 +151,10 @@ local menu = {
   searchindex = {},
   selectedcomponent = 0,
   spawnTableMode = "object",
+  frameData = {},
 }
 
-local config = {
+local EditorConfig = {
   mapFontSize = Helper.standardFontSize,
   optionsLayer = 4,
   backarrow = "table_arrow_inv_left",
@@ -171,6 +172,7 @@ local config = {
   mainFrameLayer = 6,
   infoFrameLayer = 5,
   infoFrame2Layer = 4,
+  topLevelLayer = 1,
 
   leftBar = {
     { name = "Spawn Object",                    icon = "mapob_poi",       mode = "object" },   -- TEMPTEXT Florian
@@ -183,304 +185,258 @@ local config = {
   clusterGridEdgeLength = 10000000,
 }
 
--- from gameoptions.lua
-
-config.standardTextProperties = {
-  font = config.font,
-  fontsize = config.standardFontSize,
-  x = config.standardTextOffsetX,
-  y = 2,
-}
-
-config.headerTextProperties = {
-  font = config.fontBold,
-  fontsize = config.headerFontSize,
-  x = config.headerTextOffsetX,
+EditorConfig.headerTextProperties = {
+  font = EditorConfig.fontBold,
+  fontsize = EditorConfig.headerFontSize,
+  x = EditorConfig.headerTextOffsetX,
   y = 6,
-  minRowHeight = config.headerTextHeight,
+  minRowHeight = EditorConfig.headerTextHeight,
   titleColor = Color["row_title"],
 }
-
-menu.mapEditorSettings = {
-  gamestartid = option.id,
-  sectors = { all = true },
-}
-
-function menu.displayMapEditor()
-  Helper.clearDataForRefresh(menu, config.optionsLayer)
-  menu.selectedOption = nil
-
-  menu.currentOption = "mapeditor"
-
-  local frame = menu.createOptionsFrame()
-
-  local titletable = frame:addTable(2,
-    { tabOrder = 2, x = menu.table.x, y = menu.table.y, width = menu.table.width, skipTabChange = true })
-  titletable:setColWidth(1, menu.table.arrowColumnWidth, false)
-
-  -- title
-  local row = titletable:addRow(true, { fixed = true })
-  row[1]:setBackgroundColSpan(2)
-  row[1]:createButton({ height = config.headerTextHeight }):setIcon(config.backarrow, { x = config.backarrowOffsetX })
-  row[1].handlers.onClick = function() return menu.onCloseElement("back") end
-  row[2]:createText(ReadText(1021, 8100), config.headerTextProperties)
-
-  local offsety = titletable.properties.y + titletable:getVisibleHeight() + Helper.borderSize
-  local height = menu.table.height - (titletable:getVisibleHeight() + Helper.borderSize)
-
-  local optiontable = frame:addTable(3,
-    { tabOrder = 1, x = menu.table.x, y = offsety, width = menu.table.width, maxVisibleHeight = height })
-  optiontable:setColWidth(2, menu.table.arrowColumnWidth, false)
-  optiontable:setColWidthPercent(3, 60)
-  optiontable:setDefaultCellProperties("button", { height = config.standardTextHeight })
-  optiontable:setDefaultComplexCellProperties("button", "text",
-    { x = config.standardTextOffsetX, fontsize = config.standardFontSize })
-  optiontable:setDefaultCellProperties("dropdown", { height = config.standardTextHeight })
-  optiontable:setDefaultComplexCellProperties("dropdown", "text",
-    { x = config.standardTextOffsetX, fontsize = config.standardFontSize })
-  optiontable:setDefaultCellProperties("slidercell", { height = config.standardTextHeight })
-  optiontable:setDefaultComplexCellProperties("slidercell", "text",
-    { x = config.standardTextOffsetX, fontsize = config.standardFontSize })
-
-  local buf = ffi.new("CustomGameStartStringPropertyState[1]")
-  local mapeditormacro = ffi.string(C.GetCustomGameStartStringProperty(menu.mapEditorSettings.gamestartid, "galaxy", buf))
-  if mapeditormacro == "editor_empty_galaxy_macro" then
-    mapeditormacro = ""
-  end
-
-  local mapeditormacrooptions = {}
-  table.insert(mapeditormacrooptions,
-    { id = "editor_galaxy_macro", text = ReadText(1001, 11780), icon = "", displayremoveoption = false })
-  table.insert(mapeditormacrooptions,
-    { id = "xu_ep2_universe_macro", text = ReadText(1001, 11789), icon = "", displayremoveoption = false })
-  table.insert(mapeditormacrooptions,
-    { id = "swi_galaxy_macro", text = "Star Wars Interworlds", icon = "", displayremoveoption = false })
-  local n = C.GetNumMapEditorMacros()
-  if n > 0 then
-    local buf = ffi.new("const char*[?]", n)
-    n = C.GetMapEditorMacros(buf, n)
-    for i = 0, n - 1 do
-      local macro = ffi.string(buf[i])
-      local name = GetMacroData(macro, "name")
-      table.insert(mapeditormacrooptions,
-        { id = macro, text = name, icon = "", displayremoveoption = false, mouseovertext = macro })
-    end
-  end
-
-  local row = optiontable:addRow(true, {})
-  row[1]:createText(ReadText(1001, 11781) .. ReadText(1001, 120), config.standardTextProperties)
-  row[2]:setColSpan(2):createDropDown(mapeditormacrooptions, { startOption = mapeditormacro }):setTextProperties({
-    x =
-        Helper.standardTextOffsetx
-  })
-  row[2].handlers.onDropDownConfirmed = function(_, id)
-    menu.callbackGamestartGalaxyMacro(menu.mapEditorSettings.gamestartid, "galaxy", id); menu.refresh()
-  end
-
-  local row = optiontable:addRow(true, {})
-  row[2]:setColSpan(2):createButton({ active = mapeditormacro ~= "" }):setText(ReadText(1001, 11782),
-    { halign = "center" })
-  row[2].handlers.onClick = function()
-    Helper.addDelayedOneTimeCallbackOnUpdate(function() NewGame(menu.mapEditorSettings.gamestartid) end, true,
-      getElapsedTime() + 0.1); menu.displayInit()
-  end
-
-  optiontable:addEmptyRow()
-
-  local clusteroptions = {}
-  local n = C.GetNumCatalogMacros("cluster")
-  if n > 0 then
-    local buf = ffi.new("const char*[?]", n)
-    n = C.GetCatalogMacros(buf, n, "cluster")
-    for i = 0, n - 1 do
-      local macro = ffi.string(buf[i])
-      local name, sectors = GetMacroData(macro, "name", "sectors")
-      if #sectors == 1 then
-        name = GetMacroData(sectors[1], "name")
-      end
-
-      table.insert(clusteroptions,
-        { id = macro, text = name, icon = "", displayremoveoption = false, mouseovertext = macro })
-    end
-  end
-  table.sort(clusteroptions, function(a, b) return a.text < b.text end)
-
-  local row = optiontable:addRow(true, {})
-  row[1]:createText(ReadText(1001, 11783) .. ReadText(1001, 120), config.standardTextProperties)
-  row[2]:setColSpan(2):createDropDown(clusteroptions, { startOption = menu.mapEditorSettings.cluster or "" })
-      :setTextProperties({ x = Helper.standardTextOffsetx })
-  row[2].handlers.onDropDownConfirmed = function(_, id)
-    menu.mapEditorSettings.cluster = id; menu.refresh()
-  end
-
-  local sectoroptions = {}
-  if menu.mapEditorSettings.cluster then
-    local sectors = GetMacroData(menu.mapEditorSettings.cluster, "sectors") or {}
-    table.sort(sectors, Helper.sortMacroName)
-    if menu.mapEditorSettings.sectors["all"] then
-      for _, sector in ipairs(sectors) do
-        menu.mapEditorSettings.sectors[sector] = true
-      end
-    end
-
-    local row = optiontable:addRow(true, {})
-    row[2]:createCheckBox(function() return menu.mapEditorSettings.sectors["all"] end)
-    row[2].handlers.onClick = function(_, value) menu.checkboxMapEditorSector("all", value) end
-    row[3]:createText(ReadText(1001, 11784))
-
-    for _, sector in ipairs(sectors) do
-      local row = optiontable:addRow(true, {})
-      row[2]:createCheckBox(function()
-        return menu.mapEditorSettings.sectors[sector] or
-            menu.mapEditorSettings.sectors["all"]
-      end)
-      row[2].handlers.onClick = function(_, value) menu.checkboxMapEditorSector(sector, value) end
-      row[3]:createText(GetMacroData(sector, "name"), { mouseOverText = sector })
-    end
-  end
-
-  local row = optiontable:addRow(true, {})
-  row[2]:setColSpan(2):createButton({ active = menu.buttonMapEditorClusterCopyActive }):setText(ReadText(1001, 11782),
-    { halign = "center" })
-  row[2].handlers.onClick = menu.startMapEditorWithCopy
-
-  optiontable:setTopRow(menu.preselectTopRow)
-  menu.preselectTopRow = nil
-  menu.preselectOption = nil
-
-  titletable.properties.nextTable = optiontable.index
-  optiontable.properties.prevTable = titletable.index
-
-  frame:display()
-end
-
-function menu.startMapEditorWithCopy()
-  C.SetCustomGameStartStringProperty(menu.mapEditorSettings.gamestartid, "galaxy", "editor_empty_galaxy_macro")
-
-  local sectors = ""
-  if menu.mapEditorSettings.sectors and (menu.mapEditorSettings.sectors["all"] ~= true) then
-    for sector, value in pairs(menu.mapEditorSettings.sectors) do
-      if value then
-        if sectors == "" then
-          C.SetCustomGameStartStringProperty(menu.mapEditorSettings.gamestartid, "sector", sector)
-        else
-          sectors = sectors .. " "
-        end
-        sectors = sectors .. sector
-      end
-    end
-  else
-    local sectors = GetMacroData(menu.mapEditorSettings.cluster, "sectors") or {}
-    C.SetCustomGameStartStringProperty(menu.mapEditorSettings.gamestartid, "sector", sectors[1] or "")
-  end
-
-  local numparams = 2
-  local params = ffi.new("NewGameParameter[?]", numparams)
-  params[0].key = Helper.ffiNewString("cluster")
-  params[0].value = Helper.ffiNewString(menu.mapEditorSettings.cluster)
-  params[1].key = Helper.ffiNewString("sectors")
-  params[1].value = Helper.ffiNewString(sectors)
-
-  Helper.addDelayedOneTimeCallbackOnUpdate(
-    function() C.NewGame(menu.mapEditorSettings.gamestartid, numparams, params) end, true, getElapsedTime() + 0.1)
-  menu.displayInit()
-end
-
-function menu.buttonMapEditorClusterCopyActive()
-  if not menu.mapEditorSettings.cluster then
-    return false
-  end
-  for _, value in pairs(menu.mapEditorSettings.sectors) do
-    if value then
-      return true
-    end
-  end
-  return false
-end
-
-function menu.checkboxMapEditorSector(sector, value)
-  menu.mapEditorSettings.sectors[sector] = value
-  if sector == "all" then
-    local sectors = GetMacroData(menu.mapEditorSettings.cluster, "sectors") or {}
-    for _, sector in ipairs(sectors) do
-      menu.mapEditorSettings.sectors[sector] = value
-    end
-  else
-    if not value then
-      menu.mapEditorSettings.sectors["all"] = false
-    end
-  end
-end
-
--- end from gameoptions.lua
 
 __CORE_DETAILMONITOR_MAPEDITOR = __CORE_DETAILMONITOR_MAPEDITOR or {
   opacity = 98,
 }
 
-local function init()
+local MapMenu = nil
+local ModLua = {}
+
+function ModLua.init()
   Menus = Menus or {}
-  table.insert(Menus, menu)
-  --[[   if Helper then
-    Helper.registerMenu(menu)
-  end ]]
-end
-
-function menu.cleanup()
-  menu.noupdate = nil
-  if menu.holomap ~= 0 then
-    C.RemoveHoloMap()
-    menu.holomap = 0
+  table.insert(Menus, UixMenu)
+  if Helper then
+    Helper.registerMenu(UixMenu)
   end
-  menu.activatemap = nil
-
-  menu.selectedcomponent = 0
-  menu.selectedComponentSector = nil
-  menu.selectedComponentOffset = nil
+  MapMenu = Helper.getMenu("MapMenu")
+  DebugError("mapEditor.registerCallbacks")
+  MapMenu.registerCallback("buttonToggleObjectList_on_start", UixMenu.buttonToggleObjectList_on_start)
+  MapMenu.registerCallback("createSideBar_on_start", UixMenu.createSideBar_on_start)
+  MapMenu.registerCallback("createInfoFrame_on_menu_infoTableMode", UixMenu.displayMapEditor)
+  MapMenu.registerCallback("cleanup", UixMenu.cleanup)
 end
 
-function menu.onShowMenu()
-  menu.sideBarWidth = Helper.scaleX(Helper.sidebarWidth)
+function UixMenu.cleanup()
+  DebugError("UixMenu.cleanup: Starting")
+  UixMenu.noupdate = nil
+  if UixMenu.holomap ~= 0 then
+    C.RemoveHoloMap()
+    UixMenu.holomap = 0
+  end
+  UixMenu.activatemap = nil
 
-  if menu.mapname == "" then
+  UixMenu.selectedcomponent = 0
+  UixMenu.selectedComponentSector = nil
+  UixMenu.selectedComponentOffset = nil
+  DebugError("UixMenu.cleanup: Finished")
+end
+
+function UixMenu.addToLeftBar(config)
+  DebugError("mapEditor.addToLeftBar")
+  local mapEditorMenuExists
+  for _, leftBarEntry in ipairs(config.leftBar) do
+    if leftBarEntry.mode == "mapeditor" then
+      mapEditorMenuExists = true
+    end
+  end
+  if not mapEditorMenuExists then
+    local mapEditorBtn = {
+      name = "Map Editor",
+      icon = "shipbuildst_repair",
+      mode = "mapeditor",
+      helpOverlayID = "mapmenu_sidebar_mapeditor",
+      helpOverlayText = "Map Editor"
+    }
+
+    table.insert(config.leftBar, 3, mapEditorBtn)
+  end
+  UixMenu.config = config
+end
+
+function UixMenu.buttonToggleObjectList_on_start(objectlistparam, config)
+  DebugError("mapEditor.buttonToggleObjectList_on_start")
+  UixMenu.addToLeftBar(config)
+end
+
+function UixMenu.createSideBar_on_start(config)
+  DebugError("mapEditor.createSideBar_on_start")
+  UixMenu.addToLeftBar(config)
+end
+
+function UixMenu.displayMapEditor()
+  DebugError("UixMenu.displayMapEditor: Starting")
+  UixMenu.cleanup()
+
+  -- Log existing frames on optionsLayer before cleanup
+  if UixMenu.frameData and UixMenu.frameData[EditorConfig.optionsLayer] then
+    DebugError("UixMenu.displayMapEditor: Pre-cleanup frameData for layer " .. EditorConfig.optionsLayer .. ": " ..
+      tostring(UixMenu.frameData[EditorConfig.optionsLayer]))
+  else
+    DebugError("UixMenu.displayMapEditor: No frameData for layer " .. EditorConfig.optionsLayer .. " before cleanup")
+  end
+
+  DebugError("UixMenu.displayMapEditor: Clearing data for layer " .. EditorConfig.optionsLayer)
+  Helper.clearDataForRefresh(UixMenu, EditorConfig.optionsLayer)
+
+  DebugError("UixMenu.displayMapEditor: Creating frame handle for layer " .. EditorConfig.optionsLayer)
+  UixMenu.mainFrame = Helper.createFrameHandle(UixMenu, {
+    layer = EditorConfig.optionsLayer,
+    standardButtons = { back = true, close = true },
+    width = Helper.viewWidth,
+    height = Helper.viewHeight,
+    x = 0,
+    y = 0,
+  })
+  if UixMenu.mainFrame == nil then
+    DebugError("UixMenu.displayMapEditor: ERROR - mainFrame is nil after creation")
+    return
+  else
+    -- Log the frame ID (assuming Helper provides a way to access it)
+    -- Note: We don’t have direct access to frame ID, but we can infer it’s created
+    DebugError("UixMenu.displayMapEditor: mainFrame created successfully")
+  end
+
+  DebugError("UixMenu.displayMapEditor: Adding table to mainFrame")
+  local ftable = UixMenu.mainFrame:addTable(1, { tabOrder = 1, width = 200, x = 100, y = 100 })
+
+  DebugError("UixMenu.displayMapEditor: Adding row and button")
+  local row = ftable:addRow(true)
+  row[1]:createButton():setText("Start Map Editor")
+  row[1].handlers.onClick = function()
+    DebugError("UixMenu.displayMapEditor: Button clicked, starting map editor")
+    UixMenu.onShowMenu()
+  end
+
+  DebugError("UixMenu.displayMapEditor: Displaying mainFrame")
+  UixMenu.mainFrame:display()
+  DebugError("UixMenu.displayMapEditor: Display called successfully")
+
+  -- Log frameData after display
+  if UixMenu.frameData and UixMenu.frameData[EditorConfig.optionsLayer] then
+    DebugError("UixMenu.displayMapEditor: Post-display frameData for layer " .. EditorConfig.optionsLayer .. ": " ..
+      tostring(UixMenu.frameData[EditorConfig.optionsLayer]))
+  end
+
+  DebugError("UixMenu.displayMapEditor: Finished")
+end
+
+function UixMenu.onShowMenu()
+  DebugError("UixMenu.onShowMenu: Starting")
+  -- Mimic cleanup from displayInit
+  Helper.clearDataForRefresh(UixMenu, EditorConfig.optionsLayer)
+  Helper.clearFrame(UixMenu, EditorConfig.topLevelLayer)
+  UixMenu.cleanup()
+
+  UixMenu.sideBarWidth = Helper.scaleX(Helper.sidebarWidth)
+  DebugError("UixMenu.onShowMenu: Sidebar width set to " .. tostring(UixMenu.sideBarWidth))
+
+  if UixMenu.mapname == "" then
+    DebugError("UixMenu.onShowMenu: Mapname is empty, fetching galaxy data")
     local galaxy = C.GetPlayerGalaxyID()
+    DebugError("UixMenu.onShowMenu: Galaxy ID = " .. tostring(galaxy))
     local galaxymacro = GetComponentData(ConvertStringToLuaID(tostring(galaxy)), "macro")
-    menu.mapname = string.match(galaxymacro, "(.-)_galaxy_macro") or ""
-    local cropbasename = string.match(menu.mapname, "^basegame_map_(.+)")
+    DebugError("UixMenu.onShowMenu: Galaxy macro = " .. tostring(galaxymacro))
+    UixMenu.mapname = string.match(galaxymacro, "(.-)_galaxy_macro") or ""
+    DebugError("UixMenu.onShowMenu: Initial mapname = " .. UixMenu.mapname)
+    local cropbasename = string.match(UixMenu.mapname, "^basegame_map_(.+)")
     if cropbasename then
-      menu.mapname = cropbasename
+      UixMenu.mapname = cropbasename
+      DebugError("UixMenu.onShowMenu: Cropped mapname = " .. UixMenu.mapname)
     end
   end
 
-  menu.objects = {}
+  UixMenu.objects = {}
   local n = C.GetNumMapEditorObjectList()
+  DebugError("UixMenu.onShowMenu: Number of map editor objects = " .. tostring(n))
   if n > 0 then
     local buf = ffi.new("UniverseID[?]", n)
     n = C.GetMapEditorObjectList(buf, n)
+    DebugError("UixMenu.onShowMenu: Retrieved " .. tostring(n) .. " objects")
     for i = 0, n - 1 do
       local id = buf[i]
       C.SetObjectForcedRadarVisible(id, true)
       C.SetKnownTo(id, "player")
-      table.insert(menu.objects, { id = id })
+      table.insert(UixMenu.objects, { id = id })
     end
+    DebugError("UixMenu.onShowMenu: Objects table populated with " .. #UixMenu.objects .. " entries")
   end
 
-  menu.getRegionDefinitions()
-  menu.getConstructionPlans()
-  menu.getFactions()
+  DebugError("UixMenu.onShowMenu: Calling getRegionDefinitions")
+  UixMenu.getRegionDefinitions()
+  DebugError("UixMenu.onShowMenu: Calling getConstructionPlans")
+  UixMenu.getConstructionPlans()
+  DebugError("UixMenu.onShowMenu: Calling getFactions")
+  UixMenu.getFactions()
 
   -- map
-  menu.rendertargetWidth = Helper.viewWidth
-  menu.rendertargetHeight = Helper.viewHeight
+  UixMenu.rendertargetWidth = Helper.viewWidth
+  UixMenu.rendertargetHeight = Helper.viewHeight
+  DebugError("UixMenu.onShowMenu: Render target set to " ..
+    UixMenu.rendertargetWidth .. "x" .. UixMenu.rendertargetHeight)
 
-  C.RevealMap()
+  --C.RevealMap()
+  AddUITriggeredEvent("CheatMenu", "full_reveal")
+  DebugError("UixMenu.onShowMenu: UI event 'full_reveal' triggered")
 
-  menu.displayMenu()
+  DebugError("UixMenu.onShowMenu: Calling displayMenu")
+  UixMenu.displayMenu()
+  DebugError("UixMenu.onShowMenu: Finished")
 end
 
-function menu.getRegionDefinitions()
-  menu.regiondefinitions = {}
-  menu.regiondefinitionbyref = {}
+function UixMenu.displayMenu()
+  DebugError("UixMenu.displayMenu: Starting")
+  DebugError("UixMenu.displayMenu: Calling createMainFrame")
+  UixMenu.createMainFrame()
+  DebugError("UixMenu.displayMenu: Calling createInfoFrame")
+  UixMenu.createInfoFrame()
+  DebugError("UixMenu.displayMenu: Finished")
+end
+
+function UixMenu.createMainFrame()
+  DebugError("UixMenu.createMainFrame: Starting")
+  UixMenu.createMainFrameRunning = true
+  DebugError("UixMenu.createMainFrame: Clearing old widgets")
+  Helper.removeAllWidgetScripts(UixMenu, EditorConfig.mainFrameLayer)
+
+  DebugError("UixMenu.createMainFrame: Creating frame handle")
+  UixMenu.mainFrame = Helper.createFrameHandle(UixMenu, {
+    layer = EditorConfig.mainFrameLayer,
+    standardButtons = { back = true, close = true },
+    width = Helper.viewWidth,
+    height = Helper.viewHeight,
+    x = 0,
+    y = 0,
+  })
+  if UixMenu.mainFrame == nil then
+    DebugError("UixMenu.createMainFrame: ERROR - mainFrame is nil after creation")
+  else
+    DebugError("UixMenu.createMainFrame: mainFrame created successfully")
+  end
+
+  -- rendertarget
+  local alpha = __CORE_DETAILMONITOR_MAPEDITOR.opacity
+  DebugError("UixMenu.createMainFrame: Adding render target with alpha = " .. tostring(alpha))
+  UixMenu.mainFrame:addRenderTarget({
+    width = UixMenu.rendertargetWidth,
+    height = UixMenu.rendertargetHeight,
+    x = 0,
+    y = 0,
+    scaling = false,
+    alpha = alpha,
+    clear = false
+  })
+
+  -- left bar
+  DebugError("UixMenu.createMainFrame: Creating sidebar")
+  UixMenu.createSideBar(UixMenu.mainFrame)
+
+  DebugError("UixMenu.createMainFrame: Displaying mainFrame")
+  UixMenu.mainFrame:display()
+  DebugError("UixMenu.createMainFrame: Finished")
+end
+
+function UixMenu.getRegionDefinitions()
+  UixMenu.regiondefinitions = {}
+  UixMenu.regiondefinitionbyref = {}
   local n = C.GetNumRegionDefinitions()
   if n > 0 then
     local buf = ffi.new("RegionDefinition[?]", n)
@@ -534,18 +490,18 @@ function menu.getRegionDefinitions()
         table.insert(entry.resources, resource)
       end
 
-      table.insert(menu.regiondefinitions, entry)
-      menu.regiondefinitionbyref[entry.id] = entry
+      table.insert(UixMenu.regiondefinitions, entry)
+      UixMenu.regiondefinitionbyref[entry.id] = entry
     end
   end
 end
 
-function menu.getConstructionPlans()
-  menu.constructionplans = {}
+function UixMenu.getConstructionPlans()
+  UixMenu.constructionplans = {}
   local n = C.GetNumConstructionPlans()
   local buf = ffi.new("UIConstructionPlan[?]", n)
   n = C.GetConstructionPlans(buf, n)
-  local ischeatversion = IsCheatVersion()
+  local ischeatversion = true
   for i = 0, n - 1 do
     local id = ffi.string(buf[i].id)
     local source = ffi.string(buf[i].source)
@@ -581,81 +537,44 @@ function menu.getConstructionPlans()
         end
       end
 
-      table.insert(menu.constructionplans,
+      table.insert(UixMenu.constructionplans,
         { id = id, text = ffi.string(buf[i].name), icon = "", displayremoveoption = false, active = isvalid, mouseovertext = (mouseovertext or "") })
     end
   end
-  table.sort(menu.constructionplans, function(a, b) return a.text < b.text end)
+  table.sort(UixMenu.constructionplans, function(a, b) return a.text < b.text end)
 end
 
-function menu.getFactions()
+function UixMenu.getFactions()
   -- all factions
-  menu.factions = {}
+  UixMenu.factions = {}
   local n = C.GetNumAllFactions(false)
   local buf = ffi.new("const char*[?]", n)
   n = C.GetAllFactions(buf, n, false)
   for i = 0, n - 1 do
     local id = ffi.string(buf[i])
     if id ~= "player" then
-      table.insert(menu.factions, { id = id, text = GetFactionData(id, "name"), icon = "", displayremoveoption = false })
+      table.insert(UixMenu.factions,
+        { id = id, text = GetFactionData(id, "name"), icon = "", displayremoveoption = false })
     end
   end
-  table.sort(menu.factions, function(a, b) return a.text < b.text end)
+  table.sort(UixMenu.factions, function(a, b) return a.text < b.text end)
   -- player faction in front
-  table.insert(menu.factions, 1, { id = "player", text = "Player", icon = "", displayremoveoption = false }) -- TEMPTEXT Florian
+  table.insert(UixMenu.factions, 1, { id = "player", text = "Player", icon = "", displayremoveoption = false }) -- TEMPTEXT Florian
 end
 
-function menu.displayMenu()
-  menu.createMainFrame()
-  menu.createInfoFrame()
-end
-
-function menu.createMainFrame()
-  menu.createMainFrameRunning = true
-  -- remove old data
-  Helper.removeAllWidgetScripts(menu, config.mainFrameLayer)
-
-  menu.mainFrame = Helper.createFrameHandle(menu, {
-    layer = config.mainFrameLayer,
-    standardButtons = { back = true, close = true },
-    width = Helper.viewWidth,
-    height = Helper.viewHeight,
-    x = 0,
-    y = 0,
-  })
-
-  -- rendertarget
-  local alpha = __CORE_DETAILMONITOR_MAPEDITOR.opacity
-  menu.mainFrame:addRenderTarget({
-    width = menu.rendertargetWidth,
-    height = menu.rendertargetHeight,
-    x = 0,
-    y = 0,
-    scaling = false,
-    alpha =
-        alpha,
-    clear = false
-  })
-
-  -- left bar
-  menu.createSideBar(menu.mainFrame)
-
-  menu.mainFrame:display()
-end
-
-function menu.refreshMainFrame()
-  if not menu.createMainFrameRunning then
-    menu.createMainFrame()
+function UixMenu.refreshMainFrame()
+  if not UixMenu.createMainFrameRunning then
+    UixMenu.createMainFrame()
   end
 end
 
-function menu.createSideBar(frame)
-  local spacingHeight = menu.sideBarWidth / 4
-  local defaultInteractiveObject = menu.spawnTableMode == nil
+function UixMenu.createSideBar(frame)
+  local spacingHeight = UixMenu.sideBarWidth / 4
+  local defaultInteractiveObject = UixMenu.spawnTableMode == nil
   local ftable = frame:addTable(1,
     {
       tabOrder = 21,
-      width = menu.sideBarWidth,
+      width = UixMenu.sideBarWidth,
       x = Helper.frameBorder,
       y = Helper.frameBorder,
       scaling = false,
@@ -665,7 +584,7 @@ function menu.createSideBar(frame)
           defaultInteractiveObject
     })
 
-  local leftbar = config.leftBar
+  local leftbar = EditorConfig.leftBar
   for _, entry in ipairs(leftbar) do
     if (entry.condition == nil) or entry.condition() then
       if not entry.spacing then
@@ -674,13 +593,13 @@ function menu.createSideBar(frame)
           local selectedmode = false
           if type(entry.mode) == "table" then
             for _, mode in ipairs(entry) do
-              if mode == menu.spawnTableMode then
+              if mode == UixMenu.spawnTableMode then
                 selectedmode = true
                 break
               end
             end
           else
-            if entry.mode == menu.spawnTableMode then
+            if entry.mode == UixMenu.spawnTableMode then
               selectedmode = true
             end
           end
@@ -693,7 +612,7 @@ function menu.createSideBar(frame)
     if (entry.condition == nil) or entry.condition() then
       if entry.spacing then
         local row = ftable:addRow(false, { fixed = true })
-        row[1]:createIcon("mapst_seperator_line", { width = menu.sideBarWidth, height = spacingHeight })
+        row[1]:createIcon("mapst_seperator_line", { width = UixMenu.sideBarWidth, height = spacingHeight })
       else
         local mode = entry.mode
         if type(entry.mode) == "table" then
@@ -703,13 +622,13 @@ function menu.createSideBar(frame)
         local bgcolor = Color["row_title_background"]
         if type(entry.mode) == "table" then
           for _, mode in ipairs(entry) do
-            if mode == menu.spawnTableMode then
+            if mode == UixMenu.spawnTableMode then
               bgcolor = Color["row_background_blue"]
               break
             end
           end
         else
-          if entry.mode == menu.spawnTableMode then
+          if entry.mode == UixMenu.spawnTableMode then
             bgcolor = Color["row_background_blue"]
           end
         end
@@ -717,7 +636,7 @@ function menu.createSideBar(frame)
 
         row[1]:createButton({
           active = entry.active,
-          height = menu.sideBarWidth,
+          height = UixMenu.sideBarWidth,
           bgColor = bgcolor,
           mouseOverText = entry
               .name,
@@ -725,72 +644,84 @@ function menu.createSideBar(frame)
           helpOverlayText = entry.helpOverlayText
         }):setIcon(entry.icon,
           { color = color })
-        row[1].handlers.onClick = function() return menu.buttonToggleSpawnTable(mode) end
+        row[1].handlers.onClick = function() return UixMenu.buttonToggleSpawnTable(mode) end
       end
     end
   end
 end
 
-function menu.createInfoFrame()
-  menu.createInfoFrameRunning = true
-  -- remove old data
-  Helper.removeAllWidgetScripts(menu, config.infoFrameLayer)
+function UixMenu.createInfoFrame()
+  DebugError("UixMenu.createInfoFrame: Starting")
+  UixMenu.createInfoFrameRunning = true
+  DebugError("UixMenu.createInfoFrame: Clearing old widgets")
+  Helper.removeAllWidgetScripts(UixMenu, EditorConfig.infoFrameLayer)
 
-  menu.infoFrame = Helper.createFrameHandle(menu, {
-    layer = config.infoFrameLayer,
+  DebugError("UixMenu.createInfoFrame: Creating frame handle")
+  UixMenu.infoFrame = Helper.createFrameHandle(UixMenu, {
+    layer = EditorConfig.infoFrameLayer,
     standardButtons = {},
     width = Helper.viewWidth,
     height = Helper.viewHeight,
     x = 0,
     y = 0,
   })
+  if UixMenu.infoFrame == nil then
+    DebugError("UixMenu.createInfoFrame: ERROR - infoFrame is nil after creation")
+  else
+    DebugError("UixMenu.createInfoFrame: infoFrame created successfully")
+  end
 
-  menu.createSpawnTable(menu.infoFrame)
-  menu.createComponentTable(menu.infoFrame)
-  menu.createExportTable(menu.infoFrame)
+  DebugError("UixMenu.createInfoFrame: Creating spawn table")
+  UixMenu.createSpawnTable(UixMenu.infoFrame)
+  DebugError("UixMenu.createInfoFrame: Creating component table")
+  UixMenu.createComponentTable(UixMenu.infoFrame)
+  DebugError("UixMenu.createInfoFrame: Creating export table")
+  UixMenu.createExportTable(UixMenu.infoFrame)
 
-  menu.infoFrame:display()
+  DebugError("UixMenu.createInfoFrame: Displaying infoFrame")
+  UixMenu.infoFrame:display()
+  DebugError("UixMenu.createInfoFrame: Finished")
 end
 
-function menu.refreshInfoFrame()
-  if not menu.createInfoFrameRunning then
-    menu.createInfoFrame()
+function UixMenu.refreshInfoFrame()
+  if not UixMenu.createInfoFrameRunning then
+    UixMenu.createInfoFrame()
   end
 end
 
-function menu.createSpawnTable(frame)
+function UixMenu.createSpawnTable(frame)
   local numcols = 3
   local ftable = frame:addTable(numcols,
     {
       tabOrder = 1,
       width = 500,
-      x = Helper.frameBorder + menu.sideBarWidth + 2 * Helper.borderSize,
+      x = Helper.frameBorder + UixMenu.sideBarWidth + 2 * Helper.borderSize,
       y = Helper
           .frameBorder
     })
 
-  if menu.spawnTableMode == "object" then
+  if UixMenu.spawnTableMode == "object" then
     local row = ftable:addRow(nil, { fixed = true })
     row[1]:setColSpan(numcols):createText("Spawn Object", Helper.headerRowCenteredProperties) -- TEMPTEXT Florian
 
     local row = ftable:addRow(true, { fixed = true })
     row[1]:setColSpan(numcols):createEditBox({ height = Helper.standardTextHeight, defaultText = "Find macro..." })
-        :setText(menu.macrosearch) -- TEMPTEXT Florian
+        :setText(UixMenu.macrosearch) -- TEMPTEXT Florian
     row[1].handlers.onTextChanged = function(_, text, textchanged)
-      menu.macrosearch = text; menu.refreshInfoFrame2()
+      UixMenu.macrosearch = text; UixMenu.refreshInfoFrame2()
     end
     row[1].handlers.onEditBoxActivated = function()
-      menu.showMacroSuggestions = true; menu.refreshInfoFrame2()
+      UixMenu.showMacroSuggestions = true; UixMenu.refreshInfoFrame2()
     end
     row[1].handlers.onEditBoxDeactivated = function()
-      menu.showMacroSuggestions = false; menu.refreshInfoFrame2(); menu.refreshInfoFrame()
+      UixMenu.showMacroSuggestions = false; UixMenu.refreshInfoFrame2(); UixMenu.refreshInfoFrame()
     end
 
     local row = ftable:addRow(nil, { fixed = true })
-    row[1]:setColSpan(numcols):createText(menu.macroSearchText, { color = menu.macroSearchColor })
+    row[1]:setColSpan(numcols):createText(UixMenu.macroSearchText, { color = UixMenu.macroSearchColor })
 
     local searchhistory = {}
-    for macro, name in pairs(menu.searchindex) do
+    for macro, name in pairs(UixMenu.searchindex) do
       table.insert(searchhistory, { macro = macro, name = name })
     end
     table.sort(searchhistory, Helper.sortName)
@@ -804,7 +735,7 @@ function menu.createSpawnTable(frame)
       for _, entry in ipairs(searchhistory) do
         local row = ftable:addRow(true, {})
         row[1]:setColSpan(numcols):createButton({}):setText(entry.name .. " (" .. entry.macro .. ")")
-        row[1].handlers.onClick = function() menu.macrosearch = entry.macro end
+        row[1].handlers.onClick = function() UixMenu.macrosearch = entry.macro end
       end
     else
       local row = ftable:addRow(true, {})
@@ -814,57 +745,57 @@ function menu.createSpawnTable(frame)
     local row = ftable:addRow(true, {})
     row[3]:createButton({}):setText("Clear", { halign = "center" }) -- TEMPTEXT Florian
     row[3].handlers.onClick = function()
-      menu.searchindex = {}; menu.refreshInfoFrame()
+      UixMenu.searchindex = {}; UixMenu.refreshInfoFrame()
     end
-  elseif menu.spawnTableMode == "region" then
+  elseif UixMenu.spawnTableMode == "region" then
     local row = ftable:addRow(nil, { fixed = true })
     row[1]:setColSpan(numcols):createText("Spawn Region", Helper.headerRowCenteredProperties) -- TEMPTEXT Florian
 
     local regionoptions = {}
-    for _, definition in ipairs(menu.regiondefinitions) do
+    for _, definition in ipairs(UixMenu.regiondefinitions) do
       table.insert(regionoptions, { id = definition.id, text = definition.id, icon = "", displayremoveoption = false })
     end
 
     local row = ftable:addRow(true, {})
     row[1]:createText("Region Definition:") -- TEMPTEXT Florian
     row[2]:setColSpan(2):createDropDown(regionoptions,
-      { height = Helper.standardTextHeight, startOption = menu.regiondefinition }):setTextProperties({
-      fontsize = config
+      { height = Helper.standardTextHeight, startOption = UixMenu.regiondefinition }):setTextProperties({
+      fontsize = EditorConfig
           .mapFontSize
     })
-    row[2].handlers.onDropDownConfirmed = function(_, id) menu.regiondefinition = id end
+    row[2].handlers.onDropDownConfirmed = function(_, id) UixMenu.regiondefinition = id end
 
     ftable:addEmptyRow()
 
     local row = ftable:addRow(nil, {})
-    row[1]:setColSpan(numcols):createText(menu.regionSearchText)
-  elseif menu.spawnTableMode == "station" then
+    row[1]:setColSpan(numcols):createText(UixMenu.regionSearchText)
+  elseif UixMenu.spawnTableMode == "station" then
     local row = ftable:addRow(nil, { fixed = true })
     row[1]:setColSpan(numcols):createText("Spawn Construction Plan Station", Helper.headerRowCenteredProperties) -- TEMPTEXT Florian
 
     local row = ftable:addRow(true, {})
     row[1]:createText("Construction Plan:") -- TEMPTEXT Florian
-    row[2]:setColSpan(2):createDropDown(menu.constructionplans,
-      { height = Helper.standardTextHeight, startOption = menu.constructionplan }):setTextProperties({
-      fontsize = config
+    row[2]:setColSpan(2):createDropDown(UixMenu.constructionplans,
+      { height = Helper.standardTextHeight, startOption = UixMenu.constructionplan }):setTextProperties({
+      fontsize = EditorConfig
           .mapFontSize
     })
-    row[2].handlers.onDropDownConfirmed = function(_, id) menu.constructionplan = id end
+    row[2].handlers.onDropDownConfirmed = function(_, id) UixMenu.constructionplan = id end
 
     local row = ftable:addRow(true, {})
     row[1]:createText("Station Owner:") -- TEMPTEXT Florian
-    row[2]:setColSpan(2):createDropDown(menu.factions,
-      { height = Helper.standardTextHeight, startOption = menu.cpfaction }):setTextProperties({
-      fontsize = config
+    row[2]:setColSpan(2):createDropDown(UixMenu.factions,
+      { height = Helper.standardTextHeight, startOption = UixMenu.cpfaction }):setTextProperties({
+      fontsize = EditorConfig
           .mapFontSize
     })
-    row[2].handlers.onDropDownConfirmed = function(_, id) menu.cpfaction = id end
+    row[2].handlers.onDropDownConfirmed = function(_, id) UixMenu.cpfaction = id end
 
     ftable:addEmptyRow()
 
     local row = ftable:addRow(nil, {})
-    row[1]:setColSpan(numcols):createText(menu.stationSearchText)
-  elseif menu.spawnTableMode == "settings" then
+    row[1]:setColSpan(numcols):createText(UixMenu.stationSearchText)
+  elseif UixMenu.spawnTableMode == "settings" then
     local row = ftable:addRow(nil, { fixed = true })
     row[1]:setColSpan(numcols):createText("Settings", Helper.headerRowCenteredProperties) -- TEMPTEXT Florian
 
@@ -878,9 +809,9 @@ function menu.createSpawnTable(frame)
       hideMaxValue = true,
     })
     row[2].handlers.onSliderCellChanged = function(_, value)
-      __CORE_DETAILMONITOR_MAPEDITOR.opacity = value; C.SaveUIUserData(); menu.refreshMainFrame()
+      __CORE_DETAILMONITOR_MAPEDITOR.opacity = value; C.SaveUIUserData(); UixMenu.refreshMainFrame()
     end
-  elseif menu.spawnTableMode == "highway" then
+  elseif UixMenu.spawnTableMode == "highway" then
     local row = ftable:addRow(nil, { fixed = true })
     row[1]:setColSpan(numcols):createText("Spawn Local Highway", Helper.headerRowCenteredProperties) -- TEMPTEXT Florian
 
@@ -889,24 +820,24 @@ function menu.createSpawnTable(frame)
   end
 end
 
-function menu.macroSearchText()
-  if C.FindMacro(menu.macrosearch) then
-    local name = GetMacroData(menu.macrosearch, "name")
-    menu.searchindex[string.lower(menu.macrosearch)] = name
+function UixMenu.macroSearchText()
+  if C.FindMacro(UixMenu.macrosearch) then
+    local name = GetMacroData(UixMenu.macrosearch, "name")
+    UixMenu.searchindex[string.lower(UixMenu.macrosearch)] = name
 
-    local class = ffi.string(C.GetMacroClass(menu.macrosearch))
+    local class = ffi.string(C.GetMacroClass(UixMenu.macrosearch))
     local postfix = ""
-    if IsMacroClass(menu.macrosearch, "object") then
+    if IsMacroClass(UixMenu.macrosearch, "object") then
       postfix = "\n\nCtrl+RMB on the map to spawn this object"                                     -- TEMPTEXT Florian
     end
     return ColorText["text_positive"] .. "[Found]\27X " .. name .. "\nClass: " .. class .. postfix -- TEMPTEXT Florian
   end
-  return menu.macrosearch .. "\n \n \n "
+  return UixMenu.macrosearch .. "\n \n \n "
 end
 
-function menu.regionSearchText()
-  if menu.regiondefinition ~= "" then
-    local def = menu.regiondefinitionbyref[menu.regiondefinition]
+function UixMenu.regionSearchText()
+  if UixMenu.regiondefinition ~= "" then
+    local def = UixMenu.regiondefinitionbyref[UixMenu.regiondefinition]
     if def then
       local text = ""
 
@@ -986,78 +917,78 @@ function menu.regionSearchText()
   return ""
 end
 
-function menu.stationSearchText()
-  if menu.constructionplan ~= "" then
+function UixMenu.stationSearchText()
+  if UixMenu.constructionplan ~= "" then
     return "\nCtrl+RMB on the map to spawn this station" -- TEMPTEXT Florian
   end
   return ""
 end
 
-function menu.macroSearchColor()
-  if C.FindMacro(menu.macrosearch) then
+function UixMenu.macroSearchColor()
+  if C.FindMacro(UixMenu.macrosearch) then
     return Color["text_normal"]
   end
   return Color["text_inactive"]
 end
 
-function menu.createComponentTable(frame)
+function UixMenu.createComponentTable(frame)
   local width = 500
 
   local numcols = 3
   local ftable = frame:addTable(numcols,
     { tabOrder = 2, width = width, x = Helper.viewWidth - width - Helper.frameBorder, y = Helper.frameBorder })
 
-  if menu.gateconnection ~= menu.selectedcomponent then
-    menu.gateconnection = nil
+  if UixMenu.gateconnection ~= UixMenu.selectedcomponent then
+    UixMenu.gateconnection = nil
   end
 
   local row = ftable:addRow(nil, { fixed = true })
   row[1]:setColSpan(numcols):createText("Selected Component", Helper.headerRowCenteredProperties) -- TEMPTEXT Florian
 
-  if menu.selectedcomponent ~= 0 then
-    if C.IsComponentClass(menu.selectedcomponent, "object") then
-      menu.selectedComponentSector = C.GetContextByClass(menu.selectedcomponent, "sector", false)
-      menu.selectedComponentOffset = C.GetObjectPositionInSector(menu.selectedcomponent)
+  if UixMenu.selectedcomponent ~= 0 then
+    if C.IsComponentClass(UixMenu.selectedcomponent, "object") then
+      UixMenu.selectedComponentSector = C.GetContextByClass(UixMenu.selectedcomponent, "sector", false)
+      UixMenu.selectedComponentOffset = C.GetObjectPositionInSector(UixMenu.selectedcomponent)
 
-      menu.addNameRows(ftable, menu.selectedcomponent)
+      UixMenu.addNameRows(ftable, UixMenu.selectedcomponent)
 
-      menu.addObjectOffsetRow(ftable, "X", "x", "m")               -- TEMPTEXT Florian
-      menu.addObjectOffsetRow(ftable, "Y", "y", "m")               -- TEMPTEXT Florian
-      menu.addObjectOffsetRow(ftable, "Z", "z", "m")               -- TEMPTEXT Florian
-      menu.addObjectOffsetRow(ftable, "Yaw", "yaw", "°", true)     -- TEMPTEXT Florian
-      menu.addObjectOffsetRow(ftable, "Pitch", "pitch", "°", true) -- TEMPTEXT Florian
-      menu.addObjectOffsetRow(ftable, "Roll", "roll", "°", true)   -- TEMPTEXT Florian
+      UixMenu.addObjectOffsetRow(ftable, "X", "x", "m")               -- TEMPTEXT Florian
+      UixMenu.addObjectOffsetRow(ftable, "Y", "y", "m")               -- TEMPTEXT Florian
+      UixMenu.addObjectOffsetRow(ftable, "Z", "z", "m")               -- TEMPTEXT Florian
+      UixMenu.addObjectOffsetRow(ftable, "Yaw", "yaw", "°", true)     -- TEMPTEXT Florian
+      UixMenu.addObjectOffsetRow(ftable, "Pitch", "pitch", "°", true) -- TEMPTEXT Florian
+      UixMenu.addObjectOffsetRow(ftable, "Roll", "roll", "°", true)   -- TEMPTEXT Florian
 
       ftable:addEmptyRow()
 
-      local luaselectedcomponent = ConvertStringToLuaID(tostring(menu.selectedcomponent))
+      local luaselectedcomponent = ConvertStringToLuaID(tostring(UixMenu.selectedcomponent))
       local owner, destination, destinationsector = GetComponentData(luaselectedcomponent, "owner", "destination",
         "destinationsector")
 
       local row = ftable:addRow(true, {})
       row[1]:createText("Owner:") -- TEMPTEXT Florian
-      row[2]:setColSpan(2):createDropDown(menu.factions, { height = Helper.standardTextHeight, startOption = owner })
-          :setTextProperties({ fontsize = config.mapFontSize })
-      row[2].handlers.onDropDownConfirmed = function(_, id) C.SetComponentOwner(menu.selectedcomponent, id) end
+      row[2]:setColSpan(2):createDropDown(UixMenu.factions, { height = Helper.standardTextHeight, startOption = owner })
+          :setTextProperties({ fontsize = EditorConfig.mapFontSize })
+      row[2].handlers.onDropDownConfirmed = function(_, id) C.SetComponentOwner(UixMenu.selectedcomponent, id) end
 
-      if C.IsComponentClass(menu.selectedcomponent, "checkpoint") then
+      if C.IsComponentClass(UixMenu.selectedcomponent, "checkpoint") then
         ftable:addEmptyRow()
 
         local row = ftable:addRow(true, {})
         row[1]:setColSpan(2):createText("Sequence:") -- TEMPTEXT Florian
         local editbox = row[3]:createEditBox({ height = Helper.standardTextHeight }):setText(C.GetCheckpointSequence(
-          menu.selectedcomponent))
+          UixMenu.selectedcomponent))
         row[3].handlers.onTextChanged = function(_, text, textchanged)
           if (text ~= "") and tonumber(text) then
             C
-                .SetCheckpointSequence(menu.selectedcomponent, tonumber(text))
+                .SetCheckpointSequence(UixMenu.selectedcomponent, tonumber(text))
           end
         end
         row[3].handlers.onEditBoxDeactivated = function(_, text, textchanged)
           C.SetEditBoxText(editbox.id,
-            tostring(C.GetCheckpointSequence(menu.selectedcomponent)))
+            tostring(C.GetCheckpointSequence(UixMenu.selectedcomponent)))
         end
-      elseif C.IsComponentClass(menu.selectedcomponent, "gate") then
+      elseif C.IsComponentClass(UixMenu.selectedcomponent, "gate") then
         ftable:addEmptyRow()
 
         if destination then
@@ -1070,17 +1001,17 @@ function menu.createComponentTable(frame)
           local row = ftable:addRow(true, {})
           row[3]:createButton({}):setText("Remove Connection", { halign = "center" }) -- TEMPTEXT Florian
           row[3].handlers.onClick = function()
-            C.RemoveGateConnection(menu.selectedcomponent, C.ConvertStringTo64Bit(tostring(destination))); menu
+            C.RemoveGateConnection(UixMenu.selectedcomponent, C.ConvertStringTo64Bit(tostring(destination))); UixMenu
                 .refreshInfoFrame()
           end
         else
           local row = ftable:addRow(true, {})
           row[1]:setColSpan(3):createButton({}):setText("Add Gate Connection") -- TEMPTEXT Florian
           row[1].handlers.onClick = function()
-            menu.gateconnection = menu.selectedcomponent; menu.refreshInfoFrame()
+            UixMenu.gateconnection = UixMenu.selectedcomponent; UixMenu.refreshInfoFrame()
           end
 
-          if menu.gateconnection then
+          if UixMenu.gateconnection then
             local row = ftable:addRow(true, {})
             row[1]:setColSpan(3):createText("Select another inactive gate to set the connection", { wordwrap = true }) -- TEMPTEXT Florian
           end
@@ -1092,75 +1023,75 @@ function menu.createComponentTable(frame)
       local row = ftable:addRow(true, {})
       row[3]:createButton({}):setText("Remove", { halign = "center" }) -- TEMPTEXT Florian
       row[3].handlers.onClick = function()
-        C.RemoveComponent(menu.selectedcomponent); menu.selectedcomponent = 0; menu.refreshInfoFrame()
+        C.RemoveComponent(UixMenu.selectedcomponent); UixMenu.selectedcomponent = 0; UixMenu.refreshInfoFrame()
       end
-    elseif C.IsComponentClass(menu.selectedcomponent, "region") then
-      menu.selectedComponentCluster = C.GetContextByClass(menu.selectedcomponent, "cluster", false)
-      menu.selectedComponentOffset = C.GetPositionalOffset(menu.selectedcomponent, 0)
+    elseif C.IsComponentClass(UixMenu.selectedcomponent, "region") then
+      UixMenu.selectedComponentCluster = C.GetContextByClass(UixMenu.selectedcomponent, "cluster", false)
+      UixMenu.selectedComponentOffset = C.GetPositionalOffset(UixMenu.selectedcomponent, 0)
 
-      menu.addPositionalOffsetRow(ftable, "X", "x", "m")               -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Y", "y", "m")               -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Z", "z", "m")               -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Yaw", "yaw", "°", true)     -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Pitch", "pitch", "°", true) -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Roll", "roll", "°", true)   -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "X", "x", "m")               -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Y", "y", "m")               -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Z", "z", "m")               -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Yaw", "yaw", "°", true)     -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Pitch", "pitch", "°", true) -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Roll", "roll", "°", true)   -- TEMPTEXT Florian
 
       ftable:addEmptyRow()
 
       local regionoptions = {}
-      for _, definition in ipairs(menu.regiondefinitions) do
+      for _, definition in ipairs(UixMenu.regiondefinitions) do
         table.insert(regionoptions, { id = definition.id, text = definition.id, icon = "", displayremoveoption = false })
       end
 
       local row = ftable:addRow(true, {})
       row[1]:createText("Region Definition:") -- TEMPTEXT Florian
       row[2]:setColSpan(2):createDropDown(regionoptions,
-        { height = Helper.standardTextHeight, startOption = ffi.string(C.GetRegionDefinition(menu.selectedcomponent)) })
-          :setTextProperties({ fontsize = config.mapFontSize })
-      row[2].handlers.onDropDownConfirmed = function(_, id) C.SetRegionDefinition(menu.selectedcomponent, id) end
+        { height = Helper.standardTextHeight, startOption = ffi.string(C.GetRegionDefinition(UixMenu.selectedcomponent)) })
+          :setTextProperties({ fontsize = EditorConfig.mapFontSize })
+      row[2].handlers.onDropDownConfirmed = function(_, id) C.SetRegionDefinition(UixMenu.selectedcomponent, id) end
 
       ftable:addEmptyRow()
 
       local row = ftable:addRow(true, {})
       row[3]:createButton({}):setText("Remove", { halign = "center" }) -- TEMPTEXT Florian
       row[3].handlers.onClick = function()
-        C.RemoveComponent(menu.selectedcomponent); menu.selectedcomponent = 0; menu.refreshInfoFrame()
+        C.RemoveComponent(UixMenu.selectedcomponent); UixMenu.selectedcomponent = 0; UixMenu.refreshInfoFrame()
       end
-    elseif C.IsComponentClass(menu.selectedcomponent, "sector") then
-      menu.selectedComponentCluster = C.GetContextByClass(menu.selectedcomponent, "cluster", false)
-      menu.selectedComponentOffset = C.GetPositionalOffset(menu.selectedcomponent, 0)
-      local selectedComponentClusterOffset = C.GetPositionalOffset(menu.selectedComponentCluster, 0)
-      local q, r = menu.snapToClusterGrid(selectedComponentClusterOffset)
-      menu.selectedComponentClusterGridOffset = { q = q, r = r }
+    elseif C.IsComponentClass(UixMenu.selectedcomponent, "sector") then
+      UixMenu.selectedComponentCluster = C.GetContextByClass(UixMenu.selectedcomponent, "cluster", false)
+      UixMenu.selectedComponentOffset = C.GetPositionalOffset(UixMenu.selectedcomponent, 0)
+      local selectedComponentClusterOffset = C.GetPositionalOffset(UixMenu.selectedComponentCluster, 0)
+      local q, r = UixMenu.snapToClusterGrid(selectedComponentClusterOffset)
+      UixMenu.selectedComponentClusterGridOffset = { q = q, r = r }
 
       local row = ftable:addRow(nil, {})
       row[1]:setColSpan(numcols):createText("Sector", Helper.subHeaderTextProperties) -- TEMPTEXT Florian
-      menu.addNameRows(ftable, menu.selectedcomponent)
+      UixMenu.addNameRows(ftable, UixMenu.selectedcomponent)
 
-      menu.addPositionalOffsetRow(ftable, "X", "x", "m")               -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Y", "y", "m")               -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Z", "z", "m")               -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Yaw", "yaw", "°", true)     -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Pitch", "pitch", "°", true) -- TEMPTEXT Florian
-      menu.addPositionalOffsetRow(ftable, "Roll", "roll", "°", true)   -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "X", "x", "m")               -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Y", "y", "m")               -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Z", "z", "m")               -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Yaw", "yaw", "°", true)     -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Pitch", "pitch", "°", true) -- TEMPTEXT Florian
+      UixMenu.addPositionalOffsetRow(ftable, "Roll", "roll", "°", true)   -- TEMPTEXT Florian
 
       ftable:addEmptyRow()
 
       local row = ftable:addRow(true, {})
-      row[3]:createButton({ active = function() return not C.IsPlayerContext(menu.selectedcomponent) end }):setText(
+      row[3]:createButton({ active = function() return not C.IsPlayerContext(UixMenu.selectedcomponent) end }):setText(
         "Remove", { halign = "center" }) -- TEMPTEXT Florian
       row[3].handlers.onClick = function()
-        C.RemoveComponent(menu.selectedcomponent); menu.selectedcomponent = 0; menu.refreshInfoFrame(); menu.activatemap = true
+        C.RemoveComponent(UixMenu.selectedcomponent); UixMenu.selectedcomponent = 0; UixMenu.refreshInfoFrame(); UixMenu.activatemap = true
       end
 
       local row = ftable:addRow(nil, {})
       row[1]:setColSpan(numcols):createText("Cluster", Helper.subHeaderTextProperties) -- TEMPTEXT Florian
-      menu.addNameRows(ftable, menu.selectedComponentCluster)
+      UixMenu.addNameRows(ftable, UixMenu.selectedComponentCluster)
 
-      menu.addClusterOffsetRow(ftable, "X", "q") -- TEMPTEXT Florian
-      menu.addClusterOffsetRow(ftable, "Z", "r") -- TEMPTEXT Florian
+      UixMenu.addClusterOffsetRow(ftable, "X", "q") -- TEMPTEXT Florian
+      UixMenu.addClusterOffsetRow(ftable, "Z", "r") -- TEMPTEXT Florian
 
-      local clusterbackground = ffi.string(C.GetClusterBackground(menu.selectedComponentCluster))
+      local clusterbackground = ffi.string(C.GetClusterBackground(UixMenu.selectedComponentCluster))
       local clusterbackgroundoptions = {}
       local n = C.GetNumCatalogTemplates("celestialbody")
       if n > 0 then
@@ -1179,51 +1110,56 @@ function menu.createComponentTable(frame)
       row[1]:createText("Cluster Background:") -- TEMPTEXT Florian
       row[2]:setColSpan(2):createDropDown(clusterbackgroundoptions,
         { height = Helper.standardTextHeight, startOption = clusterbackground }):setTextProperties({
-        fontsize = config
+        fontsize = EditorConfig
             .mapFontSize
       })
       row[2].handlers.onDropDownConfirmed = function(_, id)
-        return C.SetClusterBackground(menu.selectedComponentCluster,
+        return C.SetClusterBackground(UixMenu.selectedComponentCluster,
           id)
       end
 
       ftable:addEmptyRow()
 
       local row = ftable:addRow(true, {})
-      row[2]:setColSpan(2):createButton({ active = function() return C.GetNumSectors(menu.selectedComponentCluster) < 3 end })
+      row[2]:setColSpan(2):createButton({
+        active = function()
+          return C.GetNumSectors(UixMenu.selectedComponentCluster) <
+              3
+        end
+      })
           :setText("Add Sector", { halign = "center" }) -- TEMPTEXT Florian
-      row[2].handlers.onClick = function() return menu.buttonAddSector(menu.selectedComponentCluster) end
+      row[2].handlers.onClick = function() return UixMenu.buttonAddSector(UixMenu.selectedComponentCluster) end
 
       ftable:addEmptyRow()
 
       local row = ftable:addRow(true, {})
-      row[3]:createButton({ active = function() return not C.IsPlayerContext(menu.selectedComponentCluster) end })
+      row[3]:createButton({ active = function() return not C.IsPlayerContext(UixMenu.selectedComponentCluster) end })
           :setText("Remove", { halign = "center" }) -- TEMPTEXT Florian
       row[3].handlers.onClick = function()
-        C.RemoveComponent(menu.selectedComponentCluster); menu.selectedcomponent = 0; menu.refreshInfoFrame(); menu.activatemap = true
+        C.RemoveComponent(UixMenu.selectedComponentCluster); UixMenu.selectedcomponent = 0; UixMenu.refreshInfoFrame(); UixMenu.activatemap = true
       end
-    elseif C.IsComponentClass(menu.selectedcomponent, "highway") then
+    elseif C.IsComponentClass(UixMenu.selectedcomponent, "highway") then
       local row = ftable:addRow(nil, {})
       row[1]:setColSpan(numcols):createText("Highway", Helper.subHeaderTextProperties) -- TEMPTEXT Florian
 
-      menu.getSpline()
-      for i, point in ipairs(menu.splinepoints) do
+      UixMenu.getSpline()
+      for i, point in ipairs(UixMenu.splinepoints) do
         local row = ftable:addRow(true, {})
         local name = "Point " .. i -- TEMPTEXT Florian
         if i == 1 then
           name = "Start Point"     -- TEMPTEXT Florian
-        elseif i == #menu.splinepoints then
+        elseif i == #UixMenu.splinepoints then
           name = "End Point"       -- TEMPTEXT Florian
         end
         row[1]:createText(name)
-        if i ~= #menu.splinepoints then
+        if i ~= #UixMenu.splinepoints then
           row[2]:createButton({}):setText("Add Point", { halign = "center" }) -- TEMPTEXT Florian
-          row[2].handlers.onClick = function() menu.buttonAddSplinePoint(i) end
+          row[2].handlers.onClick = function() UixMenu.buttonAddSplinePoint(i) end
         end
-        if (i ~= 1) and (i ~= #menu.splinepoints) then
+        if (i ~= 1) and (i ~= #UixMenu.splinepoints) then
           row[3]:createButton({}):setText("Remove Point", { halign = "center" }) -- TEMPTEXT Florian
           row[3].handlers.onClick = function()
-            menu.getSpline(); table.remove(menu.splinepoints, i); menu.updateSpline()
+            UixMenu.getSpline(); table.remove(UixMenu.splinepoints, i); UixMenu.updateSpline()
           end
         end
       end
@@ -1233,40 +1169,40 @@ function menu.createComponentTable(frame)
       local row = ftable:addRow(true, {})
       row[3]:createButton({}):setText("Remove", { halign = "center" }) -- TEMPTEXT Florian
       row[3].handlers.onClick = function()
-        C.RemoveComponent(menu.selectedcomponent); menu.selectedcomponent = 0; menu.refreshInfoFrame()
+        C.RemoveComponent(UixMenu.selectedcomponent); UixMenu.selectedcomponent = 0; UixMenu.refreshInfoFrame()
       end
     end
   end
 end
 
-function menu.buttonAddSplinePoint(i)
-  menu.getSpline()
+function UixMenu.buttonAddSplinePoint(i)
+  UixMenu.getSpline()
 
   local offset = {}
-  offset.x = (menu.splinepoints[i].offset.x + menu.splinepoints[i + 1].offset.x) / 2
-  offset.y = (menu.splinepoints[i].offset.y + menu.splinepoints[i + 1].offset.y) / 2
-  offset.z = (menu.splinepoints[i].offset.z + menu.splinepoints[i + 1].offset.z) / 2
+  offset.x = (UixMenu.splinepoints[i].offset.x + UixMenu.splinepoints[i + 1].offset.x) / 2
+  offset.y = (UixMenu.splinepoints[i].offset.y + UixMenu.splinepoints[i + 1].offset.y) / 2
+  offset.z = (UixMenu.splinepoints[i].offset.z + UixMenu.splinepoints[i + 1].offset.z) / 2
 
   local tangent = {}
-  tangent.x = (menu.splinepoints[i].tangent.x + menu.splinepoints[i + 1].tangent.x) / 2
-  tangent.y = (menu.splinepoints[i].tangent.y + menu.splinepoints[i + 1].tangent.y) / 2
-  tangent.z = (menu.splinepoints[i].tangent.z + menu.splinepoints[i + 1].tangent.z) / 2
+  tangent.x = (UixMenu.splinepoints[i].tangent.x + UixMenu.splinepoints[i + 1].tangent.x) / 2
+  tangent.y = (UixMenu.splinepoints[i].tangent.y + UixMenu.splinepoints[i + 1].tangent.y) / 2
+  tangent.z = (UixMenu.splinepoints[i].tangent.z + UixMenu.splinepoints[i + 1].tangent.z) / 2
 
-  local weight = (menu.splinepoints[i].weight + menu.splinepoints[i + 1].weight) / 2
-  local inlength = (menu.splinepoints[i].inlength + menu.splinepoints[i + 1].inlength) / 2
-  local outlength = (menu.splinepoints[i].outlength + menu.splinepoints[i + 1].outlength) / 2
+  local weight = (UixMenu.splinepoints[i].weight + UixMenu.splinepoints[i + 1].weight) / 2
+  local inlength = (UixMenu.splinepoints[i].inlength + UixMenu.splinepoints[i + 1].inlength) / 2
+  local outlength = (UixMenu.splinepoints[i].outlength + UixMenu.splinepoints[i + 1].outlength) / 2
 
-  table.insert(menu.splinepoints, i + 1,
+  table.insert(UixMenu.splinepoints, i + 1,
     { offset = offset, tangent = tangent, weight = weight, inlength = inlength, outlength = outlength })
 
-  menu.updateSpline()
+  UixMenu.updateSpline()
 end
 
-function menu.getSpline()
-  menu.splinepoints = {}
-  local n = C.GetNumHighwaySplinePoints(menu.selectedcomponent)
+function UixMenu.getSpline()
+  UixMenu.splinepoints = {}
+  local n = C.GetNumHighwaySplinePoints(UixMenu.selectedcomponent)
   local buf = ffi.new("SplineData[?]", n)
-  n = C.GetHighwaySplinePoints(buf, n, menu.selectedcomponent)
+  n = C.GetHighwaySplinePoints(buf, n, UixMenu.selectedcomponent)
   for i = 0, n - 1 do
     local offset = {}
     offset.x = buf[i].offset.x
@@ -1278,7 +1214,7 @@ function menu.getSpline()
     tangent.y = buf[i].tangent.y
     tangent.z = buf[i].tangent.z
 
-    table.insert(menu.splinepoints,
+    table.insert(UixMenu.splinepoints,
       {
         offset = offset,
         tangent = tangent,
@@ -1290,97 +1226,98 @@ function menu.getSpline()
   end
 end
 
-function menu.updateSpline()
-  local n = #menu.splinepoints
+function UixMenu.updateSpline()
+  local n = #UixMenu.splinepoints
   local splinedata = ffi.new("SplineData[?]", n)
-  for i, point in ipairs(menu.splinepoints) do
+  for i, point in ipairs(UixMenu.splinepoints) do
     splinedata[i - 1].offset = point.offset
     splinedata[i - 1].tangent = point.tangent
     splinedata[i - 1].weight = point.weight
     splinedata[i - 1].inlength = point.inlength
     splinedata[i - 1].outlength = point.outlength
   end
-  C.ReplaceHighwaySpline(menu.selectedcomponent, splinedata, n, menu.holomap)
-  menu.refreshInfoFrame();
+  C.ReplaceHighwaySpline(UixMenu.selectedcomponent, splinedata, n, UixMenu.holomap)
+  UixMenu.refreshInfoFrame();
 end
 
-function menu.buttonAddSector(cluster)
+function UixMenu.buttonAddSector(cluster)
   local numsectors = C.GetNumSectors(cluster)
 
   local offset = ffi.new("UIPosRot")
-  offset.x = numsectors * config.clusterGridEdgeLength
+  offset.x = numsectors * EditorConfig.clusterGridEdgeLength
   offset.y = 0
-  offset.z = numsectors * config.clusterGridEdgeLength
+  offset.z = numsectors * EditorConfig.clusterGridEdgeLength
 
   C.AddSector(cluster, "editor_cluster_001_sector_001_macro", offset)
 
-  menu.activatemap = true
-  menu.revealmap = getElapsedTime()
+  UixMenu.activatemap = true
+  -- todo: add sector as known to player
+  --menu.revealmap = getElapsedTime()
 end
 
-function menu.addObjectOffsetRow(ftable, name, coord, suffix, converttodeg)
+function UixMenu.addObjectOffsetRow(ftable, name, coord, suffix, converttodeg)
   local row = ftable:addRow(true, {})
   row[1]:setColSpan(2):createText(name .. ":")
   if converttodeg then
-    menu.selectedComponentOffset[coord] = menu.selectedComponentOffset[coord] * 180 / math.pi
+    UixMenu.selectedComponentOffset[coord] = UixMenu.selectedComponentOffset[coord] * 180 / math.pi
   end
   local editbox = row[3]:createEditBox({ height = Helper.standardTextHeight }):setText(Helper.round(
-    menu.selectedComponentOffset[coord], 2) .. suffix)
+    UixMenu.selectedComponentOffset[coord], 2) .. suffix)
   row[3].handlers.onEditBoxActivated = function()
     C.SetEditBoxText(editbox.id,
-      tostring(Helper.round(menu.selectedComponentOffset[coord], 2)))
+      tostring(Helper.round(UixMenu.selectedComponentOffset[coord], 2)))
   end
   row[3].handlers.onTextChanged = function(_, text, textchanged)
-    if text ~= "" then menu.selectedComponentOffset[coord] = tonumber(text) end
-    C.SetObjectSectorPos(menu.selectedcomponent, menu.selectedComponentSector, menu.selectedComponentOffset)
+    if text ~= "" then UixMenu.selectedComponentOffset[coord] = tonumber(text) end
+    C.SetObjectSectorPos(UixMenu.selectedcomponent, UixMenu.selectedComponentSector, UixMenu.selectedComponentOffset)
   end
   row[3].handlers.onEditBoxDeactivated = function()
     C.SetEditBoxText(editbox.id,
-      Helper.round(menu.selectedComponentOffset[coord], 2) .. suffix)
+      Helper.round(UixMenu.selectedComponentOffset[coord], 2) .. suffix)
   end
 end
 
-function menu.addPositionalOffsetRow(ftable, name, coord, suffix, converttodeg)
+function UixMenu.addPositionalOffsetRow(ftable, name, coord, suffix, converttodeg)
   local row = ftable:addRow(true, {})
   row[1]:setColSpan(2):createText(name .. ":")
   if converttodeg then
-    menu.selectedComponentOffset[coord] = menu.selectedComponentOffset[coord] * 180 / math.pi
+    UixMenu.selectedComponentOffset[coord] = UixMenu.selectedComponentOffset[coord] * 180 / math.pi
   end
   local editbox = row[3]:createEditBox({ height = Helper.standardTextHeight }):setText(Helper.round(
-    menu.selectedComponentOffset[coord], 2) .. suffix)
+    UixMenu.selectedComponentOffset[coord], 2) .. suffix)
   row[3].handlers.onEditBoxActivated = function()
     C.SetEditBoxText(editbox.id,
-      tostring(Helper.round(menu.selectedComponentOffset[coord], 2)))
+      tostring(Helper.round(UixMenu.selectedComponentOffset[coord], 2)))
   end
   row[3].handlers.onTextChanged = function(_, text, textchanged)
-    if text ~= "" then menu.selectedComponentOffset[coord] = tonumber(text) end
-    C.SetPositionalOffset(menu.selectedcomponent, menu.selectedComponentOffset)
+    if text ~= "" then UixMenu.selectedComponentOffset[coord] = tonumber(text) end
+    C.SetPositionalOffset(UixMenu.selectedcomponent, UixMenu.selectedComponentOffset)
   end
   row[3].handlers.onEditBoxDeactivated = function()
     C.SetEditBoxText(editbox.id,
-      Helper.round(menu.selectedComponentOffset[coord], 2) .. suffix)
+      Helper.round(UixMenu.selectedComponentOffset[coord], 2) .. suffix)
   end
 end
 
-function menu.addClusterOffsetRow(ftable, name, coord)
+function UixMenu.addClusterOffsetRow(ftable, name, coord)
   local row = ftable:addRow(true, {})
   row[1]:setColSpan(2):createText(name .. ":")
-  local editbox = row[3]:createEditBox({ height = Helper.standardTextHeight }):setText(Helper.round(menu
+  local editbox = row[3]:createEditBox({ height = Helper.standardTextHeight }):setText(Helper.round(UixMenu
     .selectedComponentClusterGridOffset[coord]))
-  row[3].handlers.onTextChanged = menu.editboxClusterCoord
+  row[3].handlers.onTextChanged = UixMenu.editboxClusterCoord
 end
 
-function menu.editboxClusterCoord(_, text, coord)
+function UixMenu.editboxClusterCoord(_, text, coord)
   if text ~= "" then
-    menu.selectedComponentClusterGridOffset[coord] = tonumber(text)
+    UixMenu.selectedComponentClusterGridOffset[coord] = tonumber(text)
   end
   local offset = ffi.new("UIPosRot")
-  offset.x, offset.z = menu.convertClusterGridToCoord(menu.selectedComponentClusterGridOffset.q,
-    menu.selectedComponentClusterGridOffset.r)
-  C.SetPositionalOffset(menu.selectedComponentCluster, offset)
+  offset.x, offset.z = UixMenu.convertClusterGridToCoord(UixMenu.selectedComponentClusterGridOffset.q,
+    UixMenu.selectedComponentClusterGridOffset.r)
+  C.SetPositionalOffset(UixMenu.selectedComponentCluster, offset)
 end
 
-function menu.addNameRows(ftable, component)
+function UixMenu.addNameRows(ftable, component)
   local luacomponent = ConvertStringToLuaID(tostring(component))
   local name, rawname, description, rawdescription = GetComponentData(luacomponent, "name", "rawname", "description",
     "rawdescription")
@@ -1392,7 +1329,7 @@ function menu.addNameRows(ftable, component)
   local row = ftable:addRow(true, {})
   row[2]:setColSpan(2):createEditBox({ height = Helper.standardTextHeight }):setText(rawname)
   row[2].handlers.onEditBoxDeactivated = function(_, text, textchanged)
-    SetComponentName(luacomponent, text); menu.refreshInfoFrame()
+    SetComponentName(luacomponent, text); UixMenu.refreshInfoFrame()
   end
 
   ftable:addEmptyRow()
@@ -1404,13 +1341,13 @@ function menu.addNameRows(ftable, component)
   local row = ftable:addRow(true, {})
   row[2]:setColSpan(2):createEditBox({ height = Helper.standardTextHeight }):setText(rawdescription)
   row[2].handlers.onEditBoxDeactivated = function(_, text, textchanged)
-    C.SetComponentDescription(component, text); menu.refreshInfoFrame()
+    C.SetComponentDescription(component, text); UixMenu.refreshInfoFrame()
   end
 
   ftable:addEmptyRow()
 end
 
-function menu.createExportTable(frame)
+function UixMenu.createExportTable(frame)
   local width = 500
 
   local numcols = 3
@@ -1429,7 +1366,7 @@ function menu.createExportTable(frame)
   row[1]:setColSpan(numcols):createText("Export Map", Helper.headerRowCenteredProperties) -- TEMPTEXT Florian
 
   local ismaster = C.IsMasterVersion()
-  local ischeat = IsCheatVersion()
+  local ischeat = true
   local extensionoptions = {}
 
   if not ismaster then
@@ -1440,13 +1377,13 @@ function menu.createExportTable(frame)
   local extensions = GetExtensionList()
   for _, extension in ipairs(extensions) do
     if extension.enabled and ((not ismaster) or (not extension.egosoftextension)) and (ischeat or extension.personal) then
-      if menu.exportExtension == "" then
-        menu.exportExtension = extension.id
+      if UixMenu.exportExtension == "" then
+        UixMenu.exportExtension = extension.id
       end
       table.insert(extensionoptions,
         { id = extension.id, text = extension.name .. (extension.personal and " (Personal)" or ""), icon = "", displayremoveoption = false }) -- TEMPTEXT Florian
     end
-    if menu.exportExtension == extension.id then
+    if UixMenu.exportExtension == extension.id then
       isSelectedExtensionPersonal = extension.personal
     end
   end
@@ -1455,12 +1392,12 @@ function menu.createExportTable(frame)
     local row = ftable:addRow(true, { fixed = true })
     row[1]:createText("Extension:") -- TEMPTEXT Florian
     row[2]:setColSpan(2):createDropDown(extensionoptions,
-      { height = Helper.standardTextHeight, startOption = menu.exportExtension }):setTextProperties({
-      fontsize = config
+      { height = Helper.standardTextHeight, startOption = UixMenu.exportExtension }):setTextProperties({
+      fontsize = EditorConfig
           .mapFontSize
     })
     row[2].handlers.onDropDownConfirmed = function(_, id)
-      menu.exportExtension = id; menu.refreshInfoFrame()
+      UixMenu.exportExtension = id; UixMenu.refreshInfoFrame()
     end
   end
 
@@ -1470,7 +1407,7 @@ function menu.createExportTable(frame)
       "The map will be saved as '*_galaxy_macro.xml' in '$extensionfolder/maps' sub-folder of your personal X4 folder.\n\nThis file will contain all cluster, sector and zone macros of this map, each starting with the prefix '*_'.\n\nMake sure to add a macro index entry in the $extensionfolder to reference the exported map, e.g. '<entry name=\"extensionmap_*\" value=\"maps\\extensionmap_*\" />'",
       { wordwrap = true }) -- TEMPTEXT Florian
   else
-    if menu.exportExtension == "basegame" then
+    if UixMenu.exportExtension == "basegame" then
       row[1]:setColSpan(numcols):createText(
         "The map will be saved as 'basegame_map_*_galaxy_macro.xml' in 'maps'.\n\nThis file will contain all cluster, sector and zone macros of this map, each starting with the prefix 'basegame_map_*_'.",
         { wordwrap = true }) -- TEMPTEXT Florian
@@ -1483,27 +1420,29 @@ function menu.createExportTable(frame)
 
   local row = ftable:addRow(true, { fixed = true })
   row[1]:setColSpan(numcols):createEditBox({ height = Helper.standardTextHeight, defaultText = "Enter map name here" })
-      :setText(menu.mapname) -- TEMPTEXT Florian
-  row[1].handlers.onTextChanged = function(_, text, textchanged) menu.mapname = text end
+      :setText(UixMenu.mapname) -- TEMPTEXT Florian
+  row[1].handlers.onTextChanged = function(_, text, textchanged) UixMenu.mapname = text end
 
   local row = ftable:addRow(true, { fixed = true })
-  row[3]:createButton({ active = function() return (menu.mapname ~= "") and (menu.exportExtension ~= "") end }):setText(
-    "Export", { halign = "center" }) -- TEMPTEXT Florian
+  row[3]:createButton({ active = function() return (UixMenu.mapname ~= "") and (UixMenu.exportExtension ~= "") end })
+      :setText(
+        "Export", { halign = "center" }) -- TEMPTEXT Florian
   row[3].handlers.onClick = function()
-    local filename = string.gsub(menu.mapname, "[^%w_%-%() ]", "_"); return C.ExportMap(filename,
-      (menu.exportExtension ~= "basegame") and menu.exportExtension or "", isSelectedExtensionPersonal)
+    -- todo: export map without using ExportMap?
+    local filename = string.gsub(UixMenu.mapname, "[^%w_%-%() ]", "_"); return C.ExportMap(filename,
+      (UixMenu.exportExtension ~= "basegame") and UixMenu.exportExtension or "", isSelectedExtensionPersonal)
   end
 
   ftable.properties.y = Helper.viewHeight - ftable:getFullHeight() - ftable.properties.y
 end
 
-function menu.createInfoFrame2()
-  menu.createInfoFrame2Running = true
+function UixMenu.createInfoFrame2()
+  UixMenu.createInfoFrame2Running = true
   -- remove old data
-  Helper.removeAllWidgetScripts(menu, config.infoFrame2Layer)
+  Helper.removeAllWidgetScripts(UixMenu, EditorConfig.infoFrame2Layer)
 
-  menu.infoFrame2 = Helper.createFrameHandle(menu, {
-    layer = config.infoFrame2Layer,
+  UixMenu.infoFrame2 = Helper.createFrameHandle(UixMenu, {
+    layer = EditorConfig.infoFrame2Layer,
     standardButtons = {},
     width = Helper.viewWidth,
     height = Helper.viewHeight,
@@ -1511,20 +1450,20 @@ function menu.createInfoFrame2()
     y = 0,
   })
 
-  if menu.showMacroSuggestions then
-    menu.createMacroSearchTable(menu.infoFrame2)
+  if UixMenu.showMacroSuggestions then
+    UixMenu.createMacroSearchTable(UixMenu.infoFrame2)
   end
 
-  menu.infoFrame2:display()
+  UixMenu.infoFrame2:display()
 end
 
-function menu.refreshInfoFrame2()
-  if not menu.createInfoFrame2Running then
-    menu.createInfoFrame2()
+function UixMenu.refreshInfoFrame2()
+  if not UixMenu.createInfoFrame2Running then
+    UixMenu.createInfoFrame2()
   end
 end
 
-function menu.createMacroSearchTable(frame)
+function UixMenu.createMacroSearchTable(frame)
   local width = 500
   local numcols = 3
 
@@ -1532,7 +1471,7 @@ function menu.createMacroSearchTable(frame)
     {
       tabOrder = 11,
       width = width,
-      x = Helper.frameBorder + menu.sideBarWidth + 2 * Helper.borderSize + width +
+      x = Helper.frameBorder + UixMenu.sideBarWidth + 2 * Helper.borderSize + width +
           Helper.borderSize,
       y = Helper.frameBorder
     })
@@ -1540,246 +1479,248 @@ function menu.createMacroSearchTable(frame)
   local row = ftable:addRow(nil, { fixed = true })
   row[1]:setColSpan(numcols):createText("Suggested macros:", Helper.subHeaderTextProperties) -- TEMPTEXT Florian
 
-  if menu.macrosearch ~= "" then
-    local n = C.GetNumMacrosStartingWith(menu.macrosearch)
+  if UixMenu.macrosearch ~= "" then
+    local n = C.GetNumMacrosStartingWith(UixMenu.macrosearch)
     if n > 0 then
       local buf = ffi.new("const char*[?]", n)
-      n = C.GetMacrosStartingWith(buf, n, menu.macrosearch)
+      n = C.GetMacrosStartingWith(buf, n, UixMenu.macrosearch)
       for i = 0, n - 1 do
         local macro = ffi.string(buf[i])
 
         local row = ftable:addRow(true, {})
         row[1]:setColSpan(numcols):createButton({}):setText((GetMacroData(macro, "name") or "") .. " (" .. macro .. ")")
         row[1].handlers.onClick = function()
-          menu.macrosearch = macro; menu.showMacroSuggestions = false; menu.refreshInfoFrame(); menu.refreshInfoFrame2()
+          UixMenu.macrosearch = macro; UixMenu.showMacroSuggestions = false; UixMenu.refreshInfoFrame(); UixMenu
+              .refreshInfoFrame2()
         end
       end
     end
   end
 end
 
-function menu.closeContextMenu(dueToClose)
+function UixMenu.closeContextMenu(dueToClose)
   if Helper.closeInteractMenu() then
     return true
   end
-  if menu.contextMenuMode then
+  if UixMenu.contextMenuMode then
     -- REMOVE this block once the mouse out/over event order is correct -> This should be unnessecary due to the global tablemouseout event reseting the picking
-    if menu.currentMouseOverTable and (
-          (menu.contextMenuMode == "boardingcontext")
-          or (menu.contextMenuMode == "dropwares")
+    if UixMenu.currentMouseOverTable and (
+          (UixMenu.contextMenuMode == "boardingcontext")
+          or (UixMenu.contextMenuMode == "dropwares")
         ) then
-      menu.picking = true
-      menu.currentMouseOverTable = nil
+      UixMenu.picking = true
+      UixMenu.currentMouseOverTable = nil
     end
     -- END
-    menu.contextFrame = nil
-    Helper.clearFrame(menu, config.contextFrameLayer)
-    menu.contextMenuData = {}
-    menu.contextMenuMode = nil
+    UixMenu.contextFrame = nil
+    Helper.clearFrame(UixMenu, EditorConfig.contextFrameLayer)
+    UixMenu.contextMenuData = {}
+    UixMenu.contextMenuMode = nil
     return true
   end
   return false
 end
 
 -- update
-menu.updateInterval = 0.01
-function menu.onUpdate()
+UixMenu.updateInterval = 0.01
+function UixMenu.onUpdate()
   local curtime = getElapsedTime()
-  if menu.mainFrame then
-    menu.mainFrame:update()
+  if UixMenu.mainFrame then
+    UixMenu.mainFrame:update()
   end
-  if menu.infoFrame then
-    menu.infoFrame:update()
+  if UixMenu.infoFrame then
+    UixMenu.infoFrame:update()
   end
-  if menu.infoFrame2 then
-    menu.infoFrame2:update()
-  end
-
-  if menu.map and menu.holomap ~= 0 then
-    local x, y = GetRenderTargetMousePosition(menu.map)
-    C.SetMapRelativeMousePosition(menu.holomap, (x and y) ~= nil, x or 0, y or 0)
+  if UixMenu.infoFrame2 then
+    UixMenu.infoFrame2:update()
   end
 
-  if menu.activatemap then
+  if UixMenu.map and UixMenu.holomap ~= 0 then
+    local x, y = GetRenderTargetMousePosition(UixMenu.map)
+    C.SetMapRelativeMousePosition(UixMenu.holomap, (x and y) ~= nil, x or 0, y or 0)
+  end
+
+  if UixMenu.activatemap then
     -- pass relative screenspace of the holomap rendertarget to the holomap (value range = -1 .. 1)
-    local renderX0, renderX1, renderY0, renderY1 = Helper.getRelativeRenderTargetSize(menu, config.mainFrameLayer,
-      menu.map)
-    local rendertargetTexture = GetRenderTargetTexture(menu.map)
+    local renderX0, renderX1, renderY0, renderY1 = Helper.getRelativeRenderTargetSize(UixMenu,
+      EditorConfig.mainFrameLayer,
+      UixMenu.map)
+    local rendertargetTexture = GetRenderTargetTexture(UixMenu.map)
     if rendertargetTexture then
       local mapstate
-      if menu.holomap ~= 0 then
+      if UixMenu.holomap ~= 0 then
         mapstate = ffi.new("HoloMapState")
-        C.GetMapState(menu.holomap, mapstate)
+        C.GetMapState(UixMenu.holomap, mapstate)
       end
 
-      menu.holomap = C.AddHoloMap(rendertargetTexture, renderX0, renderX1, renderY0, renderY1,
-        menu.rendertargetWidth / menu.rendertargetHeight, 1)
-      if menu.holomap ~= 0 then
-        C.ClearSelectedMapComponents(menu.holomap)
-        C.ShowEditorMap(menu.holomap, C.GetContextByClass(C.GetPlayerID(), "sector", false))
+      UixMenu.holomap = C.AddHoloMap(rendertargetTexture, renderX0, renderX1, renderY0, renderY1,
+        UixMenu.rendertargetWidth / UixMenu.rendertargetHeight, 1)
+      if UixMenu.holomap ~= 0 then
+        C.ClearSelectedMapComponents(UixMenu.holomap)
+        C.ShowEditorMap(UixMenu.holomap, C.GetContextByClass(C.GetPlayerID(), "sector", false))
 
         if mapstate then
-          C.SetMapState(menu.holomap, mapstate)
+          C.SetMapState(UixMenu.holomap, mapstate)
         end
       end
 
-      menu.activatemap = false
+      UixMenu.activatemap = false
     end
   end
 
-  if not menu.refreshed then
-    if menu.holomap and (menu.holomap ~= 0) then
-      if menu.picking ~= menu.pickstate then
-        menu.pickstate = menu.picking
-        C.SetMapPicking(menu.holomap, menu.pickstate)
+  if not UixMenu.refreshed then
+    if UixMenu.holomap and (UixMenu.holomap ~= 0) then
+      if UixMenu.picking ~= UixMenu.pickstate then
+        UixMenu.pickstate = UixMenu.picking
+        C.SetMapPicking(UixMenu.holomap, UixMenu.pickstate)
       end
     end
   end
-  menu.refreshed = nil
+  UixMenu.refreshed = nil
 
-  if menu.panningmap and menu.panningmap.isclick then
+  if UixMenu.panningmap and UixMenu.panningmap.isclick then
     local offset = table.pack(GetLocalMousePosition())
-    if (menu.leftdown.time + 0.5 < curtime) or Helper.comparePositions(menu.leftdown.position, offset, 5) then
-      menu.panningmap.isclick = false
+    if (UixMenu.leftdown.time + 0.5 < curtime) or Helper.comparePositions(UixMenu.leftdown.position, offset, 5) then
+      UixMenu.panningmap.isclick = false
     end
   end
 
-  if menu.leftdown then
-    if not menu.leftdown.wasmoved then
+  if UixMenu.leftdown then
+    if not UixMenu.leftdown.wasmoved then
       local offset = table.pack(GetLocalMousePosition())
-      if Helper.comparePositions(menu.leftdown.position, offset, 5) then
-        menu.leftdown.wasmoved = true
+      if Helper.comparePositions(UixMenu.leftdown.position, offset, 5) then
+        UixMenu.leftdown.wasmoved = true
       end
     end
-    if menu.leftdown.wasmoved and menu.leftdown.time + 0.1 < curtime and not C.IsComponentClass(C.GetPickedMapComponent(menu.holomap), "object") then
+    if UixMenu.leftdown.wasmoved and UixMenu.leftdown.time + 0.1 < curtime and not C.IsComponentClass(C.GetPickedMapComponent(UixMenu.holomap), "object") then
       local currentmousepos = table.pack(GetLocalMousePosition())
-      if menu.panningmap then
-        menu.leftdown.dynpos = currentmousepos
+      if UixMenu.panningmap then
+        UixMenu.leftdown.dynpos = currentmousepos
       end
     end
   end
 
-  if menu.rightdown then
-    if not menu.rightdown.wasmoved then
+  if UixMenu.rightdown then
+    if not UixMenu.rightdown.wasmoved then
       local offset = table.pack(GetLocalMousePosition())
-      if Helper.comparePositions(menu.rightdown.position, offset, 5) then
-        menu.rightdown.wasmoved = true
+      if Helper.comparePositions(UixMenu.rightdown.position, offset, 5) then
+        UixMenu.rightdown.wasmoved = true
       end
     end
-    if menu.rightdown.wasmoved and menu.rightdown.time + 0.1 < curtime and not C.IsComponentClass(C.GetPickedMapComponent(menu.holomap), "object") then
+    if UixMenu.rightdown.wasmoved and UixMenu.rightdown.time + 0.1 < curtime and not C.IsComponentClass(C.GetPickedMapComponent(UixMenu.holomap), "object") then
       local currentmousepos = table.pack(GetLocalMousePosition())
-      if menu.rotatingmap then
-        menu.rightdown.dynpos = currentmousepos
+      if UixMenu.rotatingmap then
+        UixMenu.rightdown.dynpos = currentmousepos
       end
     end
   end
 
-  if menu.refreshIF and (menu.refreshIF < curtime) then
-    menu.refreshInfoFrame()
-    menu.refreshIF = nil
+  if UixMenu.refreshIF and (UixMenu.refreshIF < curtime) then
+    UixMenu.refreshInfoFrame()
+    UixMenu.refreshIF = nil
   end
-  if menu.refreshIF2 and (menu.refreshIF2 < curtime) then
-    menu.refreshInfoFrame2()
-    menu.refreshIF2 = nil
+  if UixMenu.refreshIF2 and (UixMenu.refreshIF2 < curtime) then
+    UixMenu.refreshInfoFrame2()
+    UixMenu.refreshIF2 = nil
   end
 
-  if menu.revealmap and (menu.revealmap < curtime) then
+  --[[ if menu.revealmap and (menu.revealmap < curtime) then
     C.RevealMap()
-  end
+  end ]]
 end
 
-function menu.viewCreated(layer, ...)
-  if layer == config.mainFrameLayer then
-    menu.map, menu.sideBar = ...
+function UixMenu.viewCreated(layer, ...)
+  if layer == EditorConfig.mainFrameLayer then
+    UixMenu.map, UixMenu.sideBar = ...
 
-    if menu.activatemap == nil then
-      menu.activatemap = true
+    if UixMenu.activatemap == nil then
+      UixMenu.activatemap = true
     end
 
-    menu.createMainFrameRunning = false
-  elseif layer == config.infoFrameLayer then
-    menu.createInfoFrameRunning = false
-  elseif layer == config.infoFrame2Layer then
-    menu.createInfoFrame2Running = false
+    UixMenu.createMainFrameRunning = false
+  elseif layer == EditorConfig.infoFrameLayer then
+    UixMenu.createInfoFrameRunning = false
+  elseif layer == EditorConfig.infoFrame2Layer then
+    UixMenu.createInfoFrame2Running = false
   end
 end
 
 -- close menu handler
-function menu.onCloseElement(dueToClose, layer)
-  if (layer == nil) or (layer == config.mainFrameLayer) or (layer == config.infoFrameLayer) or (layer == config.infoFrame2Layer) then
-    Helper.closeMenu(menu, dueToClose)
-    menu.cleanup()
-  elseif layer == config.contextFrameLayer then
-    Helper.clearFrame(menu, layer)
+function UixMenu.onCloseElement(dueToClose, layer)
+  if (layer == nil) or (layer == EditorConfig.mainFrameLayer) or (layer == EditorConfig.infoFrameLayer) or (layer == EditorConfig.infoFrame2Layer) then
+    Helper.closeMenu(UixMenu, dueToClose)
+    UixMenu.cleanup()
+  elseif layer == EditorConfig.contextFrameLayer then
+    Helper.clearFrame(UixMenu, layer)
   end
 end
 
 -- table mouse input helper
-function menu.onTableMouseOut(uitable, row)
-  if menu.currentMouseOverTable and (uitable == menu.currentMouseOverTable) then
-    menu.currentMouseOverTable = nil
-    if menu.holomap ~= 0 then
-      menu.picking = true
+function UixMenu.onTableMouseOut(uitable, row)
+  if UixMenu.currentMouseOverTable and (uitable == UixMenu.currentMouseOverTable) then
+    UixMenu.currentMouseOverTable = nil
+    if UixMenu.holomap ~= 0 then
+      UixMenu.picking = true
     end
   end
 end
 
-function menu.onTableMouseOver(uitable, row)
-  menu.currentMouseOverTable = uitable
-  if menu.holomap ~= 0 then
-    menu.picking = false
+function UixMenu.onTableMouseOver(uitable, row)
+  UixMenu.currentMouseOverTable = uitable
+  if UixMenu.holomap ~= 0 then
+    UixMenu.picking = false
   end
 end
 
 -- rendertarget selections
-function menu.onRenderTargetSelect(modified)
+function UixMenu.onRenderTargetSelect(modified)
   local offset = table.pack(GetLocalMousePosition())
   -- Check if the mouse button was down less than 0.5 seconds and the mouse was moved more than a distance of 5px
-  if (not menu.leftdown) or ((menu.leftdown.time + 0.5 > getElapsedTime()) and not Helper.comparePositions(menu.leftdown.position, offset, 5)) then
+  if (not UixMenu.leftdown) or ((UixMenu.leftdown.time + 0.5 > getElapsedTime()) and not Helper.comparePositions(UixMenu.leftdown.position, offset, 5)) then
     local newselectedcomponent = 0
 
-    local pickedcomponent = C.GetPickedMapComponent(menu.holomap)
+    local pickedcomponent = C.GetPickedMapComponent(UixMenu.holomap)
     local pickedcomponentclass = ffi.string(C.GetComponentClass(pickedcomponent))
     if pickedcomponent ~= 0 then
       newselectedcomponent = pickedcomponent
     end
 
-    if newselectedcomponent ~= menu.selectedcomponent then
-      menu.selectedcomponent = newselectedcomponent
-      if menu.selectedcomponent ~= 0 then
-        if C.IsComponentClass(menu.selectedcomponent, "object") then
-          menu.macrosearch = GetComponentData(ConvertStringToLuaID(tostring(menu.selectedcomponent)), "macro")
+    if newselectedcomponent ~= UixMenu.selectedcomponent then
+      UixMenu.selectedcomponent = newselectedcomponent
+      if UixMenu.selectedcomponent ~= 0 then
+        if C.IsComponentClass(UixMenu.selectedcomponent, "object") then
+          UixMenu.macrosearch = GetComponentData(ConvertStringToLuaID(tostring(UixMenu.selectedcomponent)), "macro")
         end
-        C.SetSelectedMapComponent(menu.holomap, newselectedcomponent)
+        C.SetSelectedMapComponent(UixMenu.holomap, newselectedcomponent)
 
-        if menu.gateconnection and menu.gateconnection ~= menu.selectedcomponent then
-          if C.IsComponentClass(menu.selectedcomponent, "gate") then
-            C.AddGateConnection(menu.gateconnection, menu.selectedcomponent)
-            menu.gateconnection = nil
+        if UixMenu.gateconnection and UixMenu.gateconnection ~= UixMenu.selectedcomponent then
+          if C.IsComponentClass(UixMenu.selectedcomponent, "gate") then
+            C.AddGateConnection(UixMenu.gateconnection, UixMenu.selectedcomponent)
+            UixMenu.gateconnection = nil
           end
         end
       else
-        C.ClearSelectedMapComponents(menu.holomap)
+        C.ClearSelectedMapComponents(UixMenu.holomap)
       end
-      menu.refreshInfoFrame()
+      UixMenu.refreshInfoFrame()
     end
   end
-  menu.leftdown = nil
+  UixMenu.leftdown = nil
 end
 
 -- rendertarget doubleclick
-function menu.onRenderTargetDoubleClick(modified)
-  local pickedcomponent = C.GetPickedMapComponent(menu.holomap)
+function UixMenu.onRenderTargetDoubleClick(modified)
+  local pickedcomponent = C.GetPickedMapComponent(UixMenu.holomap)
   if pickedcomponent ~= 0 then
     if C.IsComponentClass(pickedcomponent, "sector") then
-
+      -- todo: find empty block?
     end
   end
 end
 
 -- rendertarget mouse input helper
-function menu.onRenderTargetMouseDown(modified)
-  menu.leftdown = {
+function UixMenu.onRenderTargetMouseDown(modified)
+  UixMenu.leftdown = {
     time = getElapsedTime(),
     position = table.pack(GetLocalMousePosition()),
     dynpos = table.pack(
@@ -1787,65 +1728,65 @@ function menu.onRenderTargetMouseDown(modified)
   }
 
   if modified == "shift" then
-    C.StartMapBoxSelect(menu.holomap, false)
+    C.StartMapBoxSelect(UixMenu.holomap, false)
   else
-    C.StartPanMap(menu.holomap)
-    menu.panningmap = { isclick = true }
-    menu.noupdate = true
+    C.StartPanMap(UixMenu.holomap)
+    UixMenu.panningmap = { isclick = true }
+    UixMenu.noupdate = true
   end
 end
 
-function menu.onRenderTargetMouseUp(modified)
-  if menu.panningmap then
-    C.StopPanMap(menu.holomap)
-    menu.noupdate = false
-    menu.panningmap = nil
-    menu.refreshInfoFrame()
+function UixMenu.onRenderTargetMouseUp(modified)
+  if UixMenu.panningmap then
+    C.StopPanMap(UixMenu.holomap)
+    UixMenu.noupdate = false
+    UixMenu.panningmap = nil
+    UixMenu.refreshInfoFrame()
   else
-    C.StopMapBoxSelect(menu.holomap)
+    C.StopMapBoxSelect(UixMenu.holomap)
     local components = {}
-    Helper.ffiVLA(components, "UniverseID", C.GetNumMapSelectedComponents, C.GetMapSelectedComponents, menu.holomap)
+    Helper.ffiVLA(components, "UniverseID", C.GetNumMapSelectedComponents, C.GetMapSelectedComponents, UixMenu.holomap)
 
     if #components > 0 then
-
+      -- todo: find empty block?
     end
   end
 end
 
-function menu.onRenderTargetRightMouseDown()
-  menu.closeContextMenu()
-  menu.rightdown = {
+function UixMenu.onRenderTargetRightMouseDown()
+  UixMenu.closeContextMenu()
+  UixMenu.rightdown = {
     time = getElapsedTime(),
     position = table.pack(GetLocalMousePosition()),
     dynpos = table.pack(
       GetLocalMousePosition())
   }
 
-  C.StartRotateMap(menu.holomap)
-  menu.rotatingmap = true
-  menu.noupdate = true
+  C.StartRotateMap(UixMenu.holomap)
+  UixMenu.rotatingmap = true
+  UixMenu.noupdate = true
 end
 
-function menu.onRenderTargetRightMouseUp(modified)
+function UixMenu.onRenderTargetRightMouseUp(modified)
   local offset = table.pack(GetLocalMousePosition())
 
   -- Check if the mouse was moved more than a distance of 5px
-  if menu.rightdown and (not Helper.comparePositions(menu.rightdown.position, offset, 5)) and (not menu.rightdown.wasmoved) then
-    local pickedcomponent = C.GetPickedMapComponent(menu.holomap)
+  if UixMenu.rightdown and (not Helper.comparePositions(UixMenu.rightdown.position, offset, 5)) and (not UixMenu.rightdown.wasmoved) then
+    local pickedcomponent = C.GetPickedMapComponent(UixMenu.holomap)
 
     local posrot = ffi.new("UIPosRot")
     local eclipticoffset = ffi.new("UIPosRot")
-    local posrotcomponent = C.GetMapPositionOnEcliptic2(menu.holomap, posrot, false, 0, eclipticoffset)
+    local posrotcomponent = C.GetMapPositionOnEcliptic2(UixMenu.holomap, posrot, false, 0, eclipticoffset)
 
     if pickedcomponent ~= 0 then
       local convertedComponent = ConvertStringTo64Bit(tostring(pickedcomponent))
       if modified ~= "ctrl" then
         local missions = {}
-        Helper.ffiVLA(missions, "MissionID", C.GetNumMapComponentMissions, C.GetMapComponentMissions, menu.holomap,
+        Helper.ffiVLA(missions, "MissionID", C.GetNumMapComponentMissions, C.GetMapComponentMissions, UixMenu.holomap,
           pickedcomponent)
 
         local playerships, otherobjects, playerdeployables = {}, {}, {}
-        Helper.openInteractMenu(menu,
+        Helper.openInteractMenu(UixMenu,
           {
             component = pickedcomponent,
             offsetcomponent = posrotcomponent,
@@ -1857,29 +1798,29 @@ function menu.onRenderTargetRightMouseUp(modified)
             componentmissions = missions
           })
       else
-        if menu.spawnTableMode == "object" then
-          if C.FindMacro(menu.macrosearch) then
-            if IsMacroClass(menu.macrosearch, "object") then
-              local object = C.SpawnObjectAtPos2(menu.macrosearch, posrotcomponent, posrot, "player")
+        if UixMenu.spawnTableMode == "object" then
+          if C.FindMacro(UixMenu.macrosearch) then
+            if IsMacroClass(UixMenu.macrosearch, "object") then
+              local object = C.SpawnObjectAtPos2(UixMenu.macrosearch, posrotcomponent, posrot, "player")
               if object ~= 0 then
                 C.SetObjectForcedRadarVisible(object, true)
               end
             end
           end
-        elseif menu.spawnTableMode == "region" then
-          if menu.regiondefinition ~= "" then
-            C.SpawnRegionAtPos(menu.regiondefinition, posrotcomponent, posrot)
+        elseif UixMenu.spawnTableMode == "region" then
+          if UixMenu.regiondefinition ~= "" then
+            C.SpawnRegionAtPos(UixMenu.regiondefinition, posrotcomponent, posrot)
           end
-        elseif menu.spawnTableMode == "station" then
-          if menu.constructionplan ~= "" then
+        elseif UixMenu.spawnTableMode == "station" then
+          if UixMenu.constructionplan ~= "" then
             local station = C.SpawnStationAtPos("station_gen_factory_base_01_macro", posrotcomponent, posrot,
-              menu.constructionplan, menu.cpfaction)
+              UixMenu.constructionplan, UixMenu.cpfaction)
             if station ~= 0 then
               C.SetObjectForcedRadarVisible(station, true)
               C.SetKnownTo(station, "player")
             end
           end
-        elseif menu.spawnTableMode == "highway" then
+        elseif UixMenu.spawnTableMode == "highway" then
           C.SpawnLocalHighwayAtPos("editor_local_highway_macro", posrotcomponent, posrot)
         end
       end
@@ -1891,31 +1832,32 @@ function menu.onRenderTargetRightMouseUp(modified)
         offset.y = posrot.y * 25
         offset.z = posrot.z * 25
         -- snap to the hex grid
-        local q, r = menu.snapToClusterGrid(offset)
-        offset.x, offset.z = menu.convertClusterGridToCoord(q, r)
+        local q, r = UixMenu.snapToClusterGrid(offset)
+        offset.x, offset.z = UixMenu.convertClusterGridToCoord(q, r)
         C.AddCluster("editor_cluster_001_macro", offset)
-        menu.activatemap = true
-        menu.revealmap = getElapsedTime()
+        UixMenu.activatemap = true
+        --todo: set cluster to known to player
+        -- menu.revealmap = getElapsedTime()
       end
     end
   end
-  menu.rightdown = nil
-  if menu.rotatingmap then
-    C.StopRotateMap(menu.holomap)
-    menu.noupdate = false
-    if menu.sound_rotatemap and menu.sound_rotatemap.sound then
-      StopPlayingSound(menu.sound_rotatemap.sound)
-      menu.sound_rotatemap = nil
+  UixMenu.rightdown = nil
+  if UixMenu.rotatingmap then
+    C.StopRotateMap(UixMenu.holomap)
+    UixMenu.noupdate = false
+    if UixMenu.sound_rotatemap and UixMenu.sound_rotatemap.sound then
+      StopPlayingSound(UixMenu.sound_rotatemap.sound)
+      UixMenu.sound_rotatemap = nil
     end
-    menu.rotatingmap = nil
-    if menu.infoTableMode == "objectlist" then
-      menu.refreshInfoFrame()
+    UixMenu.rotatingmap = nil
+    if UixMenu.infoTableMode == "objectlist" then
+      UixMenu.refreshInfoFrame()
     end
   end
 end
 
-function menu.snapToClusterGrid(offset)
-  local l = config.clusterGridEdgeLength
+function UixMenu.snapToClusterGrid(offset)
+  local l = EditorConfig.clusterGridEdgeLength
 
   -- convert to hex coordinates with r == y axis and q axis being 60° ccw from x axis
   local q = (2 * offset.x) / (3 * l)
@@ -1943,8 +1885,8 @@ function menu.snapToClusterGrid(offset)
   return roundQ, roundR
 end
 
-function menu.convertClusterGridToCoord(q, r)
-  local l = config.clusterGridEdgeLength
+function UixMenu.convertClusterGridToCoord(q, r)
+  local l = EditorConfig.clusterGridEdgeLength
 
   local x = 3 * l * q / 2
   local y = math.sqrt(3) * l * (r + q / 2 - math.floor(Helper.round(q) / 2))
@@ -1952,24 +1894,24 @@ function menu.convertClusterGridToCoord(q, r)
   return x, y
 end
 
-function menu.onRenderTargetCombinedScrollDown(step)
-  C.ZoomMap(menu.holomap, step)
+function UixMenu.onRenderTargetCombinedScrollDown(step)
+  C.ZoomMap(UixMenu.holomap, step)
 end
 
-function menu.onRenderTargetCombinedScrollUp(step)
-  C.ZoomMap(menu.holomap, -step)
+function UixMenu.onRenderTargetCombinedScrollUp(step)
+  C.ZoomMap(UixMenu.holomap, -step)
 end
 
-function menu.buttonToggleSpawnTable(spawntableparam)
+function UixMenu.buttonToggleSpawnTable(spawntableparam)
   local oldidx, newidx
-  local leftbar = config.leftBar
+  local leftbar = EditorConfig.leftBar
   local count = 1
   for _, entry in ipairs(leftbar) do
     if (entry.condition == nil) or entry.condition() then
       if entry.mode then
         if type(entry.mode) == "table" then
           for _, mode in ipairs(entry) do
-            if mode == menu.spawnTableMode then
+            if mode == UixMenu.spawnTableMode then
               oldidx = count
             end
             if mode == spawntableparam then
@@ -1977,7 +1919,7 @@ function menu.buttonToggleSpawnTable(spawntableparam)
             end
           end
         else
-          if entry.mode == menu.spawnTableMode then
+          if entry.mode == UixMenu.spawnTableMode then
             oldidx = count
           end
           if entry.mode == spawntableparam then
@@ -1992,29 +1934,29 @@ function menu.buttonToggleSpawnTable(spawntableparam)
     end
   end
 
-  local deactivate = menu.spawnTableMode == spawntableparam
+  local deactivate = UixMenu.spawnTableMode == spawntableparam
 
   if newidx then
-    Helper.updateButtonColor(menu.sideBar, newidx, 1, Color["row_background_blue"])
+    Helper.updateButtonColor(UixMenu.sideBar, newidx, 1, Color["row_background_blue"])
   end
   if oldidx then
-    Helper.updateButtonColor(menu.sideBar, oldidx, 1, Color["button_background_default"])
+    Helper.updateButtonColor(UixMenu.sideBar, oldidx, 1, Color["button_background_default"])
   end
 
-  AddUITriggeredEvent(menu.name, spawntableparam, menu.spawnTableMode == spawntableparam and "off" or "on")
+  AddUITriggeredEvent(UixMenu.name, spawntableparam, UixMenu.spawnTableMode == spawntableparam and "off" or "on")
   if deactivate then
     PlaySound("ui_negative_back")
-    menu.spawnTableMode = nil
+    UixMenu.spawnTableMode = nil
   else
     PlaySound("ui_positive_select")
-    menu.spawnTableMode = spawntableparam
+    UixMenu.spawnTableMode = spawntableparam
   end
 
-  menu.refreshMainFrame()
-  menu.refreshInfoFrame()
+  UixMenu.refreshMainFrame()
+  UixMenu.refreshInfoFrame()
 
-  menu.showMacroSuggestions = false;
-  menu.refreshInfoFrame2()
+  UixMenu.showMacroSuggestions = false;
+  UixMenu.refreshInfoFrame2()
 end
 
-init()
+return ModLua.init()
