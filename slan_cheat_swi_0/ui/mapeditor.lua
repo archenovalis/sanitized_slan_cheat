@@ -156,7 +156,6 @@ local UixMenu = {
 
 local EditorConfig = {
   mapFontSize = Helper.standardFontSize,
-  optionsLayer = 4,
   backarrow = "table_arrow_inv_left",
   backarrowOffsetX = 3,
   standardFontSize = 10,
@@ -168,10 +167,11 @@ local EditorConfig = {
   headerFontSize = 13,
   headerTextOffsetX = 5,
   infoFontSize = 9,
-  contextFrameLayer = 2,
+
   mainFrameLayer = 6,
   infoFrameLayer = 5,
   infoFrame2Layer = 4,
+  contextFrameLayer = 2,
   topLevelLayer = 1,
 
   leftBar = {
@@ -208,7 +208,6 @@ function ModLua.init()
     Helper.registerMenu(UixMenu)
   end
   MapMenu = Helper.getMenu("MapMenu")
-  DebugError("mapEditor.registerCallbacks")
   MapMenu.registerCallback("buttonToggleObjectList_on_start", UixMenu.buttonToggleObjectList_on_start)
   MapMenu.registerCallback("createSideBar_on_start", UixMenu.createSideBar_on_start)
   MapMenu.registerCallback("createInfoFrame_on_menu_infoTableMode", UixMenu.displayMapEditor)
@@ -216,7 +215,6 @@ function ModLua.init()
 end
 
 function UixMenu.cleanup()
-  DebugError("UixMenu.cleanup: Starting")
   UixMenu.noupdate = nil
   if UixMenu.holomap ~= 0 then
     C.RemoveHoloMap()
@@ -227,22 +225,20 @@ function UixMenu.cleanup()
   UixMenu.selectedcomponent = 0
   UixMenu.selectedComponentSector = nil
   UixMenu.selectedComponentOffset = nil
-  DebugError("UixMenu.cleanup: Finished")
 end
 
 function UixMenu.addToLeftBar(config)
-  DebugError("mapEditor.addToLeftBar")
   local mapEditorMenuExists
   for _, leftBarEntry in ipairs(config.leftBar) do
-    if leftBarEntry.mode == "mapeditor" then
+    if leftBarEntry.mode == "cheat_mapeditor" then
       mapEditorMenuExists = true
     end
   end
   if not mapEditorMenuExists then
     local mapEditorBtn = {
-      name = "Map Editor",
+      name = "Cheat Map Editor",
       icon = "shipbuildst_repair",
-      mode = "mapeditor",
+      mode = "cheat_mapeditor",
       helpOverlayID = "mapmenu_sidebar_mapeditor",
       helpOverlayText = "Map Editor"
     }
@@ -253,151 +249,70 @@ function UixMenu.addToLeftBar(config)
 end
 
 function UixMenu.buttonToggleObjectList_on_start(objectlistparam, config)
-  DebugError("mapEditor.buttonToggleObjectList_on_start")
   UixMenu.addToLeftBar(config)
 end
 
 function UixMenu.createSideBar_on_start(config)
-  DebugError("mapEditor.createSideBar_on_start")
   UixMenu.addToLeftBar(config)
 end
 
 function UixMenu.displayMapEditor()
-  DebugError("UixMenu.displayMapEditor: Starting")
-  UixMenu.cleanup()
-
-  -- Log existing frames on optionsLayer before cleanup
-  if UixMenu.frameData and UixMenu.frameData[EditorConfig.optionsLayer] then
-    DebugError("UixMenu.displayMapEditor: Pre-cleanup frameData for layer " .. EditorConfig.optionsLayer .. ": " ..
-      tostring(UixMenu.frameData[EditorConfig.optionsLayer]))
-  else
-    DebugError("UixMenu.displayMapEditor: No frameData for layer " .. EditorConfig.optionsLayer .. " before cleanup")
+  if MapMenu ~= nil then
+    Helper.closeMenu(MapMenu, "close")
+    MapMenu.cleanup()
   end
-
-  DebugError("UixMenu.displayMapEditor: Clearing data for layer " .. EditorConfig.optionsLayer)
-  Helper.clearDataForRefresh(UixMenu, EditorConfig.optionsLayer)
-
-  DebugError("UixMenu.displayMapEditor: Creating frame handle for layer " .. EditorConfig.optionsLayer)
-  UixMenu.mainFrame = Helper.createFrameHandle(UixMenu, {
-    layer = EditorConfig.optionsLayer,
-    standardButtons = { back = true, close = true },
-    width = Helper.viewWidth,
-    height = Helper.viewHeight,
-    x = 0,
-    y = 0,
-  })
-  if UixMenu.mainFrame == nil then
-    DebugError("UixMenu.displayMapEditor: ERROR - mainFrame is nil after creation")
-    return
-  else
-    -- Log the frame ID (assuming Helper provides a way to access it)
-    -- Note: We don’t have direct access to frame ID, but we can infer it’s created
-    DebugError("UixMenu.displayMapEditor: mainFrame created successfully")
-  end
-
-  DebugError("UixMenu.displayMapEditor: Adding table to mainFrame")
-  local ftable = UixMenu.mainFrame:addTable(1, { tabOrder = 1, width = 200, x = 100, y = 100 })
-
-  DebugError("UixMenu.displayMapEditor: Adding row and button")
-  local row = ftable:addRow(true)
-  row[1]:createButton():setText("Start Map Editor")
-  row[1].handlers.onClick = function()
-    DebugError("UixMenu.displayMapEditor: Button clicked, starting map editor")
-    UixMenu.onShowMenu()
-  end
-
-  DebugError("UixMenu.displayMapEditor: Displaying mainFrame")
-  UixMenu.mainFrame:display()
-  DebugError("UixMenu.displayMapEditor: Display called successfully")
-
-  -- Log frameData after display
-  if UixMenu.frameData and UixMenu.frameData[EditorConfig.optionsLayer] then
-    DebugError("UixMenu.displayMapEditor: Post-display frameData for layer " .. EditorConfig.optionsLayer .. ": " ..
-      tostring(UixMenu.frameData[EditorConfig.optionsLayer]))
-  end
-
-  DebugError("UixMenu.displayMapEditor: Finished")
+  OpenMenu("Cheat_MapEditorMenu", { 0, 0 }, nil)
 end
 
 function UixMenu.onShowMenu()
-  DebugError("UixMenu.onShowMenu: Starting")
-  -- Mimic cleanup from displayInit
-  Helper.clearDataForRefresh(UixMenu, EditorConfig.optionsLayer)
-  Helper.clearFrame(UixMenu, EditorConfig.topLevelLayer)
-  UixMenu.cleanup()
-
   UixMenu.sideBarWidth = Helper.scaleX(Helper.sidebarWidth)
-  DebugError("UixMenu.onShowMenu: Sidebar width set to " .. tostring(UixMenu.sideBarWidth))
 
   if UixMenu.mapname == "" then
-    DebugError("UixMenu.onShowMenu: Mapname is empty, fetching galaxy data")
     local galaxy = C.GetPlayerGalaxyID()
-    DebugError("UixMenu.onShowMenu: Galaxy ID = " .. tostring(galaxy))
     local galaxymacro = GetComponentData(ConvertStringToLuaID(tostring(galaxy)), "macro")
-    DebugError("UixMenu.onShowMenu: Galaxy macro = " .. tostring(galaxymacro))
     UixMenu.mapname = string.match(galaxymacro, "(.-)_galaxy_macro") or ""
-    DebugError("UixMenu.onShowMenu: Initial mapname = " .. UixMenu.mapname)
     local cropbasename = string.match(UixMenu.mapname, "^basegame_map_(.+)")
     if cropbasename then
       UixMenu.mapname = cropbasename
-      DebugError("UixMenu.onShowMenu: Cropped mapname = " .. UixMenu.mapname)
     end
   end
 
   UixMenu.objects = {}
   local n = C.GetNumMapEditorObjectList()
-  DebugError("UixMenu.onShowMenu: Number of map editor objects = " .. tostring(n))
   if n > 0 then
     local buf = ffi.new("UniverseID[?]", n)
     n = C.GetMapEditorObjectList(buf, n)
-    DebugError("UixMenu.onShowMenu: Retrieved " .. tostring(n) .. " objects")
     for i = 0, n - 1 do
       local id = buf[i]
       C.SetObjectForcedRadarVisible(id, true)
       C.SetKnownTo(id, "player")
       table.insert(UixMenu.objects, { id = id })
     end
-    DebugError("UixMenu.onShowMenu: Objects table populated with " .. #UixMenu.objects .. " entries")
   end
 
-  DebugError("UixMenu.onShowMenu: Calling getRegionDefinitions")
   UixMenu.getRegionDefinitions()
-  DebugError("UixMenu.onShowMenu: Calling getConstructionPlans")
   UixMenu.getConstructionPlans()
-  DebugError("UixMenu.onShowMenu: Calling getFactions")
   UixMenu.getFactions()
 
   -- map
   UixMenu.rendertargetWidth = Helper.viewWidth
   UixMenu.rendertargetHeight = Helper.viewHeight
-  DebugError("UixMenu.onShowMenu: Render target set to " ..
-    UixMenu.rendertargetWidth .. "x" .. UixMenu.rendertargetHeight)
 
   --C.RevealMap()
   AddUITriggeredEvent("CheatMenu", "full_reveal")
-  DebugError("UixMenu.onShowMenu: UI event 'full_reveal' triggered")
 
-  DebugError("UixMenu.onShowMenu: Calling displayMenu")
   UixMenu.displayMenu()
-  DebugError("UixMenu.onShowMenu: Finished")
 end
 
 function UixMenu.displayMenu()
-  DebugError("UixMenu.displayMenu: Starting")
-  DebugError("UixMenu.displayMenu: Calling createMainFrame")
   UixMenu.createMainFrame()
-  DebugError("UixMenu.displayMenu: Calling createInfoFrame")
   UixMenu.createInfoFrame()
-  DebugError("UixMenu.displayMenu: Finished")
 end
 
 function UixMenu.createMainFrame()
-  DebugError("UixMenu.createMainFrame: Starting")
   UixMenu.createMainFrameRunning = true
-  DebugError("UixMenu.createMainFrame: Clearing old widgets")
   Helper.removeAllWidgetScripts(UixMenu, EditorConfig.mainFrameLayer)
 
-  DebugError("UixMenu.createMainFrame: Creating frame handle")
   UixMenu.mainFrame = Helper.createFrameHandle(UixMenu, {
     layer = EditorConfig.mainFrameLayer,
     standardButtons = { back = true, close = true },
@@ -406,15 +321,9 @@ function UixMenu.createMainFrame()
     x = 0,
     y = 0,
   })
-  if UixMenu.mainFrame == nil then
-    DebugError("UixMenu.createMainFrame: ERROR - mainFrame is nil after creation")
-  else
-    DebugError("UixMenu.createMainFrame: mainFrame created successfully")
-  end
 
   -- rendertarget
   local alpha = __CORE_DETAILMONITOR_MAPEDITOR.opacity
-  DebugError("UixMenu.createMainFrame: Adding render target with alpha = " .. tostring(alpha))
   UixMenu.mainFrame:addRenderTarget({
     width = UixMenu.rendertargetWidth,
     height = UixMenu.rendertargetHeight,
@@ -426,12 +335,9 @@ function UixMenu.createMainFrame()
   })
 
   -- left bar
-  DebugError("UixMenu.createMainFrame: Creating sidebar")
   UixMenu.createSideBar(UixMenu.mainFrame)
 
-  DebugError("UixMenu.createMainFrame: Displaying mainFrame")
   UixMenu.mainFrame:display()
-  DebugError("UixMenu.createMainFrame: Finished")
 end
 
 function UixMenu.getRegionDefinitions()
@@ -651,12 +557,9 @@ function UixMenu.createSideBar(frame)
 end
 
 function UixMenu.createInfoFrame()
-  DebugError("UixMenu.createInfoFrame: Starting")
   UixMenu.createInfoFrameRunning = true
-  DebugError("UixMenu.createInfoFrame: Clearing old widgets")
   Helper.removeAllWidgetScripts(UixMenu, EditorConfig.infoFrameLayer)
 
-  DebugError("UixMenu.createInfoFrame: Creating frame handle")
   UixMenu.infoFrame = Helper.createFrameHandle(UixMenu, {
     layer = EditorConfig.infoFrameLayer,
     standardButtons = {},
@@ -665,22 +568,12 @@ function UixMenu.createInfoFrame()
     x = 0,
     y = 0,
   })
-  if UixMenu.infoFrame == nil then
-    DebugError("UixMenu.createInfoFrame: ERROR - infoFrame is nil after creation")
-  else
-    DebugError("UixMenu.createInfoFrame: infoFrame created successfully")
-  end
 
-  DebugError("UixMenu.createInfoFrame: Creating spawn table")
   UixMenu.createSpawnTable(UixMenu.infoFrame)
-  DebugError("UixMenu.createInfoFrame: Creating component table")
   UixMenu.createComponentTable(UixMenu.infoFrame)
-  DebugError("UixMenu.createInfoFrame: Creating export table")
   UixMenu.createExportTable(UixMenu.infoFrame)
 
-  DebugError("UixMenu.createInfoFrame: Displaying infoFrame")
   UixMenu.infoFrame:display()
-  DebugError("UixMenu.createInfoFrame: Finished")
 end
 
 function UixMenu.refreshInfoFrame()
@@ -980,8 +873,7 @@ function UixMenu.createComponentTable(frame)
           UixMenu.selectedcomponent))
         row[3].handlers.onTextChanged = function(_, text, textchanged)
           if (text ~= "") and tonumber(text) then
-            C
-                .SetCheckpointSequence(UixMenu.selectedcomponent, tonumber(text))
+            C.SetCheckpointSequence(UixMenu.selectedcomponent, tonumber(text))
           end
         end
         row[3].handlers.onEditBoxDeactivated = function(_, text, textchanged)
@@ -1253,6 +1145,7 @@ function UixMenu.buttonAddSector(cluster)
   UixMenu.activatemap = true
   -- todo: add sector as known to player
   --menu.revealmap = getElapsedTime()
+  AddUITriggeredEvent("CheatMenu", "full_reveal")
 end
 
 function UixMenu.addObjectOffsetRow(ftable, name, coord, suffix, converttodeg)
@@ -1360,7 +1253,8 @@ function UixMenu.createExportTable(frame)
   local row = ftable:addRow(true, { fixed = true })
   row[1]:setColSpan(numcols):createText("Ctrl+RMB into the void to add a cluster at that position.", { wordwrap = true }) -- TEMPTEXT Florian
 
-  ftable:addEmptyRow()
+  -- export disabled in public version
+  --[[   ftable:addEmptyRow()
 
   local row = ftable:addRow(nil, { fixed = true })
   row[1]:setColSpan(numcols):createText("Export Map", Helper.headerRowCenteredProperties) -- TEMPTEXT Florian
@@ -1431,7 +1325,7 @@ function UixMenu.createExportTable(frame)
     -- todo: export map without using ExportMap?
     local filename = string.gsub(UixMenu.mapname, "[^%w_%-%() ]", "_"); return C.ExportMap(filename,
       (UixMenu.exportExtension ~= "basegame") and UixMenu.exportExtension or "", isSelectedExtensionPersonal)
-  end
+  end ]]
 
   ftable.properties.y = Helper.viewHeight - ftable:getFullHeight() - ftable.properties.y
 end
@@ -1838,6 +1732,7 @@ function UixMenu.onRenderTargetRightMouseUp(modified)
         UixMenu.activatemap = true
         --todo: set cluster to known to player
         -- menu.revealmap = getElapsedTime()
+        AddUITriggeredEvent("CheatMenu", "full_reveal")
       end
     end
   end

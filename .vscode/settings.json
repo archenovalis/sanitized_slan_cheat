@@ -22,6 +22,7 @@
     "AddUITriggeredEvent",
     "PlaySound",
     "DebugError",
-    "RegisterEvent"
+    "RegisterEvent",
+    "OpenMenu"
   ]
 }
