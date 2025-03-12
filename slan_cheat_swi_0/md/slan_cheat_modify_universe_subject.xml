@@ -4,7 +4,7 @@
 		<cue name="Slan_cheat_map_reveal" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
-					<event_conversation_started conversation="slan_cheat_map_reveal" />
+					<event_conversation_started conversation="Slan_cheat_map_reveal" />
 					<event_ui_triggered screen="'CheatMenu'" control="'full_reveal'" />
 				</check_any>
 			</conditions>
@@ -33,7 +33,7 @@
 		</cue>
 		<cue name="Slan_cheat_map_scan_all_stations" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_map_scan_all_stations" />
+				<event_conversation_started conversation="Slan_cheat_map_scan_all_stations" />
 			</conditions>
 			<actions>
 				<set_value name="global.$swi_slancheat.$slanjchainscanset" exact="false" />
@@ -45,22 +45,22 @@
 		</cue>
 		<cue name="Slan_cheat_map_chain_scan" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_map_chain_scan" />
+				<event_conversation_started conversation="Slan_cheat_map_chain_scan" />
 			</conditions>
 			<actions>
 				<add_conversation_view />
 				<do_if value="not global.$swi_slancheat.$slanjchainscanset">
-					<add_player_choice_subconv text="{357423,8}" position="top_left" conversation="slan_cheat_map_chain_scan_set" convparam="[true]" actor="player.computer" comment="open" />
+					<add_player_choice_subconv text="{357423,8}" position="top_left" conversation="Slan_cheat_map_chain_scan_set" convparam="[true]" actor="player.computer" comment="open" />
 				</do_if>
 				<do_else>
-					<add_player_choice_subconv text="{357423,9}" position="top_left" conversation="slan_cheat_map_chain_scan_set" convparam="[false]" actor="player.computer" comment="Close" />
+					<add_player_choice_subconv text="{357423,9}" position="top_left" conversation="Slan_cheat_map_chain_scan_set" convparam="[false]" actor="player.computer" comment="Close" />
 				</do_else>
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_map_chain_scan_set" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_map_chain_scan_set" />
+				<event_conversation_started conversation="Slan_cheat_map_chain_scan_set" />
 			</conditions>
 			<actions>
 				<set_value name="global.$swi_slancheat.$slanjchainscanset" exact="event.param2.{1}" />

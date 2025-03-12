@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="Slan_cheat_modify_station_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="Slan_cheat_modify_station_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../xsd/md.xsd">
 	<cues>
-		<cue name="aslan_cheat_modify_station_Initialization" instantiate="true" namespace="this">
+		<cue name="aSlan_cheat_modify_station_Initialization" instantiate="true" namespace="this">
 			<conditions>
 				<event_cue_signalled />
 			</conditions>
@@ -24,18 +24,18 @@
 		</cue>
 		<cue name="Slan_cheat_modify_station_Invincible" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_modify_station_Invincible" />
+				<event_conversation_started conversation="Slan_cheat_modify_station_Invincible" />
 			</conditions>
 			<actions>
-				<signal_cue_instantly cue="aslan_cheat_modify_station_Initialization" />
-				<add_player_choice_sub text="{1001,2648}" position="top_left" section="slan_cheat_modify_station_Invincible_set" choiceparam="[100]" comment="" />
-				<add_player_choice_sub text="{1001,2649}" position="left" section="slan_cheat_modify_station_Invincible_set" choiceparam="[0]" comment="" />
+				<signal_cue_instantly cue="aSlan_cheat_modify_station_Initialization" />
+				<add_player_choice_sub text="{1001,2648}" position="top_left" section="Slan_cheat_modify_station_Invincible_set" choiceparam="[100]" comment="" />
+				<add_player_choice_sub text="{1001,2649}" position="left" section="Slan_cheat_modify_station_Invincible_set" choiceparam="[0]" comment="" />
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_modify_station_Invincible_set" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_next_section section="slan_cheat_modify_station_Invincible_set" />
+				<event_conversation_next_section section="Slan_cheat_modify_station_Invincible_set" />
 			</conditions>
 			<actions>
 				<do_all exact="md.$slanmodifystations.count" counter="$i">
@@ -56,7 +56,7 @@
 
 		<cue name="Slan_cheat_modify_station_building_resource" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_modify_station_building_resource" />
+				<event_conversation_started conversation="Slan_cheat_modify_station_building_resource" />
 			</conditions>
 			<actions>
 				<find_object name="$BuildStorages" class="class.buildstorage" owner="faction.player" space="player.galaxy" multiple="true" />
@@ -74,12 +74,12 @@
 
 		<cue name="Slan_cheat_modify_station_equipment" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_station_equipment'" />
+				<event_conversation_started conversation="Slan_cheat_menu_list_selection" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'Slan_cheat_modify_station_equipment'" />
 			</conditions>
 			<actions>
-				<!-- <set_conversation_return_section section="slan_cheat_modify_station_equipment" /> -->
-				<signal_cue_instantly cue="aslan_cheat_modify_station_Initialization" />
+				<!-- <set_conversation_return_section section="Slan_cheat_modify_station_equipment" /> -->
+				<signal_cue_instantly cue="aSlan_cheat_modify_station_Initialization" />
 				<do_if value="global.$swi_slancheat.$slanmodifystationchoicemode == 'Selected'">
 					<set_value name="$station" exact="global.$swi_slancheat.$playertargetstation" />
 					<do_if value="$station?">
@@ -97,28 +97,28 @@
 							<set_value name="$max" exact="$station.ammostorage.deployable.capacity" />
 						</do_elseif>
 					</do_if>
-					<add_player_choice_sub text="{1001,2679} + '10%' + {1001,7105} + '=' + ($max * 0.1)i" position="top_left" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 10]" comment="" />
-					<add_player_choice_sub text="{1001,2679} + '30%' + {1001,7105} + '=' + ($max * 0.3)i" position="left" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 30]" comment="" />
-					<add_player_choice_sub text="{1001,2679} + '50%' + {1001,7105} + '=' + ($max * 0.5)i" position="bottom_left" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 50]" comment="" />
-					<add_player_choice_sub text="{1001,2679} + '70%' + {1001,7105} + '=' + ($max * 0.7)i" position="top_right" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 70]" comment="" />
-					<add_player_choice_sub text="{1001,2679} + '100%' + {1001,7105} + '=' + ($max)" position="right" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 100]" comment="" />
-					<add_player_choice_sub text="{357423,2202} + '-' + $count" position="bottom_right" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, -100]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '10%' + {1001,7105} + '=' + ($max * 0.1)i" position="top_left" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 10]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '30%' + {1001,7105} + '=' + ($max * 0.3)i" position="left" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 30]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '50%' + {1001,7105} + '=' + ($max * 0.5)i" position="bottom_left" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 50]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '70%' + {1001,7105} + '=' + ($max * 0.7)i" position="top_right" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 70]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '100%' + {1001,7105} + '=' + ($max)" position="right" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 100]" comment="" />
+					<add_player_choice_sub text="{357423,2202} + '-' + $count" position="bottom_right" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, -100]" comment="" />
 					<!-- <add_player_choice_return  text="{1002,20}"  comment="(Back)"/> -->
 				</do_if>
 				<do_else>
-					<add_player_choice_sub text="{1001,2679} + '10%' + {1001,7105}" position="top_left" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 10]" comment="" />
-					<add_player_choice_sub text="{1001,2679} + '30%' + {1001,7105}" position="left" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 30]" comment="" />
-					<add_player_choice_sub text="{1001,2679} + '50%' + {1001,7105}" position="bottom_left" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 50]" comment="" />
-					<add_player_choice_sub text="{1001,2679} + '70%' + {1001,7105}" position="top_right" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 70]" comment="" />
-					<add_player_choice_sub text="{1001,2679} + '100%' + {1001,7105}" position="right" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 100]" comment="" />
-					<add_player_choice_sub text="{357423,2202}" position="bottom_right" section="slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, -100]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '10%' + {1001,7105}" position="top_left" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 10]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '30%' + {1001,7105}" position="left" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 30]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '50%' + {1001,7105}" position="bottom_left" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 50]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '70%' + {1001,7105}" position="top_right" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 70]" comment="" />
+					<add_player_choice_sub text="{1001,2679} + '100%' + {1001,7105}" position="right" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, 100]" comment="" />
+					<add_player_choice_sub text="{357423,2202}" position="bottom_right" section="Slan_cheat_modify_station_equipment_count" choiceparam="[event.param2.{1}, -100]" comment="" />
 					<!-- <add_player_choice_return  text="{1002,20}"  comment="(Back)"/> -->
 				</do_else>
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_modify_station_equipment_count" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_next_section section="slan_cheat_modify_station_equipment_count" />
+				<event_conversation_next_section section="Slan_cheat_modify_station_equipment_count" />
 			</conditions>
 			<actions>
 				<do_all exact="md.$slanmodifystations.count" counter="$i">
@@ -146,10 +146,10 @@
 
 		<cue name="Slan_cheat_modify_station_people" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_modify_station_people" />
+				<event_conversation_started conversation="Slan_cheat_modify_station_people" />
 			</conditions>
 			<actions>
-				<signal_cue_instantly cue="aslan_cheat_modify_station_Initialization" />
+				<signal_cue_instantly cue="aSlan_cheat_modify_station_Initialization" />
 				<do_all exact="md.$slanmodifystations.count" counter="$i">
 					<set_value name="$ThisStation" exact="md.$slanmodifystations.{$i}" />
 					<set_value name="$Crew" exact="$ThisStation.people.list" />
@@ -174,10 +174,10 @@
 		</cue>
 		<cue name="Slan_cheat_modify_station_delete" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_modify_station_delete" />
+				<event_conversation_started conversation="Slan_cheat_modify_station_delete" />
 			</conditions>
 			<actions>
-				<signal_cue_instantly cue="aslan_cheat_modify_station_Initialization" />
+				<signal_cue_instantly cue="aSlan_cheat_modify_station_Initialization" />
 				<do_all exact="md.$slanmodifystations.count" counter="$i">
 					<set_value name="$ThisStation" exact="md.$slanmodifystations.{$i}" />
 					<destroy_object object="$ThisStation" explosion="true" />
@@ -187,11 +187,11 @@
 		</cue>
 		<cue name="Slan_cheat_modify_station_faction" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_station_faction'" />
+				<event_conversation_started conversation="Slan_cheat_menu_list_selection" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'Slan_cheat_modify_station_faction'" />
 			</conditions>
 			<actions>
-				<signal_cue_instantly cue="aslan_cheat_modify_station_Initialization" />
+				<signal_cue_instantly cue="aSlan_cheat_modify_station_Initialization" />
 				<do_all exact="md.$slanmodifystations.count" counter="$i">
 					<set_value name="$ThisStation" exact="md.$slanmodifystations.{$i}" />
 					<do_if value="$ThisStation.allsubordinates">
@@ -249,18 +249,18 @@
 		</cue>
 		<cue name="Slan_cheat_modify_station_add_cargotype" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_modify_station_add_cargotype" />
+				<event_conversation_started conversation="Slan_cheat_modify_station_add_cargotype" />
 			</conditions>
 			<actions>
-				<signal_cue_instantly cue="aslan_cheat_modify_station_Initialization" />
-				<add_player_choice_sub text="{357423,2201}" position="top_left" section="slan_cheat_modify_station_add_cargotype_count" choiceparam="[event.param2.{1}, 1000000]" comment="" />
-				<add_player_choice_sub text="{357423,2202}" position="left" section="slan_cheat_modify_station_add_cargotype_count" choiceparam="[event.param2.{1}, -100]" comment="" />
+				<signal_cue_instantly cue="aSlan_cheat_modify_station_Initialization" />
+				<add_player_choice_sub text="{357423,2201}" position="top_left" section="Slan_cheat_modify_station_add_cargotype_count" choiceparam="[event.param2.{1}, 1000000]" comment="" />
+				<add_player_choice_sub text="{357423,2202}" position="left" section="Slan_cheat_modify_station_add_cargotype_count" choiceparam="[event.param2.{1}, -100]" comment="" />
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_modify_station_add_cargotype_count" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_next_section section="slan_cheat_modify_station_add_cargotype_count" />
+				<event_conversation_next_section section="Slan_cheat_modify_station_add_cargotype_count" />
 			</conditions>
 			<actions>
 				<do_all exact="md.$slanmodifystations.count" counter="$i">
@@ -308,26 +308,26 @@
 		</cue>
 		<cue name="Slan_cheat_modify_station_add_cargo_specified" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_station_add_cargo_specified'" />
+				<event_conversation_started conversation="Slan_cheat_menu_list_selection" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'Slan_cheat_modify_station_add_cargo_specified'" />
 			</conditions>
 			<actions>
-				<signal_cue_instantly cue="aslan_cheat_modify_station_Initialization" />
+				<signal_cue_instantly cue="aSlan_cheat_modify_station_Initialization" />
 				<!-- <add_conversation_view/> -->
 				<set_value name="$max" exact="global.$swi_slancheat.$playertargetstation.cargo.{event.param2.{1}}.target" />
 				<set_value name="$count" exact="global.$swi_slancheat.$playertargetstation.cargo.{event.param2.{1}}.count" />
-				<add_player_choice_sub text="{1001,2679} + '10%' + {1001,6802} +	'=' +($max * 0.1)i" position="top_left" section="slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 10]" comment="" />
-				<add_player_choice_sub text="{1001,2679} + '30%' + {1001,6802} +  '=' +($max * 0.3)i" position="left" section="slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 30]" comment="" />
-				<add_player_choice_sub text="{1001,2679} + '50%' + {1001,6802} +  '=' +($max * 0.5)i" position="bottom_left" section="slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 50]" comment="" />
-				<add_player_choice_sub text="{1001,2679} + '70%' + {1001,6802} +  '=' +($max * 0.7)i" position="top_right" section="slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 70]" comment="" />
-				<add_player_choice_sub text="{1001,2679} + '100%' + {1001,6802} + '=' +($max )" position="right" section="slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 100]" comment="" />
-				<add_player_choice_sub text="{357423,2202} + '-' + $count" position="bottom_right" section="slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, -100]" comment="" />
+				<add_player_choice_sub text="{1001,2679} + '10%' + {1001,6802} +	'=' +($max * 0.1)i" position="top_left" section="Slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 10]" comment="" />
+				<add_player_choice_sub text="{1001,2679} + '30%' + {1001,6802} +  '=' +($max * 0.3)i" position="left" section="Slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 30]" comment="" />
+				<add_player_choice_sub text="{1001,2679} + '50%' + {1001,6802} +  '=' +($max * 0.5)i" position="bottom_left" section="Slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 50]" comment="" />
+				<add_player_choice_sub text="{1001,2679} + '70%' + {1001,6802} +  '=' +($max * 0.7)i" position="top_right" section="Slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 70]" comment="" />
+				<add_player_choice_sub text="{1001,2679} + '100%' + {1001,6802} + '=' +($max )" position="right" section="Slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, 100]" comment="" />
+				<add_player_choice_sub text="{357423,2202} + '-' + $count" position="bottom_right" section="Slan_cheat_modify_station_add_cargo_specified_count" choiceparam="[event.param2.{1}, -100]" comment="" />
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_modify_station_add_cargo_specified_count" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_next_section section="slan_cheat_modify_station_add_cargo_specified_count" />
+				<event_conversation_next_section section="Slan_cheat_modify_station_add_cargo_specified_count" />
 			</conditions>
 			<actions>
 				<set_value name="$max" exact="global.$swi_slancheat.$playertargetstation.cargo.{event.param2.{1}}.target" />
@@ -343,17 +343,17 @@
 		</cue>
 		<cue name="Slan_cheat_modify_station_workforce" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_modify_station_workforce" />
+				<event_conversation_started conversation="Slan_cheat_modify_station_workforce" />
 			</conditions>
 			<actions>
-				<signal_cue_instantly cue="aslan_cheat_modify_station_Initialization" />
-				<add_player_choice_sub text="{357423,2201}" position="top_left" section="slan_cheat_modify_station_workforce_set" comment="" />
+				<signal_cue_instantly cue="aSlan_cheat_modify_station_Initialization" />
+				<add_player_choice_sub text="{357423,2201}" position="top_left" section="Slan_cheat_modify_station_workforce_set" comment="" />
 				<add_player_choice_return text="{1002,20}" comment="(Back)" />
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_modify_station_workforce_set" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_next_section section="slan_cheat_modify_station_workforce_set" />
+				<event_conversation_next_section section="Slan_cheat_modify_station_workforce_set" />
 			</conditions>
 			<actions>
 				<do_all exact="md.$slanmodifystations.count" counter="$i">

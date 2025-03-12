@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="Slan_cheat_public_common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
+<mdscript name="Slan_cheat_public_common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../xsd/md.xsd">
 	<cues>
 		<cue name="Slan_cheat_menu_list" instantiate="true" namespace="this">
 			<conditions>
 				<check_any>
-					<event_conversation_next_section section="slan_cheat_menu_list" />
-					<event_conversation_returned_to_section section="slan_cheat_menu_list" />
+					<event_conversation_next_section section="Slan_cheat_menu_list" />
+					<event_conversation_returned_to_section section="Slan_cheat_menu_list" />
 				</check_any>
 			</conditions>
 			<actions>
@@ -19,83 +19,83 @@
 							<clear_list list="global.$swi_slancheat.$conversation_list_temp" />
 						</do_if>
 						<set_value name="global.$swi_slancheat.$conversation_mode_name" exact="event.param2.{2}" />
-						<do_if value="event.param2.{2} == 'slan_cheat_add_ship'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_ship_list.count" counter="$i">
+						<do_if value="event.param2.{2} == 'Slan_cheat_add_ship'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_ship_list.count" counter="$i">
 								<do_if value="event.param2.{1} == 'XL'">
-									<do_if value="global.$swi_slancheat.$slan_cheat_ship_list.{$i}.docksize == tag.dock_xl">
-										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ship_list.{$i}" />
+									<do_if value="global.$swi_slancheat.$Slan_cheat_ship_list.{$i}.docksize == tag.dock_xl">
+										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_ship_list.{$i}" />
 									</do_if>
 								</do_if>
 								<do_if value="event.param2.{1} == 'XXL'">
-									<do_if value="global.$swi_slancheat.$slan_cheat_ship_list.{$i}.docksize == tag.dock_xxl">
-										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ship_list.{$i}" />
+									<do_if value="global.$swi_slancheat.$Slan_cheat_ship_list.{$i}.docksize == tag.dock_xxl">
+										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_ship_list.{$i}" />
 									</do_if>
 								</do_if>
 								<do_else>
-									<do_if value="global.$swi_slancheat.$slan_cheat_ship_list.{$i}.isclass.[event.param2.{1}]">
-										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ship_list.{$i}" />
+									<do_if value="global.$swi_slancheat.$Slan_cheat_ship_list.{$i}.isclass.[event.param2.{1}]">
+										<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_ship_list.{$i}" />
 									</do_if>
 								</do_else>
 							</do_all>
 						</do_if>
 
-						<do_elseif value="event.param2.{2} == 'slan_cheat_modify_prestige'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_faction_list.count" counter="$i">
-								<do_if value="global.$swi_slancheat.$slan_cheat_faction_list.{$i} != faction.player">
-									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_faction_list.{$i}" />
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_modify_prestige'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_faction_list.count" counter="$i">
+								<do_if value="global.$swi_slancheat.$Slan_cheat_faction_list.{$i} != faction.player">
+									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_faction_list.{$i}" />
 								</do_if>
 							</do_all>
 						</do_elseif>
-						<do_elseif value="event.param2.{2} == 'slan_cheat_add_licences'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_faction_list.count" counter="$i">
-								<do_if value="global.$swi_slancheat.$slan_cheat_faction_list.{$i} != faction.player and global.$swi_slancheat.$slan_cheat_faction_list.{$i} != faction.khaak and global.$swi_slancheat.$slan_cheat_faction_list.{$i} != faction.xenon">
-									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_faction_list.{$i}" />
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_add_licences'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_faction_list.count" counter="$i">
+								<do_if value="global.$swi_slancheat.$Slan_cheat_faction_list.{$i} != faction.player and global.$swi_slancheat.$Slan_cheat_faction_list.{$i} != faction.khaak and global.$swi_slancheat.$Slan_cheat_faction_list.{$i} != faction.xenon">
+									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_faction_list.{$i}" />
 								</do_if>
 							</do_all>
 						</do_elseif>
-						<do_elseif value="event.param2.{2} == 'slan_cheat_add_inventory_personal_upgrade'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
-								<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.personalupgrade}">
-									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_add_inventory_personal_upgrade'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_ware_list.count" counter="$i">
+								<do_if value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.personalupgrade}">
+									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 								</do_if>
 							</do_all>
 						</do_elseif>
-						<do_elseif value="event.param2.{2} == 'slan_cheat_add_any_inventory'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
-								<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.inventory}">
-									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
-								</do_if>
-							</do_all>
-						</do_elseif>
-
-						<do_elseif value="event.param2.{2} == 'slan_cheat_modify_ship_equipment'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
-								<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{event.param2.{1}}">
-									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
-								</do_if>
-							</do_all>
-						</do_elseif>
-						<do_elseif value="event.param2.{2} == 'slan_cheat_modify_ship_faction'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_faction_list.count" counter="$i">
-								<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_faction_list.{$i}" />
-							</do_all>
-						</do_elseif>
-						<do_elseif value="event.param2.{2} == 'slan_cheat_modify_ship_set_cargo'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
-								<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.economy}">
-									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_add_any_inventory'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_ware_list.count" counter="$i">
+								<do_if value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.inventory}">
+									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 								</do_if>
 							</do_all>
 						</do_elseif>
 
-						<do_elseif value="event.param2.{2} == 'slan_cheat_modify_station_equipment'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
-								<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{event.param2.{1}}">
-									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_modify_ship_equipment'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_ware_list.count" counter="$i">
+								<do_if value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{event.param2.{1}}">
+									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 								</do_if>
 							</do_all>
 						</do_elseif>
-						<do_elseif value="event.param2.{2} == 'slan_cheat_modify_station_add_cargo_specified'">
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_modify_ship_faction'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_faction_list.count" counter="$i">
+								<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_faction_list.{$i}" />
+							</do_all>
+						</do_elseif>
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_modify_ship_set_cargo'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_ware_list.count" counter="$i">
+								<do_if value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.economy}">
+									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
+								</do_if>
+							</do_all>
+						</do_elseif>
+
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_modify_station_equipment'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_ware_list.count" counter="$i">
+								<do_if value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{event.param2.{1}}">
+									<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
+								</do_if>
+							</do_all>
+						</do_elseif>
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_modify_station_add_cargo_specified'">
 							<set_value name="$warelist" exact="global.$swi_slancheat.$playertargetstation.resources.list" />
 							<do_all exact="$warelist.count" counter="$i">
 								<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="$warelist.{$i}" />
@@ -118,9 +118,9 @@
 								</do_if>
 							</do_all>
 						</do_elseif>
-						<do_elseif value="event.param2.{2} == 'slan_cheat_modify_station_faction'">
-							<do_all exact="global.$swi_slancheat.$slan_cheat_faction_list.count" counter="$i">
-								<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$slan_cheat_faction_list.{$i}" />
+						<do_elseif value="event.param2.{2} == 'Slan_cheat_modify_station_faction'">
+							<do_all exact="global.$swi_slancheat.$Slan_cheat_faction_list.count" counter="$i">
+								<append_to_list name="global.$swi_slancheat.$conversation_list_temp" exact="global.$swi_slancheat.$Slan_cheat_faction_list.{$i}" />
 							</do_all>
 						</do_elseif>
 					</do_else>
@@ -138,25 +138,25 @@
 				<set_value name="md.$pagenum" exact="(md.$page - 1) * 5" />
 				<do_if value="md.$page gt 0">
 					<do_if value="$listcount ge md.$pagenum + 1">
-						<add_player_choice_subconv text="$list.{md.$pagenum + 1}.name" position="top_left" conversation="slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 1}]" actor="player.computer" comment="" />
+						<add_player_choice_subconv text="$list.{md.$pagenum + 1}.name" position="top_left" conversation="Slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 1}]" actor="player.computer" comment="" />
 					</do_if>
 					<do_if value="$listcount ge md.$pagenum + 2">
-						<add_player_choice_subconv text="$list.{md.$pagenum + 2}.name" position="left" conversation="slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 2}]" actor="player.computer" comment="" />
+						<add_player_choice_subconv text="$list.{md.$pagenum + 2}.name" position="left" conversation="Slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 2}]" actor="player.computer" comment="" />
 					</do_if>
 					<do_if value="$listcount ge md.$pagenum + 3">
-						<add_player_choice_subconv text="$list.{md.$pagenum + 3}.name" position="bottom_left" conversation="slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 3}]" actor="player.computer" comment="" />
+						<add_player_choice_subconv text="$list.{md.$pagenum + 3}.name" position="bottom_left" conversation="Slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 3}]" actor="player.computer" comment="" />
 					</do_if>
 					<do_if value="$listcount ge md.$pagenum + 4">
-						<add_player_choice_subconv text="$list.{md.$pagenum + 4}.name" position="top_right" conversation="slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 4}]" actor="player.computer" comment="" />
+						<add_player_choice_subconv text="$list.{md.$pagenum + 4}.name" position="top_right" conversation="Slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 4}]" actor="player.computer" comment="" />
 					</do_if>
 					<do_if value="$listcount ge md.$pagenum + 5">
-						<add_player_choice_subconv text="$list.{md.$pagenum + 5}.name" position="right" conversation="slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 5}]" actor="player.computer" comment="" />
+						<add_player_choice_subconv text="$list.{md.$pagenum + 5}.name" position="right" conversation="Slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 5}]" actor="player.computer" comment="" />
 					</do_if>
 					<do_if value="$listcount gt md.$pagenum + 6">
-						<add_player_choice_sub text="{1002,12025}" position="bottom_right" section="slan_cheat_menu_list" choiceparam="[md.$page + 1,'Oneself']" comment="More..." />
+						<add_player_choice_sub text="{1002,12025}" position="bottom_right" section="Slan_cheat_menu_list" choiceparam="[md.$page + 1,'Oneself']" comment="More..." />
 					</do_if>
 					<do_elseif value="$listcount == md.$pagenum + 6">
-						<add_player_choice_subconv text="$list.{md.$pagenum + 6}.name" position="bottom_right" conversation="slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 6}]" actor="player.computer" comment="" />
+						<add_player_choice_subconv text="$list.{md.$pagenum + 6}.name" position="bottom_right" conversation="Slan_cheat_menu_list_selection" convparam="[$list.{md.$pagenum + 6}]" actor="player.computer" comment="" />
 					</do_elseif>
 				</do_if>
 				<do_if value="md.$page == 1">
@@ -220,7 +220,7 @@
 				<set_value name="global.$swi_slancheat.$slancreate_ship_set.{5}" exact="$zone" />
 				<set_value name="global.$swi_slancheat.$slancreate_ship_set.{6}" exact="$JumpPosition" />
 
-				<signal_cue_instantly cue="md.Slan_cheat_jump_subject.slan_cheat_jump_run" />
+				<signal_cue_instantly cue="md.Slan_cheat_jump_subject.Slan_cheat_jump_run" />
 			</actions>
 		</cue>
 	</cues>

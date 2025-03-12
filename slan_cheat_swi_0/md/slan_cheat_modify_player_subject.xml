@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="Slan_cheat_modify_player_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/md.xsd">
+<mdscript name="Slan_cheat_modify_player_subject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../xsd/md.xsd">
 	<cues>
 		<cue name="Slan_cheat_add_money" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_add_money" />
+				<event_conversation_started conversation="Slan_cheat_add_money" />
 			</conditions>
 			<actions>
 				<reward_player money="event.param2.{1}" />
@@ -11,19 +11,19 @@
 		</cue>
 		<cue name="Slan_cheat_modify_prestige" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_modify_prestige'" />
+				<event_conversation_started conversation="Slan_cheat_menu_list_selection" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'Slan_cheat_modify_prestige'" />
 			</conditions>
 			<actions>
-				<add_player_choice_sub text="{1001,5203}" position="top_left" section="slan_cheat_prestige_set" choiceparam="[event.param2.{1}, 'allied']" comment="Allied" />
-				<add_player_choice_sub text="{1001,5202}" position="left" section="slan_cheat_prestige_set" choiceparam="[event.param2.{1}, 'neutral']" comment="Neutral" />
-				<add_player_choice_sub text="{1001,5201}" position="bottom_left" section="slan_cheat_prestige_set" choiceparam="[event.param2.{1}, 'enemy']" comment="Enemy" />
+				<add_player_choice_sub text="{1001,5203}" position="top_left" section="Slan_cheat_prestige_set" choiceparam="[event.param2.{1}, 'allied']" comment="Allied" />
+				<add_player_choice_sub text="{1001,5202}" position="left" section="Slan_cheat_prestige_set" choiceparam="[event.param2.{1}, 'neutral']" comment="Neutral" />
+				<add_player_choice_sub text="{1001,5201}" position="bottom_left" section="Slan_cheat_prestige_set" choiceparam="[event.param2.{1}, 'enemy']" comment="Enemy" />
 				<add_player_choice_return text="{1002,20}" returnparam="[event.param2.{1}]" comment="(Back)" />
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_prestige_set" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_next_section section="slan_cheat_prestige_set" />
+				<event_conversation_next_section section="Slan_cheat_prestige_set" />
 			</conditions>
 			<actions>
 				<do_if value="event.param2.{2} == 'allied'">
@@ -39,8 +39,8 @@
 		</cue>
 		<cue name="Slan_cheat_add_licences" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_add_licences'" />
+				<event_conversation_started conversation="Slan_cheat_menu_list_selection" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'Slan_cheat_add_licences'" />
 			</conditions>
 			<actions>
 				<set_value name="$licences" exact="event.param2.{1}.licences" />
@@ -51,19 +51,19 @@
 		</cue>
 		<cue name="Slan_cheat_add_inventory" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_add_inventory" />
+				<event_conversation_started conversation="Slan_cheat_add_inventory" />
 			</conditions>
 			<actions>
-				<add_player_choice_sub text="{1001,3106} + '1'" position="top_left" section="slan_cheat_add_inventory_count" choiceparam="[event.param2.{1}, 1]" comment="" />
-				<add_player_choice_sub text="{1001,3106} + '20'" position="left" section="slan_cheat_add_inventory_count" choiceparam="[event.param2.{1}, 20]" comment="" />
-				<add_player_choice_sub text="{1001,3106} + '100'" position="bottom_left" section="slan_cheat_add_inventory_count" choiceparam="[event.param2.{1}, 100]" comment="" />
-				<add_player_choice_sub text="{1001,3106} + '999'" position="top_right" section="slan_cheat_add_inventory_count" choiceparam="[event.param2.{1}, 999]" comment="" />
+				<add_player_choice_sub text="{1001,3106} + '1'" position="top_left" section="Slan_cheat_add_inventory_count" choiceparam="[event.param2.{1}, 1]" comment="" />
+				<add_player_choice_sub text="{1001,3106} + '20'" position="left" section="Slan_cheat_add_inventory_count" choiceparam="[event.param2.{1}, 20]" comment="" />
+				<add_player_choice_sub text="{1001,3106} + '100'" position="bottom_left" section="Slan_cheat_add_inventory_count" choiceparam="[event.param2.{1}, 100]" comment="" />
+				<add_player_choice_sub text="{1001,3106} + '999'" position="top_right" section="Slan_cheat_add_inventory_count" choiceparam="[event.param2.{1}, 999]" comment="" />
 				<add_player_choice_return text="{1002,20}" returnparam="[event.param2.{1}]" comment="(Back)" />
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_add_inventory_count" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_next_section section="slan_cheat_add_inventory_count" />
+				<event_conversation_next_section section="Slan_cheat_add_inventory_count" />
 			</conditions>
 			<actions>
 				<create_list name="$WaresList" />
@@ -71,16 +71,16 @@
 					<append_to_list name="$WaresList" exact="event.param2.{1}" />
 				</do_if>
 				<do_elseif value="event.param2.{1} == 'crafting_inventory'">
-					<do_for_each name="$ware" in="global.$swi_slancheat.$slan_cheat_ware_list">
+					<do_for_each name="$ware" in="global.$swi_slancheat.$Slan_cheat_ware_list">
 						<do_if value="$ware.hastag.inventory and $ware.hastag.crafting">
 							<append_to_list name="$WaresList" exact="$ware" />
 						</do_if>
 					</do_for_each>
 				</do_elseif>
 				<do_else>
-					<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
-						<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{event.param2.{1}}">
-							<append_to_list name="$WaresList" exact="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+					<do_all exact="global.$swi_slancheat.$Slan_cheat_ware_list.count" counter="$i">
+						<do_if value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{event.param2.{1}}">
+							<append_to_list name="$WaresList" exact="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 						</do_if>
 					</do_all>
 				</do_else>
@@ -93,20 +93,20 @@
 		</cue>
 		<cue name="Slan_cheat_add_any_inventory" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_add_any_inventory'" />
+				<event_conversation_started conversation="Slan_cheat_menu_list_selection" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'Slan_cheat_add_any_inventory'" />
 			</conditions>
 			<actions>
-				<add_player_choice_sub text="{1001,3106} + '1'" position="top_left" section="slan_cheat_add_any_inventory_count" choiceparam="[event.param2.{1}, 1]" comment="" />
-				<add_player_choice_sub text="{1001,3106} + '10'" position="left" section="slan_cheat_add_any_inventory_count" choiceparam="[event.param2.{1}, 20]" comment="" />
-				<add_player_choice_sub text="{1001,3106} + '100'" position="bottom_left" section="slan_cheat_add_any_inventory_count" choiceparam="[event.param2.{1}, 100]" comment="" />
-				<add_player_choice_sub text="{1001,3106} + '999'" position="top_right" section="slan_cheat_add_any_inventory_count" choiceparam="[event.param2.{1}, 999]" comment="" />
+				<add_player_choice_sub text="{1001,3106} + '1'" position="top_left" section="Slan_cheat_add_any_inventory_count" choiceparam="[event.param2.{1}, 1]" comment="" />
+				<add_player_choice_sub text="{1001,3106} + '10'" position="left" section="Slan_cheat_add_any_inventory_count" choiceparam="[event.param2.{1}, 20]" comment="" />
+				<add_player_choice_sub text="{1001,3106} + '100'" position="bottom_left" section="Slan_cheat_add_any_inventory_count" choiceparam="[event.param2.{1}, 100]" comment="" />
+				<add_player_choice_sub text="{1001,3106} + '999'" position="top_right" section="Slan_cheat_add_any_inventory_count" choiceparam="[event.param2.{1}, 999]" comment="" />
 				<add_player_choice_return text="{1002,20}" returnparam="[event.param2.{1}]" comment="(Back)" />
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_add_any_inventory_count" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_next_section section="slan_cheat_add_any_inventory_count" />
+				<event_conversation_next_section section="Slan_cheat_add_any_inventory_count" />
 			</conditions>
 			<actions>
 				<add_inventory entity="player.entity" ware="event.param2.{1}" exact="event.param2.{2}" />
@@ -115,8 +115,8 @@
 		</cue>
 		<cue name="Slan_cheat_add_inventory_personal_upgrade" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_menu_list_selection" />
-				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'slan_cheat_add_inventory_personal_upgrade'" />
+				<event_conversation_started conversation="Slan_cheat_menu_list_selection" />
+				<check_value value="global.$swi_slancheat.$conversation_mode_name == 'Slan_cheat_add_inventory_personal_upgrade'" />
 			</conditions>
 			<actions>
 				<set_value name="$count" exact="1" />
@@ -129,38 +129,38 @@
 		</cue>
 		<cue name="Slan_cheat_add_blueprints" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_add_blueprints" />
+				<event_conversation_started conversation="Slan_cheat_add_blueprints" />
 			</conditions>
 			<actions>
-				<do_all exact="global.$swi_slancheat.$slan_cheat_ware_list.count" counter="$i">
-					<do_if value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.clothingmod}">
-						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+				<do_all exact="global.$swi_slancheat.$Slan_cheat_ware_list.count" counter="$i">
+					<do_if value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.clothingmod}">
+						<add_blueprints wares="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 					</do_if>
-					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.module}">
-						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+					<do_elseif value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.module}">
+						<add_blueprints wares="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 					</do_elseif>
-					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.equipmentmod}">
-						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+					<do_elseif value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.equipmentmod}">
+						<add_blueprints wares="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 					</do_elseif>
-					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.paintmod}">
-						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+					<do_elseif value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.paintmod}">
+						<add_blueprints wares="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 					</do_elseif>
-					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.turret}">
-						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+					<do_elseif value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.turret}">
+						<add_blueprints wares="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 					</do_elseif>
-					<do_elseif value="global.$swi_slancheat.$slan_cheat_ware_list.{$i}.tags.indexof.{tag.shield}">
-						<add_blueprints wares="global.$swi_slancheat.$slan_cheat_ware_list.{$i}" />
+					<do_elseif value="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}.tags.indexof.{tag.shield}">
+						<add_blueprints wares="global.$swi_slancheat.$Slan_cheat_ware_list.{$i}" />
 					</do_elseif>
 				</do_all>
 			</actions>
 		</cue>
 		<cue name="Slan_cheat_add_research" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_add_research" />
+				<event_conversation_started conversation="Slan_cheat_add_research" />
 			</conditions>
 			<actions>
 				<create_list name="$WaresList" />
-				<do_for_each name="$ware" in="global.$swi_slancheat.$slan_cheat_ware_list">
+				<do_for_each name="$ware" in="global.$swi_slancheat.$Slan_cheat_ware_list">
 					<do_if value="$ware.tags.indexof.{tag.research}">
 						<do_if value="not $ware.research.unlocked">
 							<append_to_list name="$WaresList" exact="$ware" />
@@ -175,10 +175,10 @@
 		</cue>
 		<cue name="Slan_cheat_add_encyclopedia" instantiate="true" namespace="this">
 			<conditions>
-				<event_conversation_started conversation="slan_cheat_add_encyclopedia" />
+				<event_conversation_started conversation="Slan_cheat_add_encyclopedia" />
 			</conditions>
 			<actions>
-				<set_value name="$WaresList" exact="global.$swi_slancheat.$slan_cheat_ware_list" />
+				<set_value name="$WaresList" exact="global.$swi_slancheat.$Slan_cheat_ware_list" />
 				<do_all exact="$WaresList.count" counter="$i">
 					<set_value name="$Warescontainer" exact="$WaresList.{$i}.objectmacro" />
 					<do_if value="$WaresList.{$i}.tags.indexof.{tag.ship}">
@@ -255,7 +255,7 @@
 					</do_if>
 
 				</do_all>
-				<set_value name="$shipsList" exact="global.$swi_slancheat.$slan_cheat_ship_list" />
+				<set_value name="$shipsList" exact="global.$swi_slancheat.$Slan_cheat_ship_list" />
 				<do_all exact="$shipsList.count" counter="$i">
 					<do_if value="$shipsList.{$i}.isclass.ship_xl">
 						<add_encyclopedia_entry type="shiptypes_xl" item="$shipsList.{$i}.id" />
