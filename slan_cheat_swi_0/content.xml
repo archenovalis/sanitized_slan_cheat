@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <content id="slan_cheat_menu_swi_0" name="sanitized slan_cheats" description="sanitized slim cheat mod" author="Slan, others, archie" version="110" save="0" date="2025-3-12" enabled="true">
+  <dependency version="750" />
   <text language="7" name="sanitized Читы" description="Мод X4 читы" />
   <text language="44" name="sanitized cheats" description="X4 cheat MOD" />
   <text language="86" name="sanitized 作弊脚本" description="X4修改MOD" />
@@ -11,5 +12,6 @@
   <text language="81" name="sanitized cheats" description="X4 cheat MOD" />
   <text language="82" name="sanitized cheats" description="X4 cheat MOD" />
   <text language="88" name="sanitized 作弊脚本" description="X4修改MOD" />
+  <dependency id="kuerteeUIExtensionsAndHUD" optional="false" name="kuertee UI Extensions and HUD" version="750" />
   <dependency id="SW Interworlds" optional="true" name="SW Interworlds" />
 </content>

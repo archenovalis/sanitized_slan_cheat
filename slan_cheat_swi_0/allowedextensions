@@ -1,0 +1,4 @@
+{
+  "filetypes": [".xml", ".md", ".cat", ".dat", ".ogg", ".lua"],
+  "exclude": ["DEV_"]
+}
